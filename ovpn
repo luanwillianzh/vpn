@@ -5,7 +5,7 @@ Menu() {
     clear
     echo -e '\n'
     echo "=========================="
-    echo "     BOLSA NETFREE 2.0 Beta    "
+    echo "  BOLSA NETFREE 2.0 Beta    "
     echo "=========================="
     echo "Desligue o wifi e o vpn, fique só nos dados e escolha o aplicativo que queira criar o arquivo .ovpn para ser redirecionado para ele"
     echo "Obs:Só vai funcionar caso você tenha o app escolhido e ele conecte na vpn"
@@ -25,8 +25,8 @@ Menu() {
     echo "[ 13 ] | Escola MSJ"
     echo "[ 14 ] | Escola Igarassu"
     echo "[ 15 ] | Princesa Educa+"
-    echo "[ 16 ] | Conquista App (Off)"
-    echo "[ 17 ] | Educa Olinda (Off)"
+    echo "[ 16 ] | Conquista App"
+    echo "[ 17 ] | Educa Olinda"
     echo "[ 0 ] | SAIR"
     echo
     echo "Para suporte ou duvidas, procure no telegram:"
@@ -66,7 +66,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/org.cordova.quasar.corona.app/cache/android.conf /storage/emulated/0/Download/EscolaDF.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EscolaDF.ovpn && termux-open /storage/emulated/0/Download/EscolaDF.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/org.cordova.quasar.corona.app/cache/android.conf /storage/emulated/0/Download/EscolaDF.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EscolaDF.ovpn && termux-open /storage/emulated/0/Download/EscolaDF.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -79,7 +79,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/com.portoseguru.reach4all/cache/android.conf /storage/emulated/0/Download/PortoSeguro.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/PortoSeguro.ovpn && termux-open /storage/emulated/0/Download/PortoSeguro.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/com.portoseguru.reach4all/cache/android.conf /storage/emulated/0/Download/PortoSeguro.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/PortoSeguro.ovpn && termux-open /storage/emulated/0/Download/PortoSeguro.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -95,7 +95,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/com.conectauneb.reach4all/cache/android.conf /storage/emulated/0/Download/ConectaUneb.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/ConectaUneb.ovpn && termux-open /storage/emulated/0/Download/ConectaUneb.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/com.conectauneb.reach4all/cache/android.conf /storage/emulated/0/Download/ConectaUneb.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/ConectaUneb.ovpn && termux-open /storage/emulated/0/Download/ConectaUneb.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -107,7 +107,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/br.sc.gov.ciasc.sed.inp/cache/android.conf /storage/emulated/0/Download/SalaEstudanteSC.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/SalaEstudanteSC.ovpn && termux-open /storage/emulated/0/Download/SalaEstudanteSC.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/br.sc.gov.ciasc.sed.inp/cache/android.conf /storage/emulated/0/Download/SalaEstudanteSC.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/SalaEstudanteSC.ovpn && termux-open /storage/emulated/0/Download/SalaEstudanteSC.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -119,7 +119,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/br.estacio.estaciomobile/cache/android.conf /storage/emulated/0/Download/MinhaEstacio.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/MinhaEstacio.ovpn && termux-open /storage/emulated/0/Download/MinhaEstacio.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/br.estacio.estaciomobile/cache/android.conf /storage/emulated/0/Download/MinhaEstacio.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/MinhaEstacio.ovpn && termux-open /storage/emulated/0/Download/MinhaEstacio.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -131,7 +131,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/br.gov.prodemge.conexaoescola/cache/android.conf /storage/emulated/0/Download/ConexãoEscola.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/ConexãoEscola.ovpn && termux-open /storage/emulated/0/Download/ConexãoEscola.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/br.gov.prodemge.conexaoescola/cache/android.conf /storage/emulated/0/Download/ConexãoEscola.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/ConexãoEscola.ovpn && termux-open /storage/emulated/0/Download/ConexãoEscola.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -143,7 +143,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/br.gov.es.sedu.educacao/cache/android.conf /storage/emulated/0/Download/EscoLAR.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EscoLAR.ovpn && termux-open /storage/emulated/0/Download/EscoLAR.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/br.gov.es.sedu.educacao/cache/android.conf /storage/emulated/0/Download/EscoLAR.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EscoLAR.ovpn && termux-open /storage/emulated/0/Download/EscoLAR.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -155,7 +155,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/br.com.procergs.tuaescola/cache/android.conf /storage/emulated/0/Download/EscolaProfRS.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EscolaProfRS.ovpn && termux-open /storage/emulated/0/Download/EscolaProfRS.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/br.com.procergs.tuaescola/cache/android.conf /storage/emulated/0/Download/EscolaProfRS.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EscolaProfRS.ovpn && termux-open /storage/emulated/0/Download/EscolaProfRS.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -166,7 +166,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/br.com.procergs.estudante/cache/android.conf /storage/emulated/0/Download/EscolaAlunoRS.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EscolaAlunoRS.ovpn && termux-open /storage/emulated/0/Download/EscolaAlunoRS.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/br.com.procergs.estudante/cache/android.conf /storage/emulated/0/Download/EscolaAlunoRS.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EscolaAlunoRS.ovpn && termux-open /storage/emulated/0/Download/EscolaAlunoRS.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -178,7 +178,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/com.educasaoleo.reach4all/cache/android.conf /storage/emulated/0/Download/EducaSãoLeo.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EducaSãoLeo.ovpn && termux-open /storage/emulated/0/Download/EducaSãoLeo.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/com.educasaoleo.reach4all/cache/android.conf /storage/emulated/0/Download/EducaSãoLeo.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EducaSãoLeo.ovpn && termux-open /storage/emulated/0/Download/EducaSãoLeo.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -190,7 +190,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/com.seduc.estudeemcasa/cache/android.conf /storage/emulated/0/Download/EstudeEmCasa.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EstudeEmCasa.ovpn && termux-open /storage/emulated/0/Download/EstudeEmCasa.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/com.seduc.estudeemcasa/cache/android.conf /storage/emulated/0/Download/EstudeEmCasa.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EstudeEmCasa.ovpn && termux-open /storage/emulated/0/Download/EstudeEmCasa.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -202,7 +202,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/com.escola.msj/cache/android.conf /storage/emulated/0/Download/MSJ.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/MSJ.ovpn && termux-open /storage/emulated/0/Download/MSJ.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/com.escola.msj/cache/android.conf /storage/emulated/0/Download/MSJ.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/MSJ.ovpn && termux-open /storage/emulated/0/Download/MSJ.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -214,7 +214,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/org.educarigarassu.app/cache/android.conf /storage/emulated/0/Download/EducarIguarassu.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EducarIguarassu.ovpn && termux-open /storage/emulated/0/Download/EducarIguarassu.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/org.educarigarassu.app/cache/android.conf /storage/emulated/0/Download/EducarIguarassu.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EducarIguarassu.ovpn && termux-open /storage/emulated/0/Download/EducarIguarassu.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -226,31 +226,31 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/com.princesaeducamais/cache/android.conf /storage/emulated/0/Download/PrincesaEduca.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/PrincesaEduca.ovpn && termux-open /storage/emulated/0/Download/PrincesaEduca.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/com.princesaeducamais/cache/android.conf /storage/emulated/0/Download/PrincesaEduca.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/PrincesaEduca.ovpn && termux-open /storage/emulated/0/Download/PrincesaEduca.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
 }
 App16 () {
 clear
-am start -n org.cordova.quasar.corona.app/.SplashScreenActivity
+am start -n br.gov.ba.pmvc.vcapp/.SplashScreenActivity
 check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/br.gov.ba.pmvc.vcapp/cache/android.conf /storage/emulated/0/Download/ConquistApp.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/ConquistApp.ovpn && termux-open /storage/emulated/0/Download/ConquistApp.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/br.gov.ba.pmvc.vcapp/cache/android.conf /storage/emulated/0/Download/ConquistApp.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/ConquistApp.ovpn && termux-open /storage/emulated/0/Download/ConquistApp.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
 }
 App17 () {
 clear
-am start -n org.cordova.quasar.corona.app/.SplashScreenActivity
+am start -n org.educaolinda.app/org.aprendendosempre.app.main.MainActivity
 check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) mv /data/data/org.educaolinda.app/cache/android.conf /storage/emulated/0/Download/EducaOlinda.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EducaOlinda.ovpn && termux-open /storage/emulated/0/Download/EducaOlinda.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/org.educaolinda.app/cache/android.conf /storage/emulated/0/Download/EducaOlinda.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EducaOlinda.ovpn && termux-open /storage/emulated/0/Download/EducaOlinda.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
