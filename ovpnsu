@@ -4,13 +4,12 @@ Menu() {
     clear
     echo -e '\n'
     echo "=========================="
-    echo " BOLSA NETFREE 2.0 (BETA)    "
+    echo " BOLSA NETFREE 2.0 (ROOT)     "
     echo "=========================="
-    echo "Script beta, pode ser que não funcionem para varias pessoas por conta de estar em fase de testes, caso ocorra algum erro, alerte ele nos grupos abaixo"
-    echo
+    echo 
     echo "Desligue o wifi e o vpn, fique só nos dados e escolha o aplicativo que queira criar o arquivo .ovpn para ser redirecionado para ele e só vai funcionar caso conecte na vpn do app escolhido"
     echo
-    echo "Obs:Alguns apps só funcionam se forem editados puramente pelo NP Manager"
+    echo "Obs: Usem os apps sem mods baixados pela play store"
     echo "__________________________"
     echo "[ 1 ] | Escola em Casa DF - Bolsa Netfree"
     echo "[ 2 ] | E-learning EC (Porto Seguro)"
@@ -69,7 +68,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) sleep 4 && cp /data/data/$App/cache/android.conf /storage/emulated/0/Download/NetFree.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/NetFree.ovpn && termux-open /storage/emulated/0/Download/NetFree.ovpn --content-type "application/x-openvpn-profile"
+    1) su -c mv /data/data/$App/cache/android.conf /storage/emulated/0/Download/NetFree.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/NetFree.ovpn && termux-open /storage/emulated/0/Download/NetFree.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
