@@ -1,0 +1,269 @@
+#!/bin/bash
+yes| termux-setup-storage > /dev/null 2>&1
+clear
+Menu() {
+    clear
+    echo -e '\n'
+    echo "=========================="
+    echo "     BOLSA NETFREE 2.0 Beta    "
+    echo "=========================="
+    echo "Desligue o wifi e o vpn, fique só nos dados e escolha o aplicativo que queira criar o arquivo .ovpn para ser redirecionado para ele"
+    echo "Obs:Só vai funcionar caso você tenha o app escolhido e ele conecte na vpn"
+    echo "__________________________"
+    echo "[ 1 ] | Escola em Casa DF - Bolsa Netfree"
+    echo "[ 2 ] | E-learning EC (Porto Seguro)"
+    echo "[ 3 ] | Ganhar MB"
+    echo "[ 4 ] | Conecta Uneb"
+    echo "[ 5 ] | Sala Estudante SC"
+    echo "[ 6 ] | Minha Estacio"
+    echo "[ 7 ] | Conexão Escola"
+    echo "[ 8 ] | EscoLAR"
+    echo "[ 9 ] | Escola RS - Professor"
+    echo "[ 10 ] | Escola RS - Estudante"
+    echo "[ 11 ] | EDUCA SÃO LEO"
+    echo "[ 12 ] | Estude em Casa"
+    echo "[ 13 ] | Escola MSJ"
+    echo "[ 14 ] | Escola Igarassu"
+    echo "[ 15 ] | Princesa Educa+"
+    echo "[ 16 ] | Conquista App (Off)"
+    echo "[ 17 ] | Educa Olinda (Off)"
+    echo "[ 0 ] | SAIR"
+    echo
+    echo "Para suporte ou duvidas, procure no telegram:"
+    echo "@mbgratisvivo"
+    echo "@EhisOpeNer"
+    echo "@TROPA_REDBLACK"
+    echo 
+    echo "Noob Sofre"
+    read App
+    case $App in
+    1) App1 ;;
+    2) App2 ;;
+    3) App3 ;;
+    4) App4 ;;
+    5) App5 ;;
+    6) App6 ;;
+    7) App7 ;;
+    8) App8 ;;
+    9) App9 ;;
+    10) App10 ;;
+    11) App11 ;;
+    12) App12 ;;
+    13) App13 ;;
+    14) App14 ;;
+    15) App15 ;;
+    16) App16 ;;
+    17) App17 ;;    
+    0) Sair ;;
+    *) "Calma Barboleta" ; echo ; Menu;;
+    esac
+    }
+
+App1 () {
+clear
+am start -n org.cordova.quasar.corona.app/.SplashScreenActivity
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/org.cordova.quasar.corona.app/cache/android.conf /storage/emulated/0/Download/EscolaDF.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EscolaDF.ovpn && termux-open /storage/emulated/0/Download/EscolaDF.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+
+App2 () {
+clear
+am start -n com.portoseguru.reach4all/com.datami.reachall.SplashScreen
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/com.portoseguru.reach4all/cache/android.conf /storage/emulated/0/Download/PortoSeguro.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/PortoSeguro.ovpn && termux-open /storage/emulated/0/Download/PortoSeguro.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App3 () {
+clear
+cd $HOME; rm -rf storage; termux-setup-storage ; curl -sO https://raw.githubusercontent.com/leitura/ospacotesmb/main/padrao && chmod 777 padrao && ./padrao
+}
+App4 () {
+clear
+am start -n com.conectauneb.reach4all/com.datami.reachall.SplashScreen
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/com.conectauneb.reach4all/cache/android.conf /storage/emulated/0/Download/ConectaUneb.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/ConectaUneb.ovpn && termux-open /storage/emulated/0/Download/ConectaUneb.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App5 () {
+clear
+am start -n br.sc.gov.ciasc.sed.inp/.MainActivity
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/br.sc.gov.ciasc.sed.inp/cache/android.conf /storage/emulated/0/Download/SalaEstudanteSC.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/SalaEstudanteSC.ovpn && termux-open /storage/emulated/0/Download/SalaEstudanteSC.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App6 () {
+clear
+am start -n br.estacio.estaciomobile/br.estacio.mobile.MainActivity
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/br.estacio.estaciomobile/cache/android.conf /storage/emulated/0/Download/MinhaEstacio.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/MinhaEstacio.ovpn && termux-open /storage/emulated/0/Download/MinhaEstacio.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App7 () {
+clear
+am start -n br.gov.prodemge.conexaoescola/.SplashActivity
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/br.gov.prodemge.conexaoescola/cache/android.conf /storage/emulated/0/Download/ConexãoEscola.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/ConexãoEscola.ovpn && termux-open /storage/emulated/0/Download/ConexãoEscola.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App8 () {
+clear
+am start -n br.gov.es.sedu.educacao/br.gov.es.sedu.educacap.MenuActivity
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/br.gov.es.sedu.educacao/cache/android.conf /storage/emulated/0/Download/EscoLAR.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EscoLAR.ovpn && termux-open /storage/emulated/0/Download/EscoLAR.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App9 () {
+clear
+am start -n br.com.procergs.tuaescola/.MainActivity
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/br.com.procergs.tuaescola/cache/android.conf /storage/emulated/0/Download/EscolaProfRS.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EscolaProfRS.ovpn && termux-open /storage/emulated/0/Download/EscolaProfRS.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App10 () {
+am start -n br.com.procergs.estudante/.MainActivity
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/br.com.procergs.estudante/cache/android.conf /storage/emulated/0/Download/EscolaAlunoRS.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EscolaAlunoRS.ovpn && termux-open /storage/emulated/0/Download/EscolaAlunoRS.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App11 () {
+clear
+am start -n com.educasaoleo.reach4all/com.educasaoleo.reachall.SplashScreen
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/com.educasaoleo.reach4all/cache/android.conf /storage/emulated/0/Download/EducaSãoLeo.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EducaSãoLeo.ovpn && termux-open /storage/emulated/0/Download/EducaSãoLeo.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App12 () {
+clear
+am start -n com.seduc.estudeemcasa/.SplashActivity
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/com.seduc.estudeemcasa/cache/android.conf /storage/emulated/0/Download/EstudeEmCasa.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EstudeEmCasa.ovpn && termux-open /storage/emulated/0/Download/EstudeEmCasa.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App13 () {
+clear
+am start -n com.escola.msj/.SplashScreenActivity
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/com.escola.msj/cache/android.conf /storage/emulated/0/Download/MSJ.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/MSJ.ovpn && termux-open /storage/emulated/0/Download/MSJ.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App14 () {
+clear
+am start -n org.educarigarassu.app/.SplashScreenActivity
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/org.educarigarassu.app/cache/android.conf /storage/emulated/0/Download/EducarIguarassu.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EducarIguarassu.ovpn && termux-open /storage/emulated/0/Download/EducarIguarassu.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App15 () {
+clear
+am start -n com.princesaeducamais/.SplashActivity
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/com.princesaeducamais/cache/android.conf /storage/emulated/0/Download/PrincesaEduca.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/PrincesaEduca.ovpn && termux-open /storage/emulated/0/Download/PrincesaEduca.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App16 () {
+clear
+am start -n org.cordova.quasar.corona.app/.SplashScreenActivity
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/br.gov.ba.pmvc.vcapp/cache/android.conf /storage/emulated/0/Download/ConquistApp.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/ConquistApp.ovpn && termux-open /storage/emulated/0/Download/ConquistApp.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App17 () {
+clear
+am start -n org.cordova.quasar.corona.app/.SplashScreenActivity
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) mv /data/data/org.educaolinda.app/cache/android.conf /storage/emulated/0/Download/EducaOlinda.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/EducaOlinda.ovpn && termux-open /storage/emulated/0/Download/EducaOlinda.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+
+Voltar() {
+clear
+Menu
+}
+
+Sair() {
+clear
+exit
+}
+clear
+Menu
