@@ -4,12 +4,12 @@ Menu() {
     clear
     echo -e '\n'
     echo "=========================="
-    echo " BOLSA NETFREE 2.0 (ROOT)     "
+    echo " BOLSA NETFREE 2.1 (ROOT)     "
     echo "=========================="
     echo 
     echo "Desligue o wifi e o vpn, fique só nos dados e escolha o aplicativo que queira criar o arquivo .ovpn para ser redirecionado para ele e só vai funcionar caso conecte na vpn do app escolhido"
     echo
-    echo "Obs: Usem os apps sem mods baixados pela play store"
+    echo "Obs: Usem os apps baixados pela play store"
     echo "__________________________"
     echo "[ 1 ] | Escola em Casa DF - Bolsa Netfree"
     echo "[ 2 ] | E-learning EC (Porto Seguro)"
