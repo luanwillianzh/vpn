@@ -34,6 +34,8 @@ Menu() {
     echo "@mbgratisvivo"
     echo "@EhisOpeNer"
     echo "@TROPA_REDBLACK"
+    echo
+    echo "Script feito por @alpacinoo007 e @luanw04"
     echo 
     echo "Noob Sofre"
     read App
