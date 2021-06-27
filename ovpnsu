@@ -63,12 +63,12 @@ Menu() {
 
 connect () {
 clear
-am start -n $App/$atividade
+su -c pm enable $App && am start -n $App/$atividade
 check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) su -c mv /data/data/$App/cache/android.conf /storage/emulated/0/Download/NetFree.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/NetFree.ovpn && termux-open /storage/emulated/0/Download/NetFree.ovpn --content-type "application/x-openvpn-profile"
+    1) su -c pm disable $App && su -c mv /data/data/$App/cache/android.conf /storage/emulated/0/Download/NetFree.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/NetFree.ovpn && termux-open /storage/emulated/0/Download/NetFree.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
