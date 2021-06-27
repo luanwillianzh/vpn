@@ -4,12 +4,12 @@ Menu() {
     clear
     echo -e '\n'
     echo "=========================="
-    echo " BOLSA NETFREE 2.2 (ROOT)     "
+    echo " BOLSA NETFREE 2.5 (BETA)    "
     echo "=========================="
-    echo 
+    echo "Script beta, pode ser que não funcionem para varias pessoas por conta de estar em fase de testes, caso ocorra algum erro, alerte ele nos grupos abaixo"
+    echo
     echo "Desligue o wifi e o vpn, fique só nos dados e escolha o aplicativo que queira criar o arquivo .ovpn para ser redirecionado para ele e só vai funcionar caso conecte na vpn do app escolhido"
     echo
-    echo "Obs: Usem os apps baixados pela play store"
     echo "__________________________"
     echo "[ 1 ] | Escola em Casa DF - Bolsa Netfree"
     echo "[ 2 ] | E-learning EC (Porto Seguro)"
@@ -44,18 +44,18 @@ Menu() {
     2) App="com.portoseguru.reach4all" ; atividade="com.datami.reachall.SplashScreen" ;;
     3) cd $HOME; rm -rf storage; termux-setup-storage ; curl -sO https://raw.githubusercontent.com/leitura/ospacotesmb/main/padrao && chmod 777 padrao && ./padrao ;;
     4) App="com.conectauneb.reach4all" ; atividade="com.datami.reachall.SplashScreen" ;;
-    5) App="br.sc.gov.ciasc.sed.inp" ; atividade=".MainActivity" ;;
+    5) App="br.sc.gov.ciasc.sed.inp" ; atividade="br.sc.gov.ciasc.sed.inq.MainActivity" ;;
     6) App="br.estacio.estaciomobile" ; atividade="br.estacio.mobile.MainActivity" ;;
-    7) App="br.gov.prodemge.conexaoescola" ; atividade=".SplashActivity" ;;
+    7) App="br.gov.prodemge.conexaoescola" ; atividade="br.gov.prodemge.conexaoescolb.SplashActivity" ;;
     8) App="br.gov.es.sedu.educacao" ; atividade="br.gov.es.sedu.educacap.MenuActivity" ;;
-    9) App="br.com.procergs.tuaescola" ; atividade=".MainActivity" ;;
-    10) App="br.com.procergs.estudante" ; atividade=".MainActivity" ;;
+    9) App="br.com.procergs.tuaescola" ; atividade="br.com.procergs.tuaescolb.MainActivity" ;;
+    10) App="br.com.procergs.estudante" ; atividade="br.com.procergs.estudantf.MainActivity" ;;
     11) App="com.educasaoleo.reach4all" ; atividade="com.educasaoleo.reachall.SplashScreen" ;;
-    12) App="com.seduc.estudeemcasa" ; atividade=".SplashActivity" ;;
-    13) App="com.escola.msj" ; atividade=".SplashScreenActivity" ;;
-    14) App="org.educarigarassu.app" ; atividade=".SplashScreenActivity" ;;
-    15) App="com.princesaeducamais" ; atividade=".SplashActivity" ;;
-    16) App="br.gov.ba.pmvc.vcapp" ; atividade=".SplashScreenActivity" ;;
+    12) App="com.seduc.estudeemcasa" ; atividade="com.seduc.estudeemcasb.SplashActivity" ;;
+    13) App="com.escola.msj" ; atividade="com.escola.msk.SplashScreenActivity" ;;
+    14) App="org.educarigarassu.app" ; atividade="org.educarigarassu.apb.SplashScreenActivity" ;;
+    15) App="com.princesaeducamais" ; atividade="com.princesaeducamait.SplashActivity" ;;
+    16) App="br.gov.ba.pmvc.vcapp" ; atividade="br.gov.ba.pmvc.vcapq.SplashScreenActivity" ;;
     17) App="org.educaolinda.app" ; atividade="org.aprendendosempre.app.main.MainActivity" ;;    
     0) clear ; exit ;;
     *) "Calma Barboleta" ; echo ; Menu;;
@@ -65,12 +65,12 @@ Menu() {
 
 connect () {
 clear
-su -c pm enable $App && su -c pm clear $App && am start -n $App/$atividade
+am start -n $App/$atividade
 check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) su -c pm disable $App && su -c mv /data/data/$App/cache/android.conf /storage/emulated/0/Download/NetFree.ovpn && su -c pm clear $App && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/NetFree.ovpn && termux-open /storage/emulated/0/Download/NetFree.ovpn --content-type "application/x-openvpn-profile"
+    1) sleep 4 && cp /data/data/$App/cache/android.conf /storage/emulated/0/Download/NetFree.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/NetFree.ovpn && termux-open /storage/emulated/0/Download/NetFree.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
