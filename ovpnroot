@@ -72,7 +72,7 @@ su -c am broadcast -a android.intent.action.AIRPLANE_MODE && su -c 'svc wifi dis
     dados=$(ifconfig | grep -c rmnet0)
     case $dados in
     0) sleep 2 ; check;;
-    1) su -c setprop net.dns1 1.1.1.1 && su -c setprop net.dns2 1.0.0.1 && su -c setprop net.dns3 2606:4700:4700::1111 && su -c setprop net.dns4 2606:4700:4700::1001 && su -c setprop net.rmnet0.dns1 1.1.1.1 && su -c setprop net.rmnet0.dns2 1.0.0.1 && am start -n $App/$atividade && clear ;;
+    1) am start -n $App/$atividade && clear ;;
      esac
 }
 check
@@ -80,7 +80,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) su -c pm disable $App && su -c mv /data/data/$App/cache/android.conf /storage/emulated/0/Download/$nome.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/$nome.ovpn && termux-open /storage/emulated/0/Download/$nome.ovpn --content-type "application/x-openvpn-profile"
+    1) su -c pm disable $App && su -c mv /data/data/$App/cache/android.conf /storage/emulated/0/Download/$nome.ovpn && su -c pm clear $App && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/$nome.ovpn && termux-open /storage/emulated/0/Download/$nome.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
@@ -88,7 +88,7 @@ check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) su -c setprop net.dns1 1.1.1.1 && su -c setprop net.dns2 1.0.0.1 && su -c setprop net.dns3 2606:4700:4700::1111 && su -c setprop net.dns4 2606:4700:4700::1001 && su -c setprop net.rmnet0.dns1 1.1.1.1 && su -c setprop net.rmnet0.dns2 1.0.0.1 ;;
+    1) su -c setprop net.dns1 1.1.1.1 && su -c setprop net.dns2 1.0.0.1 && su -c setprop net.dns3 2606:4700:4700::1111 && su -c setprop net.dns4 2606:4700:4700::1001 && su -c setprop net.rmnet0.dns1 1.1.1.1 && su -c setprop net.rmnet0.dns2 1.0.0.1;;
      esac
 }
 check
