@@ -3,17 +3,13 @@ clear
 Menu() {
     clear
     echo -e '\n'
-    echo "=========================="
-    echo " BOLSA NETFREE 3.5 (ROOT)     "
-    echo "=========================="
+    echo "============================="
+    echo " TROPA RED DATAMI 3.5 (ROOT)     "
+    echo "============================="
     echo 
     echo "Apenas desconecte da vpn caso esteja conectado"
     echo "e escolha o app de escola que deseja gerar"
     echo "o arquivo .ovpn"
-    echo 
-    echo "Caso você for aluno basta digitar o"
-    echo "numero da sua escola e logo após o numero 1"
-    echo "exemplos: 171, 181, 191, 201"
     echo
     echo "Obs: Usem os apps baixados pela play store"
     echo "__________________________"
@@ -37,14 +33,14 @@ Menu() {
     echo "[ 18 ] - Rio Educa Em Casa (Conexão Forçada)"
     echo "[ 19 ] - Aulas Parana (Conexão Forçada)"
     echo "[ 20 ] - Applique-se (Conexão Forçada)"    
-    echo "[ 0 ] | SAIR"
+    echo "[ 21 ] - Area Vip"
+    echo "[ 22 ] - Change DNS"
+    echo "[ 0 ] - SAIR"
     echo
     echo "Para suporte ou duvidas, procure no telegram:"
     echo "@mbgratisvivo"
     echo "@EhisOpeNer"
     echo "@TROPA_REDBLACK"
-    echo
-    echo "Creditos:@alpacinoo007 e @luanw04"
     echo 
     echo "Noob Sofre"
     read App
@@ -68,11 +64,9 @@ Menu() {
     17) App="tv.ip.edusp" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2" ; nome="CentroDeMidiasSP" ; A2="su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.edusp/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.edusp" ; eb="su -c pm enable tv.ip.edusp";;
     18) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.rioeduca" ; eb="su -c pm enable tv.ip.rioeduca";;
     19) App="tv.ip.aulapr" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2" ; nome="AulaParana" ; A2="su -c am start -n tv.ip.aulapr/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.aulapr" ; eb="su -c pm enable tv.ip.aulapr";;
-    20) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.appliquese" ; eb="su -c pm enable tv.ip.appliquese";;
-    171) App171;;
-    181) App181;;
-    191) App191;;
-    201) App201;;
+    20) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.appliquese" ; eb="su -c pm enable tv.ip.appliquese";; 
+   21) App21;;
+   22) App22;;
     0) clear ; exit ;;
     *) "Calma Barboleta" ; echo ; Menu;;
     esac
@@ -81,31 +75,23 @@ Menu() {
 
 connect () {
 clear
-su -c 'svc wifi disable' && su -c 'svc data enable' && su -c pm enable $App && su -c pm clear $App && $A4 && $s && $A2 && $s && $db && $eb && am start -n $App/$atividade && sleep 4 && $A3 && $s && clear
+sleep 2 && echo "PARA QUE O SCRIPT FUNCIONE PERFEITAMENTE" && sleep 5 && clear && echo "VOCÊ PRECISA FALAR O SEGUINTE" && sleep 5 && clear && echo "O AL PACINO É UM GOSTOZAUM" && sleep 5 && clear && echo "BOM GAROTO!" && sleep 4 && clear && su -c 'svc wifi disable' && su -c 'svc data enable' && su -c pm enable $App && su -c pm clear $App && $A4 && $s && $A2 && $s && $db && $eb && am start -n $App/$atividade && sleep 4 && $A3 && $s && clear
 check() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check;;
-    1) su -c pm disable $App && su -c mv /data/data/$App/cache/android.conf /storage/emulated/0/Download/$nome.ovpn && su -c pm clear $App && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none" >> /storage/emulated/0/Download/$nome.ovpn && termux-open /storage/emulated/0/Download/$nome.ovpn --content-type "application/x-openvpn-profile"
+    1) su -c pm disable $App && su -c mv /data/data/$App/cache/android.conf /storage/emulated/0/Download/$nome.ovpn && su -c pm clear $App && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\nhttp-proxy paws-tbr-sdgw.datami.net 8043\n--verify-client-cert none" >> /storage/emulated/0/Download/$nome.ovpn && termux-open /storage/emulated/0/Download/$nome.ovpn --content-type "application/x-openvpn-profile"
     esac
 }
 check
 }
-App171() {
+App21(){
 clear
-cd $HOME; rm -rf storage; termux-setup-storage ; cd $PREFIX/bin/ && echo 'cp /data/data/tv.ip.edusp/cache/android.conf /storage/emulated/0/Download/CMSP.ovpn && echo -e "<auth-user-pass>\nAuth\npass\n</auth-user-pass>" >> ~/storage/downloads/CMSP.ovpn && termux-open --chooser ~/storage/downloads/CMSP.ovpn --content-type "application/x-openvpn-profile"' > cmsp && chmod +x cmsp && chmod 777 cmsp && cd && cmsp
+sleep 2 && echo "DESCULPE, VOCÊ NÃO É VIP!" && sleep 4 && bash ovpnsu
 }
-App181() {
+App22(){
 clear
-cd $HOME; rm -rf storage; termux-setup-storage ; cd $PREFIX/bin/ && echo 'cp /data/data/tv.ip.rioeduca/cache/android.conf /storage/emulated/0/Download/RioEducaEmCasa.ovpn && echo -e "<auth-user-pass>\nAuth\npass\n</auth-user-pass>" >> ~/storage/downloads/RioEducaEmCasa.ovpn && termux-open --chooser ~/storage/downloads/RioEducaEmCasa.ovpn --content-type "application/x-openvpn-profile"' > rio && chmod +x rio && chmod 777 rio && cd && rio
-}
-App191() {
-clear
-cd $HOME; rm -rf storage; termux-setup-storage ; cd $PREFIX/bin/ && echo 'cp /data/data/tv.ip.aulapr/cache/android.conf /storage/emulated/0/Download/AulaParana.ovpn && echo -e "<auth-user-pass>\nAuth\npass\n</auth-user-pass>" >> ~/storage/downloads/AulaParana.ovpn && termux-open --chooser ~/storage/downloads/AulaParana.ovpn --content-type "application/x-openvpn-profile"' > parana && chmod +x parana && chmod 777 parana && cd && parana
-}
-App201 () {
-clear
-cd $HOME; rm -rf storage; termux-setup-storage ; cd $PREFIX/bin/ && echo 'cp /data/data/tv.ip.appliquese/cache/android.conf /storage/emulated/0/Download/Applique-se.ovpn && echo -e "<auth-user-pass>\nAuth\npass\n</auth-user-pass>" >> ~/storage/downloads/Applique-se.ovpn && termux-open --chooser ~/storage/downloads/Applique-se.ovpn --content-type "application/x-openvpn-profile"' > apl && chmod +x apl && chmod 777 apl && cd && apl
+sleep 2 && echo "Em Breve..." && sleep 4 && bash ovpnsu
 }
 clear
 Menu
