@@ -3,8 +3,8 @@ sleep 2 && echo "CHECANDO SE VOCÊ TEM ROOT..." && sleep 4
 check() {
     su=$(su -h | grep -c "command")
     case $su in
-    0) clear && echo "ROOT NÃO ENCONTRADO!" && sleep 4 && clear && echo "INICIANDO O MODO SEM ROOT, AGUARDE..." && sleep 4 && bash ovpn2 ;;
-    1) clear && echo "ROOT DETECTADO!" && sleep 4 && clear && echo "INICIANDO O MODO ROOT, AGUARDE..." && sleep 4 && bash ovpnsu ;;
+    0) clear && echo "ROOT NÃO ENCONTRADO!" && sleep 4 && clear && echo "INICIANDO O MODO SEM ROOT, AGUARDE..." && sleep 4 && bash $HOME/vpn/ovpn2 ;;
+    1) clear && echo "ROOT DETECTADO!" && sleep 4 && clear && echo "INICIANDO O MODO ROOT, AGUARDE..." && sleep 4 && bash $HOME/vpn/ovpnsu ;;
     esac
 }
 check

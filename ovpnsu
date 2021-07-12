@@ -29,7 +29,7 @@ Menu() {
     echo "             [ 16 ] - ConquistApp"
    echo "         ==================================="
     echo
-    echo "              ESPECIALIDADES DA CASA  "
+    echo "                ESPECIALIDADES DA CASA  "
    echo "         ==================================="
     echo "             [ 17 ] - CMSP (Conexão Forçada)"
     echo "             [ 18 ] - Rio Educa Em Casa (Conexão Forçada)"
@@ -38,6 +38,7 @@ Menu() {
     echo "             [ 21 ] - App Personalizado"
     echo "             [ 22 ] - Reativar Apps"
     echo "             [ 23 ] - Change DNS"
+    echo "             [ 24 ] - Criar Atalho (Termux-Widget)"
     echo "              [ 0 ] - SAIR"
    echo "         ==================================="
     echo "@luanw04"
@@ -68,6 +69,7 @@ Menu() {
    21) App21;;
    22) App22;;
    23) App23;; 
+   24) App24;;
     0) clear ; exit ;;
     *) "Calma Barboleta" ; echo ; Menu;;
     esac
@@ -75,11 +77,15 @@ Menu() {
     }
 App22(){
 clear
-bash enable
+bash $HOME/vpn/enable
 }
 App23(){
 clear
-bash changedns
+bash $HOME/vpn/changedns
+}
+App24(){
+clear
+cd $HOME && cd .shortcuts && echo "bash $HOME/ovpn" > "OPEN VPN" && chmod +x "OPEN VPN" && chmod 777 "OPEN VPN" && cd && clear && echo "ATALHO CRIADO COM SUCESSO" ; echo "AGORA BAIXE O TERMUX-WIDGET" && sleep 5 && clear && bash $HOME/vpn/ovpnsu
 }
 App21(){
 clear

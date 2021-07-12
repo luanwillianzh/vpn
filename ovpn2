@@ -4,7 +4,12 @@ Menu() {
     clear
    echo "      ==================================="
     echo "                  OPEN VPN DATAMI     "
-   echo "         ==================================="
+   echo "         ==================================="    
+   echo  
+echo "         ESSE SCRIPT FORNEÇE A POSSIBILIDADE DE"
+echo "         CONECTAR NO OPEN VPN ENTRANDO ANTES"
+echo "         NO APP DE ESCOLA OU SEM ENTRAR, USE"
+echo "         A MAIS FUNCIONAL PRA VOCÊ"
     echo
     echo "                  ESCOLHA UM APP"
    echo "         ==================================="
@@ -29,8 +34,9 @@ Menu() {
     echo "             [ 19 ] - Aulas Parana (Alunos)"
     echo "             [ 20 ] - Applique-se (Alunos)"    
     echo "             [ 21 ] - App Personalizado"
+    echo "             [ 22 ] - Criar Atalho (Termux-Widget)"
     echo "              [ 0 ] - SAIR"
-    echo "         ==================================="
+   echo "         ==================================="
     echo "@luanw04"
     echo "@alpacinoo007"
     echo 
@@ -57,12 +63,17 @@ Menu() {
     19) App="tv.ip.aulapr" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2" ; nome="AulaParana" ; A2="su -c am start -n tv.ip.aulapr/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.aulapr" ; eb="su -c pm enable tv.ip.aulapr";;
     20) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.appliquese" ; eb="su -c pm enable tv.ip.appliquese";;
     21) App21;;
+    22) App22;;
     0) clear ; exit ;;
     *) "Calma Barboleta" ; echo ; Menu;;
     esac
     connect
     }
 
+App22(){
+clear
+cd $HOME && cd .shortcuts && echo "bash $HOME/ovpn" > "OPEN VPN" && chmod +x "OPEN VPN" && chmod 777 "OPEN VPN" && cd && clear && echo "ATALHO CRIADO COM SUCESSO" ; echo "AGORA BAIXE O TERMUX-WIDGET" && sleep 5 && clear && bash $HOME/vpn/ovpn2 
+}
 App21(){
 clear && echo "PARA QUE FUNCIONE VOCÊ PRECISA" ; echo "EDITAR O APP DE ESCOLA ANTES" ; echo "E LIBERAR O ACESSO A PASTA DATA"&& sleep 7 && clear
 echo -e "ㅤㅤㅤ \emCole o nome do pacote\em"

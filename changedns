@@ -41,7 +41,7 @@ Menu() {
 
 connect () {
 clear
-su -c setprop net.dns1 $d1 && su -c setprop net.dns2 $d2 && su -c setprop net.dns3 $d3 && su -c setprop net.dns4 $d4 && su -c setprop net.rmnet0.dns1 $d5 && su -c setprop net.rmnet0.dns2 $d6 && clear && sleep 1 && echo "SEU DNS FOI ALTERADO PARA:" && sleep 1 && echo && echo "    $nome" && sleep 1 && echo && echo "DNS PRIMARIO:" && su -c getprop net.dns1 && sleep 1 && echo && echo "DNS SECUNDARIO:" && su -c getprop net.dns2 && sleep 1 && echo && echo "IPv6 PRIMARIO:" && su -c getprop net.dns3 && sleep 1 && echo && echo "IPv6 SECUNDARIO:" && su -c getprop net.dns4 && echo && sleep 10 && bash ovpnsu
+su -c setprop net.dns1 $d1 && su -c setprop net.dns2 $d2 && su -c setprop net.dns3 $d3 && su -c setprop net.dns4 $d4 && su -c setprop net.rmnet0.dns1 $d5 && su -c setprop net.rmnet0.dns2 $d6 && clear && sleep 1 && echo "SEU DNS FOI ALTERADO PARA:" && sleep 1 && echo && echo "    $nome" && sleep 1 && echo && echo "DNS PRIMARIO:" && su -c getprop net.dns1 && sleep 1 && echo && echo "DNS SECUNDARIO:" && su -c getprop net.dns2 && sleep 1 && echo && echo "IPv6 PRIMARIO:" && su -c getprop net.dns3 && sleep 1 && echo && echo "IPv6 SECUNDARIO:" && su -c getprop net.dns4 && echo && sleep 10 && bash $HOME/vpn/ovpnsu
 }
 App9(){
 clear
@@ -51,7 +51,7 @@ su -c am broadcast -a android.intent.action.AIRPLANE_MODE && clear
 }
 App10(){
 clear
-bash ovpnsu 
+bash $HOME/vpn/ovpnsu 
 }
 clear
 Menu
