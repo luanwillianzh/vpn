@@ -7,7 +7,7 @@ Menu() {
     echo "                CHANGE DNS (ROOT)     "
    echo "         ==================================="
     echo 
-    echo "              Escolha um DNS"
+    echo "              ESCOLHA UM DNS"
     echo "        ==================================="
     echo "              [ 1 ] - CloudFire DNS"
     echo "              [ 2 ] - OpenDNS"
@@ -21,7 +21,6 @@ Menu() {
     echo "             [ 10 ] - Voltar"
    echo "         ==================================="
     echo 
-    echo "Noob Sofre"
     read App
     case $App in
     1) d1="1.1.1.1" ; d2="1.0.0.1" ; d3="2606:4700:4700::1111" ; d4="2606:4700:4700::1001" ; d5="1.1.1.1" ; d6="1.0.0.1" ; nome="CloudFire DNS";;

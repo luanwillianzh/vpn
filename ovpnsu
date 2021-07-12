@@ -35,13 +35,13 @@ Menu() {
     echo "             [ 18 ] - Rio Educa Em Casa (Conexão Forçada)"
     echo "             [ 19 ] - Aulas Parana (Conexão Forçada)"
     echo "             [ 20 ] - Applique-se (Conexão Forçada)" 
-    echo "             [ 21 ] - Reativar Apps"
-    echo "             [ 22 ] - Change DNS"
-    echo "             [ 23 ] - App Personalizado"
+    echo "             [ 21 ] - App Personalizado"
+    echo "             [ 22 ] - Reativar Apps"
+    echo "             [ 23 ] - Change DNS"
     echo "              [ 0 ] - SAIR"
    echo "         ==================================="
     echo "              @luanw04"
-    echo "              @alpacino007"
+    echo "              @alpacinoo007"
     echo 
     read App
     case $App in
@@ -72,15 +72,15 @@ Menu() {
     esac
     connect
     }
-App21(){
+App22(){
 clear
 bash enable
 }
-App22(){
+App23(){
 clear
 bash changedns
 }
-App23(){
+App21(){
 clear
  echo -e "ㅤㅤㅤ \emCole o nome do pacote\em"
 read App
