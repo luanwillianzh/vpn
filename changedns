@@ -21,6 +21,7 @@ Menu() {
     echo "             [ 10 ] - Voltar"
    echo "         ==================================="
     echo 
+    echo "ESCOLHA UMA OPÇÃO:"
     read App
     case $App in
     1) d1="1.1.1.1" ; d2="1.0.0.1" ; d3="2606:4700:4700::1111" ; d4="2606:4700:4700::1001" ; d5="1.1.1.1" ; d6="1.0.0.1" ; nome="CloudFire DNS";;

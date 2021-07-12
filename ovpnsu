@@ -43,6 +43,7 @@ Menu() {
     echo "              @luanw04"
     echo "              @alpacinoo007"
     echo 
+    echo "ESCOLHA UMA OPÇÃO:"
     read App
     case $App in
     1) App="org.cordova.quasar.corona.app" ; atividade=".SplashScreenActivity" ; nome="EscolaDF" ; E1="sleep 10";;

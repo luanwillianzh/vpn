@@ -33,6 +33,7 @@ Menu() {
     echo "             [ 22 ] - Voltar"
    echo "         ==================================="
     echo
+    echo "ESCOLHA UMA OPÇÃO:"
     read App
     case $App in
     1) App="org.cordova.quasar.corona.app" ; atividade=".SplashScreenActivity" ; nome="EscolaDF" ; E1="sleep 10";;
