@@ -19,7 +19,6 @@ Menu() {
     echo "              [ 8 ] - Quad9 DNS"
     echo "              [ 9 ] - Reverter Alterações"
     echo "             [ 10 ] - Voltar"
-    echo "              [ 0 ] - SAIR"
    echo "         ==================================="
     echo 
     echo "Noob Sofre"
@@ -35,7 +34,6 @@ Menu() {
     8) d1="9.9.9.9" ; d2="149.112.112.112" ; d3="2620:fe::fe" ; d4="2620:fe::9" ; d5="9.9.9.9" ; d6="149.112.112.112" ; nome="Quad9 DNS" ;;
     9) App9;;
    10) App10;;
-    0) clear ; exit ;;
     *) "Calma Barboleta" ; echo ; Menu;;
     esac
     connect
