@@ -31,7 +31,7 @@ Menu() {
     echo "             [ 20 ] - Applique-se" 
     echo "             [ 21 ] - App Personalizado"
     echo "             [ 22 ] - Voltar"
-   echo "         ==================================="
+    echo "         ==================================="
     echo
     echo "ESCOLHA UMA OPÇÃO:"
     read App
@@ -65,7 +65,7 @@ Menu() {
 
 connect () {
 clear
-su -c pm enable $App && bash enable
+su -c pm enable $App
 }
 App22(){
 clear
@@ -76,8 +76,7 @@ clear
 echo -e "ㅤ    \emCole o nome do pacote\em"
 read App
 echo ""
-  connect
-  }
-su -c pm enable $App && bash enable
+connect
+}
 clear
 Menu
