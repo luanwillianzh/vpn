@@ -40,8 +40,8 @@ Menu() {
     echo "             [ 23 ] - Change DNS"
     echo "              [ 0 ] - SAIR"
    echo "         ==================================="
-    echo "              @luanw04"
-    echo "              @alpacinoo007"
+    echo "@luanw04"
+    echo "@alpacinoo007"
     echo 
     echo "ESCOLHA UMA OPÇÃO:"
     read App
@@ -94,12 +94,13 @@ read nome
 echo ""
 connect
 }
+
 connect () {
 clear
 check1() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
-    1) clear && echo "VOCÊ ESTÁ USANDO UMA VPN!" ; echo ; echo ; echo "PARA CONTINUAR DESCONECTE" ; echo "DA VPN QUE VOCÊ ESTÁ USANDO" ; echo ; echo "CHECANDO SE A VPN FOI DESLIGADA..." ; sleep 2 ; check;;
+    1) clear && echo "VOCÊ ESTÁ USANDO UMA VPN!" ; echo ; echo ; echo "PARA CONTINUAR DESCONECTE" ; echo "DA VPN QUE VOCÊ ESTÁ USANDO" ; echo ; echo "CHECANDO SE A VPN FOI DESLIGADA..." ; sleep 2 ; check1;;
     0) clear && su -c 'svc wifi disable' && su -c 'svc data enable' && su -c pm enable $App && su -c pm clear $App && $A4 && $s && $A2 && $s && $db && $eb && am start -n $App/$atividade && sleep 4 && $A3 && $s && clear 
      esac
 }
@@ -107,7 +108,7 @@ check1
 check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
-    0) sleep 5 ; check;;
+    0) sleep 5 ; check2;;
     1) su -c pm disable $App && su -c mv /data/data/$App/cache/android.conf /storage/emulated/0/Download/$nome.ovpn && su -c pm clear $App && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\nhttp-proxy paws-tbr-sdgw.datami.net 8043\n--verify-client-cert none" >> /storage/emulated/0/Download/$nome.ovpn && termux-open /storage/emulated/0/Download/$nome.ovpn --content-type "application/x-openvpn-profile" && exit
     esac
 }
