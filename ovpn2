@@ -79,7 +79,7 @@ sleep 2 && echo "PARA QUE O SCRIPT FUNCIONE PERFEITAMENTE" && sleep 5 && clear &
 check() {
     conf=$(test -f "/data/data/$App/cache/android.conf" && echo 1)
     case $conf in
-    1) clear && sleep 5 && mv /data/data/$App/cache/android.conf /storage/emulated/0/Download/$nome.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\nhttp-proxy paws-tbr-sdgw.datami.net 8043\n--verify-client-cert none" >> /storage/emulated/0/Download/$nome.ovpn && termux-open --chooser /storage/emulated/0/Download/$nome.ovpn --content-type "application/x-openvpn-profile"
+    1) clear && sleep 5 && mv /data/data/$App/cache/android.conf /storage/emulated/0/Download/$nome.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\nhttp-proxy paws-tbr-sdgw.datami.net 8043\n--verify-client-cert none" >> /storage/emulated/0/Download/$nome.ovpn && termux-open --chooser /storage/emulated/0/Download/$nome.ovpn --content-type "application/x-openvpn-profile";;
     *) echo "ARQUIVO NECESSARIO PARA CONTINUAR" ; echo "O PROCESSO NÃO FOI ENCONTRADO!" ; echo "POR FAVOR, CERTIFIQUE-SE DE QUE VOCÊ" ; echo "ENTROU NO APP ESCOLHIDO"; echo "E QUE O APP GEROU A CHAVINHA" ; echo "OU QUE VOCÊ ESTÁ COM O APP MODIFICADO" ; sleep 2 ; echo -e "\nSaindo!\nPara usar o script basta executar ./ovpn2";;
     esac
 }
