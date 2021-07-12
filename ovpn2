@@ -30,7 +30,7 @@ Menu() {
     echo "             [ 20 ] - Applique-se (Alunos)"    
     echo "             [ 21 ] - App Personalizado"
     echo "              [ 0 ] - SAIR"
-   echo "         ==================================="
+    echo "         ==================================="
     echo "@luanw04"
     echo "@alpacinoo007"
     echo 
@@ -56,7 +56,7 @@ Menu() {
     18) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.rioeduca" ; eb="su -c pm enable tv.ip.rioeduca";;
     19) App="tv.ip.aulapr" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2" ; nome="AulaParana" ; A2="su -c am start -n tv.ip.aulapr/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.aulapr" ; eb="su -c pm enable tv.ip.aulapr";;
     20) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.appliquese" ; eb="su -c pm enable tv.ip.appliquese";;
-   21) App21;;
+    21) App21;;
     0) clear ; exit ;;
     *) "Calma Barboleta" ; echo ; Menu;;
     esac
@@ -65,7 +65,7 @@ Menu() {
 
 App21(){
 clear && echo "PARA QUE FUNCIONE VOCÊ PRECISA" ; echo "EDITAR O APP DE ESCOLA ANTES" ; echo "E LIBERAR O ACESSO A PASTA DATA"&& sleep 7 && clear
- echo -e "ㅤㅤㅤ \emCole o nome do pacote\em"
+echo -e "ㅤㅤㅤ \emCole o nome do pacote\em"
 read App
 echo
 echo -e "ㅤㅤ   \emCole o nome da atividade(OPCIONAL)\em"
@@ -74,8 +74,8 @@ echo
 echo -e "ㅤ    \emEscolha um nome pro arquivo\em"
 read nome
 echo ""
-  connect
-  }
+connect
+}
 
 connect () {
 clear
@@ -88,7 +88,7 @@ check1() {
 }
 check1
 check2() {
-     conf=$(test -f "/data/data/$App/cache/android.conf" && echo 1)
+    conf=$(test -f "/data/data/$App/cache/android.conf" && echo 1)
     case $conf in
     0) echo "ARQUIVO NECESSARIO PARA CONTINUAR" ; echo "O PROCESSO NÃO FOI ENCONTRADO!" && sleep 4 && clear && echo "VOCÊ SERÁ REDIRECIONADO PARA O APP" ; echo "DE ESCOLA ESCOLHIDO PARA GERA A" ; echo "CHAVINHA E O ARQUIVO" && sleep 8 && clear && echo "QUANDO A CHAVINHA APARECER, FECHE" ; echo "O APLICATIVO DE ESCOLA PARA SER" ; echo "REDIRECIONADO PARA O OPEN VPN" && sleep 6 && am start -n $App/$atividade;;
     1) clear && sleep 2 && echo "ARQUIVO .CONF ENCONTRADO!" ; echo ; echo ; echo "CONTINUANDO O PROCESSO..." && sleep 5 && mv /data/data/$App/cache/android.conf /storage/emulated/0/Download/$nome.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\nhttp-proxy paws-tbr-sdgw.datami.net 8043\n--verify-client-cert none" >> /storage/emulated/0/Download/$nome.ovpn && termux-open --chooser /storage/emulated/0/Download/$nome.ovpn --content-type "application/x-openvpn-profile" && exit
