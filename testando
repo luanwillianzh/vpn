@@ -1,0 +1,125 @@
+#!/bin/bash
+clear
+Menu() {
+    clear
+    echo -e '\n'
+   echo "      ==================================="
+    echo "              OPEN VPN DATAMI (ROOT)     "
+   echo "         ==================================="
+    echo "                  ESCOLHA UM APP"
+    echo 
+    echo "                   APPS NORMAIS  "
+   echo "         ==================================="
+    echo "              [ 1 ] - Escola em Casa DF"
+    echo "              [ 2 ] - E-learning EC"
+    echo "              [ 3 ] - Educa Olinda"
+    echo "              [ 4 ] - Conecta Uneb"
+    echo "              [ 5 ] - Sala Estudante SC"
+    echo "              [ 6 ] - Minha Estacio"
+    echo "              [ 7 ] - Conexão Escola"
+    echo "              [ 8 ] - EscoLAR"
+    echo "              [ 9 ] - Escola RS - Professor"
+    echo "             [ 10 ] - Escola RS - Estudante"
+    echo "             [ 11 ] - EDUCA SÃO LEO"
+    echo "             [ 12 ] - Estude em Casa"
+    echo "             [ 13 ] - Escola MSJ"
+    echo "             [ 14 ] - Escola Igarassu"
+    echo "             [ 15 ] - Princesa Educa+"
+    echo "             [ 16 ] - ConquistApp"
+   echo "         ==================================="
+    echo
+    echo "              ESPECIALIDADES DA CASA  "
+   echo "         ==================================="
+    echo "             [ 17 ] - CMSP (Conexão Forçada)"
+    echo "             [ 18 ] - Rio Educa Em Casa (Conexão Forçada)"
+    echo "             [ 19 ] - Aulas Parana (Conexão Forçada)"
+    echo "             [ 20 ] - Applique-se (Conexão Forçada)"  
+    echo "             [ 21 ] - ConectaAi (Conexão Forçada)"
+    echo "             [ 22 ] - Infantil CMSP (Conexão Forçada)"
+    echo "             [ 23 ] - EducaWeb"
+    echo "             [ 24 ] - Monteiro Educa+"
+    echo "             [ 25 ] - NetEscola"
+    echo "             [ 26 ] - Reativar Apps"
+    echo "             [ 27 ] - Change DNS"
+    echo "              [ 0 ] - SAIR"
+   echo "         ==================================="
+    echo 
+    echo "Noob Sofre"
+    read App
+    case $App in
+    1) App="org.cordova.quasar.corona.app" ; atividade=".SplashScreenActivity" ; nome="EscolaDF" ;;
+    2) App="com.portoseguru.reach4all" ; atividade="com.datami.reachall.SplashScreen" ; nome="E-learning" ;;
+    3) App="org.educaolinda.app" ; atividade="org.aprendendosempre.app.main.MainActivity" ; nome="EducaOlinda" ;;   
+    4) App4;;
+    5) App="br.sc.gov.ciasc.sed.inp" ; atividade=".MainActivity" ; nome="SalaEstudanteSC" ;;
+    6) App="br.estacio.estaciomobile" ; atividade="br.estacio.mobile.MainActivity" ; nome="MinhaEstacio" ;;
+    7) App="br.gov.prodemge.conexaoescola" ; atividade=".SplashActivity" ; nome="ConexaoEscola" ;;
+    8) App="br.gov.es.sedu.educacao" ; atividade=".MenuActivity" ; nome="EscoLAR" ;;
+    9) App="br.com.procergs.tuaescola" ; atividade=".MainActivity" ; nome="EscolaProfessorRS" ;;
+    10) App="br.com.procergs.estudante" ; atividade=".MainActivity" ; nome="EscolaEstudanteRS" ;;
+    11) App="com.educasaoleo.reach4all" ; atividade="com.educasaoleo.reachall.SplashScreen" ; nome="EducaSãoLeo" ;;
+    12) App="com.seduc.estudeemcasa" ; atividade=".SplashActivity" ; nome="EstudeEmCasa" ;;
+    13) App="com.escola.msj" ; atividade=".SplashScreenActivity" ; nome="EscolaMSJ" ;;
+    14) App="org.educarigarassu.app" ; atividade=".SplashScreenActivity" ; nome="EducarIguarassu" ;;
+    15) App="com.princesaeducamais" ; atividade=".SplashActivity" ; nome="PrincesaEducaMais" ;;
+    16) App="br.gov.ba.pmvc.vcapp" ; atividade=".SplashScreenActivity" ; nome="ConquistApp" ;;    
+    17) App="tv.ip.edusp" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2" ; nome="CentroDeMidiasSP" ;;
+    18) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ;;
+    19) App="tv.ip.aulapr" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2" ; nome="AulaParana" ;;
+    20) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ;;
+    21) App="tv.ip.conectaai" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.conectaai/tv.ip.my.activities.VideoActivity2" ; nome="ConectaAi" ;;
+    22) App="tv.ip.cmspi" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.cmspi/tv.ip.my.activities.MyVideoActivity" ; nome="InfantilCMSP" ;;
+    23) App23;;  
+    24) App24;;
+    25) App="br.gov.go.seduc.netescola" ; atividade="br.gov.go.seduc.netescola.MainActivity" ; nome="NetEscola" ;;
+    26) App26;;
+    27) App27;;
+    0) clear ; exit ;;
+    *) "Calma Barboleta" ; echo ; Menu;;
+    esac
+    connect
+    }
+
+
+connect () {
+clear
+su -c 'svc wifi disable' && su -c 'svc data enable' && su -c pm enable $App && su -c pm clear $App && am start -n $App/$atividade && sleep 4 && $A3 && clear
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) su -c pm disable $App && su -c mv /data/data/$App/cache/android.conf /storage/emulated/0/Download/$nome.ovpn && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none\nhttp-proxy paws-tbr-sdgw.datami.net 8043" >> /storage/emulated/0/Download/$nome.ovpn && termux-open /storage/emulated/0/Download/$nome.ovpn --content-type "application/x-openvpn-profile"
+    esac
+}
+check
+}
+App4(){
+clear 
+su -c 'svc wifi disable' && su -c 'svc data enable' && su -c pm enable com.conectauneb.reach4all && su -c pm clear com.conectauneb.reach4all && am start -n com.conectauneb.reach4all/com.datami.reachall.SplashScreen && clear
+check() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check;;
+    1) su -c pm disable com.conectauneb.reach4all && su -c mv /data/data/com.conectauneb.reach4all/cache/android.conf /storage/emulated/0/Download/ConectaUNEB.ovpn && su -c pm clear com.conectauneb.reach4all && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none\nhttp-proxy eaws-tbr-sdgw.datami.net 8043" >> /storage/emulated/0/Download/ConectaUNEB.ovpn && termux-open /storage/emulated/0/Download/ConectaUNEB.ovpn --content-type "application/x-openvpn-profile" && exit
+     esac
+}
+check
+}
+App23(){
+clear 
+su -c 'svc wifi disable' && su -c 'svc data enable' && su -c pm enable br.dtec.educaweb && su -c pm clear br.dtec.educaweb && am start -n br.dtec.educaweb/br.dtec.educaweb.MainActivity && sleep 15 && clear && su -c pm disable br.dtec.educaweb && su -c mv /data/data/br.dtec.educaweb/cache/android.conf /storage/emulated/0/Download/EducaWeb.ovpn && su -c pm clear br.dtec.educaweb && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none\nhttp-proxy eaws-tbr-sdgw.datami.net 8043" >> /storage/emulated/0/Download/EducaWeb.ovpn && termux-open /storage/emulated/0/Download/EducaWeb.ovpn --content-type "application/x-openvpn-profile"
+}
+App24(){
+clear 
+su -c 'svc wifi disable' && su -c 'svc data enable' && su -c pm enable org.monteiroeducamais.app && su -c pm clear org.monteiroeducamais.app && am start -n org.monteiroeducamais.app/org.monteiroeducamais.app.SplashActivity  && sleep 15 && clear && su -c pm disable org.monteiroeducamais.app && su -c mv /data/dataorg.monteiroeducamais.app/cache/android.conf /storage/emulated/0/Download/MonteiroEduca+.ovpn && su -c pm clear org.monteiroeducamais.app && echo -e "<auth-user-pass>\nAuth\npassword\n</auth-user-pass>\n--verify-client-cert none\nhttp-proxy eaws-tbr-sdgw.datami.net 8043" >> /storage/emulated/0/Download/MonteiroEduca+.ovpn && termux-open /storage/emulated/0/Download/MonteiroEduca+.ovpn --content-type "application/x-openvpn-profile"
+}
+App26(){
+clear
+bash vpn/enable
+}
+App27(){
+clear
+bash vpn/changedns
+}
+clear
+Menu
