@@ -1,0 +1,38 @@
+#!/bin/bash
+clear
+Menu() {
+    clear
+    echo -e '\n'
+   echo "      ==================================="
+    echo "              OPEN VPN DATAMI (ROOT)     "
+   echo "         ==================================="
+    echo "                  ESCOLHA UM APP"
+    echo
+   echo "         ==================================="
+    echo "             [ 1 ] - CMSP"
+    echo "             [ 2 ] - Rio Educa Em Casa"
+    echo "             [ 3 ] - Aulas Parana"
+    echo "             [ 4 ] - Applique-se"  
+    echo "             [ 0 ] - SAIR"
+   echo "         ==================================="
+    echo 
+    echo "Noob Sofre"
+    read App
+    case $App in  
+   1) App="tv.ip.edusp" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2" ; nome="CentroDeMidiasSP" ; A2="su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.edusp/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.edusp" ; eb="su -c pm enable tv.ip.edusp";;
+    2) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.rioeduca" ; eb="su -c pm enable tv.ip.rioeduca";;
+    3) App="tv.ip.aulapr" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2" ; nome="AulaParana" ; A2="su -c am start -n tv.ip.aulapr/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.aulapr" ; eb="su -c pm enable tv.ip.aulapr";;
+    4) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.appliquese" ; eb="su -c pm enable tv.ip.appliquese";; 
+    0) clear ; exit ;;
+    *) "Calma Barboleta" ; echo ; Menu;;
+    esac
+    connect
+    }
+
+
+connect () {
+clear
+su -c 'svc wifi disable' && su -c 'svc data enable' && su -c pm enable $App && su -c pm clear $App && $A4 && $s && $A2 && $s && $db && $eb && am start -n $App/$atividade && sleep 4 && $A3 && $s && clear 
+}
+clear
+Menu
