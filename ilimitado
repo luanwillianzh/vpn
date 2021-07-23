@@ -56,7 +56,7 @@ check6(){
       apps=$(test -d "/data/data/$App" && echo 1)
     case $apps in
      1) clear ;;
-     *) echo "INSTALANDO..." ; echo "NÃO FAÇA NADA!" ; termux-open /storage/emulated/0/Download/$nome.apk ;;
+     *) echo "INSTALANDO..." ; echo "NÃO FAÇA NADA!" ; sleep 3 && termux-open --chooser /storage/emulated/0/Download/$nome.apk ;;
      esac
 }
 check6
@@ -94,7 +94,7 @@ check3(){
      esac
 }
 check3
-am start -n com.termux/com.termux.HomeActivity && clear && echo "INSTALANDO NOVAMENTE..." ; echo "NÃO FAÇA NADA!" ; termux-open /storage/emulated/0/Download/$nome.apk
+am start -n com.termux/com.termux.HomeActivity && clear && echo "INSTALANDO NOVAMENTE..." ; echo "NÃO FAÇA NADA!" ; termux-open --chooser /storage/emulated/0/Download/$nome.apk
 check4(){
       apps=$(test -d "/data/data/$App" && echo 1)
     case $apps in
