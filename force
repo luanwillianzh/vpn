@@ -53,10 +53,10 @@ check1
 App07(){
 clear
 check4() {
-    vpnloop=$(test -f "$HOME/vpn02" && echo 1)
+    vpnloop=$(test -f "$HOME/vpn03" && echo 1)
     case $vpnloop in
-    1) bash vpn02;;
-    *) clear && echo "NECESSARIO TER INTERNET NA 1°" ; echo "VEZ PARA BAIXAR O RECURSO" ; sleep 4 && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/vpn02 && chmod +x vpn02 && cp vpn02 $PREFIX/bin/ && ./vpn02 ; check4;;
+    1) bash vpn03;;
+    *) clear && echo "NECESSARIO TER INTERNET NA 1°" ; echo "VEZ PARA BAIXAR O RECURSO" ; sleep 4 && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/vpn03 && chmod +x vpn03 && cp vpn03 $PREFIX/bin/ && ./vpn03 ; check4;;
     esac
 }
 check4
