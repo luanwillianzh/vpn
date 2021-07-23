@@ -1,0 +1,103 @@
+clear && echo "PARA FUNCIONAR CORRETAMENTE É NECESSARIO" ; echo "TER TODOS OS APPS DE CONEXÃO FORÇADA," ; echo "DEIXAR O TERMUX EM SEGUNDO PLANO" ; echo "E ACEITAR AS PERMIÇÕES DE VPN DE" ; echo "TODOS OS APPS" && sleep 15 && clear
+su -c pm clear tv.ip.edusp && su -c am start -n tv.ip.edusp/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.edusp/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2 && sleep 40
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) clear;;
+    1) su -c killall tv.ip.edusp;;
+     esac
+}
+check2
+check3() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) sleep 2 ; check3;;
+    0) clear;;
+     esac
+}
+check3
+su -c pm clear tv.ip.cmspi && su -c am start -n tv.ip.cmspi/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.cmspi/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.cmspi/tv.ip.my.activities.MyVideoActivity && sleep 40
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) clear;;
+    1) su -c killall tv.ip.cmspi;;
+     esac
+}
+check2
+check3() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) sleep 2 ; check3;;
+    0) clear;;
+     esac
+}
+check3
+su -c pm clear tv.ip.aulapr && su -c am start -n tv.ip.aulapr/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.aulapr/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2 && sleep 40
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) clear;;
+    1) su -c killall tv.ip.aulapr;;
+     esac
+}
+check2
+check3() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) sleep 2 ; check3;;
+    0) clear;;
+     esac
+}
+check3
+su -c pm clear tv.ip.conectaai && su -c am start -n tv.ip.conectaai/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.conectaai/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.conectaai/tv.ip.my.activities.MyVideoActivity && sleep 40
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) clear;;
+    1) su -c killall tv.ip.conectaai;;
+     esac
+}
+check2
+check3() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) sleep 2 ; check3;;
+    0) clear;;
+     esac
+}
+check3
+su -c pm clear tv.ip.appliquese && su -c am start -n tv.ip.appliquese/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.appliquese/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2 && sleep 40
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) clear;;
+    1) su -c killall tv.ip.appliquese;;
+     esac
+}
+check2
+check3() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) sleep 2 ; check3;;
+    0) clear;;
+     esac
+}
+check3
+su -c pm clear tv.ip.rioeduca && su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.rioeduca/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2 && sleep 40 
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) clear;;
+    1) su -c killall tv.ip.rioeduca;;
+     esac
+}
+check2
+check3() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) sleep 2 ; check3;;
+    0) bash vpnloop;;
+     esac
+}
+check3
