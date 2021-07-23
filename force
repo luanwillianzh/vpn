@@ -16,6 +16,7 @@ Menu() {
     echo "            [ 4 ] - Conecta Ai"  
     echo "            [ 5 ] - Applique-se"
     echo "            [ 6 ] - Rio Educa Em Casa"  
+    echo "            [ 7 ] - Loop De Conexão"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
@@ -30,8 +31,8 @@ Menu() {
     4) App="tv.ip.conectaai" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.conectaai/tv.ip.my.activities.MyVideoActivity" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.conectaai/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.conectaai/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.conectaai" ; eb="su -c pm enable tv.ip.conectaai";; 
     5) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.appliquese" ; eb="su -c pm enable tv.ip.appliquese";; 
    6) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.rioeduca" ; eb="su -c pm enable tv.ip.rioeduca";;
+    7) App07;;
     0) App0;;
-    0) clear ; exit ;;
     *) "Calma Barboleta" ; echo ; Menu;;
     esac
     connect
@@ -40,13 +41,25 @@ Menu() {
 App0(){
 clear
 check1() {
-    conf=$(test -f "$HOME/PerVPN" && echo 1)
-    case $conf in
+    pervpn=$(test -f "$HOME/PerVPN" && echo 1)
+    case $pervpn in
     1) bash PerVPN;;
-    *) clear && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/PerVPN && chmod +x PerVPN && cp PerVPN $PREFIX/bin/ && ./PerVPN ; echo "NECESSARIO TER INTERNET NA 1°" ; echo "VEZ PARA BAIXAR O RECURSO" ; sleep 4 && check1;;
+    *) clear && echo "NECESSARIO TER INTERNET NA 1°" ; echo "VEZ PARA BAIXAR O RECURSO" ; sleep 4 && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/PerVPN && chmod +x PerVPN && cp PerVPN $PREFIX/bin/ && ./PerVPN ; check1;;
     esac
 }
 check1
+}
+
+App07(){
+clear
+check4() {
+    vpnloop=$(test -f "$HOME/vpn02" && echo 1)
+    case $vpnloop in
+    1) bash vpn02;;
+    *) clear && echo "NECESSARIO TER INTERNET NA 1°" ; echo "VEZ PARA BAIXAR O RECURSO" ; sleep 4 && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/vpn02 && chmod +x vpn02 && cp vpn02 $PREFIX/bin/ && ./vpn02 ; check4;;
+    esac
+}
+check4
 }
 
 connect () {
