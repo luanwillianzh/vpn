@@ -98,7 +98,7 @@ check2() {
     esac
 }
 check2
-am start -n com.termux/com.termux.HomeActivity && clear && echo "AGORA DESINSTALE O APP"
+am start -n com.termux/com.termux.HomeActivity && clear && echo "OPS, A CHAVINHA SUMIU" echo "AGORA DESINSTALE O APP" ; echo "PARA ELE SER REINSTALADO"
 check3(){
       Appss=$(test -d "/data/data/$App" && echo 1)
     case $Appss in
