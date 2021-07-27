@@ -2,29 +2,35 @@
 clear
 Menu() {
 echo "    ================================"
-    echo "              ID ILIMITADO BETA   "
+    echo "                ID CHANGE   "
    echo "        ================================"   
     echo
     echo "              ESCOLHA UMA OPÇÃO"
-    echo "              PARA REINSTALAR"
+    echo "              PARA MUDAR O ID"
    echo "       ================================"
-    echo "            [ 1 ] - EscolaEmCasaDF"
-    echo "            [ 2 ] - E-learningEC"
-    echo "            [ 3 ] - EducaOlinda"
-    echo "            [ 4 ] - ConectaUneb"
-    echo "            [ 5 ] - SalaEstudanteSC"
-    echo "            [ 6 ] - MinhaEstacio"
-    echo "            [ 7 ] - ConexãoEscola"
-    echo "            [ 8 ] - EscoLAR"
-    echo "            [ 9 ] - EscolaProfessorRS"
-    echo "           [ 10 ] - EscolaEstudanteRS"
-    echo "           [ 11 ] - EducaSãoLeo"
-    echo "           [ 12 ] - EstudeEmCasa"
-    echo "           [ 13 ] - EscolaMSJ"
-    echo "           [ 14 ] - EscolaIgarassu"
-    echo "           [ 15 ] - PrincesaEduca+"
-    echo "           [ 16 ] - ConquistApp"
-    echo "           [ 17 ] - NetEscola"
+    echo "              [ 1 ] - Escola em Casa DF"
+    echo "              [ 2 ] - E-learning EC"
+    echo "              [ 3 ] - Educa Olinda"
+    echo "              [ 4 ] - Conecta Uneb"
+    echo "              [ 5 ] - Sala Estudante SC"
+    echo "              [ 6 ] - Minha Estacio"
+    echo "              [ 7 ] - Conexão Escola"
+    echo "              [ 8 ] - EscoLAR"
+    echo "              [ 9 ] - Escola RS - Professor"
+    echo "             [ 10 ] - Escola RS - Estudante"
+    echo "             [ 11 ] - EDUCA SÃO LEO"
+    echo "             [ 12 ] - Estude em Casa"
+    echo "             [ 13 ] - Escola MSJ"
+    echo "             [ 14 ] - Escola Igarassu"
+    echo "             [ 15 ] - Princesa Educa+"
+    echo "             [ 16 ] - ConquistApp"
+    echo "             [ 17 ] - Net Escola"
+    echo "             [ 18 ] - CMSP"
+    echo "             [ 19 ] - CMSP KIDS"
+    echo "             [ 20 ] - Aulas Parana"
+    echo "             [ 21 ] - Conecta Ai"  
+    echo "             [ 22 ] - Applique-se"
+    echo "             [ 23 ] - Rio Educa Em Casa"  
    echo "       ================================"
     echo "@luanw04"
     echo "@alpacinoo007"
@@ -49,6 +55,12 @@ echo "    ================================"
     15) App="com.princesaeducamais" ; atividade=".SplashActivity" ; nome="PrincesaEduca+" ;;
     16) App="br.gov.ba.pmvc.vcapp" ; atividade=".SplashScreenActivity" ; nome="ConquistApp" ; E1="sleep 10";;    
     17) App="br.gov.go.seduc.netescola" ; atividade="br.gov.go.seduc.netescola.MainActivity" ; nome="NetEscola" ;;
+   18) App="tv.ip.edusp" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2 " ; nome="CentroDeMidiasSP" ; A2="su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.edusp/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.edusp" ; eb="su -c pm enable tv.ip.edusp";;
+    19) App="tv.ip.cmspi" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.cmspi/tv.ip.my.activities.MyVideoActivity" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.cmspi/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.cmspi/tv.ip.my.activities.SplashScreen " ; db="su -c pm disable tv.ip.cmspi" ; eb="su -c pm enable tv.ip.cmspi";;
+    20) App="tv.ip.aulapr" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2 " ; nome="AulaParana" ; A2="su -c am start -n tv.ip.aulapr/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.aulapr" ; eb="su -c pm enable tv.ip.aulapr";;
+    21) App="tv.ip.conectaai" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.conectaai/tv.ip.my.activities.MyVideoActivity" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.conectaai/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.conectaai/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.conectaai" ; eb="su -c pm enable tv.ip.conectaai";; 
+    22) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.appliquese" ; eb="su -c pm enable tv.ip.appliquese";; 
+   23) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.rioeduca" ; eb="su -c pm enable tv.ip.rioeduca";;
     *) "Calma Barboleta" ; echo ; Menu;;
     esac
     connect
@@ -56,37 +68,12 @@ echo "    ================================"
 
 connect () {
 clear
-check8(){
-      apk=$(test -f "/storage/emulated/0/Download/$nome.apk" && echo 1)
-    case $apk in
-    1) clear;;
-    *) clear && echo "APK NÃO ENCONTRADO NA PASTA DOWNLOAD" ; echo "CERTIFIQUE DE TER RENOMEADO ELE COM O" ; echo "SEU EXATO NOME DO PAINEL OU DE TER" ; echo "MOVIDO ELE PARA DOWNLOADS" ; sleep 2 ; check8;;
-     esac
-}
-check8
-am start -n com.termux/com.termux.HomeActivity && clear
-check6(){
-      apps=$(test -d "/data/data/$App" && echo 1)
-    case $apps in
-     1) clear ;;
-     *) clear && echo "ABRINDO O INSTALADOR!" ; echo "AGUARDE..." ; termux-open /storage/emulated/0/Download/$nome.apk && sleep 4 && check6 ;;
-     esac
-}
-check6
-check7(){
-      apps=$(test -d "/data/data/$App" && echo 1)
-    case $apps in
-     1) clear ;;
-     *) sleep 2 ; check7 ;;
-     esac
-}
-check7
-am start -n $App/$atividade 
+am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name $App [--ez clear_cache {true}] [--ez delete_app_data {true}] && clear && sleep 8 && echo "LIMPE OS DADOS E ENTRE NO APP"
 check1() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
-    1) clear;;
-    0) sleep 2 ; check1;; 
+    1) clear ;;
+    0) sleep 2 ; check1;;
     esac
 }
 check1
@@ -94,20 +81,10 @@ check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     1) sleep 2 ; check2 ;;
-    0) clear ;;
+    0) am start -n com.termux/com.termux.HomeActivity && clear ; connect;;
     esac
 }
 check2
-am start -n com.termux/com.termux.HomeActivity && clear && echo "OPS, A CHAVINHA SUMIU" ; echo "AGORA DESINSTALE O APP" ; echo "PARA ELE SER REINSTALADO"
-check3(){
-      Appss=$(test -d "/data/data/$App" && echo 1)
-    case $Appss in
-     1) sleep 2 ; check3 ;;
-     *) clear;;
-     esac
-}
-check3
-am start -n com.termux/com.termux.HomeActivity && connect
 }
 clear
 Menu
