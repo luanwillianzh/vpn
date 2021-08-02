@@ -1,0 +1,66 @@
+#!/bin/bash
+clear
+Menu() {
+    clear
+    echo -e '\n'
+   echo "      ==================================="
+    echo "               FORÇAR CONEXÃO (ROOT)     "
+   echo "         ==================================="
+    echo
+    echo "            ESCOLHA UM APP PARA BAIXAR"
+   echo "         ==================================="
+    echo "             [ 1 ] - CMSP"
+    echo "             [ 2 ] - Rio Educa Em Casa"
+    echo "             [ 3 ] - Aulas Parana"
+    echo "             [ 4 ] - Applique-se" 
+    echo "             [ 5 ] - CMSP Kids"
+    echo "             [ 6 ] - Voltar"
+    echo "        ==================================="
+    echo
+    echo "ESCOLHA UMA OPÇÃO:"
+    read App
+    case $App in
+    1) App="tv.ip.edusp" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2" ; nome="CentroDeMidiasSP" ; A2="su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.edusp/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.edusp" ; eb="su -c pm enable tv.ip.edusp";E1="17";;
+    2) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.rioeduca" ; eb="su -c pm enable tv.ip.rioeduca"; E1="18";;
+    3) App="tv.ip.aulapr" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2" ; nome="AulaParana" ; A2="su -c am start -n tv.ip.aulapr/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.aulapr" ; eb="su -c pm enable tv.ip.aulapr"; E1="19";;
+    4) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.appliquese" ; eb="su -c pm enable tv.ip.appliquese"; E1="20";;
+     5) App="tv.ip.cmspi" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.cmspi/tv.ip.my.activities.MyVideoActivity" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.cmspi/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.cmspi/tv.ip.my.activities.SplashScreen " ; db="su -c pm disable tv.ip.cmspi" ; eb="su -c pm enable tv.ip.cmspi" ; E1="22";;
+    6) App6;;
+    *) "Calma Barboleta" ; echo ; Menu;;
+    esac
+    connect
+}
+
+connect () {
+clear
+check(){
+      appk=$(test -f "$HOME/$E1.apk" && echo 1)
+    case $appk in
+    1) su -c rm $HOME/$E1.apk && clear;;
+    *) echo "BAIXANDO..." ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/$E1.apk && chmod +x $E1.apk && clear && echo "BAIXADO COM SUCESSO!" ; sleep 3 && clear  ;;
+    esac
+}
+check
+check(){
+      apps=$(test -d "/data/data/$App" && echo 1)
+    case $apps in
+    1) echo "DESINSTALANDO SEU APP..." && su -c pm uninstall $App && echo ; echo "INSTALANDO O NOVO APP..." ; su -c pm install $HOME/$E1.apk ;;
+    *) echo "INSTALANDO O NOVO APP..." ; su -c pm install $HOME/$E1.apk;;
+     esac
+}
+check
+check(){
+      apps=$(test -d "/data/data/$App" && echo 1)
+    case $apps in
+    1) clear;;
+    *) termux-open $HOME/$E1.apk;;
+     esac
+}
+check
+sleep 2 && bash force
+}
+App6(){
+clear && bash force
+}
+clear
+Menu

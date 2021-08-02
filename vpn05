@@ -1,0 +1,163 @@
+#!/bin/bash
+clear
+Menu() {
+    clear
+    echo -e '\n'
+   echo "     ==================================="
+    echo "             LOOP DE CONEXÃO (ROOT)     "
+   echo "        ==================================="
+    echo "                 ESCOLHA UM APP"
+    echo
+   echo "        ==================================="
+    echo "            [ P ] - Permições VPN"
+    echo "            [ 1 ] - CMSP"
+    echo "            [ 2 ] - CMSP KIDS"
+    echo "            [ 3 ] - Aulas Parana"
+    echo "            [ 4 ] - Applique-se"
+    echo "            [ 5 ] - Rio Educa Em Casa"  
+    echo "            [ 6 ] - Todos os apps"
+   echo "         ==================================="
+   echo
+    echo "@alpacinoo007"
+    echo "@luanw04"
+    echo
+    echo "Noob Sofre"
+    read App
+    case $App in  
+   1) App="tv.ip.edusp" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2 " ; nome="CentroDeMidiasSP" ; A2="su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.edusp/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.edusp" ; eb="su -c pm enable tv.ip.edusp";;
+    2) App="tv.ip.cmspi" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.cmspi/tv.ip.my.activities.MyVideoActivity" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.cmspi/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.cmspi/tv.ip.my.activities.SplashScreen " ; db="su -c pm disable tv.ip.cmspi" ; eb="su -c pm enable tv.ip.cmspi";;
+    3) App="tv.ip.aulapr" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2 " ; nome="AulaParana" ; A2="su -c am start -n tv.ip.aulapr/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.aulapr" ; eb="su -c pm enable tv.ip.aulapr";;
+    4) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.appliquese" ; eb="su -c pm enable tv.ip.appliquese";; 
+   5) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.rioeduca" ; eb="su -c pm enable tv.ip.rioeduca";;
+    6) App6;;
+    P) App0;;
+    p) App0;;
+    *) "Calma Barboleta" ; echo ; Menu;;
+    esac
+    connect
+    }
+App6(){
+clear 
+echo "PARA FUNCIONAR CORRETAMENTE É NECESSARIO" ; echo "TER TODOS OS APPS DE CONEXÃO FORÇADA," ; echo "DEIXAR O TERMUX EM SEGUNDO PLANO" ;  sleep 10 && clear && echo "PEDINDO AS PERMIÇÕES DE VPN DE" ; echo "TODOS OS APPS, POR FAVOR ACEITE" &&
+su -c am start -n tv.ip.edusp/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c pm clear tv.ip.edusp && su -c am start -n tv.ip.cmspi/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.cmspi/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c pm clear tv.ip.cmspi && su -c am start -n tv.ip.aulapr/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.aulapr/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c pm clear tv.ip.aulapr && su -c am start -n tv.ip.appliquese/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c pm clear tv.ip.appliquese && su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.edusp [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear tv.ip.edusp && su -c am start -n tv.ip.edusp/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.edusp/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2 && sleep 40
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) clear;;
+    1) su -c killall tv.ip.edusp;;
+     esac
+}
+check2
+check3() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) sleep 2 ; check3;;
+    0) su -c pm clear tv.ip.edusp && clear;;
+     esac
+}
+check3
+su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.cmspi [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear tv.ip.cmspi && su -c am start -n tv.ip.cmspi/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.cmspi/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.cmspi/tv.ip.my.activities.MyVideoActivity && sleep 40
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) clear;;
+    1) su -c killall tv.ip.cmspi;;
+     esac
+}
+check2
+check3() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) sleep 2 ; check3;;
+    0) su -c pm clear tv.ip.cmspi && clear;;
+     esac
+}
+check3
+su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.aulapr [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear tv.ip.aulapr && su -c am start -n tv.ip.aulapr/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.aulapr/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2 && sleep 40
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) clear;;
+    1) su -c killall tv.ip.aulapr;;
+     esac
+}
+check2
+check3() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) sleep 2 ; check3;;
+    0) su -c pm clear tv.ip.aulapr && clear;;
+     esac
+}
+check3
+su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.appliquese [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear tv.ip.appliquese && su -c am start -n tv.ip.appliquese/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.appliquese/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2 && sleep 40
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) clear;;
+    1) su -c killall tv.ip.appliquese;;
+     esac
+}
+check2
+check3() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) sleep 2 ; check3;;
+    0) su -c pm clear tv.ip.appliquese && clear;;
+     esac
+}
+check3
+su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.rioeduca [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear tv.ip.rioeduca && su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.rioeduca/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2 && sleep 40 
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) clear;;
+    1) su -c killall tv.ip.rioeduca;;
+     esac
+}
+check2
+check3() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) sleep 2 ; check3;;
+    0) su -c pm clear tv.ip.rioeduca && clear;;
+     esac
+}
+check3
+clear && App6
+}
+
+App0(){
+clear
+check1() {
+    pervpn=$(test -f "$HOME/PerVPN2" && echo 1)
+    case $pervpn in
+    1) bash PerVPN2;;
+    *) clear && echo "NECESSARIO TER INTERNET NA 1°" ; echo "VEZ PARA BAIXAR O RECURSO" ; sleep 4 && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/PerVPN2 && chmod +x PerVPN2 && cp PerVPN2 $PREFIX/bin/ && ./PerVPN2 ; check1;;
+    esac
+}
+check1
+}
+
+connect () {
+clear
+su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name $App [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear $App && su -c am start -n $App/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n $App/tv.ip.my.controller.MyMainService && $A3
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) sleep 2 ; check2;;
+    1) su -c am stopservice -n $App/tv.ip.my.controller.MyMainService && su -c killall $App
+     esac
+}
+check2
+check9() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) connect;;
+    1) sleep 2 ; check9;;
+     esac
+}
+check9
+}
+clear
+Menu
