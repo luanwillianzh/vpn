@@ -75,7 +75,7 @@ check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check2;;
-    1) su -c am startservice -n tv.ip.edusp/de.blinkt.openvpn.core.OpenVPNService && sleep 4 && su -c am startservice -n tv.ip.edusp/de.blinkt.openvpn.core.OpenVPNService && su -c am start -n com.termux/com.termux.app.TermuxActivity && clear && echo "AGORA REMOVA O APP DE RECENTES" && sleep 4 && su -c killall $App
+    1) su -c am startservice -n $App/de.blinkt.openvpn.core.OpenVPNService && sleep 4 && su -c am startservice -n $App/de.blinkt.openvpn.core.OpenVPNService && su -c am start -n com.termux/com.termux.app.TermuxActivity && clear && echo "AGORA REMOVA O APP DE RECENTES" && sleep 4 && su -c killall $App
      esac
 }
 check2
