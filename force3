@@ -6,7 +6,9 @@ Menu() {
    echo "     ==================================="
     echo "             FORÇAR CONEXÃO (ROOT)     "
    echo "        ==================================="
-    echo "                 ESCOLHA UM APP"
+    echo
+    echo "            USE ESSE CASO O OUTRO"
+    echo "            NÃO ESTEJA FUNCIONANDO"
     echo
    echo "        ==================================="
     echo "            [ P ] - Permições VPN"
@@ -14,13 +16,8 @@ Menu() {
     echo "            [ 2 ] - CMSP KIDS"
     echo "            [ 3 ] - Aulas Parana"
     echo "            [ 4 ] - Applique-se"
-    echo "            [ 5 ] - Rio Educa Em Casa"  
-    echo "            [ 6 ] - Loop De Conexão"
-    echo "            [ 7 ] - Change DNS"
-    echo "            [ 8 ] - Baixar Apps"
-    echo "            [ 9 ] - MBs Gastos VPN"
-    echo "            [ N ] - Proximo" 
-    echo "            [ 0 ] - Sair"
+    echo "            [ 5 ] - Rio Educa Em Casa"
+    echo "            [ 0 ] - Voltar"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
@@ -34,14 +31,8 @@ Menu() {
     3) App="tv.ip.aulapr" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2 " ; nome="AulaParana" ; A2="su -c am start -n tv.ip.aulapr/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.aulapr/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.aulapr" ; eb="su -c pm enable tv.ip.aulapr";; 
     4) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.appliquese" ; eb="su -c pm enable tv.ip.appliquese";; 
    5) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.rioeduca" ; eb="su -c pm enable tv.ip.rioeduca";;
-    6) App6;;
-    7) App7;;
-    8) App8;;
-    9) App9;;
     P) AppP;;
     p) Appp;;
-    N) AppN;;
-    n) Appn;;
     0) App0;;
     *) "Calma Barboleta" ; echo ; Menu;;
     esac
@@ -50,31 +41,7 @@ Menu() {
 
 App0(){
 clear
-su -c killall com.termux
-}
-
-AppN(){
-clear
-check1() {
-    pervpn=$(test -f "$HOME/force3" && echo 1)
-    case $pervpn in
-    1) bash force3;;
-    *) clear && echo "NECESSARIO TER INTERNET NA 1°" ; echo "VEZ PARA BAIXAR O RECURSO" ; sleep 4 && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/force3 && chmod +x force3 && cp force3 $PREFIX/bin/ && ./force3 ; check1;;
-    esac
-}
-check1
-}
-
-Appn(){
-clear
-check1() {
-    pervpn=$(test -f "$HOME/force3" && echo 1)
-    case $pervpn in
-    1) bash force3;;
-    *) clear && echo "NECESSARIO TER INTERNET NA 1°" ; echo "VEZ PARA BAIXAR O RECURSO" ; sleep 4 && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/force3 && chmod +x force3 && cp force3 $PREFIX/bin/ && ./force3 ; check1;;
-    esac
-}
-check1
+bash force
 }
 
 AppP(){
@@ -101,54 +68,14 @@ check1() {
 check1
 }
 
-App6(){
-clear
-check4() {
-    vpnloop=$(test -f "$HOME/vpn05" && echo 1)
-    case $vpnloop in
-    1) bash vpn05;;
-    *) clear && echo "NECESSARIO TER INTERNET NA 1°" ; echo "VEZ PARA BAIXAR O RECURSO" ; sleep 4 && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/vpn05 && chmod +x vpn05 && cp vpn05 $PREFIX/bin/ && ./vpn05 ; check4;;
-    esac
-}
-check4
-}
-App7(){
-clear
-check1() {
-    pervpn=$(test -f "$HOME/changedns2" && echo 1)
-    case $pervpn in
-    1) bash changedns2;;
-    *) clear && echo "NECESSARIO TER INTERNET NA 1°" ; echo "VEZ PARA BAIXAR O RECURSO" ; sleep 4 && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/changedns2 && chmod +x changedns2 && cp changedns2 $PREFIX/bin/ && ./changedns2 ; check1;;
-    esac
-}
-check1
-}
-
-App8(){
-clear
-check4() {
-    vpnloop=$(test -f "$HOME/downloads2" && echo 1)
-    case $vpnloop in
-    1) bash downloads2;;
-    *) clear && echo "NECESSARIO TER INTERNET NA 1°" ; echo "VEZ PARA BAIXAR O RECURSO" ; sleep 4 && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/downloads2 && chmod +x downloads2 && cp downloads2 $PREFIX/bin/ && ./downloads2 ; check4;;
-    esac
-}
-check4
-}
-
-App9(){
-clear
-echo "É PRECISO ESTAR CONECTADO NA VPN PARA VER" ; echo "O TEMPO CONECTADO E OS MBS GASTOS" ; sleep 5 && clear && su -c am start -n com.android.vpndialogs/com.android.vpndialogs.ManageDialog && bash force
-}
-
 connect(){
 clear
-su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name $App [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear $App && su -c am start -n $App/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n $App/tv.ip.my.controller.MyMainService && $A3
+su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name $App [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear $App && $A4 && sleep 4 && $A3
 check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) sleep 2 ; check2;;
-    1) su -c am stopservice -n $App/tv.ip.my.controller.MyMainService && su -c killall $App
+    1) su -c am startservice -n tv.ip.edusp/de.blinkt.openvpn.core.OpenVPNService && sleep 4 && su -c am startservice -n tv.ip.edusp/de.blinkt.openvpn.core.OpenVPNService && su -c am start -n com.termux/com.termux.app.TermuxActivity && clear && echo "AGORA REMOVA O APP DE RECENTES" && sleep 4 && su -c killall $App
      esac
 }
 check2
