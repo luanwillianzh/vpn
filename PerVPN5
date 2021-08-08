@@ -1,0 +1,42 @@
+#!/bin/bash
+clear
+Menu() {
+    clear
+    echo -e '\n'
+   echo "      ==================================="
+    echo "                   FORÇAR CONEXÃO      "
+   echo "         ==================================="
+    echo "                ESCOLHA UM APP PARA"
+    echo "                PEDIR PERMIÇÕES VPN"
+    echo 
+   echo "         ==================================="
+    echo "             [ 1 ] - CMSP"
+    echo "             [ 2 ] - CMSP KIDS"
+    echo "             [ 3 ] - Aulas Parana"
+    echo "             [ 4 ] - Applique-se"
+    echo "             [ 5 ] - Rio Educa Em Casa"  
+   echo "         ==================================="
+   echo
+    echo "@alpacinoo007"
+    echo "@luanw04"
+    echo
+    echo "Noob Sofre"
+    read App
+    case $App in  
+   1) App="tv.ip.edusp" ; atividade="tv.ip.my.activities.SplashScreen" ; A3=" am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2 " ; nome="CentroDeMidiasSP" ; A2=" am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4=" am start -n tv.ip.edusp/tv.ip.my.activities.SplashScreen" ; db=" pm disable tv.ip.edusp" ; eb=" pm enable tv.ip.edusp";;
+    2) App="tv.ip.cmspi" ; atividade="tv.ip.my.activities.SplashScreen" ; A3=" am start -n tv.ip.cmspi/tv.ip.my.activities.MyVideoActivity" ; nome="RioEducaEmCasa" ; A2=" am start -n tv.ip.cmspi/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4=" am start -n tv.ip.cmspi/tv.ip.my.activities.SplashScreen " ; db=" pm disable tv.ip.cmspi" ; eb=" pm enable tv.ip.cmspi";;
+    3) App="tv.ip.aulapr" ; atividade="tv.ip.my.activities.SplashScreen" ; A3=" am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2 " ; nome="AulaParana" ; A2=" am start -n tv.ip.aulapr/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4=" am start -n tv.ip.aulapr/tv.ip.my.activities.SplashScreen" ; db=" pm disable tv.ip.aulapr" ; eb=" pm enable tv.ip.aulapr";; 
+    4) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3=" am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2=" am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4=" am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db=" pm disable tv.ip.appliquese" ; eb=" pm enable tv.ip.appliquese";; 
+   5) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3=" am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ; A2=" am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4=" am start -n tv.ip.rioeduca/tv.ip.my.activities.SplashScreen" ; db=" pm disable tv.ip.rioeduca" ; eb=" pm enable tv.ip.rioeduca";;
+    *) "Calma Barboleta" ; echo ; Menu;;
+    esac
+    connect
+    }
+
+
+connect () {
+clear
+ am start -n $App/tv.ip.my.activities.PermissionActivity && sleep 2 && $A2 && sleep 6 && bash force0
+}
+clear
+Menu
