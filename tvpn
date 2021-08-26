@@ -38,7 +38,14 @@ esac
 
 App1(){
 clear
-sudo bash runvpn.sh
+check1() {
+    conf=$(test -f "$HOME/runvpn.sh" && echo 1)
+    case $conf in
+    1) sudo bash runvpn.sh ;;
+    *) clear ; echo "Ainda não foi instalado" ; sleep 4 ; Main;;
+   esac
+}
+check1
 }
 
 App2(){
