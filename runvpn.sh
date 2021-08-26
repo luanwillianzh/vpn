@@ -75,10 +75,10 @@ do
 	
 	killprocess
 	echo -e "${GREEN}"
-	read -p "reconnect ? [y\n] " reconnect
+	read -p "Deseja Reconectar? [y\n] " reconnect
 	if [ "$reconnect" = 'y' ]  || [ "$reconnect" = 'Y' ]
 	then 
-		echo -e "reconnecting ${SCOLOR}"
+		echo -e "Reconectando... ${SCOLOR}"
 
 		connect
 	else 
