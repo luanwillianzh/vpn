@@ -1,0 +1,279 @@
+#!/bin/bash
+
+    su=$(su -h | grep -c "command")
+    case $su in
+    0) killall com.termux;;
+    1) clear ;;
+    esac
+
+clear
+Main(){
+clear
+echo "---------------------------------"
+echo "        VPN TERMUX   "
+echo "---------------------------------"
+echo "1 - Iniciar Conexão"
+echo "2 - Instalar VPN"
+echo "3 - Baixar Arquivos de Conexão"
+echo "4 - Arquivos Personalizados"
+echo "0 - Sair"
+echo "---------------------------------"
+echo 
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
+
+read -n1 -p "Escolha uma Opção : " Option ; echo
+case $Option in # case Main
+
+
+1) App1;;
+2) App2;;
+3) App3;;
+4) App4;;
+0) killall com.termux;;
+*) clear ; Main;;
+esac
+}
+
+App1(){
+clear
+sudo bash runvpn.sh
+}
+
+App2(){
+clear
+check1() {
+    conf=$(test -f "$HOME/settings.ini" && echo 1)
+    case $conf in
+    1) clear ; clear;;
+    *) echo "Arquivo de conexão não encontrado" ; echo "Redirecionando para o local de download" ; sleep 5 ; clear ; App3;;
+   esac
+}
+check1
+check1() {
+    conf=$(test -d "/data/data/com.termux/files/home/http-ssl-ssh-injector/" && echo 1)
+    case $conf in
+    1) su -c rm -r /data/data/com.termux/files/home/http-ssl-ssh-injector/ ; clear;;
+    *) clear
+   esac
+}
+check1
+apt update -y ; apt upgrade -y ; pkg install git -y ; pkg install tsu -y ; apt install git -y ; apt install openssh -y ; apt install sshpass -y ; apt install netcat-openbsd -y ; apt install corkscrew -y ; apt install screen -y ; apt install python3 -y ; sleep 2 ; git clone https://github.com/abdoxfox/http-ssl-ssh-injector ; su -c rm $HOME/http-ssl-ssh-injector/settings.ini && su -c rm $HOME/http-ssl-ssh-injector/redsocks.conf ; su -c rm $HOME/http-ssl-ssh-injector/runvpn.sh ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/runvpn.sh && chmod +x runvpn.sh ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/redsocks.conf && chmod +x redsocks.conf ; su -c cp $HOME/http-ssl-ssh-injector/* $HOME ; clear ; App1
+}
+App3(){
+check7(){
+    conf=$(test -f "$HOME/settings.ini" && echo 1)
+    case $conf in
+    1) su -c rm $HOME/settings.ini ; clear;;
+    *) clear
+   esac
+}
+check7
+clear
+Menu(){
+echo "--------------------------"
+echo "   VPN TERMUX   "
+echo "--------------------------"
+echo "1 - Arquivos Vivo"
+echo "2 - Arquivos Claro"
+echo "3 - Arquivos Tim"
+echo "0 - Voltar"
+echo "--------------------------"
+echo
+
+read -n1 -p "Escolha uma Opção : " Option ; echo
+case $Option in # case Main
+
+1) A1;;
+2) A2;;
+3) A3;;
+0) clear ; Main;;
+*) App3;;
+esac
+}
+
+A1(){
+clear
+echo "--------------------------"
+echo "   VPN TERMUX   "
+echo "--------------------------"
+echo "1 - Vivo Arquivo 1"
+echo "2 - Vivo Arquivo 2"
+echo "3 - Vivo Arquivo 3"
+echo "4 - Vivo Arquivo 4"
+echo "5 - Vivo Arquivo 5"
+echo "6 - Vivo Arquivo 6"
+echo "7 - Vivo Arquivo 7"
+echo "8 - Vivo Arquivo 8"
+echo "0 - Voltar"
+echo "--------------------------"
+echo 
+
+
+read -n1 -p "Escolha uma Opção : " Option ; echo
+case $Option in # case Main
+
+1)  curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/vivo1.ini && chmod +x vivo1.ini && su -c mv vivo1.ini settings.ini ;;
+2)  curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/vivo2.ini && chmod +x vivo2.ini && su -c mv vivo2.ini settings.ini ;;
+3)  curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/vivo3.ini && chmod +x vivo3.ini && su -c mv vivo3.ini settings.ini ;;
+4) curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/vivo4.ini && chmod +x vivo4.ini && su -c mv vivo4.ini settings.ini ;;
+5) curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/vivo5.ini && chmod +x vivo5.ini && su -c mv vivo5.ini settings.ini ;;
+6) curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/vivo6.ini && chmod +x vivo6.ini && su -c mv vivo6.ini settings.ini ;;
+7) curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/vivo7.ini && chmod +x vivo7.ini && su -c mv vivo7.ini settings.ini ;;
+8) curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/vivo8.ini && chmod +x vivo8.ini && su -c mv vivo8.ini settings.ini ;;
+0) clear ; App3;;
+*) App3;;
+esac
+Main
+}
+
+A2(){
+clear
+echo "--------------------------"
+echo "   VPN TERMUX   "
+echo "--------------------------"
+echo "1 - Claro Arquivo 1"
+echo "2 - Claro Arquivo 2"
+echo "3 - Claro Arquivo 3"
+echo "4 - Claro Arquivo 4"
+echo "5 - Claro Arquivo 5"
+echo "6 - Claro Arquivo 6"
+echo "7 - Claro Arquivo 7"
+echo "8 - Claro Arquivo 8"
+echo "0 - Voltar"
+echo "--------------------------"
+echo 
+
+read -n1 -p "Escolha uma Opção : " Option ; echo
+case $Option in # case Main
+
+1)  curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/claro1.ini && chmod +x claro1.ini && su -c mv claro1.ini settings.ini ;;
+2)  curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/claro2.ini && chmod +x claro2.ini && su -c mv claro2.ini settings.ini ;;
+3)  curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/claro3.ini && chmod +x claro3.ini && su -c mv claro3.ini settings.ini ;;
+4) curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/claro4.ini && chmod +x claro4.ini && su -c mv claro4.ini settings.ini ;;
+5) curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/claro5.ini && chmod +x claro5.ini && su -c mv claro5.ini settings.ini ;;
+6) curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/claro6.ini && chmod +x claro6.ini && su -c mv claro6.ini settings.ini ;;
+7) curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/claro7.ini && chmod +x claro7.ini && su -c mv claro7.ini settings.ini ;;
+8) curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/claro8.ini && chmod +x claro8.ini && su -c mv claro8.ini settings.ini ;;
+0) clear ; App3;;
+*) App3;;
+esac
+Main
+}
+
+A3(){
+clear
+echo "--------------------------"
+echo "   VPN TERMUX   "
+echo "--------------------------"
+echo "1 - Tim Arquivo 1"
+echo "2 - Tim Arquivo 2"
+echo "3 - Tim Arquivo 3"
+echo "4 - Tim Arquivo 4"
+echo "5 - Tim Arquivo 5"
+echo "6 - Tim Arquivo 6"
+echo "7 - Tim Arquivo 7"
+echo "8 - Tim Arquivo 8"
+echo "0 - Voltar"
+echo "--------------------------"
+echo
+
+read -n1 -p "Escolha uma Opção : " Option ; echo
+case $Option in # case Main
+
+1) curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/tim1.ini && chmod +x tim1.ini && su -c mv tim1.ini settings.ini ;;
+2)  curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/tim2.ini && chmod +x tim2.ini && su -c mv tim2.ini settings.ini ;;
+3)  curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/tim3.ini && chmod +x tim3.ini && su -c mv tim3.ini settings.ini ;;
+4)  curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/tim4.ini && chmod +x tim4.ini && su -c mv tim4.ini settings.ini ;;
+5)  curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/tim5.ini && chmod +x tim5.ini && su -c mv tim5.ini settings.ini ;;
+6)  curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/tim6.ini && chmod +x tim6.ini && su -c mv tim6.ini settings.ini ;;
+7)  curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/tim7.ini && chmod +x tim7.ini && su -c mv tim7.ini settings.ini ;;
+0) clear ; App3;;
+*) App3;;
+esac
+Main
+}
+Menu
+}
+App4(){
+clear
+echo "--------------------------"
+echo "   VPN TERMUX   "
+echo "--------------------------"
+echo "1 - Arquivo Vivo"
+echo "2 - Arquivo Claro"
+echo "3 - Arquivo Tim"
+echo "0 - Voltar"
+echo "--------------------------"
+echo
+
+read -n1 -p "Escolha uma Opção : " Option ; echo
+case $Option in # case Main
+
+1) Arq1;;
+2) Arq2;;
+3) Arq3;;
+0) clear ; Main;;
+*) clear ; App4;;
+ esac
+}
+
+Arq1(){
+clear
+ echo -e "ㅤㅤㅤ \emCole o Host\em"
+read host
+echo
+echo -e "ㅤㅤ   \emCole a Porta\em"
+read port
+echo
+echo -e "ㅤ     \emDigite o Usuario\em"
+read User
+echo
+echo -e "ㅤ     \emDigite a Senha\em"
+read Pass
+echo ""
+
+su -c rm $HOME/settings.ini && curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/cobaia.ini && chmod +x cobaia.ini && su -c mv cobaia.ini settings.ini && echo -e "[mode]\n\nconnection_mode = 1\n\n[config]\npayload = GET / HTTP/1.1[crlf]Host: $host[crlf]Upgrade: websocket[crlf][crlf]\n# put proxy if needed else let it empty\nproxyip = 104.16.124.175\nproxyport = $port\n\nauto_replace = 1\n\n#ssh acount setting is required .\n[ssh]\nhost = $host\nport = $port\nusername = $User\npassword = $Pass\n\n[sni]\n# sni bughost ex : $host\nserver_name = $host" >> $HOME/settings.ini ; clear ; Main
+}
+Arq2(){
+clear
+ echo -e "ㅤㅤㅤ \emCole o Host\em"
+read host
+echo
+echo -e "ㅤㅤ   \emCole a Porta\em"
+read port
+echo
+echo -e "ㅤ     \emDigite o Usuario\em"
+read User
+echo
+echo -e "ㅤ     \emDigite a Senha\em"
+read Pass
+echo ""
+
+su -c rm $HOME/settings.ini && curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/cobaia.ini && chmod +x cobaia.ini && su -c mv cobaia.ini settings.ini && echo -e "[mode]\n\nconnection_mode = 1\n\n[config]\npayload = GET / HTTP/1.1[crlf]Host: $host[crlf]Upgrade: websocket[crlf][crlf]\n# put proxy if needed else let it empty\nproxyip = 104.16.85.20\nproxyport = $port\n\nauto_replace = 1\n\n#ssh acount setting is required .\n[ssh]\nhost = $host\nport = $port\nusername = $User\npassword = $Pass\n\n[sni]\n# sni bughost ex : $host\nserver_name = $host" >> $HOME/settings.ini ; clear ; Main
+}
+Arq3(){
+clear
+ echo -e "ㅤㅤㅤ \emCole o Host\em"
+read host
+echo
+echo -e "ㅤ     \emDigite o Usuario\em"
+read User
+echo
+echo -e "ㅤ     \emDigite a Senha\em"
+read Pass
+echo ""
+
+check1() {
+    conf=$(test -f "$HOME/settings.ini" && echo 1)
+    case $conf in
+    1) su -c rm $HOME/settings.ini ; clear;;
+    *) clear
+   esac
+}
+check1 
+curl -sO https://raw.githubusercontent.com/luanwillianzh/arquivos/main/cobaia.ini && chmod +x cobaia.ini && su -c mv cobaia.ini settings.ini && echo -e "\n\nconnection_mode = 1\n\n[config]\npayload = GET / HTTP/1.1[crlf]Host: $host[crlf]Upgrade: websocket[crlf][crlf]\n# put proxy if needed else let it empty\nproxyip = 104.16.19.94\nproxyport = 443\n\nauto_replace = 1\n\n#ssh acount setting is required .\n[ssh]\nhost = $host\nport = 443\nusername = $User\npassword = $Pass\n\n[sni]\n# sni bughost ex : $host\nserver_name = $host" >> $HOME/settings.ini ; clear ; Main
+}
+clear
+Main
