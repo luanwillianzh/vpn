@@ -51,6 +51,14 @@ check1
 App2(){
 clear
 check1() {
+    conf=$(test -f "$HOME/runvpn.sh" && echo 1)
+    case $conf in
+    *) clear ;;
+    1) clear ; echo "Já esta instalado" ; sleep 4 ; $App1;;
+   esac
+}
+check1
+check1() {
     conf=$(test -f "$HOME/settings.ini" && echo 1)
     case $conf in
     1) clear ; clear;;
@@ -58,15 +66,7 @@ check1() {
    esac
 }
 check1
-check1() {
-    conf=$(test -d "/data/data/com.termux/files/home/http-ssl-ssh-injector/" && echo 1)
-    case $conf in
-    1) su -c rm -r /data/data/com.termux/files/home/http-ssl-ssh-injector/ ; clear;;
-    *) clear
-   esac
-}
-check1
-apt update -y ; apt upgrade -y ; pkg install git -y ; pkg install tsu -y ; apt install git -y ; apt install openssh -y ; apt install sshpass -y ; apt install netcat-openbsd -y ; apt install corkscrew -y ; apt install screen -y ; apt install python3 -y ; sleep 2 ; git clone https://github.com/abdoxfox/http-ssl-ssh-injector ; su -c rm $HOME/http-ssl-ssh-injector/settings.ini && su -c rm $HOME/http-ssl-ssh-injector/redsocks.conf ; su -c rm $HOME/http-ssl-ssh-injector/runvpn.sh ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/runvpn.sh && chmod +x runvpn.sh ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/redsocks.conf && chmod +x redsocks.conf ; su -c cp $HOME/http-ssl-ssh-injector/* $HOME ; clear ; App1
+apt update -y ; apt upgrade -y ; pkg install git -y ; pkg install tsu -y ; apt install git -y ; apt install openssh -y ; apt install sshpass -y ; apt install netcat-openbsd -y ; apt install corkscrew -y ; apt install screen -y ; apt install python3 -y ; sleep 2 ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/proxification && chmod +x proxification ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/redsocks && chmod +x redsocks ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/README.md && chmod +x README.md ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/inject.py && chmod +x inject.py ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/pidkill.py && chmod +x pidkill.py ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/ssh.py && chmod +x ssh.py ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/tunnel.py && chmod +x tunnel.py ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/runvpn.sh && chmod +x runvpn.sh ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/redsocks.conf && chmod +x redsocks.conf ; clear ; App1
 }
 App3(){
 check7(){
