@@ -41,7 +41,7 @@ Menu() {
     p) Appp;;
     N) AppN;;
     n) Appn;;
-    0) App0;;
+    0) killall com.termux;;
     *) echo "Calma Barboleta" ; echo ; sleep 3 ; Menu;;
     esac
     connect
