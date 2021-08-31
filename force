@@ -6,7 +6,7 @@ Menu() {
    echo "     ==================================="
     echo "             FORÇAR CONEXÃO (ROOT)     "
    echo "        ==================================="
-    echo "                 ESCOLHA UM APP"
+    echo "               ESCOLHA UMA OPÇÃO"
     echo
    echo "        ==================================="
     echo "            [ P ] - Permições VPN"
@@ -16,18 +16,17 @@ Menu() {
     echo "            [ 4 ] - Applique-se"
     echo "            [ 5 ] - Rio Educa Em Casa"  
     echo "            [ 6 ] - Loop De Conexão"
-    echo "            [ 7 ] - Change DNS"
-    echo "            [ 8 ] - Baixar Apps"
-    echo "            [ 9 ] - MBs Gastos VPN"
-    echo "            [ N ] - Proximo" 
+    echo "            [ 7 ] - Baixar Apps"
+    echo "            [ 8 ] - MBs Gastos VPN"
+    echo "            [ 9 ] - Rotear VPN"
+    echo "            [ N ] - Proximo"
     echo "            [ 0 ] - Sair"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
     echo "@luanw04"
     echo
-    echo "Noob Sofre"
-    read App
+    read -n1 -p "Escolha uma Opção: " App
     case $App in  
    1) App="tv.ip.edusp" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2 " ; nome="CentroDeMidiasSP" ; A2="su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.edusp/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.edusp" ; eb="su -c pm enable tv.ip.edusp";;
     2) App="tv.ip.cmspi" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.cmspi/tv.ip.my.activities.MyVideoActivity" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.cmspi/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.cmspi/tv.ip.my.activities.SplashScreen " ; db="su -c pm disable tv.ip.cmspi" ; eb="su -c pm enable tv.ip.cmspi";;
@@ -43,26 +42,101 @@ Menu() {
     N) AppN;;
     n) Appn;;
     0) App0;;
-    *) "Calma Barboleta" ; echo ; Menu;;
+    *) echo "Calma Barboleta" ; echo ; sleep 3 ; Menu;;
     esac
     connect
     }
 
-App0(){
-clear
-su -c killall com.termux
-}
-
-AppN(){
-clear
-check1() {
-    pervpn=$(test -f "$HOME/force3" && echo 1)
-    case $pervpn in
-    1) bash force3;;
-    *) clear && echo "NECESSARIO TER INTERNET NA 1°" ; echo "VEZ PARA BAIXAR O RECURSO" ; sleep 4 && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/force3 && chmod +x force3 && cp force3 $PREFIX/bin/ && ./force3 ; check1;;
+App9() {
+    clear
+    echo -e '\n'
+   echo "     ==================================="
+    echo "             FORÇAR CONEXÃO (ROOT)     "
+   echo "        ==================================="
+    echo "               ESCOLHA UMA OPÇÃO"
+    echo
+   echo "        ==================================="
+    echo "            [ 1 ] - Via Roteador Wi-Fi"
+    echo "            [ 2 ] - Via USB"
+    echo "            [ 3 ] - Via Bluetooth"
+    echo "            [ 0 ] - Voltar"
+   echo "         ==================================="
+   echo
+    read -n1 -p "Escolha uma Opção: " Apps
+    case $Apps in  
+   1)Alt1;;
+   2)Alt2;;
+   3)Alt3;;
+   0)Menu;;
+   *) echo "Calma Barboleta" ; echo ; sleep 3 ; Menu;;
     esac
+    }
+
+Alt1(){
+clear
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) echo "VPN não encontrada" ; Menu;;
+    1) clear,;;
+     esac
+}
+check2
+check1() {
+    vpn=$(ifconfig | grep -c wlan0)
+    case $vpn in
+    0) clear ; echo "Roteador Wi-Fi não está ligado" ; sleep 2 ; check1;;
+    1) clear;;
+     esac
 }
 check1
+sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.43.0/24 dev wlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev wlan0 scope link table 61 && echo "Roteamento Wi-Fi iniciado" ; sleep 5 && killall com.termux
+}
+
+
+
+Alt2(){
+clear
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) echo "VPN não encontrada" ; Menu;;
+    1) clear,;;
+     esac
+}
+check2
+check1() {
+    vpn=$(ifconfig | grep -c rndis0)
+    case $vpn in
+    0) clear ; echo "Ancoragem USB não está ligada" ; sleep 2 ; check1;;
+    1) clear;;
+     esac
+}
+check1
+sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.42.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.42.0/24 dev rndis0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev rndis0 scope link table 61 && echo "Compartilhamento via USB iniciado" ; sleep 5 && killall com.termux
+}
+
+
+
+Alt3(){
+clear
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) echo "VPN não encontrada" ; Menu;;
+    1) clear,;;
+     esac
+}
+check2
+check1() {
+    vpn=$(ifconfig | grep -c bt-pan)
+    case $vpn in
+    0) clear ; echo "Nenhum aparelho conectado via Ancoragem Bluetooth" ; sleep 2 ; check1;;
+    1) clear;;
+     esac
+}
+check1
+sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.44.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.44.0/24 dev bt-pan scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev bt-pan scope link table 61 && echo "Compartilhamento via Bluetooth iniciado" ; sleep 5 && killall com.termux
 }
 
 Appn(){
@@ -112,19 +186,8 @@ check4() {
 }
 check4
 }
-App7(){
-clear
-check1() {
-    pervpn=$(test -f "$HOME/changedns2" && echo 1)
-    case $pervpn in
-    1) bash changedns2;;
-    *) clear && echo "NECESSARIO TER INTERNET NA 1°" ; echo "VEZ PARA BAIXAR O RECURSO" ; sleep 4 && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/changedns2 && chmod +x changedns2 && cp changedns2 $PREFIX/bin/ && ./changedns2 ; check1;;
-    esac
-}
-check1
-}
 
-App8(){
+App7(){
 clear
 check4() {
     vpnloop=$(test -f "$HOME/downloads2" && echo 1)
@@ -136,14 +199,14 @@ check4() {
 check4
 }
 
-App9(){
+App8(){
 clear
 echo "É PRECISO ESTAR CONECTADO NA VPN PARA VER" ; echo "O TEMPO CONECTADO E OS MBS GASTOS" ; sleep 5 && clear && su -c am start -n com.android.vpndialogs/com.android.vpndialogs.ManageDialog && bash force
 }
 
 connect(){
 clear
-su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name $App [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear $App && su -c am start -n $App/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n $App/tv.ip.my.controller.MyMainService && $A3
+su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name $App --ez delete_app_data true && sleep 10 && clear && su -c pm clear $App && su -c am start -n $App/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n $App/tv.ip.my.controller.MyMainService && $A3
 check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
