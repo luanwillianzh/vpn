@@ -24,7 +24,7 @@ clear
     2)Menu2;;
     3)Menu3;;
     0)killall com.termux;;
-    *) echo ;echo "Calma Barboleta" ; echo ; sleep 3 ; MenuPrincipal;;
+    *) echo ; MenuPrincipal;;
     esac
      }
 
@@ -64,7 +64,7 @@ Menu1() {
     8) ConexãoAuternativa;;
     9) BaixarApps;;
     0) MenuPrincipal;;
-    *) echo ;echo "Calma Barboleta" ; echo ; sleep 3 ; MenuPrincipal;;
+    *) echo ; Menu1;;
     esac
     connect
     }
@@ -101,7 +101,7 @@ clear
     4) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.appliquese" ; eb="su -c pm enable tv.ip.appliquese";; 
    5) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.rioeduca" ; eb="su -c pm enable tv.ip.rioeduca";;
     0) Menu1;;
-    *) echo ;echo "Calma Barboleta" ; echo ; sleep 3 ; MenuPrincipal;;
+    *) echo ; ConexãoAuternativa;;
     esac
     connectodd
     }
@@ -149,7 +149,7 @@ PermiçõesVPN(){
     4) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.appliquese" ; eb="su -c pm enable tv.ip.appliquese";; 
    5) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.rioeduca" ; eb="su -c pm enable tv.ip.rioeduca";;
     0) Menu1;;
-    *) "Calma Barboleta" ; echo ; Menu;;
+    *) echo ; PermiçõesVPN;;
     esac
     connectid
     }
@@ -190,7 +190,7 @@ clear
    5) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.rioeduca" ; eb="su -c pm enable tv.ip.rioeduca";;
     6) App6;;
     0) Menu1;;
-    *) echo ;echo "Calma Barboleta" ; echo ; sleep 3 ; MenuPrincipal;;
+    *) echo ; LoopDeConexão;;
     esac
     connected
     }
@@ -331,7 +331,7 @@ clear
     4) App="tv.ip.appliquese" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2" ; nome="Applique-se" ; A2="su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.appliquese/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.appliquese" ; eb="su -c pm enable tv.ip.appliquese"; E1="20";;
      5) App="tv.ip.cmspi" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.cmspi/tv.ip.my.activities.MyVideoActivity" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.cmspi/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.cmspi/tv.ip.my.activities.SplashScreen " ; db="su -c pm disable tv.ip.cmspi" ; eb="su -c pm enable tv.ip.cmspi" ; E1="22";;
     0) Menu1;;
-    *) echo ;echo "Calma Barboleta" ; echo ; sleep 3 ; MenuPrincipal;;
+    *) BaixarApps;;
     esac
     connectar
 }
@@ -403,12 +403,39 @@ Menu2() {
    1)Alt1;;
    2)Alt2;;
    3)Alt3;;
-   0)MenuPrincipal;;
-   *) echo ;echo "Calma Barboleta" ; echo ; sleep 3 ; MenuPrincipal;;
+   0) MenuPrincipal;;
+   *) Menu2;;
     esac
     }
 
 Alt1(){
+clear
+    echo -e '\n'
+   echo "     ==================================="
+    echo "              VIA ROTEADOR WI-FI     "
+   echo "        ==================================="
+   echo "               ESCOLHA UMA OPÇÃO"
+    echo
+   echo "        ==================================="
+    echo "            [ 1 ] - Ligar"
+    echo "            [ 2 ] - Desligar"
+    echo "            [ 0 ] - Voltar"
+   echo "         ==================================="
+   echo
+    echo "@alpacinoo007"
+    echo "@luanw04"
+    echo
+    read -n1 -p "Escolha uma Opção: " Apps
+    case $Apps in  
+   1)AltRW1;;
+   2)AltRW2;;
+   0)Menu2;;
+   *) Alt1;;
+    esac
+    }
+
+
+AltRW1(){
 clear
 check2() {
     vpn=$(ifconfig | grep -c tun0)
@@ -421,17 +448,55 @@ check2
 check1() {
     vpn=$(ifconfig | grep -c wlan0)
     case $vpn in
-    0) clear ; echo "Roteador Wi-Fi não está ligado" ; sleep 2 ; check1;;
+    0) clear ; echo "Roteador Wi-Fi não está ligado" ; sleep 4 ; Menu2;;
     1) clear;;
      esac
 }
 check1
-sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.43.0/24 dev wlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev wlan0 scope link table 61 && echo "Roteamento Wi-Fi iniciado" ; sleep 5 && killall com.termux
+echo "Compartilhamento em andamento..." ; sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.43.0/24 dev wlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev wlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && killall com.termux
+}
+
+AltRW2(){
+clear
+check1() {
+    vpn=$(ifconfig | grep -c wlan0)
+    case $vpn in
+    0) clear ; echo "Roteador Wi-Fi não está ligado" ; sleep 4 ; Menu2;;
+    1) clear;;
+     esac
+}
+check1
+su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule delete from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route delete default dev tun0 scope link table 61 && su -c ip route delete 192.168.43.0/24 dev wlan0 scope link table 61 && su -c ip route delete broadcast 255.255.255.255 dev wlan0 scope link table 61 ; echo "Compartilhamento via Wi-Fi parado" ; sleep 5 && Menu2
 }
 
 
-
 Alt2(){
+clear
+    echo -e '\n'
+   echo "     ==================================="
+    echo "                  VIA USB     "
+   echo "        ==================================="
+   echo "               ESCOLHA UMA OPÇÃO"
+    echo
+   echo "        ==================================="
+    echo "            [ 1 ] - Ligar"
+    echo "            [ 2 ] - Desligar"
+    echo "            [ 0 ] - Voltar"
+   echo "         ==================================="
+   echo
+    echo "@alpacinoo007"
+    echo "@luanw04"
+    echo
+    read -n1 -p "Escolha uma Opção: " Apps
+    case $Apps in  
+   1)AltRU1;;
+   2)AltRU2;;
+   0)Menu2;;
+   *) Alt2;;
+    esac
+    }
+clear
+AltRU1(){
 clear
 check2() {
     vpn=$(ifconfig | grep -c tun0)
@@ -444,15 +509,57 @@ check2
 check1() {
     vpn=$(ifconfig | grep -c rndis0)
     case $vpn in
-    0) clear ; echo "Ancoragem USB não está ligada" ; sleep 2 ; check1;;
+    0) clear ; echo "Ancoragem USB não está ligada" ; sleep 4 ; Menu2;;
     1) clear;;
      esac
 }
 check1
-sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.42.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.42.0/24 dev rndis0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev rndis0 scope link table 61 && echo "Compartilhamento via USB iniciado" ; sleep 5 && killall com.termux
+echo "Compartilhamento em andamento..." ; sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.42.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.42.0/24 dev rndis0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev rndis0 scope link table 61 && clear ; echo "Compartilhamento via USB iniciado" ; sleep 5 && killall com.termux
 }
 
+
+AltRU2(){
+clear
+check1() {
+    vpn=$(ifconfig | grep -c rndis0)
+    case $vpn in
+    0) clear ; echo "Ancoragem USB não está ligada" ; sleep 4 ; Menu2;;
+    1) clear;;
+     esac
+}
+check1
+su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule delete from 192.168.42.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route delete default dev tun0 scope link table 61 && su -c ip route delete 192.168.42.0/24 dev rndis0 scope link table 61 && su -c ip route delete broadcast 255.255.255.255 dev rndis0 scope link table 61 && echo "Compartilhamento via USB parado" ; sleep 5 && Menu2
+}
+
+
+
 Alt3(){
+clear
+    echo -e '\n'
+   echo "     ==================================="
+    echo "                VIA BLUETOOTH      "
+   echo "        ==================================="
+   echo "               ESCOLHA UMA OPÇÃO"
+    echo
+   echo "        ==================================="
+    echo "            [ 1 ] - Ligar"
+    echo "            [ 2 ] - Desligar"
+    echo "            [ 0 ] - Voltar"
+   echo "         ==================================="
+   echo
+    echo "@alpacinoo007"
+    echo "@luanw04"
+    echo
+    read -n1 -p "Escolha uma Opção: " Apps
+    case $Apps in  
+   1)AltRB1;;
+   2)AltRB2;;
+   0)Menu2;;
+   *) Alt3;;
+    esac
+    }
+
+AltRB1(){
 clear
 check2() {
     vpn=$(ifconfig | grep -c tun0)
@@ -465,13 +572,27 @@ check2
 check1() {
     vpn=$(ifconfig | grep -c bt-pan)
     case $vpn in
-    0) clear ; echo "Nenhum aparelho conectado via Ancoragem Bluetooth" ; sleep 2 ; check1;;
+    0) clear ; echo "Nenhum aparelho conectado via Ancoragem Bluetooth" ; sleep 4 ; Menu2;;
     1) clear;;
      esac
 }
 check1
 sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.44.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.44.0/24 dev bt-pan scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev bt-pan scope link table 61 && echo "Compartilhamento via Bluetooth iniciado" ; sleep 5 && killall com.termux
 }
+
+AltRB2(){
+clear
+check1() {
+    vpn=$(ifconfig | grep -c bt-pan)
+    case $vpn in
+    0) clear ; echo "Nenhum aparelho conectado via Ancoragem Bluetooth" ; sleep 4 ; Menu2;;
+    1) clear;;
+     esac
+}
+check1
+su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule delete from 192.168.44.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route delete default dev tun0 scope link table 61 && su -c ip route delete 192.168.44.0/24 dev bt-pan scope link table 61 && su -c ip route delete broadcast 255.255.255.255 dev bt-pan scope link table 61 && echo "Compartilhamento via Bluetooth parado" ; sleep 5 && Menu2
+}
+
 
 Menu3(){
 clear
@@ -497,7 +618,7 @@ clear
    2)Alter2;;
    3)Alter3;;
    0)MenuPrincipal;;
-   *) echo ;echo "Calma Barboleta" ; echo ; sleep 3 ; MenuPrincipal;;
+   *) Menu3;;
     esac
     }
 
@@ -553,7 +674,7 @@ Alter3(){
     8) d1="9.9.9.9" ; d2="149.112.112.112" ; d3="2620:fe::fe" ; d4="2620:fe::9" ; d5="9.9.9.9" ; d6="149.112.112.112" ; nome="Quad9 DNS" ;;
     9) App9;;
     0) Menu3;;
-    *) echo ;echo "Calma Barboleta" ; echo ; sleep 3 ; MenuPrincipal;;
+    *) Alter3;;
     esac
     connectdns
     }
