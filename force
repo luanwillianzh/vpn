@@ -430,7 +430,7 @@ echo "     ==================================="
     1)MetodoWIFI1;;
     2)MetodoWIFI2;;
     0)Menu2;;
-    *)Alt1;;
+    *)WIFI;;
      esac
      }
 
@@ -455,8 +455,8 @@ clear
     case $Apps in  
    1)AltRW1;;
    2)AltRW2;;
-   0)Menu2;;
-   *) Alt1;;
+   0)WIFI;;
+   *) MetodoWIFI1;;
     esac
     }
 
@@ -516,8 +516,8 @@ clear
     case $Apps in  
    1)AltRW21;;
    2)AltRW22;;
-   0)Menu2;;
-   *) Alt1;;
+   0)WIFI;;
+   *) MetodoWIFI2;;
     esac
     }
 
@@ -579,7 +579,7 @@ clear
    1)AltRU1;;
    2)AltRU2;;
    0)Menu2;;
-   *) Alt2;;
+   *) USB;;
     esac
     }
 clear
@@ -642,7 +642,7 @@ clear
    1)AltRB1;;
    2)AltRB2;;
    0)Menu2;;
-   *) Alt3;;
+   *) Bluetooth;;
     esac
     }
 
