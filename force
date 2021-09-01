@@ -400,15 +400,41 @@ Menu2() {
     echo
     read -n1 -p "Escolha uma Opção: " Apps
     case $Apps in  
-   1)Alt1;;
-   2)Alt2;;
-   3)Alt3;;
+   1)WIFI;;
+   2)USB;;
+   3)Bluetooth;;
    0) MenuPrincipal;;
    *) Menu2;;
     esac
     }
 
-Alt1(){
+WIFI(){
+clear
+echo -e '\n'
+echo "     ==================================="
+    echo "              VIA ROTEADOR WI-FI     "
+   echo "        ==================================="
+   echo "               ESCOLHA UMA OPÇÃO"
+    echo
+   echo "        ==================================="
+    echo "            [ 1 ] - Metodo 1"
+    echo "            [ 2 ] - Metodo 2"
+    echo "            [ 0 ] - Voltar"
+   echo "         ==================================="
+   echo
+    echo "@alpacinoo007"
+    echo "@luanw04"
+    echo
+    read -n1 -p "Escolha uma Opção: " Apps
+    case $Apps in  
+    1)MetodoWIFI1;;
+    2)MetodoWIFI2;;
+    0)Menu2;;
+    *)Alt1;;
+     esac
+     }
+
+MetodoWIFI1(){
 clear
     echo -e '\n'
    echo "     ==================================="
@@ -448,7 +474,7 @@ check2
 check1() {
     vpn=$(ifconfig | grep -c wlan0)
     case $vpn in
-    0) clear ; echo "Roteador Wi-Fi não está ligado" ; sleep 4 ; Menu2;;
+    0) clear ; echo "Roteador Wi-Fi não está ligado" ; echo "Ligue ou tente o metodo 2" ; sleep 4 ; Menu2;;
     1) clear;;
      esac
 }
@@ -469,8 +495,69 @@ check1
 su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule delete from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route delete default dev tun0 scope link table 61 && su -c ip route delete 192.168.43.0/24 dev wlan0 scope link table 61 && su -c ip route delete broadcast 255.255.255.255 dev wlan0 scope link table 61 ; echo "Compartilhamento via Wi-Fi parado" ; sleep 5 && Menu2
 }
 
+MetodoWIFI2(){
+clear
+    echo -e '\n'
+   echo "     ==================================="
+    echo "              VIA ROTEADOR WI-FI     "
+   echo "        ==================================="
+   echo "               ESCOLHA UMA OPÇÃO"
+    echo
+   echo "        ==================================="
+    echo "            [ 1 ] - Ligar"
+    echo "            [ 2 ] - Desligar"
+    echo "            [ 0 ] - Voltar"
+   echo "         ==================================="
+   echo
+    echo "@alpacinoo007"
+    echo "@luanw04"
+    echo
+    read -n1 -p "Escolha uma Opção: " Apps
+    case $Apps in  
+   1)AltRW21;;
+   2)AltRW22;;
+   0)Menu2;;
+   *) Alt1;;
+    esac
+    }
 
-Alt2(){
+
+AltRW21(){
+clear
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0) echo "VPN não encontrada" ; sleep 4 ; Menu2;;
+    1) clear,;;
+     esac
+}
+check2
+check1() {
+    vpn=$(ifconfig | grep -c swlan0)
+    case $vpn in
+    0) clear ; echo "Roteador Wi-Fi não está ligado" ; echo "Ligue ou tente o metodo 1" ; sleep 4 ; Menu2;;
+    1) clear;;
+     esac
+}
+check1
+echo "Compartilhamento em andamento..." ; sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.43.0/24 dev swlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev swlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && killall com.termux
+}
+
+AltRW22(){
+clear
+check1() {
+    vpn=$(ifconfig | grep -c swlan0)
+    case $vpn in
+    0) clear ; echo "Roteador Wi-Fi não está ligado" ; sleep 4 ; Menu2;;
+    1) clear;;
+     esac
+}
+check1
+su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule delete from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route delete default dev tun0 scope link table 61 && su -c ip route delete 192.168.43.0/24 dev swlan0 scope link table 61 && su -c ip route delete broadcast 255.255.255.255 dev swlan0 scope link table 61 ; echo "Compartilhamento via Wi-Fi parado" ; sleep 5 && Menu2
+}
+
+
+USB(){
 clear
     echo -e '\n'
    echo "     ==================================="
@@ -533,7 +620,7 @@ su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j AC
 
 
 
-Alt3(){
+Bluetooth(){
 clear
     echo -e '\n'
    echo "     ==================================="
