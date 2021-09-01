@@ -44,7 +44,7 @@ Menu1() {
     echo "            [ 5 ] - Rio Educa Em Casa"  
     echo "            [ 6 ] - Permições VPN"
     echo "            [ 7 ] - Loop De Conexão"
-    echo "            [ 8 ] - Conexão Auternativa"
+    echo "            [ 8 ] - Conexão Alternativa"
     echo "            [ 9 ] - Baixar Apps"
     echo "            [ 0 ] - Voltar"
    echo "         ==================================="
