@@ -103,12 +103,12 @@ clear
     0) Menu1;;
     *) echo ;echo "Calma Barboleta" ; echo ; sleep 3 ; MenuPrincipal;;
     esac
-    connect
+    connectodd
     }
 
-connect(){
+connectodd(){
 clear
-su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name $App [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear $App && $A4 && sleep 4 && $A3
+su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name $App --ez delete_app_data true && sleep 10 && clear && su -c pm clear $App && $A4 && sleep 4 && $A3
 check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
