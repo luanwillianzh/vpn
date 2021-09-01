@@ -151,13 +151,13 @@ PermiçõesVPN(){
     0) Menu1;;
     *) "Calma Barboleta" ; echo ; Menu;;
     esac
-    connect
+    connectid
     }
 
 
-connect () {
+connectid () {
 clear
-su -c am start -n $App/tv.ip.my.activities.PermissionActivity && sleep 2 && $A2 && sleep 6 && su -c pm clear $App && bash force
+su -c am start -n $App/tv.ip.my.activities.PermissionActivity && sleep 2 && $A2 && sleep 6 && su -c pm clear $App && Menu1
 }
 
 LoopDeConexão(){
@@ -190,9 +190,9 @@ clear
    5) App="tv.ip.rioeduca" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2" ; nome="RioEducaEmCasa" ; A2="su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.rioeduca" ; eb="su -c pm enable tv.ip.rioeduca";;
     6) App6;;
     0) Menu1;;
-    *) "Calma Barboleta" ; echo ; Menu;;
+    *) echo ;echo "Calma Barboleta" ; echo ; sleep 3 ; MenuPrincipal;;
     esac
-    connect
+    connected
     }
 App6(){
 clear 
@@ -285,7 +285,7 @@ check3
 clear && App6
 }
 
-connect () {
+connected() {
 clear
 su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name $App [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear $App && su -c am start -n $App/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n $App/tv.ip.my.controller.MyMainService && $A3
 check2() {
@@ -333,10 +333,10 @@ clear
     0) Menu1;;
     *) echo ;echo "Calma Barboleta" ; echo ; sleep 3 ; MenuPrincipal;;
     esac
-    connect
+    connectar
 }
 
-connect () {
+connectar () {
 clear
 check(){
       appk=$(test -f "$HOME/$E1.apk" && echo 1)
@@ -362,7 +362,7 @@ check(){
      esac
 }
 check
-sleep 2 && Menu1
+Menu1
 }
 
 connect(){
@@ -378,6 +378,8 @@ check2() {
 check2
 su -c killall com.termux
 }
+
+
 Menu2() {
     clear
     echo -e '\n'
@@ -553,7 +555,7 @@ Alter3(){
     0) Menu3;;
     *) echo ;echo "Calma Barboleta" ; echo ; sleep 3 ; MenuPrincipal;;
     esac
-    connect
+    connectdns
     }
 
 App9(){
@@ -573,7 +575,7 @@ echo ""
 connect
 }
 
-connect () {
+connectdns () {
 clear
 su -c setprop net.dns1 $d1 && su -c setprop net.dns2 $d2 && su -c setprop net.dns3 $d3 && su -c setprop net.dns4 $d4 && su -c setprop net.rmnet0.dns1 $d1 && su -c setprop net.rmnet0.dns2 $d2 && clear && sleep 1 && echo "SEU DNS FOI ALTERADO PARA:" && sleep 1 && echo && echo "    $nome" && sleep 1 && echo && echo "DNS PRIMARIO:" && su -c getprop net.dns1 && sleep 1 && echo && echo "DNS SECUNDARIO:" && su -c getprop net.dns2 && sleep 1 && echo && echo "IPv6 PRIMARIO:" && su -c getprop net.dns3 && sleep 1 && echo && echo "IPv6 SECUNDARIO:" && su -c getprop net.dns4 && echo && sleep 10 && Menu3
 }
