@@ -9,7 +9,7 @@ clear
     echo "               ESCOLHA UMA OPÇÃO"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - Apps Escola Root"
+    echo "            [ 1 ] - Apps Escola ROOT"
     echo "            [ 2 ] - Rotear VPN"
     echo "            [ 3 ] - Outros"
     echo "            [ 0 ] - Sair"
