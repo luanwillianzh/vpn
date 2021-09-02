@@ -23,7 +23,7 @@ clear
     1)Menu1;;
     2)Menu2;;
     3)Menu3;;
-    0)killall com.termux;;
+    0)su -c killall com.termux;;
     *) echo ; MenuPrincipal;;
     esac
      }
