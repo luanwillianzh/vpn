@@ -435,6 +435,25 @@ echo "     ==================================="
      }
 
 MetodoWIFI1(){
+GREEN='\033[1;32m'
+SCOLOR='\033[0m'
+su -c 'svc wifi disable'
+check1() {
+    vpn=$(ifconfig | grep -c wlan0)
+    case $vpn in
+    0) clear ; echo "Roteador Wi-Fi não está ligado" ; echo "Ligue ou tente o metodo 2" ; sleep 4 ; Menu2;;
+    1) clear;;
+     esac
+}
+check1
+check5(){
+      apps=$(test -f "$HOME/wifiip1" && echo 1)
+    case $apps in
+     1) clear;;
+     *) clear ; ifconfig wlan0; echo ; echo ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iproute1  ;echo -e "$iproute1" >> wifiip1 ;;
+     esac
+}
+check5
 clear
     echo -e '\n'
    echo "     ==================================="
@@ -445,6 +464,7 @@ clear
    echo "        ==================================="
     echo "            [ 1 ] - Ligar"
     echo "            [ 2 ] - Desligar"
+    echo "            [ 3 ] - Corrigir IP"
     echo "            [ 0 ] - Voltar"
    echo "         ==================================="
    echo
@@ -455,10 +475,16 @@ clear
     case $Apps in  
    1)AltRW1;;
    2)AltRW2;;
+   3) corrigirip13;;
    0)WIFI;;
    *) MetodoWIFI1;;
     esac
     }
+
+corrigirip13(){
+clear 
+su -c rm wifiip1 && MetodoWIFI1
+}
 
 
 AltRW1(){
@@ -479,7 +505,10 @@ check1() {
      esac
 }
 check1
-echo "Compartilhamento em andamento..." ; sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.43.0/24 dev wlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev wlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux
+
+wifiip1=$( cat wifiip1 | grep "1" | cut -d'.' -f1-3)
+
+su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from $wifiip1.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $wifiip1.0/24 dev wlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev wlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux
 }
 
 AltRW2(){
@@ -492,10 +521,33 @@ check1() {
      esac
 }
 check1
-su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule delete from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route delete default dev tun0 scope link table 61 && su -c ip route delete 192.168.43.0/24 dev wlan0 scope link table 61 && su -c ip route delete broadcast 255.255.255.255 dev wlan0 scope link table 61 ; echo "Compartilhamento via Wi-Fi parado" ; sleep 5 && Menu2
+
+wifiip1=$( cat wifiip1 | grep "1" | cut -d'.' -f1-3)
+
+su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule delete from $wifiip1.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route delete default dev tun0 scope link table 61 && su -c ip route delete $wifiip1.0/24 dev wlan0 scope link table 61 && su -c ip route delete broadcast 255.255.255.255 dev wlan0 scope link table 61 ; echo "Compartilhamento via Wi-Fi parado" ; sleep 5 && Menu2
 }
 
+
 MetodoWIFI2(){
+GREEN='\033[1;32m'
+SCOLOR='\033[0m'
+su -c 'svc wifi disable'
+check1() {
+    vpn=$(ifconfig | grep -c swlan0)
+    case $vpn in
+    0) clear ; echo "Roteador Wi-Fi não está ligado" ; echo "Ligue ou tente o metodo 1" ; sleep 4 ; Menu2;;
+    1) clear;;
+     esac
+}
+check1
+check5(){
+      apps=$(test -f "$HOME/wifiip2" && echo 1)
+    case $apps in
+     1) clear;;
+     *) clear ; ifconfig swlan0; echo ; echo ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iproute2  ;echo -e "$iproute2" >> wifiip2 ;;
+     esac
+}
+check5
 clear
     echo -e '\n'
    echo "     ==================================="
@@ -506,6 +558,7 @@ clear
    echo "        ==================================="
     echo "            [ 1 ] - Ligar"
     echo "            [ 2 ] - Desligar"
+    echo "            [ 3 ] - Corrigir IP"
     echo "            [ 0 ] - Voltar"
    echo "         ==================================="
    echo
@@ -516,11 +569,16 @@ clear
     case $Apps in  
    1)AltRW21;;
    2)AltRW22;;
+   3)corrigirip2;;
    0)WIFI;;
    *) MetodoWIFI2;;
     esac
     }
 
+corrigirip2(){
+clear 
+su -c rm wifiip2 && MetodoWIFI2
+}
 
 AltRW21(){
 clear
@@ -540,7 +598,10 @@ check1() {
      esac
 }
 check1
-echo "Compartilhamento em andamento..." ; sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.43.0/24 dev swlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev swlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux
+
+wifiip2=$( cat wifiip2 | grep "1" | cut -d'.' -f1-3)
+
+echo "Compartilhamento em andamento..." ; sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from $wifiip2.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $wifiip2.0/24 dev swlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev swlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux
 }
 
 AltRW22(){
@@ -553,11 +614,33 @@ check1() {
      esac
 }
 check1
-su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule delete from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route delete default dev tun0 scope link table 61 && su -c ip route delete 192.168.43.0/24 dev swlan0 scope link table 61 && su -c ip route delete broadcast 255.255.255.255 dev swlan0 scope link table 61 ; echo "Compartilhamento via Wi-Fi parado" ; sleep 5 && Menu2
+
+wifiip2=$( cat wifiip2 | grep "1" | cut -d'.' -f1-3)
+
+su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule delete from $wifiip2.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route delete default dev tun0 scope link table 61 && su -c ip route delete $wifiip2.0/24 dev swlan0 scope link table 61 && su -c ip route delete broadcast 255.255.255.255 dev swlan0 scope link table 61 ; echo "Compartilhamento via Wi-Fi parado" ; sleep 5 && Menu2
 }
 
 
 USB(){
+GREEN='\033[1;32m'
+SCOLOR='\033[0m'
+su -c 'svc wifi disable'
+check1() {
+    vpn=$(ifconfig | grep -c rndis0)
+    case $vpn in
+    0) clear ; echo "Ancoragem USB não está ligada" ; sleep 4 ; Menu2;;
+    1) clear;;
+     esac
+}
+check1
+check5(){
+      apps=$(test -f "$HOME/usbip" && echo 1)
+    case $apps in
+     1) clear;;
+     *) clear ; ifconfig rndis0; echo ; echo ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iuusbip  ;echo -e "$iuusbip" >> usbip ;;
+     esac
+}
+check5
 clear
     echo -e '\n'
    echo "     ==================================="
@@ -568,6 +651,7 @@ clear
    echo "        ==================================="
     echo "            [ 1 ] - Ligar"
     echo "            [ 2 ] - Desligar"
+    echo "            [ 3 ] - Corrigir IP"
     echo "            [ 0 ] - Voltar"
    echo "         ==================================="
    echo
@@ -578,11 +662,17 @@ clear
     case $Apps in  
    1)AltRU1;;
    2)AltRU2;;
+   3)corrigirip26;;
    0)Menu2;;
    *) USB;;
     esac
     }
-clear
+
+corrigirip26(){
+clear 
+su -c rm usbip && USB
+}
+
 AltRU1(){
 clear
 check2() {
@@ -601,7 +691,10 @@ check1() {
      esac
 }
 check1
-echo "Compartilhamento em andamento..." ; sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.42.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.42.0/24 dev rndis0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev rndis0 scope link table 61 && clear ; echo "Compartilhamento via USB iniciado" ; sleep 5 && su - c killall com.termux
+
+usbip=$( cat usbip | grep "1" | cut -d'.' -f1-3)
+
+su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from $usbip.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $usbip.0/24 dev rndis0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev rndis0 scope link table 61 && clear ; echo "Compartilhamento via USB iniciado" ; sleep 5 && su -c killall com.termux
 }
 
 
@@ -615,12 +708,34 @@ check1() {
      esac
 }
 check1
-su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule delete from 192.168.42.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route delete default dev tun0 scope link table 61 && su -c ip route delete 192.168.42.0/24 dev rndis0 scope link table 61 && su -c ip route delete broadcast 255.255.255.255 dev rndis0 scope link table 61 && echo "Compartilhamento via USB parado" ; sleep 5 && Menu2
+
+usbip=$( cat usbip | grep "1" | cut -d'.' -f1-3)
+
+su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule delete from $usbip.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route delete default dev tun0 scope link table 61 && su -c ip route delete $usbip.0/24 dev rndis0 scope link table 61 && su -c ip route delete broadcast 255.255.255.255 dev rndis0 scope link table 61 && echo "Compartilhamento via USB parado" ; sleep 5 && Menu2
 }
 
 
 
 Bluetooth(){
+GREEN='\033[1;32m'
+SCOLOR='\033[0m'
+su -c 'svc wifi disable'
+check1() {
+    vpn=$(ifconfig | grep -c bt-pan)
+    case $vpn in
+    0) clear ; echo "Nenhum aparelho conectado via Ancoragem Bluetooth" ; sleep 4 ; Menu2;;
+    1) clear;;
+     esac
+}
+check1
+check5(){
+      apps=$(test -f "$HOME/btip" && echo 1)
+    case $apps in
+     1) clear;;
+     *) clear ; ifconfig bt-pan; echo ; echo ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read btusbip  ;echo -e "$btusbip" >> btip ;;
+     esac
+}
+check5
 clear
     echo -e '\n'
    echo "     ==================================="
@@ -631,6 +746,7 @@ clear
    echo "        ==================================="
     echo "            [ 1 ] - Ligar"
     echo "            [ 2 ] - Desligar"
+    echo "            [ 3 ] - Corrigir IP"
     echo "            [ 0 ] - Voltar"
    echo "         ==================================="
    echo
@@ -641,10 +757,17 @@ clear
     case $Apps in  
    1)AltRB1;;
    2)AltRB2;;
+   3)corrigirip265;;
    0)Menu2;;
    *) Bluetooth;;
     esac
     }
+
+corrigirip265(){
+clear 
+su -c rm btip && Bluetooth
+}
+
 
 AltRB1(){
 clear
@@ -664,7 +787,10 @@ check1() {
      esac
 }
 check1
-sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.44.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.44.0/24 dev bt-pan scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev bt-pan scope link table 61 && echo "Compartilhamento via Bluetooth iniciado" ; sleep 5 && su -c killall com.termux
+
+btip=$( cat btip | grep "1" | cut -d'.' -f1-3)
+
+su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from $btip.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $btip.0/24 dev bt-pan scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev bt-pan scope link table 61 && echo "Compartilhamento via Bluetooth iniciado" ; sleep 5 && su -c killall com.termux
 }
 
 AltRB2(){
@@ -677,7 +803,10 @@ check1() {
      esac
 }
 check1
-su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule delete from 192.168.44.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route delete default dev tun0 scope link table 61 && su -c ip route delete 192.168.44.0/24 dev bt-pan scope link table 61 && su -c ip route delete broadcast 255.255.255.255 dev bt-pan scope link table 61 && echo "Compartilhamento via Bluetooth parado" ; sleep 5 && Menu2
+
+btip=$( cat btip | grep "1" | cut -d'.' -f1-3)
+
+su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule delete from $btip.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route delete default dev tun0 scope link table 61 && su -c ip route delete $btip.0/24 dev bt-pan scope link table 61 && su -c ip route delete broadcast 255.255.255.255 dev bt-pan scope link table 61 && echo "Compartilhamento via Bluetooth parado" ; sleep 5 && Menu2
 }
 
 
