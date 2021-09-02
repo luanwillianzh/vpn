@@ -467,7 +467,7 @@ check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) echo "VPN não encontrada" ; sleep 4 ; Menu2;;
-    1) clear,;;
+    1) su -c 'svc wifi disable';;
      esac
 }
 check2
@@ -479,7 +479,7 @@ check1() {
      esac
 }
 check1
-echo "Compartilhamento em andamento..." ; sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.43.0/24 dev wlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev wlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && killall com.termux
+echo "Compartilhamento em andamento..." ; sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.43.0/24 dev wlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev wlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux
 }
 
 AltRW2(){
@@ -528,7 +528,7 @@ check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     0) echo "VPN não encontrada" ; sleep 4 ; Menu2;;
-    1) clear,;;
+    1) su -c 'svc wifi disable';;
      esac
 }
 check2
@@ -540,7 +540,7 @@ check1() {
      esac
 }
 check1
-echo "Compartilhamento em andamento..." ; sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.43.0/24 dev swlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev swlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && killall com.termux
+echo "Compartilhamento em andamento..." ; sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.43.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.43.0/24 dev swlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev swlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux
 }
 
 AltRW22(){
@@ -601,7 +601,7 @@ check1() {
      esac
 }
 check1
-echo "Compartilhamento em andamento..." ; sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.42.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.42.0/24 dev rndis0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev rndis0 scope link table 61 && clear ; echo "Compartilhamento via USB iniciado" ; sleep 5 && killall com.termux
+echo "Compartilhamento em andamento..." ; sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.42.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.42.0/24 dev rndis0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev rndis0 scope link table 61 && clear ; echo "Compartilhamento via USB iniciado" ; sleep 5 && su - c killall com.termux
 }
 
 
@@ -664,7 +664,7 @@ check1() {
      esac
 }
 check1
-sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.44.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.44.0/24 dev bt-pan scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev bt-pan scope link table 61 && echo "Compartilhamento via Bluetooth iniciado" ; sleep 5 && killall com.termux
+sleep 15 && su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c ip rule add from 192.168.44.0/24 lookup 61 && su -c iptables -t nat -F POSTROUTING && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add 192.168.44.0/24 dev bt-pan scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev bt-pan scope link table 61 && echo "Compartilhamento via Bluetooth iniciado" ; sleep 5 && su -c killall com.termux
 }
 
 AltRB2(){
