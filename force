@@ -77,7 +77,6 @@ clear
    echo "     ==================================="
     echo "             FORÇAR CONEXÃO (ROOT)     "
    echo "        ==================================="
-    echo
     echo "            USE ESSE CASO O OUTRO"
     echo "            NÃO ESTEJA FUNCIONANDO"
     echo
@@ -126,8 +125,8 @@ PermiçõesVPN(){
    echo "      ==================================="
     echo "              FORÇAR CONEXÃO (ROOT)     "
    echo "         ==================================="
-    echo "                ESCOLHA UM APP PARA"
-    echo "                PEDIR PERMIÇÕES VPN"
+    echo "               ESCOLHA UM APP PARA"
+    echo "               PEDIR PERMIÇÕES VPN"
     echo 
    echo "         ==================================="
     echo "             [ 1 ] - CMSP"
@@ -194,10 +193,12 @@ clear
     esac
     connected
     }
+
+
 App6(){
 clear 
 echo "PARA FUNCIONAR CORRETAMENTE É NECESSARIO" ; echo "TER TODOS OS APPS DE CONEXÃO FORÇADA," ; echo "DEIXAR O TERMUX EM SEGUNDO PLANO" ;  sleep 10 && clear && echo "PEDINDO AS PERMIÇÕES DE VPN DE" ; echo "TODOS OS APPS, POR FAVOR ACEITE" &&
-su -c am start -n tv.ip.edusp/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c pm clear tv.ip.edusp && su -c am start -n tv.ip.cmspi/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.cmspi/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c pm clear tv.ip.cmspi && su -c am start -n tv.ip.aulapr/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.aulapr/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c pm clear tv.ip.aulapr && su -c am start -n tv.ip.appliquese/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c pm clear tv.ip.appliquese && su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.edusp [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear tv.ip.edusp && su -c am start -n tv.ip.edusp/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.edusp/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2 && sleep 40
+su -c am start -n tv.ip.edusp/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c pm clear tv.ip.edusp && su -c am start -n tv.ip.cmspi/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.cmspi/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c pm clear tv.ip.cmspi && su -c am start -n tv.ip.aulapr/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.aulapr/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c pm clear tv.ip.aulapr && su -c am start -n tv.ip.appliquese/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.appliquese/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c pm clear tv.ip.appliquese && su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am start -n tv.ip.rioeduca/com.datami.smi.ui.VpnPermissionActivity && sleep 6 && su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.edusp --ez delete_app_data true && sleep 10 && clear && su -c pm clear tv.ip.edusp && su -c am start -n tv.ip.edusp/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.edusp/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2 && sleep 40
 check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
@@ -214,7 +215,7 @@ check3() {
      esac
 }
 check3
-su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.cmspi [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear tv.ip.cmspi && su -c am start -n tv.ip.cmspi/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.cmspi/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.cmspi/tv.ip.my.activities.MyVideoActivity && sleep 40
+su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.cmspi --ez delete_app_data true && sleep 10 && clear && su -c pm clear tv.ip.cmspi && su -c am start -n tv.ip.cmspi/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.cmspi/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.cmspi/tv.ip.my.activities.MyVideoActivity && sleep 40
 check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
@@ -231,7 +232,7 @@ check3() {
      esac
 }
 check3
-su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.aulapr [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear tv.ip.aulapr && su -c am start -n tv.ip.aulapr/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.aulapr/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2 && sleep 40
+su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.aulapr --ez delete_app_data true && sleep 10 && clear && su -c pm clear tv.ip.aulapr && su -c am start -n tv.ip.aulapr/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.aulapr/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.aulapr/tv.ip.my.activities.VideoActivity2 && sleep 40
 check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
@@ -248,7 +249,7 @@ check3() {
      esac
 }
 check3
-su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.appliquese [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear tv.ip.appliquese && su -c am start -n tv.ip.appliquese/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.appliquese/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2 && sleep 40
+su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.appliquese --ez delete_app_data true && sleep 10 && clear && su -c pm clear tv.ip.appliquese && su -c am start -n tv.ip.appliquese/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.appliquese/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.appliquese/tv.ip.my.activities.VideoActivity2 && sleep 40
 check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
@@ -265,7 +266,7 @@ check3() {
      esac
 }
 check3
-su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.rioeduca [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear tv.ip.rioeduca && su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.rioeduca/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2 && sleep 40 
+su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name tv.ip.rioeduca --ez delete_app_data true && sleep 10 && clear && su -c pm clear tv.ip.rioeduca && su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n tv.ip.rioeduca/tv.ip.my.controller.MyMainService && su -c am start -n tv.ip.rioeduca/tv.ip.my.activities.VideoActivity2 && sleep 40 
 check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
@@ -285,9 +286,10 @@ check3
 clear && App6
 }
 
+
 connected() {
 clear
-su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name $App [--ez clear_cache {true}] [--ez delete_app_data {true}] && sleep 18 && clear && su -c pm clear $App && su -c am start -n $App/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n $App/tv.ip.my.controller.MyMainService && $A3
+su -c am broadcast -p com.applisto.appcloner -a com.applisto.appcloner.api.action.NEW_IDENTITY --es package_name $App --ez delete_app_data true && sleep 10 && sleep 18 && clear && su -c pm clear $App && su -c am start -n $App/tv.ip.my.activities.PermissionActivity && sleep 1 && su -c am startservice -n $App/tv.ip.my.controller.MyMainService && $A3
 check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
@@ -299,7 +301,7 @@ check2
 check9() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
-    0) connect;;
+    0) connected;;
     1) sleep 2 ; check9;;
      esac
 }
@@ -312,8 +314,8 @@ clear
    echo "      ==================================="
     echo "               FORÇAR CONEXÃO (ROOT)     "
    echo "         ==================================="
+    echo "           ESCOLHA UM APP PARA BAIXAR"
     echo
-    echo "            ESCOLHA UM APP PARA BAIXAR"
    echo "         ==================================="
     echo "             [ 1 ] - CMSP"
     echo "             [ 2 ] - Rio Educa Em Casa"
@@ -822,6 +824,7 @@ clear
     echo "            [ 1 ] - Ver MBs Gastos"
     echo "            [ 2 ] - Ver IP Atual"
     echo "            [ 3 ] - DNS Change"
+    echo "            [ 4 ] - SpeedTest"
     echo "            [ 0 ] - Voltar"
    echo "         ==================================="
    echo
@@ -833,6 +836,7 @@ clear
    1)Alter1;;
    2)Alter2;;
    3)Alter3;;
+   4)Speed;;
    0)MenuPrincipal;;
    *) Menu3;;
     esac
@@ -859,9 +863,9 @@ Alter3(){
     echo -e '\n'
     echo "     ==================================="
     echo "                CHANGE DNS (ROOT)     "
-   echo "         ==================================="
-    echo 
-    echo "              ESCOLHA UM DNS"
+   echo "         ===================================" 
+    echo "                 ESCOLHA UM DNS"
+    echo
     echo "        ==================================="
     echo "              [ 1 ] - CloudFire DNS"
     echo "              [ 2 ] - OpenDNS"
@@ -915,6 +919,11 @@ connect
 connectdns () {
 clear
 su -c setprop net.dns1 $d1 && su -c setprop net.dns2 $d2 && su -c setprop net.dns3 $d3 && su -c setprop net.dns4 $d4 && su -c setprop net.rmnet0.dns1 $d1 && su -c setprop net.rmnet0.dns2 $d2 && clear && sleep 1 && echo "SEU DNS FOI ALTERADO PARA:" && sleep 1 && echo && echo "    $nome" && sleep 1 && echo && echo "DNS PRIMARIO:" && su -c getprop net.dns1 && sleep 1 && echo && echo "DNS SECUNDARIO:" && su -c getprop net.dns2 && sleep 1 && echo && echo "IPv6 PRIMARIO:" && su -c getprop net.dns3 && sleep 1 && echo && echo "IPv6 SECUNDARIO:" && su -c getprop net.dns4 && echo && sleep 10 && Menu3
+}
+
+Speed(){
+clear
+echo "Sem internet..." && clear && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/SpeedTest && chmod 777 SpeedTest && pkg install python3 -y && clear && python3 SpeedTest && sleep 12 && Menu3
 }
 clear
 MenuPrincipal
