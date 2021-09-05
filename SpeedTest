@@ -1942,9 +1942,6 @@ def shell():
 
     printer('Hospedagem: %(sponsor)s (%(name)s) [%(d)0.2f km] '
             '\n\n\033[1;32mPing: %(latency)s ms\033[0m' % results.server, quiet)
-
-    printer('\n\033[1;32mIP: %(ip)s\033[0m' % speedtest.config['client'],
-            quiet)
             
     if args.download:
         printer('\nTestando velocidade de download', quiet,
