@@ -858,8 +858,9 @@ Alter2(){
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 clear
+curl -sO ipecho.net/plain && chmod 777 plain && clear
 IP1=$(cat plain)
-curl -sO ipecho.net/plain && chmod 777 plain && clear && echo -e "SEU IP ATUAL É: ${GREEN}$IP1${SCOLOR}" && echo 
+echo -e "SEU IP ATUAL É: ${GREEN}$IP1${SCOLOR}" && echo 
 
   read -n1 -p "QUER VER OS DETALHES DESSE IP? [Y/n] " optione
   case $optione in
@@ -876,7 +877,12 @@ GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 clear
 Plain=$(cat plain)
-curl -sO https://freegeoip.app/xml/$Plain ; clear ; IP=$(cat $Plain | grep IP | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "IP:${GREEN} $IP ${SCOLOR}" ; echo ; Pais=$(cat $Plain | grep CountryName | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Pais:${GREEN} $Pais ${SCOLOR}" ; echo ; Code=$(cat $Plain | grep CountryCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo do Pais:${GREEN} $Code ${SCOLOR}" ; echo ; CodeReg=$(cat $Plain | grep RegionCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo do Estado:${GREEN} $CodeReg ${SCOLOR}" ; echo ; RegionName=$(cat $Plain | grep RegionName | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Estado:${GREEN} $RegionName ${SCOLOR}" ; echo ; City=$(cat $Plain | grep City | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Cidade:${GREEN} $City ${SCOLOR}" ; echo ; ZipCode=$(cat $Plain | grep ZipCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo Postal:${GREEN} $ZipCode ${SCOLOR}" ; echo ; FusoHorario=$(cat $Plain | grep TimeZone | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Fuso Horario:${GREEN} $FusoHorario ${SCOLOR}" ; echo ; Latitude=$(cat $Plain | grep Latitude | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Latitude:${GREEN} $Latitude ${SCOLOR}" ; echo ; Longitude=$(cat $Plain | grep Longitude | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Longitude:${GREEN} $Longitude ${SCOLOR}" && sleep 20 && Menu3
+curl -sO https://freegeoip.app/xml/$Plain ; clear ; IP=$(cat $Plain | grep IP | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "IP:${GREEN} $IP ${SCOLOR}" ; echo ; Pais=$(cat $Plain | grep CountryName | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Pais:${GREEN} $Pais ${SCOLOR}" ; echo ; Code=$(cat $Plain | grep CountryCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo do Pais:${GREEN} $Code ${SCOLOR}" ; echo ; CodeReg=$(cat $Plain | grep RegionCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo do Estado:${GREEN} $CodeReg ${SCOLOR}" ; echo ; RegionName=$(cat $Plain | grep RegionName | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Estado:${GREEN} $RegionName ${SCOLOR}" ; echo ; City=$(cat $Plain | grep City | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Cidade:${GREEN} $City ${SCOLOR}" ; echo ; ZipCode=$(cat $Plain | grep ZipCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo Postal:${GREEN} $ZipCode ${SCOLOR}" ; echo ; FusoHorario=$(cat $Plain | grep TimeZone | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Fuso Horario:${GREEN} $FusoHorario ${SCOLOR}" ; echo ; Latitude=$(cat $Plain | grep Latitude | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Latitude:${GREEN} $Latitude ${SCOLOR}" ; echo ; Longitude=$(cat $Plain | grep Longitude | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Longitude:${GREEN} $Longitude ${SCOLOR}"
+echo
+ read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)Menu3;;
+  esac
 }
   
   
@@ -940,12 +946,20 @@ connect
 
 connectdns () {
 clear
-su -c setprop net.dns1 $d1 && su -c setprop net.dns2 $d2 && su -c setprop net.dns3 $d3 && su -c setprop net.dns4 $d4 && su -c setprop net.rmnet0.dns1 $d1 && su -c setprop net.rmnet0.dns2 $d2 && clear && sleep 1 && echo "SEU DNS FOI ALTERADO PARA:" && sleep 1 && echo && echo "    $nome" && sleep 1 && echo && echo "DNS PRIMARIO:" && su -c getprop net.dns1 && sleep 1 && echo && echo "DNS SECUNDARIO:" && su -c getprop net.dns2 && sleep 1 && echo && echo "IPv6 PRIMARIO:" && su -c getprop net.dns3 && sleep 1 && echo && echo "IPv6 SECUNDARIO:" && su -c getprop net.dns4 && echo && sleep 10 && Menu3
+su -c setprop net.dns1 $d1 && su -c setprop net.dns2 $d2 && su -c setprop net.dns3 $d3 && su -c setprop net.dns4 $d4 && su -c setprop net.rmnet0.dns1 $d1 && su -c setprop net.rmnet0.dns2 $d2 && clear && sleep 1 && echo "SEU DNS FOI ALTERADO PARA:" && sleep 1 && echo && echo "    $nome" && sleep 1 && echo && echo "DNS PRIMARIO:" && su -c getprop net.dns1 && sleep 1 && echo && echo "DNS SECUNDARIO:" && su -c getprop net.dns2 && sleep 1 && echo && echo "IPv6 PRIMARIO:" && su -c getprop net.dns3 && sleep 1 && echo && echo "IPv6 SECUNDARIO:" && su -c getprop net.dns4 && echo && echo
+ read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)Menu3;;
+  esac
 }
 
 Speed(){
 clear
-echo "Sem internet..." && clear && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/SpeedTest && chmod 777 SpeedTest && pkg install python3 -y && clear && python3 SpeedTest && sleep 12 && Menu3
+echo "Sem internet..." && clear && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/SpeedTest && chmod 777 SpeedTest && pkg install python3 -y && clear && python3 SpeedTest && echo
+ read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)Menu3;;
+  esac
 }
 clear
 MenuPrincipal
