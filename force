@@ -858,7 +858,6 @@ Alter2(){
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 clear
-curl -sO ipecho.net/plain && chmod 777 plain && clear
 Plain=$(curl ipecho.net/plain)
 clear
 echo -e "SEU IP ATUAL É: ${GREEN}$Plain${SCOLOR}" && echo 
