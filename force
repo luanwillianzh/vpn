@@ -876,7 +876,8 @@ opiiy(){
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 clear
-Plain=$(cat plain)
+Plain=$(curl ipecho.net/plain)
+clear
 curl -sO https://freegeoip.app/xml/$Plain ; clear ; IP=$(cat $Plain | grep IP | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "IP:${GREEN} $IP ${SCOLOR}" ; echo ; Pais=$(cat $Plain | grep CountryName | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Pais:${GREEN} $Pais ${SCOLOR}" ; echo ; Code=$(cat $Plain | grep CountryCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo do Pais:${GREEN} $Code ${SCOLOR}" ; echo ; CodeReg=$(cat $Plain | grep RegionCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo do Estado:${GREEN} $CodeReg ${SCOLOR}" ; echo ; RegionName=$(cat $Plain | grep RegionName | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Estado:${GREEN} $RegionName ${SCOLOR}" ; echo ; City=$(cat $Plain | grep City | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Cidade:${GREEN} $City ${SCOLOR}" ; echo ; ZipCode=$(cat $Plain | grep ZipCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo Postal:${GREEN} $ZipCode ${SCOLOR}" ; echo ; FusoHorario=$(cat $Plain | grep TimeZone | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Fuso Horario:${GREEN} $FusoHorario ${SCOLOR}" ; echo ; Latitude=$(cat $Plain | grep Latitude | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Latitude:${GREEN} $Latitude ${SCOLOR}" ; echo ; Longitude=$(cat $Plain | grep Longitude | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Longitude:${GREEN} $Longitude ${SCOLOR}"
 echo
  read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
