@@ -899,7 +899,7 @@ FusoHorario=$(cat $HOME/Geolocation | grep TimeZone | cut -d'>' -f2 | cut -d'<' 
 
 Latitude=$(cat $HOME/Geolocation | grep Latitude | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Latitude:${GREEN} $Latitude ${SCOLOR}" ; echo
 
-Longitude=$(cat $HOME/Geolocation | grep Longitude | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Longitude:${GREEN} $Longitude ${SCOLOR}" ; su -c rm $HOME/Geolocation
+Longitude=$(cat $HOME/Geolocation | grep Longitude | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Longitude:${GREEN} $Longitude ${SCOLOR}" ; rm $HOME/Geolocation
 
 echo
  read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
