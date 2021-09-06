@@ -439,7 +439,7 @@ echo "     ==================================="
 MetodoWIFI1(){
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
-su -c 'svc wifi disable'
+su -c 'svc wifi disable' && sleep 4
 check1() {
     vpn=$(ifconfig | grep -c wlan0)
     case $vpn in
@@ -452,7 +452,7 @@ check5(){
       apps=$(test -f "$HOME/wifiip1" && echo 1)
     case $apps in
      1) clear;;
-     *) clear ; ifconfig wlan0; echo ; echo ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iproute1  ;echo -e "$iproute1" >> wifiip1 ;;
+     *) clear ; ifconfig wlan0; echo ; echo ; echo -e "TENTE USAR${GREEN} 192.168.43.1${SCOLOR} CASO OCORRER ALGUM ERRO" ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iproute1 ; echo -e "$iproute1" >> wifiip1 ;;
      esac
 }
 check5
@@ -533,7 +533,7 @@ su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j AC
 MetodoWIFI2(){
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
-su -c 'svc wifi disable'
+su -c 'svc wifi disable' && sleep 4
 check1() {
     vpn=$(ifconfig | grep -c swlan0)
     case $vpn in
@@ -546,7 +546,7 @@ check5(){
       apps=$(test -f "$HOME/wifiip2" && echo 1)
     case $apps in
      1) clear;;
-     *) clear ; ifconfig swlan0; echo ; echo ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iproute2  ;echo -e "$iproute2" >> wifiip2 ;;
+     *) clear ; ifconfig swlan0; echo ; echo ; echo -e "TENTE USAR${GREEN} 192.168.43.1${SCOLOR} CASO OCORRER ALGUM ERRO" ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iproute2  ;echo -e "$iproute2" >> wifiip2 ;;
      esac
 }
 check5
@@ -626,7 +626,7 @@ su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j AC
 USB(){
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
-su -c 'svc wifi disable'
+su -c 'svc wifi disable' && sleep 4
 check1() {
     vpn=$(ifconfig | grep -c rndis0)
     case $vpn in
@@ -639,7 +639,7 @@ check5(){
       apps=$(test -f "$HOME/usbip" && echo 1)
     case $apps in
      1) clear;;
-     *) clear ; ifconfig rndis0; echo ; echo ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iuusbip  ;echo -e "$iuusbip" >> usbip ;;
+     *) clear ; ifconfig rndis0; echo ; echo ; echo -e "TENTE USAR${GREEN} 192.168.42.129${SCOLOR} CASO OCORRER ALGUM ERRO" ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iuusbip  ;echo -e "$iuusbip" >> usbip ;;
      esac
 }
 check5
@@ -721,7 +721,7 @@ su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j AC
 Bluetooth(){
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
-su -c 'svc wifi disable'
+su -c 'svc wifi disable' && sleep 4
 check1() {
     vpn=$(ifconfig | grep -c bt-pan)
     case $vpn in
@@ -734,7 +734,7 @@ check5(){
       apps=$(test -f "$HOME/btip" && echo 1)
     case $apps in
      1) clear;;
-     *) clear ; ifconfig bt-pan; echo ; echo ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read btusbip  ;echo -e "$btusbip" >> btip ;;
+     *) clear ; ifconfig bt-pan; echo ; echo ; echo -e "TENTE USAR${GREEN} 192.168.44.1${SCOLOR} CASO OCORRER ALGUM ERRO" ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read btusbip  ;echo -e "$btusbip" >> btip ;;
      esac
 }
 check5
@@ -876,7 +876,7 @@ opiiy(){
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 clear
-curl -sO https://freegeoip.app/xml/$Plain ; clear ; IP=$(cat $Plain | grep IP | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "IP:${GREEN} $IP ${SCOLOR}" ; echo ; Pais=$(cat $Plain | grep CountryName | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Pais:${GREEN} $Pais ${SCOLOR}" ; echo ; Code=$(cat $Plain | grep CountryCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo do Pais:${GREEN} $Code ${SCOLOR}" ; echo ; CodeReg=$(cat $Plain | grep RegionCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo do Estado:${GREEN} $CodeReg ${SCOLOR}" ; echo ; RegionName=$(cat $Plain | grep RegionName | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Estado:${GREEN} $RegionName ${SCOLOR}" ; echo ; City=$(cat $Plain | grep City | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Cidade:${GREEN} $City ${SCOLOR}" ; echo ; ZipCode=$(cat $Plain | grep ZipCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo Postal:${GREEN} $ZipCode ${SCOLOR}" ; echo ; FusoHorario=$(cat $Plain | grep TimeZone | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Fuso Horario:${GREEN} $FusoHorario ${SCOLOR}" ; echo ; Latitude=$(cat $Plain | grep Latitude | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Latitude:${GREEN} $Latitude ${SCOLOR}" ; echo ; Longitude=$(cat $Plain | grep Longitude | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Longitude:${GREEN} $Longitude ${SCOLOR}"
+curl -sO https://freegeoip.app/xml/$Plain ; clear ; IP=$(cat $HOME/$Plain | grep IP | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "IP:${GREEN} $IP ${SCOLOR}" ; echo ; Pais=$(cat $HOME/$Plain| grep CountryName | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Pais:${GREEN} $Pais ${SCOLOR}" ; echo ; Code=$(cat $HOME/$Plain | grep CountryCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo do Pais:${GREEN} $Code ${SCOLOR}" ; echo ; CodeReg=$(cat $HOME/$Plain | grep RegionCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo do Estado:${GREEN} $CodeReg ${SCOLOR}" ; echo ; RegionName=$(cat $HOME/$Plain | grep RegionName | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Estado:${GREEN} $RegionName ${SCOLOR}" ; echo ; City=$(cat $HOME/$Plain | grep City | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Cidade:${GREEN} $City ${SCOLOR}" ; echo ; ZipCode=$(cat $HOME/$Plain | grep ZipCode | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Codigo Postal:${GREEN} $ZipCode ${SCOLOR}" ; echo ; FusoHorario=$(cat $HOME/$Plain | grep TimeZone | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Fuso Horario:${GREEN} $FusoHorario ${SCOLOR}" ; echo ; Latitude=$(cat $HOME/$Plain | grep Latitude | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Latitude:${GREEN} $Latitude ${SCOLOR}" ; echo ; Longitude=$(cat $HOME/$Plain | grep Longitude | cut -d'>' -f2 | cut -d'<' -f1) && echo -e "Longitude:${GREEN} $Longitude ${SCOLOR}" ; su -c rm $HOME/$Plain
 echo
  read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
