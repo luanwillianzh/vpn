@@ -877,7 +877,7 @@ GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 clear
 
-curl -sO https://freegeoip.app/xml/$Plain && chmod 777 $Plain && mv $HOME/$Plain $HOME/Geolocation 
+Geolo=$(curl https://freegeoip.app/xml/$Plain) && echo -e "$Geolo" >> Geolocation 
 
 clear 
 
