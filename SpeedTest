@@ -1880,7 +1880,7 @@ def shell():
     else:
         callback = print_dots(shutdown_event)
 
-    printer('Recuperando a configuração do SpeedTest...', quiet)
+    printer('Procurando o servidor da rede...', quiet)
     try:
         speedtest = Speedtest(
             source_address=args.source,
@@ -1888,14 +1888,14 @@ def shell():
             secure=args.secure
         )
     except (ConfigRetrievalError,) + HTTP_ERRORS:
-        printer('Não é possível recuperar a configuração do SpeedTest', error=True)
+        printer('Não é possível encontrar o servidor da rede', error=True)
         raise SpeedtestCLIError(get_exception())
 
     if args.list:
         try:
             speedtest.get_servers()
         except (ServersRetrievalError,) + HTTP_ERRORS:
-            printer('Não é possível recuperar a lista de servidores speedtest', error=True)
+            printer('Não é possível encontrar a lista de servidores speedtest', error=True)
             raise SpeedtestCLIError(get_exception())
 
         for _, servers in sorted(speedtest.servers.items()):
@@ -1910,11 +1910,11 @@ def shell():
                         raise
         sys.exit(0)
 
-    printer('Testado por %(isp)s' % speedtest.config['client'],
+    printer('\n\033[1;33mServidor: %(isp)s\033[0m' % speedtest.config['client'],
             quiet)
 
     if not args.mini:
-        printer('Recuperando lista de servidores speedtest.net...', quiet)
+        printer('\nProcurando lista de servidores de teste...', quiet)
         try:
             speedtest.get_servers(servers=args.server, exclude=args.exclude)
         except NoMatchedServers:
@@ -1923,7 +1923,7 @@ def shell():
                 ', '.join('%s' % s for s in args.server)
             )
         except (ServersRetrievalError,) + HTTP_ERRORS:
-            printer('Não é possível recuperar a lista de servidores speedtest', error=True)
+            printer('Não é possível encontrar a lista de servidores speedtest', error=True)
             raise SpeedtestCLIError(get_exception())
         except InvalidServerIDType:
             raise SpeedtestCLIError(
@@ -1931,16 +1931,16 @@ def shell():
             )
 
         if args.server and len(args.server) == 1:
-            printer('Recuperando informações para o servidor selecionado...', quiet)
+            printer('Encontrando informações para o servidor selecionado...', quiet)
         else:
-            printer('Selecionando o melhor servidor com base no ping...', quiet)
+            printer('Selecionando o melhor servidor...', quiet)
         speedtest.get_best_server()
     elif args.mini:
         speedtest.get_best_server(speedtest.set_mini_server(args.mini))
 
     results = speedtest.results
 
-    printer('Hospedagem: %(sponsor)s (%(name)s) [%(d)0.2f km] '
+    printer('\n\033[1;33mTeste iniciado por: %(sponsor)s (%(name)s)\033[0m'
             '\n\n\033[1;32mPing: %(latency)s ms\033[0m' % results.server, quiet)
             
     if args.download:
