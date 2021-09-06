@@ -858,7 +858,7 @@ Alter2(){
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 clear
-Plain=$(curl ipecho.net/plain)
+Plain=$(curl -s ipecho.net/plain)
 clear
 echo -e "SEU IP ATUAL É: ${GREEN}$Plain${SCOLOR}" && echo 
 
@@ -877,7 +877,7 @@ GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 clear
 
-Geolo=$(curl https://freegeoip.app/xml/$Plain) && echo -e "$Geolo" >> Geolocation 
+Geolo=$(curl -s https://freegeoip.app/xml/$Plain) && echo -e "$Geolo" >> Geolocation 
 
 clear 
 
