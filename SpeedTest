@@ -1888,7 +1888,7 @@ def shell():
             secure=args.secure
         )
     except (ConfigRetrievalError,) + HTTP_ERRORS:
-        printer('Não é possível encontrar o servidor da rede', error=True)
+        printer('Não é possível encontrar o provedor da rede', error=True)
         raise SpeedtestCLIError(get_exception())
 
     if args.list:
