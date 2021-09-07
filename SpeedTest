@@ -1880,7 +1880,7 @@ def shell():
     else:
         callback = print_dots(shutdown_event)
 
-    printer('Procurando o servidor da rede...', quiet)
+    printer('Procurando o provedor da rede...', quiet)
     try:
         speedtest = Speedtest(
             source_address=args.source,
@@ -1910,7 +1910,7 @@ def shell():
                         raise
         sys.exit(0)
 
-    printer('\n\033[1;33mServidor: %(isp)s\033[0m' % speedtest.config['client'],
+    printer('\n\033[1;33mProvedor: %(isp)s\033[0m' % speedtest.config['client'],
             quiet)
 
     if not args.mini:
