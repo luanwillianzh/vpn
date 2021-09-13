@@ -1029,7 +1029,7 @@ clear
 
 echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS"
 
-Sniff=$(sudo tcpdump -c10 -n -A port 80)
+Sniff=$(su -c tcpdump -c10 -n -A port 80)
 echo -e "$Sniff" >> sniffer.txt
 
 Proxys=$(cat sniffer.txt | grep 104 | cut -d' ' -f5)
