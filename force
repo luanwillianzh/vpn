@@ -993,7 +993,7 @@ check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
     1) echo "VPN ENCONTRADA" ; sleep 4 ; Menu3;;
-    0) su -c 'svc wifi disable';;
+    0) clear;;
      esac
 }
 check2
@@ -1011,6 +1011,15 @@ clear
 P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
 P2=$(head -c1K sniffer.txt | grep -a Host)
 P3=$(head -c1K sniffer.txt | grep -a Upgrade)
+
+check2() {
+    P13=$(cat sniffer.txt | grep -c Upgrade)
+    case $P13 in
+    0) echo "NADA ENCONTRADO" ; sleep 4 ; Menu3;;
+    1) clear;;
+     esac
+}
+check2
 
 echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
 echo -e "${GREEN}$P2${SCOLOR}"
