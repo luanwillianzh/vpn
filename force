@@ -1003,6 +1003,17 @@ Sniffer(){
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 clear
+  read -p "QUER ATUALIZAR OS PACOTES? [Y/n] " optione
+  case $optione in
+  y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; sniff;;
+  Y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; sniff ;;
+  n) sniff;;
+  N) sniff;;
+  *) Alter2;;
+  esac
+  }
+sniff(){
+clear
 check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
@@ -1011,16 +1022,6 @@ check2() {
      esac
 }
 check2
-  read -p "QUER ATUALIZAR OS PACOTES? [Y/n] " optione
-  case $optione in
-  y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; sleep 3 ; sniff;;
-  Y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; sleep 3 ; sniff ;;
-  n) sniff;;
-  N) sniff;;
-  *) Alter2;;
-  esac
-  }
-sniff(){
 clear
 su -c rm sniffer.txt
 su -c rm proxys.txt
@@ -1028,7 +1029,7 @@ clear
 
 echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS"
 
-Sniff=$(su -c tcpdump -c10 -n -A port 80)
+Sniff=$(sudo tcpdump -c10 -n -A port 80)
 echo -e "$Sniff" >> sniffer.txt
 
 Proxys=$(cat sniffer.txt | grep 104 | cut -d' ' -f5)
