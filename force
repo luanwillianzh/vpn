@@ -1009,7 +1009,7 @@ clear
   Y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; sniff ;;
   n) sniff;;
   N) sniff;;
-  *) Alter2;;
+  *) Menu;;
   esac
   }
 sniff(){
@@ -1072,6 +1072,7 @@ read -n1 -p "QUER TENTAR CAPTURAR O LOGIN (Em Alguns Apps) [Y/n]" optione1
   n)Menu3;;
   y)login;;
   Y)login;;
+  *)Menu3
   esac
 }
 login(){
