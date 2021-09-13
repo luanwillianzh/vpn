@@ -1065,6 +1065,43 @@ echo
 echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
 
 echo
+
+read -n1 -p "QUER TENTAR CAPTURAR O LOGIN (Em Alguns Apps) [Y/n]" optione1
+  case $optione1 in
+  N)Menu3;;
+  n)Menu3;;
+  y)login;;
+  Y)login;;
+  esac
+}
+login(){
+su -c rm login.xml
+clear
+echo -e "\emCOLE O NOME DO PACOTE DO APP${SCOLOR}\em"
+read App
+echo ""
+
+su -c mv /data/data/$App/shared_prefs/"$App"_preferences.xml login.xml
+
+User=$(su -c cat login.xml | grep USERNAME | cut -d '>' -f2 | cut -d'<' -f1)
+
+Pass=$(su -c cat login.xml | grep PASSWORD | cut -d '>' -f2 | cut -d'<' -f1)
+
+clear
+
+echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
+echo -e "${GREEN}$P2${SCOLOR}"
+echo -e "${GREEN}$P3${SCOLOR}"
+echo 
+echo -e "${GREEN}Proxy: $Proxy${SCOLOR}"
+echo -e "${GREEN}Porta: $Porta${SCOLOR}"
+echo
+echo -e "${GREEN}Usuario: $User${SCOLOR}"
+echo -e "${GREEN}Senha: $Pass${SCOLOR}"
+echo
+echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
+echo
+
  read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
   *)Menu3;;
