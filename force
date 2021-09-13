@@ -992,7 +992,7 @@ clear
 check2() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
-    1) echo "VPN ENCONTRADA" ; sleep 4 ; Menu3;;
+    1) echo "DESCONECTE DA VPN ANTES" ; sleep 4 ; Menu3;;
     0) clear;;
      esac
 }
