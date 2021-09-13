@@ -825,6 +825,7 @@ clear
     echo "            [ 2 ] - Ver IP Atual"
     echo "            [ 3 ] - DNS Change"
     echo "            [ 4 ] - SpeedTest"
+    echo "            [ 5 ] - Sniffer de Arquivos"
     echo "            [ 0 ] - Voltar"
    echo "         ==================================="
    echo
@@ -837,6 +838,7 @@ clear
    2)Alter2;;
    3)Alter3;;
    4)Speed;;
+   5)Sniffer;;
    0)MenuPrincipal;;
    *) Menu3;;
     esac
@@ -977,6 +979,43 @@ su -c setprop net.dns1 $d1 && su -c setprop net.dns2 $d2 && su -c setprop net.dn
 Speed(){
 clear
 echo "Sem internet..." && clear && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/SpeedTest && chmod 777 SpeedTest && pkg install python3 -y && clear && python3 SpeedTest && echo
+ read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)Menu3;;
+  esac
+}
+
+Sniffer(){
+GREEN='\033[1;32m'
+SCOLOR='\033[0m'
+clear
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) echo "VPN ENCONTRADA" ; sleep 4 ; Menu3;;
+    0) su -c 'svc wifi disable';;
+     esac
+}
+check2
+su -c rm sniffer.txt
+clear
+
+echo "OK, AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS CONECTAR VOLTE AQUI" ; sleep 8 ; clear ; echo -e "PARA PARAR A CAPTURA DIGITE ${GREEN}CTRL+C${SCOLOR}" 
+
+echo
+
+su -c tcpdump -i any -vv -s 0 tcp port 80 or tcp port 8080 or tcp port 21 or tcp port 20  -w sniffer.txt 
+
+clear
+
+P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
+P2=$(head -c1K sniffer.txt | grep -a Host)
+P3=$(head -c1K sniffer.txt | grep -a Upgrade)
+
+echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
+echo -e "${GREEN}$P2${SCOLOR}"
+echo -e "${GREEN}$P3${SCOLOR}"
+echo
  read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
   *)Menu3;;
