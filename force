@@ -978,7 +978,21 @@ su -c setprop net.dns1 $d1 && su -c setprop net.dns2 $d2 && su -c setprop net.dn
 
 Speed(){
 clear
-echo "Sem internet..." && clear && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/SpeedTest && chmod 777 SpeedTest && pkg install python3 -y && clear && python3 SpeedTest && echo
+echo "Sem internet..." && clear && curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/SpeedTest && chmod 777 SpeedTest ; clear 
+
+read -p "QUER ATUALIZAR OS PACOTES? [Y/n] " optione
+  case $optione in
+  y) pkg install python3 -y ; sleep 3 ; spd;;
+  Y) pkg install python3 -y ; sleep 3 ; spd;;
+  n) spd;;
+  N) spd;;
+  *) Alter2;;
+  esac
+  }
+  
+spd(){
+clear && python3 SpeedTest && echo
+
  read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
   *)Menu3;;
