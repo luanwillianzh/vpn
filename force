@@ -825,7 +825,7 @@ clear
     echo "            [ 2 ] - Ver IP Atual"
     echo "            [ 3 ] - DNS Change"
     echo "            [ 4 ] - SpeedTest"
-    echo "            [ 5 ] - Sniffer de Arquivos"
+  echo "            [ 5 ] - X9 de WebSocket (ROOT)"
     echo "            [ 0 ] - Voltar"
    echo "         ==================================="
    echo
@@ -998,19 +998,27 @@ check2() {
 }
 check2
 su -c rm sniffer.txt
+su -c rm proxys.txt
 clear
 
-echo "OK, AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS CONECTAR VOLTE AQUI" ; sleep 8 ; clear ; echo -e "PARA PARAR A CAPTURA DIGITE ${GREEN}CTRL+C${SCOLOR}" 
+echo "OK, AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS" ; sleep 8 ; clear ; echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}"
 
 echo
 
-su -c tcpdump -i any -vv -s 0 tcp port 80 or tcp port 8080 or tcp port 21 or tcp port 20  -w sniffer.txt 
+Sniff=$(su -c tcpdump -c10 -n -A port 80)
+echo -e "$Sniff" >> sniffer.txt
+
+Proxys=$(cat sniffer.txt | grep 104 | cut -d' ' -f5)
+echo -e "$Proxys" >> proxys.txt
 
 clear
 
 P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
-P2=$(head -c1K sniffer.txt | grep -a Host)
-P3=$(head -c1K sniffer.txt | grep -a Upgrade)
+P2=$(cat sniffer.txt | grep Host)
+P3=$(cat sniffer.txt | grep Upgrade)
+Proxy=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f1-4)
+Porta=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f5 | cut -d ":" -f1)
+
 
 check2() {
     P13=$(cat sniffer.txt | grep -c Upgrade)
@@ -1024,6 +1032,14 @@ check2
 echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
 echo -e "${GREEN}$P2${SCOLOR}"
 echo -e "${GREEN}$P3${SCOLOR}"
+echo 
+echo -e "${GREEN}Proxy: $Proxy${SCOLOR}"
+echo -e "${GREEN}Porta: $Porta${SCOLOR}"
+
+echo
+
+echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
+
 echo
  read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
