@@ -1143,6 +1143,8 @@ read -n1 -p "QUER TENTAR CAPTURAR O LOGIN (Em Alguns Apps) [Y/n]" optione1
   *)Menu4;;
   esac
 }
+
+
 login(){
 su -c rm login.xml
 clear
@@ -1195,14 +1197,19 @@ clear
   }
 sniff(){
 clear
-check2() {
-    vpn=$(ifconfig | grep -c tun0)
-    case $vpn in
-    0)clear ; echo -e "NECESSARIO DESATIVAR A OPÇÃO ${GREEN}SSL${SCOLOR}, DEIXAR" ; echo -e "APENAS ${GREEN}PAYLOAD${SCOLOR} ATIVADO E INICIAR A CONEXÃO" ; echo ; echo "AGUARDANDO CONECTAR NA VPN..." ; sleep 2 ; check2;;
-    1) clear;;
-     esac
-}
-check2
+echo -e "NECESSARIO DESATIVAR A OPÇÃO ${GREEN}SSL${SCOLOR}, DEIXAR"
+echo -e "APENAS ${GREEN}PAYLOAD${SCOLOR} ATIVADO E INICIAR A CONEXÃO"
+echo 
+read -n1 -p "DIGITE Y DEPOIS DE TER FEITO TUDO ISSO" optione12
+  case $optione12 in 
+  y)Xaringan;;
+  Y)Xaringan;;
+   *)sniff;;
+  esac
+  }
+
+
+Xaringan(){
 clear
 su -c rm sniffer.txt
 su -c rm proxys.txt
@@ -1243,22 +1250,18 @@ echo -e "${GREEN}Proxy: $Proxy${SCOLOR}"
 echo -e "${GREEN}Porta: $Porta${SCOLOR}"
 echo
 echo -e "${GREEN}SNI: $P6${SCOLOR}"
-
 echo
-
-echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
-
-echo
-
 read -n1 -p "QUER TENTAR CAPTURAR O LOGIN (Em Alguns Apps) [Y/n]" optione1
   case $optione1 in
   N)Menu4;;
   n)Menu4;;
   y)login;;
   Y)login;;
-  *)Menu3
+  *)Menu4;;
   esac
 }
+
+
 login(){
 su -c rm login.xml
 clear
@@ -1281,20 +1284,15 @@ echo
 echo -e "${GREEN}Proxy: $Proxy${SCOLOR}"
 echo -e "${GREEN}Porta: $Porta${SCOLOR}"
 echo
-echo -e "${GREEN}SNI: $P6${SCOLOR}"
-echo
 echo -e "${GREEN}Usuario: $User${SCOLOR}"
 echo -e "${GREEN}Senha: $Pass${SCOLOR}"
 echo
-echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
+echo -e "${GREEN}SNI: $P6${SCOLOR}"
 echo
-
- read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
   *)Menu4;;
   esac
 }
-
-
 clear
 MenuPrincipal
