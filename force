@@ -1,5 +1,10 @@
 #!/bin/bash
 clear
+
+NADA='\033[0m'
+CINZA='\e[02;37m'
+DESTACAR='\e[01;37m'
+
 MenuPrincipal(){
 clear
     echo -e '\n'
@@ -9,11 +14,11 @@ clear
     echo "               ESCOLHA UMA OPÇÃO"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - Apps Escola (ROOT)"
-    echo "            [ 2 ] - Rotear VPN (ROOT)"
-    echo "            [ 3 ] - Outros"
-    echo "            [ 4 ] - X9 De Arquivos (ROOT)"
-    echo "            [ 0 ] - Sair"
+    echo -e "            ${DESTACAR}[ 1 ] - Apps Escola ${CINZA}ROOT${NADA}"
+    echo -e "            ${DESTACAR}[ 2 ] - Rotear VPN ${CINZA}ROOT${NADA}"
+    echo -e "            ${DESTACAR}[ 3 ] - Outros"
+    echo -e "            ${DESTACAR}[ 4 ] - X9 De Arquivos ${CINZA}ROOT${NADA}"
+    echo -e "            ${DESTACAR}[ 0 ] - Sair${NADA}"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
@@ -47,16 +52,16 @@ check
     echo "               ESCOLHA UMA OPÇÃO"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - CMSP"
-    echo "            [ 2 ] - CMSP KIDS"
-    echo "            [ 3 ] - Aulas Parana"
-    echo "            [ 4 ] - Applique-se"
-    echo "            [ 5 ] - Rio Educa Em Casa"  
-    echo "            [ 6 ] - Permições VPN"
-    echo "            [ 7 ] - Loop De Conexão"
-    echo "            [ 8 ] - Conexão Alternativa"
-    echo "            [ 9 ] - Baixar Apps"
-    echo "            [ 0 ] - Voltar"
+    echo -e "            ${DESTACAR}[ 1 ] - CMSP"
+    echo -e "            [ 2 ] - CMSP KIDS"
+    echo -e "            [ 3 ] - Aulas Parana"
+    echo -e "            [ 4 ] - Applique-se"
+    echo -e "            [ 5 ] - Rio Educa Em Casa"  
+    echo -e "            [ 6 ] - Permições VPN"
+    echo -e "            [ 7 ] - Loop De Conexão"
+    echo -e "            [ 8 ] - Conexão Alternativa"
+    echo -e "            [ 9 ] - Baixar Apps"
+    echo -e "            [ 0 ] - Voltar${NADA}"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
@@ -91,12 +96,12 @@ clear
     echo "            NÃO ESTEJA FUNCIONANDO"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - CMSP"
-    echo "            [ 2 ] - CMSP KIDS"
-    echo "            [ 3 ] - Aulas Parana"
-    echo "            [ 4 ] - Applique-se"
-    echo "            [ 5 ] - Rio Educa Em Casa"
-    echo "            [ 0 ] - Voltar"
+    echo -e "            ${DESTACAR}[ 1 ] - CMSP"
+    echo -e "            [ 2 ] - CMSP KIDS"
+    echo -e "            [ 3 ] - Aulas Parana"
+    echo -e "            [ 4 ] - Applique-se"
+    echo -e "            [ 5 ] - Rio Educa Em Casa"
+    echo -e "            [ 0 ] - Voltar${NADA}"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
@@ -139,12 +144,12 @@ PermiçõesVPN(){
     echo "               PEDIR PERMIÇÕES VPN"
     echo 
    echo "         ==================================="
-    echo "             [ 1 ] - CMSP"
-    echo "             [ 2 ] - CMSP KIDS"
-    echo "             [ 3 ] - Aulas Parana"
-    echo "             [ 4 ] - Applique-se"
-    echo "             [ 5 ] - Rio Educa Em Casa"  
-    echo "             [ 0 ] - Voltar"
+    echo -e "             ${DESTACAR}[ 1 ] - CMSP"
+    echo -e "             [ 2 ] - CMSP KIDS"
+    echo -e "             [ 3 ] - Aulas Parana"
+    echo -e "             [ 4 ] - Applique-se"
+    echo -e "             [ 5 ] - Rio Educa Em Casa"  
+    echo -e "             [ 0 ] - Voltar${NADA}"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
@@ -178,13 +183,13 @@ clear
     echo "                 ESCOLHA UM APP"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - CMSP"
-    echo "            [ 2 ] - CMSP KIDS"
-    echo "            [ 3 ] - Aulas Parana"
-    echo "            [ 4 ] - Applique-se"
-    echo "            [ 5 ] - Rio Educa Em Casa"  
-    echo "            [ 6 ] - Todos os apps"
-    echo "            [ 0 ] - Voltar"
+    echo -e "            ${DESTACAR}[ 1 ] - CMSP"
+    echo -e "            [ 2 ] - CMSP KIDS"
+    echo -e "            [ 3 ] - Aulas Parana"
+    echo -e "            [ 4 ] - Applique-se"
+    echo -e "            [ 5 ] - Rio Educa Em Casa"  
+    echo -e "            [ 6 ] - Todos os apps"
+    echo -e "            [ 0 ] - Voltar${NADA}"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
@@ -327,12 +332,12 @@ clear
     echo "           ESCOLHA UM APP PARA BAIXAR"
     echo
    echo "         ==================================="
-    echo "             [ 1 ] - CMSP"
-    echo "             [ 2 ] - Rio Educa Em Casa"
-    echo "             [ 3 ] - Aulas Parana"
-    echo "             [ 4 ] - Applique-se" 
-    echo "             [ 5 ] - CMSP Kids"
-    echo "             [ 0 ] - Voltar"
+    echo -e "             ${DESTACAR}[ 1 ] - CMSP"
+    echo -e "             [ 2 ] - Rio Educa Em Casa"
+    echo -e "             [ 3 ] - Aulas Parana"
+    echo -e "             [ 4 ] - Applique-se" 
+    echo -e "             [ 5 ] - CMSP Kids"
+    echo -e "             [ 0 ] - Voltar${NADA}"
     echo "        ==================================="
     echo
     read -n1 -p "Escolha uma Opção: " App
@@ -409,10 +414,10 @@ check
     echo "               ESCOLHA UMA OPÇÃO"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - Via Roteador Wi-Fi"
-    echo "            [ 2 ] - Via USB"
-    echo "            [ 3 ] - Via Bluetooth"
-    echo "            [ 0 ] - Voltar"
+    echo -e "            ${DESTACAR}[ 1 ] - Via Roteador Wi-Fi"
+    echo -e "            [ 2 ] - Via USB"
+    echo -e "            [ 3 ] - Via Bluetooth"
+    echo -e "            [ 0 ] - Voltar${NADA}"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
@@ -437,9 +442,9 @@ echo "     ==================================="
    echo "               ESCOLHA UMA OPÇÃO"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - Metodo 1"
-    echo "            [ 2 ] - Metodo 2"
-    echo "            [ 0 ] - Voltar"
+    echo -e "            ${DESTACAR}[ 1 ] - Metodo 1"
+    echo -e "            [ 2 ] - Metodo 2"
+    echo -e "            [ 0 ] - Voltar${NADA}"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
@@ -482,10 +487,10 @@ clear
    echo "               ESCOLHA UMA OPÇÃO"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - Ligar"
-    echo "            [ 2 ] - Desligar"
-    echo "            [ 3 ] - Corrigir IP"
-    echo "            [ 0 ] - Voltar"
+    echo -e "            ${DESTACAR}[ 1 ] - Ligar"
+    echo -e "            [ 2 ] - Desligar"
+    echo -e "            [ 3 ] - Corrigir IP"
+    echo -e "            [ 0 ] - Voltar${NADA}"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
@@ -576,10 +581,10 @@ clear
    echo "               ESCOLHA UMA OPÇÃO"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - Ligar"
-    echo "            [ 2 ] - Desligar"
-    echo "            [ 3 ] - Corrigir IP"
-    echo "            [ 0 ] - Voltar"
+    echo -e "            ${DESTACAR}[ 1 ] - Ligar"
+    echo -e "            [ 2 ] - Desligar"
+    echo -e "            [ 3 ] - Corrigir IP"
+    echo -e "            [ 0 ] - Voltar${NADA}"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
@@ -669,10 +674,10 @@ clear
    echo "               ESCOLHA UMA OPÇÃO"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - Ligar"
-    echo "            [ 2 ] - Desligar"
-    echo "            [ 3 ] - Corrigir IP"
-    echo "            [ 0 ] - Voltar"
+    echo -e "            ${DESTACAR}[ 1 ] - Ligar"
+    echo -e "            [ 2 ] - Desligar"
+    echo -e "            [ 3 ] - Corrigir IP"
+    echo -e "            [ 0 ] - Voltar${NADA}"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
@@ -764,10 +769,10 @@ clear
    echo "               ESCOLHA UMA OPÇÃO"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - Ligar"
-    echo "            [ 2 ] - Desligar"
-    echo "            [ 3 ] - Corrigir IP"
-    echo "            [ 0 ] - Voltar"
+    echo -e "            ${DESTACAR}[ 1 ] - Ligar"
+    echo -e "            [ 2 ] - Desligar"
+    echo -e "            [ 3 ] - Corrigir IP"
+    echo -e "            [ 0 ] - Voltar${NADA}"
    echo "         ==================================="
    echo
     echo "@alpacinoo007"
@@ -839,11 +844,11 @@ clear
     echo "               ESCOLHA UMA OPÇÃO"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - Ver MBs Gastos (ROOT)"
-    echo "            [ 2 ] - Ver IP Atual"
-    echo "            [ 3 ] - DNS Change (ROOT)"
-    echo "            [ 4 ] - SpeedTest"
-    echo "            [ 0 ] - Voltar"
+    echo -e "            ${DESTACAR}[ 1 ] - Ver MBs Gastos ${CINZA}ROOT${NADA}"
+    echo -e "            ${DESTACAR}[ 2 ] - Ver IP Atual"
+    echo -e "            [ 3 ] - DNS Change ${CINZA}ROOT${NADA}"
+    echo -e "            ${DESTACAR}[ 4 ] - SpeedTest"
+    echo -e "            [ 0 ] - Voltar${NADA}"
    echo "         ==================================="
    echo
    echo "@alpacinoo007"
@@ -950,16 +955,16 @@ check
     echo "                 ESCOLHA UM DNS"
     echo
     echo "        ==================================="
-    echo "              [ 1 ] - CloudFire DNS"
-    echo "              [ 2 ] - OpenDNS"
-    echo "              [ 3 ] - Google DNS"
-    echo "              [ 4 ] - Ad Guard DNS"
-    echo "              [ 5 ] - DNS Watch"
-    echo "              [ 6 ] - GIGA DNS"
-    echo "              [ 7 ] - Clean Browsing DNS"
-    echo "              [ 8 ] - Quad9 DNS"
-    echo "              [ 9 ] - DNS Personalizado"
-    echo "              [ 0 ] - Voltar"
+    echo -e "              ${DESTACAR}[ 1 ] - CloudFire DNS"
+    echo -e "              [ 2 ] - OpenDNS"
+    echo -e "              [ 3 ] - Google DNS"
+    echo -e "              [ 4 ] - Ad Guard DNS"
+    echo -e "              [ 5 ] - DNS Watch"
+    echo -e "              [ 6 ] - GIGA DNS"
+    echo -e "              [ 7 ] - Clean Browsing DNS"
+    echo -e "              [ 8 ] - Quad9 DNS"
+    echo -e "              [ 9 ] - DNS Personalizado"
+    echo -e "              [ 0 ] - Voltar${NADA}"
    echo "         ==================================="
     echo 
     echo "@alpacinoo007"
@@ -1048,9 +1053,9 @@ clear
     echo "                ESCOLHA UMA OPÇÃO"
     echo
     echo "        ==================================="
-    echo "              [ 1 ] - WebSocket Direct"
-    echo "              [ 2 ] - WS Payload + SSL"
-    echo "              [ 0 ] - Voltar"
+    echo -e "              ${DESTACAR}[ 1 ] - WebSocket Direct"
+    echo -e "              [ 2 ] - WS Payload + SSL"
+    echo -e "              [ 0 ] - Voltar${NADA}"
    echo "         ==================================="
     echo 
     echo "@alpacinoo007"
