@@ -9,9 +9,10 @@ clear
     echo "               ESCOLHA UMA OPÇÃO"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - Apps Escola ROOT"
-    echo "            [ 2 ] - Rotear VPN"
+    echo "            [ 1 ] - Apps Escola (ROOT)"
+    echo "            [ 2 ] - Rotear VPN (ROOT)"
     echo "            [ 3 ] - Outros"
+    echo "            [ 4 ] - X9 De Arquivos (ROOT)"
     echo "            [ 0 ] - Sair"
    echo "         ==================================="
    echo
@@ -23,14 +24,23 @@ clear
     1)Menu1;;
     2)Menu2;;
     3)Menu3;;
+    4)Menu4;;
     0)su -c killall com.termux;;
     *) echo ; MenuPrincipal;;
     esac
      }
 
 Menu1() {
+check() {
+    su=$(su -h | grep -c "command")
+    case $su in
+    0) killall com.termux ; clear ; exit ;;
+    1) clear;;
+    esac
+}
+echo -e '\n'
+check
     clear
-    echo -e '\n'
    echo "     ==================================="
     echo "             FORÇAR CONEXÃO (ROOT)     "
    echo "        ==================================="
@@ -383,6 +393,14 @@ su -c killall com.termux
 
 
 Menu2() {
+check() {
+    su=$(su -h | grep -c "command")
+    case $su in
+    0) killall com.termux ; clear ; exit ;;
+    1) clear;;
+    esac
+}
+check
     clear
     echo -e '\n'
    echo "     ==================================="
@@ -821,11 +839,10 @@ clear
     echo "               ESCOLHA UMA OPÇÃO"
     echo
    echo "        ==================================="
-    echo "            [ 1 ] - Ver MBs Gastos"
+    echo "            [ 1 ] - Ver MBs Gastos (ROOT)"
     echo "            [ 2 ] - Ver IP Atual"
-    echo "            [ 3 ] - DNS Change"
+    echo "            [ 3 ] - DNS Change (ROOT)"
     echo "            [ 4 ] - SpeedTest"
-  echo "            [ 5 ] - X9 de WebSocket (ROOT)"
     echo "            [ 0 ] - Voltar"
    echo "         ==================================="
    echo
@@ -838,13 +855,20 @@ clear
    2)Alter2;;
    3)Alter3;;
    4)Speed;;
-   5)Sniffer;;
    0)MenuPrincipal;;
    *) Menu3;;
     esac
     }
 
 Alter1(){
+check() {
+    su=$(su -h | grep -c "command")
+    case $su in
+    0) killall com.termux ; clear ; exit ;;
+    1) clear;;
+    esac
+}
+check
 clear
 check2() {
     vpn=$(ifconfig | grep -c tun0)
@@ -910,6 +934,14 @@ echo
   
   
 Alter3(){
+check() {
+    su=$(su -h | grep -c "command")
+    case $su in
+    0) killall com.termux ; clear ; exit ;;
+    1) clear;;
+    esac
+}
+check
    clear
     echo -e '\n'
     echo "     ==================================="
@@ -999,29 +1031,65 @@ clear && python3 SpeedTest && echo
   esac
 }
 
-Sniffer(){
+Menu4(){
+check() {
+    su=$(su -h | grep -c "command")
+    case $su in
+    0) killall com.termux ; clear ; exit ;;
+    1) clear;;
+    esac
+}
+check
+clear
+    echo -e '\n'
+    echo "     ==================================="
+    echo "                  X9 DE ARQUIVOS     "
+   echo "         ===================================" 
+    echo "                ESCOLHA UMA OPÇÃO"
+    echo
+    echo "        ==================================="
+    echo "              [ 1 ] - WebSocket Direct"
+    echo "              [ 2 ] - WS Payload + SSL"
+    echo "              [ 0 ] - Voltar"
+   echo "         ==================================="
+    echo 
+    echo "@alpacinoo007"
+    echo "@luanw04"
+    echo
+    read -n1 -p "Escolha uma Opção: " App
+    case $App in
+    1)wsDirect;;
+    2)wspayssl;;
+    0)MenuPrincipal;;
+    *)Menu4
+    esac
+    }
+    
+    
+    
+wsDirect(){
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 clear
   read -p "QUER ATUALIZAR OS PACOTES? [Y/n] " optione
   case $optione in
-  y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; sniff;;
-  Y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; sniff ;;
-  n) sniff;;
-  N) sniff;;
-  *) Menu;;
+  y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; sniffer;;
+  Y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; sniffer ;;
+  n) sniffer;;
+  N) sniffer;;
+  *) Menu4;;
   esac
   }
-sniff(){
+sniffer(){
 clear
-check2() {
+check7() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
-    1) echo "DESCONECTE DA VPN ANTES" ; sleep 4 ; Menu3;;
+    1) echo "DESCONECTE DA VPN ANTES" ; sleep 4 ; Menu4;;
     0) clear;;
      esac
 }
-check2
+check7
 clear
 su -c rm sniffer.txt
 su -c rm proxys.txt
@@ -1047,7 +1115,7 @@ Porta=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f5 | c
 check2() {
     P13=$(cat sniffer.txt | grep -c Upgrade)
     case $P13 in
-    0) echo "NADA ENCONTRADO" ; sleep 4 ; Menu3;;
+    0) echo "NADA ENCONTRADO" ; sleep 4 ; Menu4;;
     1) clear;;
      esac
 }
@@ -1068,11 +1136,11 @@ echo
 
 read -n1 -p "QUER TENTAR CAPTURAR O LOGIN (Em Alguns Apps) [Y/n]" optione1
   case $optione1 in
-  N)Menu3;;
-  n)Menu3;;
+  N)Menu4;;
+  n)Menu4;;
   y)login;;
   Y)login;;
-  *)Menu3
+  *)Menu4;;
   esac
 }
 login(){
@@ -1105,9 +1173,128 @@ echo
 
  read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
-  *)Menu3;;
+  *)Menu4;;
   esac
 }
+
+
+
+wspayssl(){
+clear
+GREEN='\033[1;32m'
+SCOLOR='\033[0m'
+clear
+  read -p "QUER ATUALIZAR OS PACOTES? [Y/n] " optione
+  case $optione in
+  y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; sniff;;
+  Y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; sniff ;;
+  n) sniff;;
+  N) sniff;;
+  *) Menu4;;
+  esac
+  }
+sniff(){
+clear
+check2() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    0)clear ; echo -e "NECESSARIO DESATIVAR A OPÇÃO ${GREEN}SSL${SCOLOR}, DEIXAR" ; echo -e "APENAS ${GREEN}PAYLOAD${SCOLOR} ATIVADO E INICIAR A CONEXÃO" ; echo ; echo "AGUARDANDO CONECTAR NA VPN..." ; sleep 2 ; check2;;
+    1) clear;;
+     esac
+}
+check2
+clear
+su -c rm sniffer.txt
+su -c rm proxys.txt
+clear
+
+echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}"
+
+echo
+
+su -c tcpdump -i any -n -c25 -w sniffer.txt
+
+Proxys=$(cat sniffer.txt | grep 104 | cut -d' ' -f5)
+echo -e "$Proxys" >> proxys.txt
+
+clear
+
+P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
+P2=$(cat sniffer.txt | grep -a Host)
+P3=$(cat sniffer.txt | grep -a Upgrade)
+Proxy=$(cat sniffer.txt | grep -a 104 | cut -d':' -f1 | cut -d' ' -f2)
+Porta=$(cat sniffer.txt | grep -a 104 | cut -d':' -f2 | cut -d' ' -f1)
+P6=$(cat sniffer.txt | grep -a Host | cut -d' ' -f2)
+
+check2() {
+    P13=$(cat sniffer.txt | grep -c Upgrade)
+    case $P13 in
+    0) echo "NADA ENCONTRADO" ; sleep 4 ; Menu4;;
+    1) clear;;
+     esac
+}
+check2
+
+echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
+echo -e "${GREEN}$P2${SCOLOR}"
+echo -e "${GREEN}$P3${SCOLOR}"
+echo 
+echo -e "${GREEN}Proxy: $Proxy${SCOLOR}"
+echo -e "${GREEN}Porta: $Porta${SCOLOR}"
+echo
+echo -e "${GREEN}SNI: $P6${SCOLOR}"
+
+echo
+
+echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
+
+echo
+
+read -n1 -p "QUER TENTAR CAPTURAR O LOGIN (Em Alguns Apps) [Y/n]" optione1
+  case $optione1 in
+  N)Menu4;;
+  n)Menu4;;
+  y)login;;
+  Y)login;;
+  *)Menu3
+  esac
+}
+login(){
+su -c rm login.xml
+clear
+echo -e "\emCOLE O NOME DO PACOTE DO APP${SCOLOR}\em"
+read App
+echo ""
+
+su -c mv /data/data/$App/shared_prefs/"$App"_preferences.xml login.xml
+
+User=$(su -c cat login.xml | grep USERNAME | cut -d '>' -f2 | cut -d'<' -f1)
+
+Pass=$(su -c cat login.xml | grep PASSWORD | cut -d '>' -f2 | cut -d'<' -f1)
+
+clear
+
+echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
+echo -e "${GREEN}$P2${SCOLOR}"
+echo -e "${GREEN}$P3${SCOLOR}"
+echo 
+echo -e "${GREEN}Proxy: $Proxy${SCOLOR}"
+echo -e "${GREEN}Porta: $Porta${SCOLOR}"
+echo
+echo -e "${GREEN}SNI: $P6${SCOLOR}"
+echo
+echo -e "${GREEN}Usuario: $User${SCOLOR}"
+echo -e "${GREEN}Senha: $Pass${SCOLOR}"
+echo
+echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
+echo
+
+ read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)Menu4;;
+  esac
+}
+
 
 clear
 MenuPrincipal
