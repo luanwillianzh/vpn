@@ -7,23 +7,23 @@ DESTACAR='\e[01;37m'
 
 MenuPrincipal(){
 clear
-    echo -e '\n'
-   echo "     ==================================="
-    echo "                MENU PRINCIPAL     "
-   echo "        ==================================="
-    echo "               ESCOLHA UMA OPÇÃO"
-    echo
-   echo "        ==================================="
-    echo -e "            ${DESTACAR}[ 1 ] - Apps Escola ${CINZA}ROOT${NADA}"
-    echo -e "            ${DESTACAR}[ 2 ] - Rotear VPN ${CINZA}ROOT${NADA}"
-    echo -e "            ${DESTACAR}[ 3 ] - Outros"
-    echo -e "            ${DESTACAR}[ 4 ] - X9 De Arquivos ${CINZA}ROOT${NADA}"
-    echo -e "            ${DESTACAR}[ 0 ] - Sair${NADA}"
-   echo "         ==================================="
-   echo
-    echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo -e '\n'
+echo "     ==================================="
+echo "                MENU PRINCIPAL     "
+echo "        ==================================="
+echo "               ESCOLHA UMA OPÇÃO"
+echo
+echo "        ==================================="v 
+echo -e "            ${DESTACAR}[ 1 ] - Apps Escola ${CINZA}ROOT${NADA}"
+echo -e "            ${DESTACAR}[ 2 ] - Rotear VPN ${CINZA}ROOT${NADA}"
+echo -e "            ${DESTACAR}[ 3 ] - Outros"
+echo -e "            ${DESTACAR}[ 4 ] - X9 De Arquivos ${CINZA}ROOT${NADA}"
+echo -e "            ${DESTACAR}[ 0 ] - Sair${NADA}"
+echo "         ==================================="
+echo
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " App
     case $App in  
     1)Menu1;;
@@ -46,27 +46,27 @@ check() {
 echo -e '\n'
 check
     clear
-   echo "     ==================================="
-    echo "             FORÇAR CONEXÃO (ROOT)     "
-   echo "        ==================================="
-    echo "               ESCOLHA UMA OPÇÃO"
-    echo
-   echo "        ==================================="
-    echo -e "            ${DESTACAR}[ 1 ] - CMSP"
-    echo -e "            [ 2 ] - CMSP KIDS"
-    echo -e "            [ 3 ] - Aulas Parana"
-    echo -e "            [ 4 ] - Applique-se"
-    echo -e "            [ 5 ] - Rio Educa Em Casa"  
-    echo -e "            [ 6 ] - Permições VPN"
-    echo -e "            [ 7 ] - Loop De Conexão"
-    echo -e "            [ 8 ] - Conexão Alternativa"
-    echo -e "            [ 9 ] - Baixar Apps"
-    echo -e "            [ 0 ] - Voltar${NADA}"
-   echo "         ==================================="
-   echo
-    echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo "     ==================================="
+echo "             FORÇAR CONEXÃO (ROOT)     "
+echo "        ==================================="
+echo "               ESCOLHA UMA OPÇÃO"
+echo
+echo "        ==================================="
+echo -e "            ${DESTACAR}[ 1 ] - CMSP"
+echo -e "            [ 2 ] - CMSP KIDS"
+echo -e "            [ 3 ] - Aulas Parana"
+echo -e "            [ 4 ] - Applique-se"
+echo -e "            [ 5 ] - Rio Educa Em Casa"  
+echo -e "            [ 6 ] - Permições VPN"
+echo -e "            [ 7 ] - Loop De Conexão"
+echo -e "            [ 8 ] - Conexão Alternativa"
+echo -e "            [ 9 ] - Baixar Apps"
+echo -e "            [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " App
     case $App in  
    1) App="tv.ip.edusp" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2 " ; nome="CentroDeMidiasSP" ; A2="su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.edusp/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.edusp" ; eb="su -c pm enable tv.ip.edusp";;
@@ -88,25 +88,25 @@ check
 
 ConexãoAuternativa(){
 clear
-    echo -e '\n'
-   echo "     ==================================="
-    echo "             FORÇAR CONEXÃO (ROOT)     "
-   echo "        ==================================="
-    echo "            USE ESSE CASO O OUTRO"
-    echo "            NÃO ESTEJA FUNCIONANDO"
-    echo
-   echo "        ==================================="
-    echo -e "            ${DESTACAR}[ 1 ] - CMSP"
-    echo -e "            [ 2 ] - CMSP KIDS"
-    echo -e "            [ 3 ] - Aulas Parana"
-    echo -e "            [ 4 ] - Applique-se"
-    echo -e "            [ 5 ] - Rio Educa Em Casa"
-    echo -e "            [ 0 ] - Voltar${NADA}"
-   echo "         ==================================="
-   echo
-    echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo -e '\n'
+echo "     ==================================="
+echo "             FORÇAR CONEXÃO (ROOT)     "
+echo "        ==================================="
+echo "            USE ESSE CASO O OUTRO"
+echo "            NÃO ESTEJA FUNCIONANDO"
+echo
+echo "        ==================================="
+echo -e "            ${DESTACAR}[ 1 ] - CMSP"
+echo -e "            [ 2 ] - CMSP KIDS"
+echo -e "            [ 3 ] - Aulas Parana"
+echo -e "            [ 4 ] - Applique-se"
+echo -e "            [ 5 ] - Rio Educa Em Casa"
+echo -e "            [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " App
     case $App in  
    1) App="tv.ip.edusp" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2 " ; nome="CentroDeMidiasSP" ; A2="su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.edusp/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.edusp" ; eb="su -c pm enable tv.ip.edusp";;
@@ -136,25 +136,25 @@ su -c am startservice -n $App/de.blinkt.openvpn.core.OpenVPNService && su -c kil
 
 PermiçõesVPN(){
     clear
-    echo -e '\n'
-   echo "      ==================================="
-    echo "              FORÇAR CONEXÃO (ROOT)     "
-   echo "         ==================================="
-    echo "               ESCOLHA UM APP PARA"
-    echo "               PEDIR PERMIÇÕES VPN"
-    echo 
-   echo "         ==================================="
-    echo -e "             ${DESTACAR}[ 1 ] - CMSP"
-    echo -e "             [ 2 ] - CMSP KIDS"
-    echo -e "             [ 3 ] - Aulas Parana"
-    echo -e "             [ 4 ] - Applique-se"
-    echo -e "             [ 5 ] - Rio Educa Em Casa"  
-    echo -e "             [ 0 ] - Voltar${NADA}"
-   echo "         ==================================="
-   echo
-    echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo -e '\n'
+echo "      ==================================="
+echo "              FORÇAR CONEXÃO (ROOT)     "
+echo "         ==================================="
+echo "               ESCOLHA UM APP PARA"
+echo "               PEDIR PERMIÇÕES VPN"
+echo 
+echo "         ==================================="
+echo -e "             ${DESTACAR}[ 1 ] - CMSP"
+echo -e "             [ 2 ] - CMSP KIDS"
+echo -e "             [ 3 ] - Aulas Parana"
+echo -e "             [ 4 ] - Applique-se"
+echo -e "             [ 5 ] - Rio Educa Em Casa"  
+echo -e "             [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " App
     case $App in  
    1) App="tv.ip.edusp" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2 " ; nome="CentroDeMidiasSP" ; A2="su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.edusp/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.edusp" ; eb="su -c pm enable tv.ip.edusp";;
@@ -176,25 +176,25 @@ su -c am start -n $App/tv.ip.my.activities.PermissionActivity && sleep 2 && $A2 
 
 LoopDeConexão(){
 clear
-    echo -e '\n'
-   echo "     ==================================="
-    echo "             LOOP DE CONEXÃO (ROOT)     "
-   echo "        ==================================="
-    echo "                 ESCOLHA UM APP"
-    echo
-   echo "        ==================================="
-    echo -e "            ${DESTACAR}[ 1 ] - CMSP"
-    echo -e "            [ 2 ] - CMSP KIDS"
-    echo -e "            [ 3 ] - Aulas Parana"
-    echo -e "            [ 4 ] - Applique-se"
-    echo -e "            [ 5 ] - Rio Educa Em Casa"  
-    echo -e "            [ 6 ] - Todos os apps"
-    echo -e "            [ 0 ] - Voltar${NADA}"
-   echo "         ==================================="
-   echo
-    echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo -e '\n'
+echo "     ==================================="
+echo "             LOOP DE CONEXÃO (ROOT)     "
+echo "        ==================================="
+echo "                 ESCOLHA UM APP"
+echo
+echo "        ==================================="
+echo -e "            ${DESTACAR}[ 1 ] - CMSP"
+echo -e "            [ 2 ] - CMSP KIDS"
+echo -e "            [ 3 ] - Aulas Parana"
+echo -e "            [ 4 ] - Applique-se"
+echo -e "            [ 5 ] - Rio Educa Em Casa"  
+echo -e "            [ 6 ] - Todos os apps"
+echo -e "            [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " App
     case $App in  
    1) App="tv.ip.edusp" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2 " ; nome="CentroDeMidiasSP" ; A2="su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 8" ; A4="su -c am start -n tv.ip.edusp/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.edusp" ; eb="su -c pm enable tv.ip.edusp";;
@@ -325,21 +325,21 @@ check9
 
 BaixarApps(){
 clear
-    echo -e '\n'
-   echo "      ==================================="
-    echo "               FORÇAR CONEXÃO (ROOT)     "
-   echo "         ==================================="
-    echo "           ESCOLHA UM APP PARA BAIXAR"
-    echo
-   echo "         ==================================="
-    echo -e "             ${DESTACAR}[ 1 ] - CMSP"
-    echo -e "             [ 2 ] - Rio Educa Em Casa"
-    echo -e "             [ 3 ] - Aulas Parana"
-    echo -e "             [ 4 ] - Applique-se" 
-    echo -e "             [ 5 ] - CMSP Kids"
-    echo -e "             [ 0 ] - Voltar${NADA}"
-    echo "        ==================================="
-    echo
+echo -e '\n'
+echo "      ==================================="
+echo "               FORÇAR CONEXÃO (ROOT)     "
+echo "         ==================================="
+echo "           ESCOLHA UM APP PARA BAIXAR"
+echo
+echo "         ==================================="
+echo -e "             ${DESTACAR}[ 1 ] - CMSP"
+echo -e "             [ 2 ] - Rio Educa Em Casa"
+echo -e "             [ 3 ] - Aulas Parana"
+echo -e "             [ 4 ] - Applique-se" 
+echo -e "             [ 5 ] - CMSP Kids"
+echo -e "             [ 0 ] - Voltar${NADA}"
+echo "        ==================================="
+echo
     read -n1 -p "Escolha uma Opção: " App
     case $App in  
     1) App="tv.ip.edusp" ; atividade="tv.ip.my.activities.SplashScreen" ; A3="su -c am start -n tv.ip.edusp/tv.ip.my.activities.VideoActivity2" ; nome="CentroDeMidiasSP" ; A2="su -c am start -n tv.ip.edusp/com.datami.smi.ui.VpnPermissionActivity" ; s="sleep 4" ; A4="su -c am start -n tv.ip.edusp/tv.ip.my.activities.SplashScreen" ; db="su -c pm disable tv.ip.edusp" ; eb="su -c pm enable tv.ip.edusp";E1="17";;
@@ -407,22 +407,22 @@ check() {
 }
 check
     clear
-    echo -e '\n'
-   echo "     ==================================="
-    echo "               ROTEAR VPN (ROOT)     "
-   echo "        ==================================="
-    echo "               ESCOLHA UMA OPÇÃO"
-    echo
-   echo "        ==================================="
-    echo -e "            ${DESTACAR}[ 1 ] - Via Roteador Wi-Fi"
-    echo -e "            [ 2 ] - Via USB"
-    echo -e "            [ 3 ] - Via Bluetooth"
-    echo -e "            [ 0 ] - Voltar${NADA}"
-   echo "         ==================================="
-   echo
-    echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo -e '\n'
+echo "     ==================================="
+echo "               ROTEAR VPN (ROOT)     "
+echo "        ==================================="
+echo "               ESCOLHA UMA OPÇÃO"
+echo
+echo "        ==================================="
+echo -e "            ${DESTACAR}[ 1 ] - Via Roteador Wi-Fi"
+echo -e "            [ 2 ] - Via USB"
+echo -e "            [ 3 ] - Via Bluetooth"
+echo -e "            [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " Apps
     case $Apps in  
    1)WIFI;;
@@ -437,19 +437,19 @@ WIFI(){
 clear
 echo -e '\n'
 echo "     ==================================="
-    echo "              VIA ROTEADOR WI-FI     "
-   echo "        ==================================="
-   echo "               ESCOLHA UMA OPÇÃO"
-    echo
-   echo "        ==================================="
-    echo -e "            ${DESTACAR}[ 1 ] - Metodo 1"
-    echo -e "            [ 2 ] - Metodo 2"
-    echo -e "            [ 0 ] - Voltar${NADA}"
-   echo "         ==================================="
-   echo
-    echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo "              VIA ROTEADOR WI-FI     "
+echo "        ==================================="
+echo "               ESCOLHA UMA OPÇÃO"
+echo
+echo "        ==================================="
+echo -e "            ${DESTACAR}[ 1 ] - Metodo 1"
+echo -e "            [ 2 ] - Metodo 2"
+echo -e "            [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " Apps
     case $Apps in  
     1)MetodoWIFI1;;
@@ -480,22 +480,22 @@ check5(){
 }
 check5
 clear
-    echo -e '\n'
-   echo "     ==================================="
-    echo "              VIA ROTEADOR WI-FI     "
-   echo "        ==================================="
-   echo "               ESCOLHA UMA OPÇÃO"
-    echo
-   echo "        ==================================="
-    echo -e "            ${DESTACAR}[ 1 ] - Ligar"
-    echo -e "            [ 2 ] - Desligar"
-    echo -e "            [ 3 ] - Corrigir IP"
-    echo -e "            [ 0 ] - Voltar${NADA}"
-   echo "         ==================================="
-   echo
-    echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo -e '\n'
+echo "     ==================================="
+echo "              VIA ROTEADOR WI-FI     "
+echo "        ==================================="
+echo "               ESCOLHA UMA OPÇÃO"
+echo
+echo "        ==================================="
+echo -e "            ${DESTACAR}[ 1 ] - Ligar"
+echo -e "            [ 2 ] - Desligar"
+echo -e "            [ 3 ] - Corrigir IP"
+echo -e "            [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " Apps
     case $Apps in  
    1)AltRW1;;
@@ -574,22 +574,22 @@ check5(){
 }
 check5
 clear
-    echo -e '\n'
-   echo "     ==================================="
-    echo "              VIA ROTEADOR WI-FI     "
-   echo "        ==================================="
-   echo "               ESCOLHA UMA OPÇÃO"
-    echo
-   echo "        ==================================="
-    echo -e "            ${DESTACAR}[ 1 ] - Ligar"
-    echo -e "            [ 2 ] - Desligar"
-    echo -e "            [ 3 ] - Corrigir IP"
-    echo -e "            [ 0 ] - Voltar${NADA}"
-   echo "         ==================================="
-   echo
-    echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo -e '\n'
+echo "     ==================================="
+echo "              VIA ROTEADOR WI-FI     "
+echo "        ==================================="
+echo "               ESCOLHA UMA OPÇÃO"
+echo
+echo "        ==================================="
+echo -e "            ${DESTACAR}[ 1 ] - Ligar"
+echo -e "            [ 2 ] - Desligar"
+echo -e "            [ 3 ] - Corrigir IP"
+echo -e "            [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " Apps
     case $Apps in  
    1)AltRW21;;
@@ -667,22 +667,22 @@ check5(){
 }
 check5
 clear
-    echo -e '\n'
-   echo "     ==================================="
-    echo "                  VIA USB     "
-   echo "        ==================================="
-   echo "               ESCOLHA UMA OPÇÃO"
-    echo
-   echo "        ==================================="
-    echo -e "            ${DESTACAR}[ 1 ] - Ligar"
-    echo -e "            [ 2 ] - Desligar"
-    echo -e "            [ 3 ] - Corrigir IP"
-    echo -e "            [ 0 ] - Voltar${NADA}"
-   echo "         ==================================="
-   echo
-    echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo -e '\n'
+echo "     ==================================="
+echo "                  VIA USB     "
+echo "        ==================================="
+echo "               ESCOLHA UMA OPÇÃO"
+echo
+echo "        ==================================="
+echo -e "            ${DESTACAR}[ 1 ] - Ligar"
+echo -e "            [ 2 ] - Desligar"
+echo -e "            [ 3 ] - Corrigir IP"
+echo -e "            [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " Apps
     case $Apps in  
    1)AltRU1;;
@@ -762,22 +762,22 @@ check5(){
 }
 check5
 clear
-    echo -e '\n'
-   echo "     ==================================="
-    echo "                VIA BLUETOOTH      "
-   echo "        ==================================="
-   echo "               ESCOLHA UMA OPÇÃO"
-    echo
-   echo "        ==================================="
-    echo -e "            ${DESTACAR}[ 1 ] - Ligar"
-    echo -e "            [ 2 ] - Desligar"
-    echo -e "            [ 3 ] - Corrigir IP"
-    echo -e "            [ 0 ] - Voltar${NADA}"
-   echo "         ==================================="
-   echo
-    echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo -e '\n'
+echo "     ==================================="
+echo "                VIA BLUETOOTH      "
+echo "        ==================================="
+echo "               ESCOLHA UMA OPÇÃO"
+echo
+echo "        ==================================="
+echo -e "            ${DESTACAR}[ 1 ] - Ligar"
+echo -e "            [ 2 ] - Desligar"
+echo -e "            [ 3 ] - Corrigir IP"
+echo -e "            [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " Apps
     case $Apps in  
    1)AltRB1;;
@@ -837,23 +837,23 @@ su -c iptables -t filter -F FORWARD && su -c iptables -t filter -I FORWARD -j AC
 
 Menu3(){
 clear
-    echo -e '\n'
-   echo "     ==================================="
-    echo "                    OUTROS     "
-   echo "        ==================================="
-    echo "               ESCOLHA UMA OPÇÃO"
-    echo
-   echo "        ==================================="
-    echo -e "            ${DESTACAR}[ 1 ] - Ver MBs Gastos ${CINZA}ROOT${NADA}"
-    echo -e "            ${DESTACAR}[ 2 ] - Ver IP Atual"
-    echo -e "            [ 3 ] - DNS Change ${CINZA}ROOT${NADA}"
-    echo -e "            ${DESTACAR}[ 4 ] - SpeedTest"
-    echo -e "            [ 0 ] - Voltar${NADA}"
-   echo "         ==================================="
-   echo
-   echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo -e '\n'
+echo "     ==================================="
+echo "                    OUTROS     "
+echo "        ==================================="
+echo "               ESCOLHA UMA OPÇÃO"
+echo
+echo "        ==================================="
+echo -e "            ${DESTACAR}[ 1 ] - Ver MBs Gastos ${CINZA}ROOT${NADA}"
+echo -e "            ${DESTACAR}[ 2 ] - Ver IP Atual"
+echo -e "            [ 3 ] - DNS Change ${CINZA}ROOT${NADA}"
+echo -e "            ${DESTACAR}[ 4 ] - SpeedTest"
+echo -e "            [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " Apps
     case $Apps in  
    1)Alter1;;
@@ -948,28 +948,28 @@ check() {
 }
 check
    clear
-    echo -e '\n'
-    echo "     ==================================="
-    echo "                CHANGE DNS (ROOT)     "
-   echo "         ===================================" 
-    echo "                 ESCOLHA UM DNS"
-    echo
-    echo "        ==================================="
-    echo -e "              ${DESTACAR}[ 1 ] - CloudFire DNS"
-    echo -e "              [ 2 ] - OpenDNS"
-    echo -e "              [ 3 ] - Google DNS"
-    echo -e "              [ 4 ] - Ad Guard DNS"
-    echo -e "              [ 5 ] - DNS Watch"
-    echo -e "              [ 6 ] - GIGA DNS"
-    echo -e "              [ 7 ] - Clean Browsing DNS"
-    echo -e "              [ 8 ] - Quad9 DNS"
-    echo -e "              [ 9 ] - DNS Personalizado"
-    echo -e "              [ 0 ] - Voltar${NADA}"
-   echo "         ==================================="
-    echo 
-    echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo -e '\n'
+echo "     ==================================="
+echo "                CHANGE DNS (ROOT)     "
+echo "         ===================================" 
+echo "                 ESCOLHA UM DNS"
+echo
+echo "        ==================================="
+echo -e "              ${DESTACAR}[ 1 ] - CloudFire DNS"
+echo -e "              [ 2 ] - OpenDNS"
+echo -e "              [ 3 ] - Google DNS"
+echo -e "              [ 4 ] - Ad Guard DNS"
+echo -e "              [ 5 ] - DNS Watch"
+echo -e "              [ 6 ] - GIGA DNS"
+echo -e "              [ 7 ] - Clean Browsing DNS"
+echo -e "              [ 8 ] - Quad9 DNS"
+echo -e "              [ 9 ] - DNS Personalizado"
+echo -e "              [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo 
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " App
     case $App in
     1) d1="1.1.1.1" ; d2="1.0.0.1" ; d3="2606:4700:4700::1111" ; d4="2606:4700:4700::1001" ; d5="1.1.1.1" ; d6="1.0.0.1" ; nome="CloudFire DNS";;
@@ -1036,6 +1036,12 @@ clear && python3 SpeedTest && echo
   esac
 }
 
+
+
+
+
+
+
 Menu4(){
 check() {
     su=$(su -h | grep -c "command")
@@ -1046,21 +1052,21 @@ check() {
 }
 check
 clear
-    echo -e '\n'
-    echo "     ==================================="
-    echo "                  X9 DE ARQUIVOS     "
-   echo "         ===================================" 
-    echo "                ESCOLHA UMA OPÇÃO"
-    echo
-    echo "        ==================================="
-    echo -e "              ${DESTACAR}[ 1 ] - WebSocket Direct"
-    echo -e "              [ 2 ] - WS Payload + SSL"
-    echo -e "              [ 0 ] - Voltar${NADA}"
-   echo "         ==================================="
-    echo 
-    echo "@alpacinoo007"
-    echo "@luanw04"
-    echo
+echo -e '\n'
+echo "     ==================================="
+echo "                  X9 DE ARQUIVOS     "
+echo "         ===================================" 
+echo "                ESCOLHA UMA OPÇÃO"
+echo
+echo "        ==================================="
+echo -e "              ${DESTACAR}[ 1 ] - WebSocket Direct"
+echo -e "              [ 2 ] - WS Payload + SSL"
+echo -e "              [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo 
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
     read -n1 -p "Escolha uma Opção: " App
     case $App in
     1)wsDirect;;
@@ -1078,14 +1084,16 @@ SCOLOR='\033[0m'
 clear
   read -p "QUER ATUALIZAR OS PACOTES? [Y/n] " optione
   case $optione in
-  y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; sniffer;;
-  Y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; sniffer ;;
-  n) sniffer;;
-  N) sniffer;;
+  y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; Sniffer1;;
+  Y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; Sniffer1 ;;
+  n) Sniffer1;;
+  N) Sniffer1;;
   *) Menu4;;
   esac
   }
-sniffer(){
+  
+  
+Sniffer1(){
 clear
 check7() {
     vpn=$(ifconfig | grep -c tun0)
@@ -1096,26 +1104,156 @@ check7() {
 }
 check7
 clear
+
+echo -e "1 - Escolher Porta ${CINZA}CAPTURA QUALQUER PROXY${NADA}"
+echo -e "2 - Todas as Portas ${CINZA}CAPTURA PROXYS COM INICIO ${NADA}104"
+echo
+read -n1 -p "Escolha uma Opção: " ComSemPorta
+case $ComSemPorta in
+1)ComPorta;;
+2)TodasPortas;;
+*)Sniffer1;;
+esac
+}
+
+ComPorta(){
+clear
+su -c rm proxycriar.txt
 su -c rm sniffer.txt
 su -c rm proxys.txt
+su -c rm proxy.txt
+clear
+echo "Ex: 80, 443, 8080, 8880, etc"
+echo
+read -p "ESCOLHA UMA PORTA: " Porta
+
 clear
 
 echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS"
 
-Sniff=$(su -c tcpdump -c10 -n -A port 80)
+Sniff=$(su -c tcpdump -c10 port ${Porta} -n -A)
 echo -e "$Sniff" >> sniffer.txt
 
-Proxys=$(cat sniffer.txt | grep 104 | cut -d' ' -f5)
-echo -e "$Proxys" >> proxys.txt
+Proxys=$(cat sniffer.txt | grep ">" | cut -d'>' -f2 | cut -d'.' -f1-5 | cut -d':' -f1)
+echo -e "$Proxys" >> proxycriar.txt
 
+ProxyCreate=$(cat proxycriar.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f1-5) && echo -e "$ProxyCreate" >> proxy.txt
 clear
+
+Proxy=$(cat proxy.txt | grep -n . | grep 1: | cut -d':' -f2 | cut -d'.' -f1-4 | grep -n . | grep 1: | cut -d':' -f2)
+
+Port=$(cat proxy.txt | grep -n . | grep 1: | cut -d':' -f2 | cut -d'.' -f5 )
 
 P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
 P2=$(cat sniffer.txt | grep Host)
 P3=$(cat sniffer.txt | grep Upgrade)
+
+
+check2() {
+    P13=$(cat sniffer.txt | grep -c websocket)
+    case $P13 in
+    0) echo "NADA ENCONTRADO NESSA PORTA" ; echo ; read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)Menu4;;
+  esac;;
+    1) clear;;
+     esac
+}
+check2
+
+echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
+echo -e "${GREEN}$P2${SCOLOR}"
+echo -e "${GREEN}Upgrade: websocket${SCOLOR}"
+echo 
+echo -e "${GREEN}Proxy:$Proxy${SCOLOR}"
+echo -e "${GREEN}Porta: $Port${SCOLOR}"
+
+echo
+
+echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
+
+echo
+
+read -n1 -p "QUER TENTAR CAPTURAR O LOGIN (Em Alguns Apps) [Y/n]" optione1
+  case $optione1 in
+  N)Menu4;;
+  n)Menu4;;
+  y)logindirect;;
+  Y)logindirect;;
+  *)Menu4;;
+  esac
+}
+
+
+
+
+logindirect(){
+su -c rm login.xml
+clear
+echo -e "\emCOLE O NOME DO PACOTE DO APP${SCOLOR}\em"
+read App
+echo ""
+
+su -c mv /data/data/$App/shared_prefs/"$App"_preferences.xml login.xml
+
+User=$(su -c cat login.xml | grep USERNAME | cut -d '>' -f2 | cut -d'<' -f1)
+
+Pass=$(su -c cat login.xml | grep PASSWORD | cut -d '>' -f2 | cut -d'<' -f1)
+
+clear
+
+echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
+echo -e "${GREEN}$P2${SCOLOR}"
+echo -e "${GREEN}Upgrade: websocket${SCOLOR}"
+echo 
+echo -e "${GREEN}Proxy:$Proxy${SCOLOR}"
+echo -e "${GREEN}Porta: $Porta${SCOLOR}"
+echo
+echo -e "${GREEN}Usuario: $User${SCOLOR}"
+echo -e "${GREEN}Senha: $Pass${SCOLOR}"
+echo
+echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
+echo
+
+ read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)Menu4;;
+  esac
+}
+
+
+
+
+TodasPortas(){
+clear
+su -c rm hostcreate.txt
+su -c rm proxycriar.txt
+su -c rm sniffer.txt
+su -c rm proxys.txt
+su -c rm proxycreator.txt
+clear
+echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS"
+
+Sniff=$(su -c tcpdump -c70 -n -A)
+echo -e "$Sniff" >> sniffer.txt
+
+Proxycreator=$(cat sniffer.txt | grep 104 | cut -d' ' -f5 | grep 104)
+echo -e "$Proxycreator" >> proxycreator.txt
+
+clear
+Proxys=$(cat proxycreator.txt | grep -n . | grep 1: | cut -d':' -f2)
+echo -e "$Proxys" >> proxys.txt
+
+HostCreate=$(cat sniffer.txt | grep Host)
+echo -e "$HostCreate" >> hostcreate.txt
+
+P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
+P2=$(cat hostcreate.txt | grep -n . | grep 1: | cut -d':' -f2-7)
+P3=$(cat sniffer.txt | grep Upgrade)
 Proxy=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f1-4)
 Porta=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f5 | cut -d ":" -f1)
 
+ 
 
 check2() {
     P13=$(cat sniffer.txt | grep -c Upgrade)
@@ -1128,7 +1266,7 @@ check2
 
 echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
 echo -e "${GREEN}$P2${SCOLOR}"
-echo -e "${GREEN}$P3${SCOLOR}"
+echo -e "${GREEN}Upgrade: websocket${SCOLOR}"
 echo 
 echo -e "${GREEN}Proxy: $Proxy${SCOLOR}"
 echo -e "${GREEN}Porta: $Porta${SCOLOR}"
@@ -1186,6 +1324,8 @@ echo
 
 
 
+
+
 wspayssl(){
 clear
 GREEN='\033[1;32m'
@@ -1193,14 +1333,14 @@ SCOLOR='\033[0m'
 clear
   read -p "QUER ATUALIZAR OS PACOTES? [Y/n] " optione
   case $optione in
-  y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; sniff;;
-  Y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; sniff ;;
-  n) sniff;;
-  N) sniff;;
+  y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; Sniffer2;;
+  Y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; Sniffer2 ;;
+  n) Sniffer2;;
+  N) Sniffer2;;
   *) Menu4;;
   esac
   }
-sniff(){
+Sniffer2(){
 clear
 echo -e "NECESSARIO DESATIVAR A OPÇÃO ${GREEN}SSL${SCOLOR}, DEIXAR"
 echo -e "APENAS ${GREEN}PAYLOAD${SCOLOR} ATIVADO E INICIAR A CONEXÃO"
@@ -1222,7 +1362,7 @@ clear
 
 echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}"
 
-echo
+echo 
 
 su -c tcpdump -i any -n -c25 -w sniffer.txt
 
@@ -1239,9 +1379,12 @@ Porta=$(cat sniffer.txt | grep -a 104 | cut -d':' -f2 | cut -d' ' -f1)
 P6=$(cat sniffer.txt | grep -a Host | cut -d' ' -f2)
 
 check2() {
-    P13=$(cat sniffer.txt | grep -c Upgrade)
+    P13=$(cat sniffer.txt | grep -c websocket)
     case $P13 in
-    0) echo "NADA ENCONTRADO" ; sleep 4 ; Menu4;;
+    0) echo "NADA ENCONTRADO NESSA PORTA" ; echo ; read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)Menu4;;
+  esac;;
     1) clear;;
      esac
 }
@@ -1249,12 +1392,14 @@ check2
 
 echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
 echo -e "${GREEN}$P2${SCOLOR}"
-echo -e "${GREEN}$P3${SCOLOR}"
+echo -e "${GREEN}Upgrade: websocket${SCOLOR}"
 echo 
 echo -e "${GREEN}Proxy: $Proxy${SCOLOR}"
 echo -e "${GREEN}Porta: $Porta${SCOLOR}"
 echo
 echo -e "${GREEN}SNI: $P6${SCOLOR}"
+echo
+echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
 echo
 read -n1 -p "QUER TENTAR CAPTURAR O LOGIN (Em Alguns Apps) [Y/n]" optione1
   case $optione1 in
@@ -1284,7 +1429,7 @@ clear
 
 echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
 echo -e "${GREEN}$P2${SCOLOR}"
-echo -e "${GREEN}$P3${SCOLOR}"
+echo -e "${GREEN}Upgrade: websocket${SCOLOR}"
 echo 
 echo -e "${GREEN}Proxy: $Proxy${SCOLOR}"
 echo -e "${GREEN}Porta: $Porta${SCOLOR}"
@@ -1293,6 +1438,8 @@ echo -e "${GREEN}Usuario: $User${SCOLOR}"
 echo -e "${GREEN}Senha: $Pass${SCOLOR}"
 echo
 echo -e "${GREEN}SNI: $P6${SCOLOR}"
+echo
+echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
 echo
 read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
