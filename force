@@ -4,6 +4,8 @@ clear
 NADA='\033[0m'
 CINZA='\e[02;37m'
 DESTACAR='\e[01;37m'
+GREEN='\033[1;32m'
+SCOLOR='\033[0m'
 
 MenuPrincipal(){
 clear
@@ -13,11 +15,11 @@ echo "                MENU PRINCIPAL     "
 echo "        ==================================="
 echo "               ESCOLHA UMA OPÇÃO"
 echo
-echo "        ==================================="v 
+echo "        ===================================" 
 echo -e "            ${DESTACAR}[ 1 ] - Apps Escola ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 2 ] - Rotear VPN ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 3 ] - Outros"
-echo -e "            ${DESTACAR}[ 4 ] - X9 De Arquivos ${CINZA}ROOT${NADA}"
+echo -e "            ${DESTACAR}[ 4 ] - X9 de Arquivos ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 0 ] - Sair${NADA}"
 echo "         ==================================="
 echo
@@ -845,7 +847,7 @@ echo "               ESCOLHA UMA OPÇÃO"
 echo
 echo "        ==================================="
 echo -e "            ${DESTACAR}[ 1 ] - Ver MBs Gastos ${CINZA}ROOT${NADA}"
-echo -e "            ${DESTACAR}[ 2 ] - Ver IP Atual"
+echo -e "            ${DESTACAR}[ 2 ] - X9 de IP"
 echo -e "            [ 3 ] - DNS Change ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 4 ] - SpeedTest"
 echo -e "            [ 0 ] - Voltar${NADA}"
@@ -1051,6 +1053,16 @@ check() {
     esac
 }
 check
+read -p "QUER ATUALIZAR OS PACOTES? [Y/n] " optione
+  case $optione in
+  y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; X9sniffer;;
+  Y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; X9sniffer ;;
+  n) X9sniffer;;
+  N) X9sniffer;;
+  *) Menu4;;
+  esac
+  }
+X9sniffer(){
 clear
 echo -e '\n'
 echo "     ==================================="
@@ -1061,6 +1073,9 @@ echo
 echo "        ==================================="
 echo -e "              ${DESTACAR}[ 1 ] - WebSocket Direct"
 echo -e "              [ 2 ] - WS Payload + SSL"
+echo -e "              [ 3 ] - V2Ray"
+echo -e "              [ 4 ] - Direct"
+echo -e "              [ 5 ] - Sniffar Tudo"
 echo -e "              [ 0 ] - Voltar${NADA}"
 echo "         ==================================="
 echo 
@@ -1071,42 +1086,36 @@ echo
     case $App in
     1)wsDirect;;
     2)wspayssl;;
+    3)V2Ray;;
+    4)direct;;
+    5)SniffarAll;;
     0)MenuPrincipal;;
-    *)Menu4
+    *)X9sniffer;;
     esac
     }
     
     
+   
     
 wsDirect(){
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
-clear
-  read -p "QUER ATUALIZAR OS PACOTES? [Y/n] " optione
-  case $optione in
-  y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; Sniffer1;;
-  Y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; Sniffer1 ;;
-  n) Sniffer1;;
-  N) Sniffer1;;
-  *) Menu4;;
-  esac
-  }
-  
-  
+Sniffer1
+}
 Sniffer1(){
 clear
 check7() {
     vpn=$(ifconfig | grep -c tun0)
     case $vpn in
-    1) echo "DESCONECTE DA VPN ANTES" ; sleep 4 ; Menu4;;
+    1) echo "DESCONECTE DA VPN ANTES" ; sleep 4 ; X9sniffer;;
     0) clear;;
      esac
 }
 check7
 clear
 
-echo -e "1 - Escolher Porta ${CINZA}CAPTURA QUALQUER PROXY${NADA}"
-echo -e "2 - Todas as Portas ${CINZA}CAPTURA PROXYS COM INICIO ${NADA}104"
+echo -e "${DESTACAR}1 - Escolher Porta${NADA} ${CINZA}CAPTURA QUALQUER PROXY${NADA}"
+echo -e "${DESTACAR}2 - Todas as Portas${NADA} ${CINZA}CAPTURA PROXYS COM INICIO ${NADA}104"
 echo
 read -n1 -p "Escolha uma Opção: " ComSemPorta
 case $ComSemPorta in
@@ -1123,7 +1132,7 @@ su -c rm sniffer.txt
 su -c rm proxys.txt
 su -c rm proxy.txt
 clear
-echo "Ex: 80, 443, 8080, 8880, etc"
+echo -e "${DESTACAR}Ex: 80, 443, 8080, 8880, etc ${NADA}"
 echo
 read -p "ESCOLHA UMA PORTA: " Porta
 
@@ -1150,16 +1159,18 @@ P3=$(cat sniffer.txt | grep Upgrade)
 
 
 check2() {
-    P13=$(cat sniffer.txt | grep -c websocket)
+    P13=$(cat sniffer.txt | grep -c websocket -i)
     case $P13 in
     0) echo "NADA ENCONTRADO NESSA PORTA" ; echo ; read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
-  *)Menu4;;
+  *)X9sniffer;;
   esac;;
     1) clear;;
      esac
 }
 check2
+echo -e "${DESTACAR}INFORMAÇÔES ENCONTRADAS: ${NADA}"
+echo
 
 echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
 echo -e "${GREEN}$P2${SCOLOR}"
@@ -1167,26 +1178,55 @@ echo -e "${GREEN}Upgrade: websocket${SCOLOR}"
 echo 
 echo -e "${GREEN}Proxy:$Proxy${SCOLOR}"
 echo -e "${GREEN}Porta: $Port${SCOLOR}"
-
+echo 
+echo -e "${DESTACAR}PAYLOAD: ${NADA}"
 echo
 
 echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
 
 echo
-
-read -n1 -p "QUER TENTAR CAPTURAR O LOGIN (Em Alguns Apps) [Y/n]" optione1
-  case $optione1 in
-  N)Menu4;;
-  n)Menu4;;
-  y)logindirect;;
-  Y)logindirect;;
-  *)Menu4;;
+read -p "QUER VER OS DETALHES? [Y/n]" optione12
+  case $optione12 in
+  y)cat sniffer.txt ; PegarinfoWSDirect11;;
+  Y)cat sniffer.txt ; PegarinfoWSDirect11;;
+  *)Verlogin1;;
   esac
 }
-
-
-
-
+PegarinfoWSDirect11(){
+echo
+  read -p "QUER BUSCAR ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)PegarinfoWSDirect22;;
+  Y)PegarinfoWSDirect22;;
+  *)Verlogin1;;
+  esac
+}
+PegarinfoWSDirect22(){
+read -p "DIGITE O QUE QUER PROCURAR: " info
+case $info in
+esac
+echo
+cat sniffer.txt | grep -a -i "$info"
+PegarinfoWSDirect33
+}
+PegarinfoWSDirect33(){
+echo
+  read -p "QUER BUSCAR MAIS ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)PegarinfoWSDirect22;;
+  Y)PegarinfoWSDirect22;;
+  *)Verlogin1;;
+  esac
+}
+Verlogin1(){
+echo
+read -n1 -p "QUER TENTAR CAPTURAR O LOGIN EM ALGUNS APPS [Y/n]" optione1
+  case $optione1 in
+  N)X9sniffer;;
+  n)X9sniffer;;
+  y)logindirect;;
+  Y)logindirect;;
+  *)X9sniffer;;
+  esac
+}
 logindirect(){
 su -c rm login.xml
 clear
@@ -1201,6 +1241,8 @@ User=$(su -c cat login.xml | grep USERNAME | cut -d '>' -f2 | cut -d'<' -f1)
 Pass=$(su -c cat login.xml | grep PASSWORD | cut -d '>' -f2 | cut -d'<' -f1)
 
 clear
+echo -e "${DESTACAR}INFORMAÇÔES ENCONTRADAS: ${NADA}"
+echo
 
 echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
 echo -e "${GREEN}$P2${SCOLOR}"
@@ -1212,12 +1254,14 @@ echo
 echo -e "${GREEN}Usuario: $User${SCOLOR}"
 echo -e "${GREEN}Senha: $Pass${SCOLOR}"
 echo
+echo -e "${DESTACAR}PAYLOAD: ${NADA}"
+echo
 echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
 echo
 
  read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
-  *)Menu4;;
+  *)X9sniffer;;
   esac
 }
 
@@ -1234,7 +1278,7 @@ su -c rm proxycreator.txt
 clear
 echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS"
 
-Sniff=$(su -c tcpdump -c70 -n -A)
+Sniff=$(su -c tcpdump -c55 -n -A)
 echo -e "$Sniff" >> sniffer.txt
 
 Proxycreator=$(cat sniffer.txt | grep 104 | cut -d' ' -f5 | grep 104)
@@ -1248,21 +1292,23 @@ HostCreate=$(cat sniffer.txt | grep Host)
 echo -e "$HostCreate" >> hostcreate.txt
 
 P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
-P2=$(cat hostcreate.txt | grep -n . | grep 1: | cut -d':' -f2-7)
+P2=$(cat hostcreate.txt | grep -n . | grep 1: | cut -d':' -f2-7 | grep -n . | grep 1: | cut -d':' -f2-7)
 P3=$(cat sniffer.txt | grep Upgrade)
 Proxy=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f1-4)
 Porta=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f5 | cut -d ":" -f1)
-
- 
-
 check2() {
-    P13=$(cat sniffer.txt | grep -c Upgrade)
+    P13=$(cat sniffer.txt | grep -c websocket -i)
     case $P13 in
-    0) echo "NADA ENCONTRADO" ; sleep 4 ; Menu4;;
+    0) echo "NADA ENCONTRADO" ; echo ; read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)X9sniffer;;
+  esac;;
     1) clear;;
      esac
 }
 check2
+echo -e "${DESTACAR}INFORMAÇÔES ENCONTRADAS: ${NADA}"
+echo
 
 echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
 echo -e "${GREEN}$P2${SCOLOR}"
@@ -1272,22 +1318,54 @@ echo -e "${GREEN}Proxy: $Proxy${SCOLOR}"
 echo -e "${GREEN}Porta: $Porta${SCOLOR}"
 
 echo
+echo -e "${DESTACAR}PAYLOAD: ${NADA}"
+echo
 
 echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
 
 echo
-
-read -n1 -p "QUER TENTAR CAPTURAR O LOGIN (Em Alguns Apps) [Y/n]" optione1
-  case $optione1 in
-  N)Menu4;;
-  n)Menu4;;
-  y)logindirect;;
-  Y)logindirect;;
-  *)Menu4;;
+read -p "QUER VER OS DETALHES? [Y/n]" optione12
+  case $optione12 in
+  y)cat sniffer.txt ; PegarinfoWSDirect1;;
+  Y)cat sniffer.txt ; PegarinfoWSDirect1;;
+  *)Verlogin2;;
   esac
 }
-
-
+PegarinfoWSDirect1(){
+echo
+  read -p "QUER BUSCAR ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)PegarinfoWSDirect2;;
+  Y)PegarinfoWSDirect2;;
+  *)Verlogin2;;
+  esac
+}
+PegarinfoWSDirect2(){
+read -p "DIGITE O QUE QUER PROCURAR: " info
+case $info in
+esac
+echo
+cat sniffer.txt | grep -a -i "$info"
+PegarinfoWSDirect3
+}
+PegarinfoWSDirect3(){
+echo
+  read -p "QUER BUSCAR MAIS ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)PegarinfoWSDirect2;;
+  Y)PegarinfoWSDirect2;;
+  *)Verlogin2;;
+  esac
+}
+Verlogin2(){
+echo
+read -n1 -p "QUER TENTAR CAPTURAR O LOGIN EM ALGUNS APPS [Y/n]" optione1
+  case $optione1 in
+  N)X9sniffer;;
+  n)X9sniffer;;
+  y)logindirect;;
+  Y)logindirect;;
+  *)X9sniffer;;
+  esac
+}
 logindirect(){
 su -c rm login.xml
 clear
@@ -1313,14 +1391,17 @@ echo
 echo -e "${GREEN}Usuario: $User${SCOLOR}"
 echo -e "${GREEN}Senha: $Pass${SCOLOR}"
 echo
+echo -e "${DESTACAR}PAYLOAD: ${NADA}"
+echo
 echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
 echo
 
  read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
-  *)Menu4;;
+  *)X9sniffer;;
   esac
 }
+
 
 
 
@@ -1331,15 +1412,8 @@ clear
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 clear
-  read -p "QUER ATUALIZAR OS PACOTES? [Y/n] " optione
-  case $optione in
-  y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; Sniffer2;;
-  Y) apt upgrade -y ; apt update -y && apt upgrade root-repo -y && pkg install tcpdump -y ; pkg install tsu ; sleep 3 ; Sniffer2 ;;
-  n) Sniffer2;;
-  N) Sniffer2;;
-  *) Menu4;;
-  esac
-  }
+Sniffer2
+}
 Sniffer2(){
 clear
 echo -e "NECESSARIO DESATIVAR A OPÇÃO ${GREEN}SSL${SCOLOR}, DEIXAR"
@@ -1349,13 +1423,12 @@ read -n1 -p "DIGITE Y DEPOIS DE TER FEITO TUDO ISSO" optione12
   case $optione12 in 
   y)Xaringan;;
   Y)Xaringan;;
-   *)sniff;;
+   *)Sniffer2;;
   esac
   }
-
-
 Xaringan(){
 clear
+su -c rm hostcreate.txt
 su -c rm sniffer.txt
 su -c rm proxys.txt
 clear
@@ -1368,27 +1441,32 @@ su -c tcpdump -i any -n -c25 -w sniffer.txt
 
 Proxys=$(cat sniffer.txt | grep 104 | cut -d' ' -f5)
 echo -e "$Proxys" >> proxys.txt
-
+ 
 clear
-
+HostCreate=$(cat sniffer.txt | grep -a Host)
+echo -e "$HostCreate" >> hostcreate.txt
 P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
-P2=$(cat sniffer.txt | grep -a Host)
+P2=$(cat hostcreate.txt | grep -n . | grep 1: | cut -d':' -f2-7) 
 P3=$(cat sniffer.txt | grep -a Upgrade)
 Proxy=$(cat sniffer.txt | grep -a 104 | cut -d':' -f1 | cut -d' ' -f2)
 Porta=$(cat sniffer.txt | grep -a 104 | cut -d':' -f2 | cut -d' ' -f1)
 P6=$(cat sniffer.txt | grep -a Host | cut -d' ' -f2)
+P22=$(cat hostcreate.txt | grep -n . | grep 1: | cut -d':' -f2-7)
 
 check2() {
-    P13=$(cat sniffer.txt | grep -c websocket)
+    P13=$(cat sniffer.txt | grep -c websocket -i)
     case $P13 in
     0) echo "NADA ENCONTRADO NESSA PORTA" ; echo ; read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
-  *)Menu4;;
+  *)X9sniffer;;
   esac;;
     1) clear;;
      esac
 }
 check2
+
+echo -e "${DESTACAR}INFORMAÇÔES ENCONTRADAS: ${NADA}"
+echo
 
 echo -e "${GREEN}GET / HTTP/1.1${SCOLOR}"
 echo -e "${GREEN}$P2${SCOLOR}"
@@ -1399,19 +1477,49 @@ echo -e "${GREEN}Porta: $Porta${SCOLOR}"
 echo
 echo -e "${GREEN}SNI: $P6${SCOLOR}"
 echo
-echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
-echo
-read -n1 -p "QUER TENTAR CAPTURAR O LOGIN (Em Alguns Apps) [Y/n]" optione1
-  case $optione1 in
-  N)Menu4;;
-  n)Menu4;;
-  y)login;;
-  Y)login;;
-  *)Menu4;;
+
+read -p "QUER VER OS DETALHES? [Y/n]" optione12
+  case $optione12 in
+  y)cat sniffer.txt ; PegarinfoPaySSL1;;
+  Y)cat sniffer.txt ; PegarinfoPaySSL1;;
+  *)Verlogin3;;
   esac
 }
-
-
+PegarinfoPaySSL1(){
+echo
+  read -p "QUER BUSCAR ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)PegarinfoPaySSL2;;
+  Y)PegarinfoPaySSL2;;
+  *)Verlogin3;;
+  esac
+}
+PegarinfoPaySSL2(){
+read -p "DIGITE O QUE QUER PROCURAR: " info
+case $info in
+esac
+echo
+cat sniffer.txt | grep -a -i "$info"
+PegarinfoPaySSL3
+}
+PegarinfoPaySSL3(){
+echo
+  read -p "QUER BUSCAR MAIS ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)PegarinfoPaySSL2;;
+  Y)PegarinfoPaySSL2;;
+  *)Verlogin3;;
+  esac
+}
+Verlogin3(){
+echo
+read -n1 -p "QUER TENTAR CAPTURAR O LOGIN EM ALGUNS APPS [Y/n]" optione1
+  case $optione1 in
+  N)X9sniffer;;
+  n)X9sniffer;;
+  y)login;;
+  Y)login;;
+  *)X9sniffer;;
+  esac
+}
 login(){
 su -c rm login.xml
 clear
@@ -1439,11 +1547,458 @@ echo -e "${GREEN}Senha: $Pass${SCOLOR}"
 echo
 echo -e "${GREEN}SNI: $P6${SCOLOR}"
 echo
-echo -e "${GREEN}GET / HTTP/1.1[crlf]$P2[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
+echo -e "${DESTACAR}PAYLOAD: ${NADA}"
+echo
+echo -e "${GREEN}GET / HTTP/1.1[crlf]$P22[crlf]Upgrade: websocket[crlf][crlf]${SCOLOR}"
 echo
 read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
-  *)Menu4;;
+  *)X9sniffer;;
+  esac
+}
+
+
+
+
+
+direct(){
+GREEN='\033[1;32m'
+SCOLOR='\033[0m'
+clear
+Sniffer3
+  }
+Sniffer3(){
+clear
+check7() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) echo "DESCONECTE DA VPN ANTES" ; sleep 4 ; X9sniffer;;
+    0) clear;;
+     esac
+}
+check7
+clear
+su -c rm sniffer.txt
+su -c rm proxys.txt
+su -c rm directproxy.txt
+clear
+su -c rm hostdirect.txt
+su -c rm directpay.txt
+su -c rm directport.txt
+clear
+su -c rm directproxycreate.txt
+clear
+echo -e "${DESTACAR}Ex: 80, 443, 8080, 8880, etc ${NADA}"
+echo
+read -p "ESCOLHA UMA PORTA: " Porta
+
+clear
+
+echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS"
+
+sniff=$(su -c tcpdump -c10 -n -A port ${Porta} -vv) && echo -e "$sniff" >> sniffer.txt
+
+HostDir=$(cat sniffer.txt | grep Host | cut -d' ' -f2 | grep -a .) && echo -e "$HostDir" >> hostdirect.txt
+
+adr=$(cat hostdirect.txt | grep -n . | grep 1: | cut -d':' -f2-9)
+
+payloaddd=$(cat sniffer.txt | grep "$adr") && echo -e "$payloaddd" >> directpay.txt
+
+directproto=$(cat directpay.txt | grep -n "$adr" | cut -d':' -f2-7)
+
+directhost=$(cat directpay.txt | grep -n "$adr" | grep 2: | cut -d':' -f2-7 | cut -d'	'  -f2)
+
+directproxycreate1=$(cat sniffer.txt | grep ">" | cut -d'>' -f2 | cut -d'.' -f1-5 | cut -d':' -f1) && echo -e "$directproxycreate1" >> directproxycreate.txt
+
+directproxycreate2=$(cat directproxycreate.txt | grep -n . | grep 1: | cut -d':' -f2) && echo -e "$directproxycreate2" >> directproxy.txt
+
+directproxy=$(cat directproxy.txt | grep -n . | grep 1: | cut -d':' -f2 | cut -d'.' -f1-4 | grep -n . | grep 1: | cut -d':' -f2)
+
+directport=$(cat directproxy.txt | grep -n . | grep 1: | cut -d':' -f2 | cut -d'.' -f5)
+
+clear
+check2() {
+    P13=$(cat sniffer.txt | grep -c $directhost)
+    case $P13 in
+    0) echo "NADA ENCONTRADO NESSA PORTA" ; echo ; read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)X9sniffer;;
+  esac;;
+    1) clear;;
+     esac
+}
+check2
+clear
+echo -e "${DESTACAR}INFORMAÇÔES ENCONTRADAS: ${NADA}"
+echo
+echo -e "${GREEN}$directproto${SCOLOR}"
+echo 
+echo -e "${GREEN}Servidor:$directproxy${SCOLOR}"
+echo -e "${GREEN}Porta: $directport${SCOLOR}"
+echo
+read -p "QUER VER OS DETALHES? [Y/n]" optione12
+  case $optione12 in
+  y)cat sniffer.txt ; PegarinfoDirect;;
+  Y)cat sniffer.txt ; PegarinfoDirect;;
+  *)Voltar;;
+  esac
+}
+PegarinfoDirect(){
+echo
+  read -p "QUER BUSCAR ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)PegarinfoDirect2;;
+  Y)PegarinfoDirect2;;
+  *)Voltar;;
+  esac
+}
+PegarinfoDirect2(){
+read -p "DIGITE O QUE QUER PROCURAR: " info
+case $info in
+esac
+echo
+cat sniffer.txt | grep -i "$info"
+PegarinfoDirect3
+}
+PegarinfoDirect3(){
+echo
+  read -p "QUER BUSCAR MAIS ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)PegarinfoDirect2;;
+  Y)PegarinfoDirect2;;
+  *)Voltar;;
+  esac
+}
+Voltar(){
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)X9sniffer;;
+  esac
+}
+
+
+
+
+
+V2Ray(){
+clear
+check7() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) echo "DESCONECTE DA VPN ANTES" ; sleep 4 ; X9sniffer;;
+    0) clear;;
+     esac
+}
+check7
+
+echo -e "${DESTACAR}1 - Sniffar porta 80${NADA}"
+echo -e "${DESTACAR}2 - Sniffar porta 443${NADA}"
+echo -e "${DESTACAR}3 - Escolher porta${NADA}"
+echo
+read -n1 -p "Escolha uma Opção: " PortaV2
+case $PortaV2 in
+1)Portv2="80";;
+2)V2Ray443;;
+3)echo ; read -p "Digite a porta: " Portv2;;
+*)V2Ray;;
+esac
+
+clear
+su -c rm proxycriar.txt
+su -c rm sniffer.txt
+su -c rm proxys.txt
+su -c rm proxycreator.txt
+su -c rm hostcreate.txt
+clear
+echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS"
+
+Sniff=$(su -c tcpdump -c80 -n -A port ${Portv2})
+echo -e "$Sniff" >> sniffer.txt
+
+Proxycreator=$(cat sniffer.txt | grep 104 | cut -d' ' -f3 | grep 104)
+echo -e "$Proxycreator" >> proxycreator.txt
+
+clear
+Proxys=$(cat proxycreator.txt | grep -n . | grep 1: | cut -d':' -f2)
+echo -e "$Proxys" >> proxys.txt
+
+HostCreate=$(cat sniffer.txt | grep Host)
+echo -e "$HostCreate" >> hostcreate.txt
+
+P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
+P2=$(cat hostcreate.txt | grep -n . | grep 1: | cut -d':' -f2-7 | grep -n . | grep 1: | cut -d':' -f2-7)
+P3=$(cat sniffer.txt | grep Upgrade)
+Proxy=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f1-4)
+Porta=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f5 | cut -d ":" -f1)
+
+ 
+
+check2() {
+    P13=$(cat sniffer.txt | grep -c 104)
+    case $P13 in
+    0) echo "NADA ENCONTRADO" ; sleep 4 ; X9sniffer;;
+    1) clear;;
+     esac
+}
+check2
+echo -e "${DESTACAR}INFORMAÇÔES ENCONTRADAS: ${NADA}"
+echo
+echo -e "${GREEN}$P2${SCOLOR}"
+echo
+echo -e "${GREEN}Address: $Proxy${SCOLOR}"
+echo -e "${GREEN}Porta: $Porta${SCOLOR}"
+echo
+read -p "QUER VER OS DETALHES? [Y/n]" optione12
+  case $optione12 in
+  y)cat sniffer.txt ; Pegarinfo;;
+  Y)cat sniffer.txt ; Pegarinfo;;
+  *)Voltar;;
+  esac
+}
+Pegarinfo(){
+echo
+  read -p "QUER BUSCAR ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)Pegarinfo2;;
+  Y)Pegarinfo2;;
+  *)Voltar;;
+  esac
+}
+Pegarinfo2(){
+read -p "DIGITE O QUE QUER PROCURAR: " info
+case $info in
+esac
+echo
+cat sniffer.txt | grep -i "$info"
+PegarinfoRev
+}
+PegarinfoRev(){
+echo
+  read -p "QUER BUSCAR MAIS ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)Pegarinfo2;;
+  Y)Pegarinfo2;;
+  *)Voltar;;
+  esac
+}
+Voltar(){
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)X9sniffer;;
+  esac
+}
+
+
+
+V2Ray443(){
+clear
+su -c rm proxycriar.txt
+su -c rm sniffer.txt
+su -c rm proxys.txt
+su -c rm proxycreator.txt
+su -c rm hostcreate.txt
+clear
+echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS"
+
+Sniff=$(su -c tcpdump -c80 -n -A port 443)
+echo -e "$Sniff" >> sniffer.txt
+
+Proxycreator=$(cat sniffer.txt | grep 104 | cut -d' ' -f3 | grep 104)
+echo -e "$Proxycreator" >> proxycreator.txt
+
+clear
+Proxys=$(cat proxycreator.txt | grep -n . | grep 1: | cut -d':' -f2)
+echo -e "$Proxys" >> proxys.txt
+
+HostCreate=$(cat sniffer.txt | grep Host)
+echo -e "$HostCreate" >> hostcreate.txt
+
+P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
+P2=$(cat hostcreate.txt | grep -n . | grep 1: | cut -d':' -f2-7 | grep -n . | grep 1: | cut -d':' -f2-7)
+P3=$(cat sniffer.txt | grep Upgrade)
+Proxy=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f1-4)
+Porta=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f5 | cut -d ":" -f1)
+
+ 
+
+check2() {
+    P13=$(cat sniffer.txt | grep -c 104)
+    case $P13 in
+    0) echo "NADA ENCONTRADO" ; sleep 4 ; X9sniffer;;
+    1) clear;;
+     esac
+}
+check2
+echo -e "${DESTACAR}INFORMAÇÔES ENCONTRADAS: ${NADA}"
+echo
+echo -e "${GREEN}Address: $Proxy${SCOLOR}"
+echo -e "${GREEN}Porta: $Porta${SCOLOR}"
+echo
+read -p "QUER VER OS DETALHES? [Y/n]" optione12
+  case $optione12 in
+  y)cat sniffer.txt ; Pegarinfo;;
+  Y)cat sniffer.txt ; Pegarinfo;;
+  *)Voltar;;
+  esac
+}
+Pegarinfo(){
+echo
+  read -p "QUER BUSCAR ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)Pegarinfo2;;
+  Y)Pegarinfo2;;
+  *)Voltar;;
+  esac
+}
+Pegarinfo2(){
+read -p "DIGITE O QUE QUER PROCURAR: " info
+case $info in
+esac
+echo
+cat sniffer.txt | grep -i "$info"
+PegarinfoRev
+}
+PegarinfoRev(){
+echo
+  read -p "QUER BUSCAR MAIS ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)Pegarinfo2;;
+  Y)Pegarinfo2;;
+  *)Voltar;;
+  esac
+}
+Voltar(){
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)X9sniffer;;
+  esac
+}
+
+
+
+
+SniffarAll(){
+clear
+check7() {
+    vpn=$(ifconfig | grep -c tun0)
+    case $vpn in
+    1) echo "DESCONECTE DA VPN ANTES" ; sleep 4 ; X9sniffer;;
+    0) clear;;
+     esac
+}
+check7
+clear
+
+echo -e "${DESTACAR}1 - Escolher Porta${NADA}"
+echo -e "${DESTACAR}2 - Todas as Portas${NADA}"
+echo
+read -n1 -p "Escolha uma Opção: " ComSemPorta
+case $ComSemPorta in
+1)ComPortaAll;;
+2)TodasPortasAll;;
+*)SniffarAll;;
+esac
+}
+
+ComPortaAll(){
+clear
+su -c rm proxycriar.txt
+su -c rm sniffer.txt
+su -c rm proxys.txt
+su -c rm proxy.txt
+clear
+echo -e "${DESTACAR}Ex: 80, 443, 8080, 8880, etc ${NADA}"
+echo
+read -p "ESCOLHA UMA PORTA: " Porta
+
+clear
+
+echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo -e "${DESTACAR}PARA PARAR DIGITE${NADA} ${GREEN}CTRL+C${NADA}"
+
+Sniff=$(su -c tcpdump -c10000 port ${Porta} -n -A)
+echo -e "$Sniff" >> sniffer.txt
+cat sniffer.txt
+
+
+PegarinfoAll
+}
+PegarinfoAll(){
+echo
+  read -p "QUER BUSCAR ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)PegarinfoAll2;;
+  Y)PegarinfoAll2;;
+  *)Voltar;;
+  esac
+}
+PegarinfoAll2(){
+read -p "DIGITE O QUE QUER PROCURAR: " info
+case $info in
+esac
+echo
+cat sniffer.txt | grep -a -i "$info"
+PegarinfoAll3
+}
+PegarinfoAll3(){
+echo
+  read -p "QUER BUSCAR MAIS ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)PegarinfoAll2;;
+  Y)PegarinfoAll2;;
+  *)Voltar;;
+  esac
+}
+Voltar(){
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)X9sniffer;;
+  esac
+}
+
+
+TodasPortasAll(){
+clear
+su -c rm proxycriar.txt
+su -c rm sniffer.txt
+su -c rm proxys.txt
+su -c rm proxy.txt
+
+clear
+
+echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo -e "${DESTACAR}PARA PARAR DIGITE${NADA} ${GREEN}CTRL+C${NADA}"
+
+Sniff=$(su -c tcpdump -c10000 -A)
+echo -e "$Sniff" >> sniffer.txt
+cat sniffer.txt
+
+
+Pegarinfo2All
+}
+Pegarinfo2All(){
+echo
+  read -p "QUER BUSCAR ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)Pegarinfo2All2;;
+  Y)Pegarinfo2All2;;
+  *)Voltar;;
+  esac
+}
+Pegarinfo2All2(){
+read -p "DIGITE O QUE QUER PROCURAR: " info
+case $info in
+esac
+echo
+cat sniffer.txt | grep -a -i "$info"
+Pegarinfo2All3
+}
+Pegarinfo2All3(){
+echo
+  read -p "QUER BUSCAR MAIS ALGUMA INFO? [Y/n]" optione12 ; case $optione12 in 
+  y)Pegarinfo2All2;;
+  Y)Pegarinfo2All2;;
+  *)Voltar;;
+  esac
+}
+Voltar(){
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)X9sniffer;;
   esac
 }
 clear
