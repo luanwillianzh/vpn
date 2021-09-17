@@ -1143,19 +1143,19 @@ echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP
 Sniff=$(su -c tcpdump -c10 port ${Porta} -n -A)
 echo -e "$Sniff" >> sniffer.txt
 
-Proxys=$(cat sniffer.txt | grep ">" | cut -d'>' -f2 | cut -d'.' -f1-5 | cut -d':' -f1)
+Proxys=$(cat sniffer.txt | grep -a ">" | cut -d'>' -f2 | cut -d'.' -f1-5 | cut -d':' -f1)
 echo -e "$Proxys" >> proxycriar.txt
 
-ProxyCreate=$(cat proxycriar.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f1-5) && echo -e "$ProxyCreate" >> proxy.txt
+ProxyCreate=$(cat proxycriar.txt | grep -a -n 1 | grep -a 1: | cut -d':' -f2 | cut -d'.' -f1-5) && echo -e "$ProxyCreate" >> proxy.txt
 clear
 
-Proxy=$(cat proxy.txt | grep -n . | grep 1: | cut -d':' -f2 | cut -d'.' -f1-4 | grep -n . | grep 1: | cut -d':' -f2)
+Proxy=$(cat proxy.txt | grep -a -n . | grep -a 1: | cut -d':' -f2 | cut -d'.' -f1-4 | grep -a -n . | grep -a 1: | cut -d':' -f2)
 
-Port=$(cat proxy.txt | grep -n . | grep 1: | cut -d':' -f2 | cut -d'.' -f5 )
+Port=$(cat proxy.txt | grep -a -n . | grep -a 1: | cut -d':' -f2 | cut -d'.' -f5 )
 
 P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
-P2=$(cat sniffer.txt | grep Host)
-P3=$(cat sniffer.txt | grep Upgrade)
+P2=$(cat sniffer.txt | grep -a Host)
+P3=$(cat sniffer.txt | grep -a Upgrade)
 
 
 check2() {
@@ -1236,9 +1236,9 @@ echo ""
 
 su -c mv /data/data/$App/shared_prefs/"$App"_preferences.xml login.xml
 
-User=$(su -c cat login.xml | grep USERNAME | cut -d '>' -f2 | cut -d'<' -f1)
+User=$(su -c cat login.xml | grep -a USERNAME | cut -d '>' -f2 | cut -d'<' -f1)
 
-Pass=$(su -c cat login.xml | grep PASSWORD | cut -d '>' -f2 | cut -d'<' -f1)
+Pass=$(su -c cat login.xml | grep -a PASSWORD | cut -d '>' -f2 | cut -d'<' -f1)
 
 clear
 echo -e "${DESTACAR}INFORMAÇÔES ENCONTRADAS: ${NADA}"
@@ -1281,21 +1281,21 @@ echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP
 Sniff=$(su -c tcpdump -c55 -n -A)
 echo -e "$Sniff" >> sniffer.txt
 
-Proxycreator=$(cat sniffer.txt | grep 104 | cut -d' ' -f5 | grep 104)
+Proxycreator=$(cat sniffer.txt | grep -a 104 | cut -d' ' -f5 | grep -a 104)
 echo -e "$Proxycreator" >> proxycreator.txt
 
 clear
-Proxys=$(cat proxycreator.txt | grep -n . | grep 1: | cut -d':' -f2)
+Proxys=$(cat proxycreator.txt | grep -a -n . | grep -a 1: | cut -d':' -f2)
 echo -e "$Proxys" >> proxys.txt
 
-HostCreate=$(cat sniffer.txt | grep Host)
+HostCreate=$(cat sniffer.txt | grep -a Host)
 echo -e "$HostCreate" >> hostcreate.txt
 
 P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
-P2=$(cat hostcreate.txt | grep -n . | grep 1: | cut -d':' -f2-7 | grep -n . | grep 1: | cut -d':' -f2-7)
-P3=$(cat sniffer.txt | grep Upgrade)
-Proxy=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f1-4)
-Porta=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f5 | cut -d ":" -f1)
+P2=$(cat hostcreate.txt | grep -a -n . | grep -a 1: | cut -d':' -f2-7 | grep -a -n . | grep -a 1: | cut -d':' -f2-7)
+P3=$(cat sniffer.txt | grep -a Upgrade)
+Proxy=$(cat proxys.txt | grep -a -n 1 | grep -a 1: | cut -d':' -f2 | cut -d'.' -f1-4)
+Porta=$(cat proxys.txt | grep -a -n 1 | grep -a 1: | cut -d':' -f2 | cut -d'.' -f5 | cut -d ":" -f1)
 check2() {
     P13=$(cat sniffer.txt | grep -c websocket -i)
     case $P13 in
@@ -1375,9 +1375,9 @@ echo ""
 
 su -c mv /data/data/$App/shared_prefs/"$App"_preferences.xml login.xml
 
-User=$(su -c cat login.xml | grep USERNAME | cut -d '>' -f2 | cut -d'<' -f1)
+User=$(su -c cat login.xml | grep -a USERNAME | cut -d '>' -f2 | cut -d'<' -f1)
 
-Pass=$(su -c cat login.xml | grep PASSWORD | cut -d '>' -f2 | cut -d'<' -f1)
+Pass=$(su -c cat login.xml | grep -a PASSWORD | cut -d '>' -f2 | cut -d'<' -f1)
 
 clear
 
@@ -1439,19 +1439,19 @@ echo
 
 su -c tcpdump -i any -n -c25 -w sniffer.txt
 
-Proxys=$(cat sniffer.txt | grep 104 | cut -d' ' -f5)
+Proxys=$(cat sniffer.txt | grep -a 104 | cut -d' ' -f5)
 echo -e "$Proxys" >> proxys.txt
  
 clear
 HostCreate=$(cat sniffer.txt | grep -a Host)
 echo -e "$HostCreate" >> hostcreate.txt
 P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
-P2=$(cat hostcreate.txt | grep -n . | grep 1: | cut -d':' -f2-7) 
+P2=$(cat hostcreate.txt | grep -a -n . | grep -a 1: | cut -d':' -f2-7) 
 P3=$(cat sniffer.txt | grep -a Upgrade)
 Proxy=$(cat sniffer.txt | grep -a 104 | cut -d':' -f1 | cut -d' ' -f2)
 Porta=$(cat sniffer.txt | grep -a 104 | cut -d':' -f2 | cut -d' ' -f1)
 P6=$(cat sniffer.txt | grep -a Host | cut -d' ' -f2)
-P22=$(cat hostcreate.txt | grep -n . | grep 1: | cut -d':' -f2-7)
+P22=$(cat hostcreate.txt | grep -a -n . | grep -a 1: | cut -d':' -f2-7)
 
 check2() {
     P13=$(cat sniffer.txt | grep -c websocket -i)
@@ -1529,9 +1529,9 @@ echo ""
 
 su -c mv /data/data/$App/shared_prefs/"$App"_preferences.xml login.xml
 
-User=$(su -c cat login.xml | grep USERNAME | cut -d '>' -f2 | cut -d'<' -f1)
+User=$(su -c cat login.xml | grep -a USERNAME | cut -d '>' -f2 | cut -d'<' -f1)
 
-Pass=$(su -c cat login.xml | grep PASSWORD | cut -d '>' -f2 | cut -d'<' -f1)
+Pass=$(su -c cat login.xml | grep -a PASSWORD | cut -d '>' -f2 | cut -d'<' -f1)
 
 clear
 
@@ -1598,23 +1598,23 @@ echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP
 
 sniff=$(su -c tcpdump -c10 -n -A port ${Porta} -vv) && echo -e "$sniff" >> sniffer.txt
 
-HostDir=$(cat sniffer.txt | grep Host | cut -d' ' -f2 | grep -a .) && echo -e "$HostDir" >> hostdirect.txt
+HostDir=$(cat sniffer.txt | grep -a Host | cut -d' ' -f2 | grep -a .) && echo -e "$HostDir" >> hostdirect.txt
 
-adr=$(cat hostdirect.txt | grep -n . | grep 1: | cut -d':' -f2-9)
+adr=$(cat hostdirect.txt | grep -a -n . | grep -a 1: | cut -d':' -f2-9)
 
-payloaddd=$(cat sniffer.txt | grep "$adr") && echo -e "$payloaddd" >> directpay.txt
+payloaddd=$(cat sniffer.txt | grep -a "$adr") && echo -e "$payloaddd" >> directpay.txt
 
-directproto=$(cat directpay.txt | grep -n "$adr" | cut -d':' -f2-7)
+directproto=$(cat directpay.txt | grep -a -n "$adr" | cut -d':' -f2-7)
 
-directhost=$(cat directpay.txt | grep -n "$adr" | grep 2: | cut -d':' -f2-7 | cut -d'	'  -f2)
+directhost=$(cat directpay.txt | grep -a -n "$adr" | grep -a 2: | cut -d':' -f2-7 | cut -d'	'  -f2)
 
-directproxycreate1=$(cat sniffer.txt | grep ">" | cut -d'>' -f2 | cut -d'.' -f1-5 | cut -d':' -f1) && echo -e "$directproxycreate1" >> directproxycreate.txt
+directproxycreate1=$(cat sniffer.txt | grep -a ">" | cut -d'>' -f2 | cut -d'.' -f1-5 | cut -d':' -f1) && echo -e "$directproxycreate1" >> directproxycreate.txt
 
-directproxycreate2=$(cat directproxycreate.txt | grep -n . | grep 1: | cut -d':' -f2) && echo -e "$directproxycreate2" >> directproxy.txt
+directproxycreate2=$(cat directproxycreate.txt | grep -a -n . | grep 1: | cut -d':' -f2) && echo -e "$directproxycreate2" >> directproxy.txt
 
-directproxy=$(cat directproxy.txt | grep -n . | grep 1: | cut -d':' -f2 | cut -d'.' -f1-4 | grep -n . | grep 1: | cut -d':' -f2)
+directproxy=$(cat directproxy.txt | grep -a -n . | grep -a 1: | cut -d':' -f2 | cut -d'.' -f1-4 | grep -a -n . | grep -a 1: | cut -d':' -f2)
 
-directport=$(cat directproxy.txt | grep -n . | grep 1: | cut -d':' -f2 | cut -d'.' -f5)
+directport=$(cat directproxy.txt | grep -a -n . | grep -a 1: | cut -d':' -f2 | cut -d'.' -f5)
 
 clear
 check2() {
@@ -1656,7 +1656,7 @@ read -p "DIGITE O QUE QUER PROCURAR: " info
 case $info in
 esac
 echo
-cat sniffer.txt | grep -i "$info"
+cat sniffer.txt | grep -a -i "$info"
 PegarinfoDirect3
 }
 PegarinfoDirect3(){
@@ -1714,26 +1714,26 @@ echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP
 Sniff=$(su -c tcpdump -c80 -n -A port ${Portv2})
 echo -e "$Sniff" >> sniffer.txt
 
-Proxycreator=$(cat sniffer.txt | grep 104 | cut -d' ' -f3 | grep 104)
+Proxycreator=$(cat sniffer.txt | grep -a 104 | cut -d' ' -f3 | grep -a 104)
 echo -e "$Proxycreator" >> proxycreator.txt
 
 clear
-Proxys=$(cat proxycreator.txt | grep -n . | grep 1: | cut -d':' -f2)
+Proxys=$(cat proxycreator.txt | grep -a -n . | grep -a 1: | cut -d':' -f2)
 echo -e "$Proxys" >> proxys.txt
 
-HostCreate=$(cat sniffer.txt | grep Host)
+HostCreate=$(cat sniffer.txt | grep -a Host)
 echo -e "$HostCreate" >> hostcreate.txt
 
 P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
-P2=$(cat hostcreate.txt | grep -n . | grep 1: | cut -d':' -f2-7 | grep -n . | grep 1: | cut -d':' -f2-7)
-P3=$(cat sniffer.txt | grep Upgrade)
-Proxy=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f1-4)
-Porta=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f5 | cut -d ":" -f1)
+P2=$(cat hostcreate.txt | grep -a -n . | grep -a 1: | cut -d':' -f2-7 | grep -a -n . | grep -a 1: | cut -d':' -f2-7)
+P3=$(cat sniffer.txt | grep -a Upgrade)
+Proxy=$(cat proxys.txt | grep -a -n 1 | grep -a 1: | cut -d':' -f2 | cut -d'.' -f1-4)
+Porta=$(cat proxys.txt | grep -a -n 1 | grep -a 1: | cut -d':' -f2 | cut -d'.' -f5 | cut -d ":" -f1)
 
  
 
 check2() {
-    P13=$(cat sniffer.txt | grep -c 104)
+    P13=$(cat sniffer.txt | grep -a -c 104)
     case $P13 in
     0) echo "NADA ENCONTRADO" ; sleep 4 ; X9sniffer;;
     1) clear;;
@@ -1767,7 +1767,7 @@ read -p "DIGITE O QUE QUER PROCURAR: " info
 case $info in
 esac
 echo
-cat sniffer.txt | grep -i "$info"
+cat sniffer.txt | grep -a -i "$info"
 PegarinfoRev
 }
 PegarinfoRev(){
@@ -1801,21 +1801,21 @@ echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP
 Sniff=$(su -c tcpdump -c80 -n -A port 443)
 echo -e "$Sniff" >> sniffer.txt
 
-Proxycreator=$(cat sniffer.txt | grep 104 | cut -d' ' -f3 | grep 104)
+Proxycreator=$(cat sniffer.txt | grep -a 104 | cut -d' ' -f3 | grep -a 104)
 echo -e "$Proxycreator" >> proxycreator.txt
 
 clear
-Proxys=$(cat proxycreator.txt | grep -n . | grep 1: | cut -d':' -f2)
+Proxys=$(cat proxycreator.txt | grep -a -n . | grep -a 1: | cut -d':' -f2)
 echo -e "$Proxys" >> proxys.txt
 
-HostCreate=$(cat sniffer.txt | grep Host)
+HostCreate=$(cat sniffer.txt | grep -a Host)
 echo -e "$HostCreate" >> hostcreate.txt
 
 P1=$(head -c1K sniffer.txt | grep -a HTTP | cut -d' ' -f3 | cut -d'<' -f3)
-P2=$(cat hostcreate.txt | grep -n . | grep 1: | cut -d':' -f2-7 | grep -n . | grep 1: | cut -d':' -f2-7)
-P3=$(cat sniffer.txt | grep Upgrade)
-Proxy=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f1-4)
-Porta=$(cat proxys.txt | grep -n 1 | grep 1: | cut -d':' -f2 | cut -d'.' -f5 | cut -d ":" -f1)
+P2=$(cat hostcreate.txt | grep -a -n . | grep -a 1: | cut -d':' -f2-7 | grep -a -n . | grep -a 1: | cut -d':' -f2-7)
+P3=$(cat sniffer.txt | grep -a Upgrade)
+Proxy=$(cat proxys.txt | grep -a -n 1 | grep -a 1: | cut -d':' -f2 | cut -d'.' -f1-4)
+Porta=$(cat proxys.txt | grep -a -n 1 | grep -a 1: | cut -d':' -f2 | cut -d'.' -f5 | cut -d ":" -f1)
 
  
 
@@ -1852,7 +1852,7 @@ read -p "DIGITE O QUE QUER PROCURAR: " info
 case $info in
 esac
 echo
-cat sniffer.txt | grep -i "$info"
+cat sniffer.txt | grep -a -i "$info"
 PegarinfoRev
 }
 PegarinfoRev(){
