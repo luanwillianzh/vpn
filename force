@@ -399,15 +399,15 @@ su -c killall com.termux
 }
 
 
+
+
+
+
+
+
+
+
 Menu2() {
-check() {
-    su=$(su -h | grep -c "command")
-    case $su in
-    0) killall com.termux ; clear ; exit ;;
-    1) clear;;
-    esac
-}
-check
     clear
 echo -e '\n'
 echo "     ==================================="
@@ -461,12 +461,13 @@ echo
      esac
      }
 
+
 MetodoWIFI1(){
 GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 su -c 'svc wifi disable' && sleep 4
 check1() {
-    vpn=$(ifconfig | grep -c wlan0)
+    vpn=$(su -c ifconfig | grep -c wlan0)
     case $vpn in
     0) clear ; echo "Roteador Wi-Fi não está ligado" ; echo "Ligue ou tente o metodo 2" ; sleep 4 ; Menu2;;
     1) clear;;
@@ -474,10 +475,13 @@ check1() {
 }
 check1
 check5(){
-      apps=$(test -f "$HOME/wifiip1" && echo 1)
+      apps=$(cat wifiip1 | grep -c .)
     case $apps in
      1) clear;;
-     *) clear ; ifconfig wlan0; echo ; echo ; echo -e "TENTE USAR${GREEN} 192.168.43.1${SCOLOR} CASO OCORRER ALGUM ERRO" ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iproute1 ; echo -e "$iproute1" >> wifiip1 ;;
+     2)clear;;
+     3)clear;;
+     4)clear;;
+     *)su -c rm wifiip1 ; su -c ifconfig wlan0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-4 >> wifiip1;;
      esac
 }
 check5
@@ -510,14 +514,14 @@ echo
 
 corrigirip13(){
 clear 
-su -c rm wifiip1 && MetodoWIFI1
+su -c rm wifiip1 && clear ; su -c ifconfig wlan0; echo ; echo ; echo -e "TENTE USAR${GREEN} 192.168.43.1${SCOLOR} CASO OCORRER ALGUM ERRO" ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iproute1 ; echo -e "$iproute1" >> wifiip1 ; MetodoWIFI1
 }
 
 
 AltRW1(){
 clear
 check2() {
-    vpn=$(ifconfig | grep -c tun0)
+    vpn=$(su -c ifconfig | grep -c tun0)
     case $vpn in
     0) echo "VPN não encontrada" ; sleep 4 ; Menu2;;
     1) su -c 'svc wifi disable';;
@@ -525,7 +529,7 @@ check2() {
 }
 check2
 check1() {
-    vpn=$(ifconfig | grep -c wlan0)
+    vpn=$(su -c ifconfig | grep -c wlan0)
     case $vpn in
     0) clear ; echo "Roteador Wi-Fi não está ligado" ; echo "Ligue ou tente o metodo 2" ; sleep 4 ; Menu2;;
     1) clear;;
@@ -541,7 +545,7 @@ su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && s
 AltRW2(){
 clear
 check1() {
-    vpn=$(ifconfig | grep -c wlan0)
+    vpn=$(su -c ifconfig | grep -c wlan0)
     case $vpn in
     0) clear ; echo "Roteador Wi-Fi não está ligado" ; sleep 4 ; Menu2;;
     1) clear;;
@@ -560,7 +564,7 @@ GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 su -c 'svc wifi disable' && sleep 4
 check1() {
-    vpn=$(ifconfig | grep -c swlan0)
+    vpn=$(su -c ifconfig | grep -c swlan0)
     case $vpn in
     0) clear ; echo "Roteador Wi-Fi não está ligado" ; echo "Ligue ou tente o metodo 1" ; sleep 4 ; Menu2;;
     1) clear;;
@@ -568,10 +572,13 @@ check1() {
 }
 check1
 check5(){
-      apps=$(test -f "$HOME/wifiip2" && echo 1)
+      apps=$(cat wifiip2 | grep -c .)
     case $apps in
      1) clear;;
-     *) clear ; ifconfig swlan0; echo ; echo ; echo -e "TENTE USAR${GREEN} 192.168.43.1${SCOLOR} CASO OCORRER ALGUM ERRO" ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iproute2  ;echo -e "$iproute2" >> wifiip2 ;;
+     2)clear;;
+     3)clear;;
+     4)clear;;
+     *)su -c rm wifiip2 ; su -c ifconfig swlan0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-4 >> wifiip2;;
      esac
 }
 check5
@@ -604,13 +611,13 @@ echo
 
 corrigirip2(){
 clear 
-su -c rm wifiip2 && MetodoWIFI2
+su -c rm wifiip2 && clear ; su -c ifconfig swlan0; echo ; echo ; echo -e "TENTE USAR${GREEN} 192.168.43.1${SCOLOR} CASO OCORRER ALGUM ERRO" ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iproute2  ;echo -e "$iproute2" >> wifiip2 ; MetodoWIFI2
 }
 
 AltRW21(){
 clear
 check2() {
-    vpn=$(ifconfig | grep -c tun0)
+    vpn=$(su -c ifconfig | grep -c tun0)
     case $vpn in
     0) echo "VPN não encontrada" ; sleep 4 ; Menu2;;
     1) su -c 'svc wifi disable';;
@@ -618,7 +625,7 @@ check2() {
 }
 check2
 check1() {
-    vpn=$(ifconfig | grep -c swlan0)
+    vpn=$(su -c ifconfig | grep -c swlan0)
     case $vpn in
     0) clear ; echo "Roteador Wi-Fi não está ligado" ; echo "Ligue ou tente o metodo 1" ; sleep 4 ; Menu2;;
     1) clear;;
@@ -634,7 +641,7 @@ su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && s
 AltRW22(){
 clear
 check1() {
-    vpn=$(ifconfig | grep -c swlan0)
+    vpn=$(su -c ifconfig | grep -c swlan0)
     case $vpn in
     0) clear ; echo "Roteador Wi-Fi não está ligado" ; sleep 4 ; Menu2;;
     1) clear;;
@@ -653,7 +660,7 @@ GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 su -c 'svc wifi disable' && sleep 4
 check1() {
-    vpn=$(ifconfig | grep -c rndis0)
+    vpn=$(su -c ifconfig | grep -c rndis0)
     case $vpn in
     0) clear ; echo "Ancoragem USB não está ligada" ; sleep 4 ; Menu2;;
     1) clear;;
@@ -661,10 +668,13 @@ check1() {
 }
 check1
 check5(){
-      apps=$(test -f "$HOME/usbip" && echo 1)
+      apps=$(cat usbip | grep -c .)
     case $apps in
      1) clear;;
-     *) clear ; ifconfig rndis0; echo ; echo ; echo -e "TENTE USAR${GREEN} 192.168.42.129${SCOLOR} CASO OCORRER ALGUM ERRO" ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iuusbip  ;echo -e "$iuusbip" >> usbip ;;
+     2)clear;;
+     3)clear;;
+     4)clear;;
+     *)su -c rm usbip ; su -c ifconfig rndis0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-4 >> usbip ;;
      esac
 }
 check5
@@ -697,13 +707,13 @@ echo
 
 corrigirip26(){
 clear 
-su -c rm usbip && USB
+su -c rm usbip && clear ; su -c ifconfig rndis0; echo ; echo ; echo -e "TENTE USAR${GREEN} 192.168.42.129${SCOLOR} CASO OCORRER ALGUM ERRO" ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read iuusbip  ;echo -e "$iuusbip" >> usbip ; USB
 }
 
 AltRU1(){
 clear
 check2() {
-    vpn=$(ifconfig | grep -c tun0)
+    vpn=$(su -c ifconfig | grep -c tun0)
     case $vpn in
     0) echo "VPN não encontrada" ; sleep 4 ; Menu2;;
     1) clear,;;
@@ -711,7 +721,7 @@ check2() {
 }
 check2
 check1() {
-    vpn=$(ifconfig | grep -c rndis0)
+    vpn=$(su -c ifconfig | grep -c rndis0)
     case $vpn in
     0) clear ; echo "Ancoragem USB não está ligada" ; sleep 4 ; Menu2;;
     1) clear;;
@@ -728,7 +738,7 @@ su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && s
 AltRU2(){
 clear
 check1() {
-    vpn=$(ifconfig | grep -c rndis0)
+    vpn=$(su -c ifconfig | grep -c rndis0)
     case $vpn in
     0) clear ; echo "Ancoragem USB não está ligada" ; sleep 4 ; Menu2;;
     1) clear;;
@@ -748,7 +758,7 @@ GREEN='\033[1;32m'
 SCOLOR='\033[0m'
 su -c 'svc wifi disable' && sleep 4
 check1() {
-    vpn=$(ifconfig | grep -c bt-pan)
+    vpn=$(su -c ifconfig | grep -c bt-pan)
     case $vpn in
     0) clear ; echo "Nenhum aparelho conectado via Ancoragem Bluetooth" ; sleep 4 ; Menu2;;
     1) clear;;
@@ -756,10 +766,13 @@ check1() {
 }
 check1
 check5(){
-      apps=$(test -f "$HOME/btip" && echo 1)
+      apps=$(cat btip | grep -c .)
     case $apps in
      1) clear;;
-     *) clear ; ifconfig bt-pan; echo ; echo ; echo -e "TENTE USAR${GREEN} 192.168.44.1${SCOLOR} CASO OCORRER ALGUM ERRO" ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read btusbip  ;echo -e "$btusbip" >> btip ;;
+     2)clear;;
+     3)clear;;
+     4)clear;;
+     *)su -c rm btip ; su -c ifconfig bt-pan | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-4 >> btip;;
      esac
 }
 check5
@@ -792,14 +805,14 @@ echo
 
 corrigirip265(){
 clear 
-su -c rm btip && Bluetooth
+su -c rm btip && clear ; su -c ifconfig bt-pan; echo ; echo ; echo -e "TENTE USAR${GREEN} 192.168.44.1${SCOLOR} CASO OCORRER ALGUM ERRO" ; echo -e "\emCOLE O IP QUE VEM LOGO APÓS ${GREEN}inet/inet addr${SCOLOR}\em" ; read btusbip  ;echo -e "$btusbip" >> btip ; Bluetooth
 }
 
 
 AltRB1(){
 clear
 check2() {
-    vpn=$(ifconfig | grep -c tun0)
+    vpn=$(su -c ifconfig | grep -c tun0)
     case $vpn in
     0) echo "VPN não encontrada" ; sleep 4 ; Menu2;;
     1) clear,;;
@@ -807,7 +820,7 @@ check2() {
 }
 check2
 check1() {
-    vpn=$(ifconfig | grep -c bt-pan)
+    vpn=$(su -c ifconfig | grep -c bt-pan)
     case $vpn in
     0) clear ; echo "Nenhum aparelho conectado via Ancoragem Bluetooth" ; sleep 4 ; Menu2;;
     1) clear;;
@@ -823,7 +836,7 @@ su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && s
 AltRB2(){
 clear
 check1() {
-    vpn=$(ifconfig | grep -c bt-pan)
+    vpn=$(su -c ifconfig | grep -c bt-pan)
     case $vpn in
     0) clear ; echo "Nenhum aparelho conectado via Ancoragem Bluetooth" ; sleep 4 ; Menu2;;
     1) clear;;
@@ -868,17 +881,9 @@ echo
     }
 
 Alter1(){
-check() {
-    su=$(su -h | grep -c "command")
-    case $su in
-    0) killall com.termux ; clear ; exit ;;
-    1) clear;;
-    esac
-}
-check
 clear
 check2() {
-    vpn=$(ifconfig | grep -c tun0)
+    vpn=$(su -c ifconfig | grep -c tun0)
     case $vpn in
     0) echo "VPN não encontrada" ; sleep 4; Menu3;;
     1) clear ; su -c am start -n com.android.vpndialogs/com.android.vpndialogs.ManageDialog && Menu3;;
