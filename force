@@ -2065,9 +2065,12 @@ echo -e "============================================${NADA}"
 echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
 
 echo -e "============================================${NADA}"
-echo -e "${DESTACAR}OK, PODE SE CONECTAR NOVAMENTE${NADA}"
-sleep 4
-Buscartokens
+echo -e "${DESTACAR}OK, PODE SE CONECTAR NOVAMENTE"
+echo
+read -n1 -p $'APERTE QUALQUER TECLA PARA CONTINUAR' conectadoain
+case $conectadoain in
+*)Buscartokens;;
+esac
 }
 
 chavecustom(){
