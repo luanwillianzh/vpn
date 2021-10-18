@@ -2605,6 +2605,9 @@ advidCF=$(cat ClubeFacilToken.txt | grep -i -o advid........... | cut -d'"' -f2 
 
 impidCF=$(cat ClubeFacilToken.txt | grep -i -o impressionEventId........................................... | cut -d'"' -f3)
 
+echo -e "$impidCF" >> impressionidrev.txt
+echo -e "$advidCF" >> advidrev.txt
+
 
 
 
@@ -2751,28 +2754,17 @@ echo
 
 echo -e "${DESTACAR}1 - PROCURAR NOVOS TOKENS${NADA} ${CINZA}RECOMENDADO 2X${NADA}"
 echo -e "${DESTACAR}2 - TESTAR TOKENS ENCONTRADOS${NADA} ${CINZA}INICIAR O ENVIO DE MBS${NADA}"
-echo -e "${DESTACAR}3 - ADICIONAR TOKEN 5MBS${NADA} ${CINZA}SEM GARANTIA DE GANHO${NADA}"
 echo -e "${DESTACAR}0 - VOLTAR${NADA} ${CINZA}NENHUM TOKEN ENCONTRADO${NADA}"
 echo
 read -p "ESCOLHA UMA OPÇÃO: " TokensNews
 case $TokensNews in
 1)ProcurarMaisTokens;;
 2)GerarOsTokens;;
-3)ClubeFacilAD;;
 0)Menu5;;
 *)NewTokens;;
 esac
 } 
 
-
-ClubeFacilAD(){
-TesteDeAdc=$(cat tokencreator.txt | grep -c TokenAdicionadoComSucesso)
-case $TesteDeAdc in
-0)clear ; echo -e "============================================${NADA}" ; echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}" ; echo -e "============================================${NADA}" ; echo -e "${GREEN}TOKEN ADICIONADO COM SUCESSO${NADA}" ; echo -e "$impidCF" >> impressionidcriar.txt ; echo -e "$advidCF" >> advidcriar.txt ; echo -e "TokenAdicionadoComSucesso" >> tokencreator.txt; sleep 4 ; ProcurarMaisTokens;;
-
-1)clear ; echo -e "============================================${NADA}" ; echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}" ; echo -e "============================================${NADA}" ; echo -e "${RED}TOKEN JÁ FOI ADICIONADO${NADA}" ; echo -e "TokenAdicionadoComSucesso" >> ClubeFacilToken.txt; sleep 4 ; ProcurarMaisTokens;;
-esac
-}
 
 
 
