@@ -20,7 +20,7 @@ rm -f Proxy443.txt
 clear
 echo -e "${DESTACAR}ESSE SCRIPT SERVE PARA TESTAR PROXYS NA PORTA 443"
 echo
-echo -e "FUNCIONA COM 2 OU 3 CASAS, EX: 104.10. OU 104.10.10. ${NADA}"
+echo -e "FUNCIONA COM 2 OU 3 CASAS DE IP, EX: 104.10. OU 104.10.10. ${NADA}"
 echo
 read -p "DOMINIO: " dominio
 echo
