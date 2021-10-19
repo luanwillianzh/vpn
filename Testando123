@@ -1,0 +1,32 @@
+#!/bin/bash
+termux-wake-lock
+
+VermelhoAll='\e[01;37;41m'
+NADA='\033[0m'
+CINZA='\e[02;37m'
+DESTACAR='\e[01;37m'
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+SCOLOR='\033[0m'
+SEMCOR='\033[8m'
+rm -f Proxy443.txt
+clear
+echo -e "${DESTACAR}ESSE SCRIPT SERVE PARA TEXTAR PROXYS NA PORTA 443${NADA}"
+echo
+read -p "DOMINIO: " dominio
+echo
+read -p "IP: " ip
+echo
+for i in $(seq 255)
+do
+rm -f LogsProxyTest.txt
+testeproxy=$(curl -s -m 0.1 --connect-to $dominio:443:$ip$i:443 https://$dominio/ -vs >LogsProxyTest.txt 2>&1)
+
+test=$(cat LogsProxyTest.txt | grep -c "Connected")
+case $test in
+1) echo -e "${YELLOW}$ip$i${NADA} | ${GREEN}TRUE${NADA}";;
+0) echo -e "${YELLOW}$ip$i${NADA} | ${RED}FALSE${NADA}";;
+esac
+done
+
