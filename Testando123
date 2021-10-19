@@ -20,7 +20,7 @@ rm -f Proxy443.txt
 clear
 echo -e "${DESTACAR}ESSE SCRIPT SERVE PARA TESTAR PROXYS NA PORTA 443"
 echo
-echo -e "FUNCIONA COM 2 OU 3 CASAS DE IP, EX: 104.10. OU 104.10.10. ${NADA}"
+echo -e "FUNCIONA COM 2 OU 3 CASAS, EX: 104.10. OU 104.10.10. ${NADA}"
 echo
 read -p "DOMINIO: " dominio
 echo
@@ -45,7 +45,7 @@ testeproxy=$(curl -s -m 0.1 --connect-to $dominio:443:$ip$GRISS.$i:443 https://$
 
 test=$(cat LogsProxyTest.txt | grep -c "Connected")
 case $test in
-1) echo -e "${YELLOW}$ip$GRISS.$i ${NADA}| ${GREEN}TRUE${NADA}"; echo -e "$ip$i | TRUE" >> True.txt ;;
+1) echo -e "${YELLOW}$ip$GRISS.$i ${NADA}| ${GREEN}TRUE${NADA}"; echo -e "$ip$GRISS.$i | TRUE" >> True.txt ;;
 0) echo -e "${YELLOW}$ip$GRISS.$i ${NADA}| ${RED}FALSE${NADA}";;
 esac
 done
