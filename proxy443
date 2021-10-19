@@ -18,13 +18,15 @@ rm -f ipcasa.txt
 rm -f Proxy443.txt
 
 clear
-echo -e "${DESTACAR}ESSE SCRIPT SERVE PARA TESTAR PROXYS NA PORTA 443"
+echo -e "${DESTACAR}ESSE SCRIPT SERVE PARA TESTAR IPS DA CLOUDFLARE EM PORTAS SSL"
 echo
 echo -e "FUNCIONA COM 2 OU 3 CASAS, EX: 104.10. OU 104.10.10. ${NADA}"
 echo
-read -p "DOMINIO: " dominio
+read -p "Dominio: " dominio
 echo
-read -p "IP: " ip
+read -p "Ip: " ip
+echo
+read -p "Porta SSL: " PortaSSL
 echo
 dots=$(fgrep "." -o <<< $ip | wc -l)
 case $dots in
@@ -40,22 +42,8 @@ for i in $(seq 255)
 do
 GRISS=$(cat ipcasa.txt | grep -c 1)
 rm -f LogsProxyTest.txt
-rm -f InternetCheck.txt
 
-InternetCheck=$(curl -s -m 0.1 google.com -vs >InternetCheck.txt 2>&1)
-
-TestInternet=$(cat InternetCheck.txt | grep -c "Connected")
-case $TestInternet in
-1) echo ; echo -e "${RED}CONEXÃO COM A INTERNET ENCONTRADA\nAPERTE QUALQUER TECLA APOS DESCONECTAR${NADA}"
-read -n1 desconected 
-case $desconected in
-*);;
-esac 
-;;
-0) ;;
-esac
-
-testeproxy=$(curl -s -m 0.1 --connect-to $dominio:443:$ip$GRISS.$i:443 https://$dominio/ -vs >LogsProxyTest.txt 2>&1)
+testeproxy=$(curl -s -m 0.1 --connect-to $dominio:$PortaSSL:$ip$GRISS.$i:$PortaSSL https://$dominio/ -vs >LogsProxyTest.txt 2>&1)
 
 test=$(cat LogsProxyTest.txt | grep -c "Connected")
 case $test in
@@ -75,23 +63,7 @@ Trescasas(){
 for i in $(seq 255)
 do
 rm -f LogsProxyTest.txt
-rm -f InternetCheck.txt
-
-InternetCheck=$(curl -s -m 0.1 google.com -vs >InternetCheck.txt 2>&1)
-
-TestInternet=$(cat InternetCheck.txt | grep -c "Connected")
-case $TestInternet in
-1) echo ; echo -e "${RED}CONEXÃO COM A INTERNET ENCONTRADA\nAPERTE QUALQUER TECLA APOS DESCONECTAR${NADA}"
-read -n1 desconected 
-case $desconected in
-*);;
-esac 
-;;
-0) ;;
-esac
-
-
-testeproxy=$(curl -s -m 0.1 --connect-to $dominio:443:$ip$i:443 https://$dominio/ -vs >LogsProxyTest.txt 2>&1)
+testeproxy=$(curl -s -m 0.1 --connect-to $dominio:$PortaSSL:$ip$i:$PortaSSL https://$dominio/ -vs >LogsProxyTest.txt 2>&1)
 
 test=$(cat LogsProxyTest.txt | grep -c "Connected")
 case $test in
