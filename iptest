@@ -2,12 +2,12 @@
 clear
 DESTACAR='\e[01;37m'
 MenuPrincipal(){
-echo -e " " >> True.txt
+echo -e "" >> True.txt
 clear
 echo -e "${DESTACAR}1 - Porta WS"
 echo -e "${DESTACAR}2 - Porta SSL"
 echo
-read -n1 -p "Escolha uma Opção: " Menu12
+read -p "Escolha uma Opção: " Menu12
 case $Menu12 in
 1)Porra;;
 2)Porra2;;
@@ -33,6 +33,7 @@ rm -f IPsTestar.txt
 rm -f IPsDaVez.txt
 rm -f ipcasa.txt
 rm -f Proxy443.txt
+echo -e "2" >> ipcasa.txt
 
 clear
 echo -e "${DESTACAR}ESSE SCRIPT SERVE PARA TESTAR IPS DA CLOUDFLARE EM PORTAS WEBSOCKET"
@@ -49,7 +50,7 @@ read -n1 -p "Mais Algum IP? [Y/n] " Mais1
 case $Mais1 in
 y)Mais1ip;;
 Y)Mais1ip;;
-*)VerProxy;;
+*)echo ; echo ; VerProxy;;
 esac
 }
 
@@ -75,7 +76,6 @@ case $dots in
 
 
 DuasCasas(){
-echo -e "1" >> ipcasa.txt
 for i in $(seq 255)
 do
 GRISS=$(cat ipcasa.txt | grep -c 1)
@@ -179,6 +179,7 @@ rm -f IPsTestar.txt
 rm -f IPsDaVez.txt
 rm -f ipcasa.txt
 rm -f Proxy443.txt
+echo -e "2" >> ipcasa.txt
 
 clear
 echo -e "${DESTACAR}ESSE SCRIPT SERVE PARA TESTAR IPS DA CLOUDFLARE EM PORTAS SSL"
@@ -195,7 +196,7 @@ read -n1 -p "Mais Algum IP? [Y/n] " Mais1
 case $Mais1 in
 y)Mais1ip2;;
 Y)Mais1ip2;;
-*)VerProxy2;;
+*)echo ; echo ; VerProxy2;;
 esac
 }
 
@@ -222,7 +223,6 @@ case $dots in
 
 
 DuasCasas2(){
-echo -e "1" >> ipcasa.txt
 for i in $(seq 255)
 do
 
