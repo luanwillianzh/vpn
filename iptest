@@ -96,7 +96,7 @@ done
 echo
 cat True.txt | grep  "|"
 echo
-
+echo -e "1" >> ipcasa.txt
 DuasCasas
 }
 
@@ -245,7 +245,7 @@ done
 echo
 cat True.txt | grep  "|"
 echo
-
+echo -e "1" >> ipcasa.txt
 DuasCasas2
 }
 
