@@ -186,7 +186,25 @@ echo -e "2" >> ipcasa.txt
 clear
 echo -e "${DESTACAR}ESSE SCRIPT SERVE PARA TESTAR IPS DA CLOUDFLARE EM PORTAS SSL"
 echo
-echo -e "FUNCIONA COM 2 OU 3 CASAS, EX: 104.10. OU 104.10.10. ${NADA}"
+echo -e "FUNCIONA COM 2 OU 3 CASAS, EX: 104.10. OU 104.10.10."
+echo
+echo -e "DURAÇÃO DE TESTE DE CADA IP: "
+echo
+echo -e "1 - 0.1 Segundos"
+echo -e "2 - 0.2 Segundos"
+echo -e "3 - 0.3 Segundos"
+echo -e "4 - 0.5 Segundos"
+echo -e "5 - 1 Segundo${NADA}"
+echo
+read -p "Escolha uma Opção: " duracao
+case $duracao in
+1) milissegundos="0.1";;
+2) milissegundos="0.2";;
+3) milissegundos="0.3";;
+4) milissegundos="0.5";;
+5) milissegundos="1";;
+*) Porra2;;
+esac
 echo
 read -p "Dominio: " dominio
 echo
@@ -236,7 +254,7 @@ case $GRISS in
 *);;
 esac
 
-testeproxy=$(curl -s -m 0.3 --connect-to $dominio:$PortaSSL:$ip$GRISS.$i:$PortaSSL https://$dominio/ -vs >LogsProxyTest.txt 2>&1)
+testeproxy=$(curl -s -m ${milissegundos} --connect-to $dominio:$PortaSSL:$ip$GRISS.$i:$PortaSSL https://$dominio/ -vs >LogsProxyTest.txt 2>&1)
 
 test=$(cat LogsProxyTest.txt | grep -c "Connected")
 case $test in
@@ -275,7 +293,7 @@ case $GRISS in
 esac
 
 rm -f LogsProxyTest.txt
-testeproxy=$(curl -s -m 0.3 --connect-to $dominio:$PortaSSL:$ip$i:$PortaSSL https://$dominio/ -vs >LogsProxyTest.txt 2>&1)
+testeproxy=$(curl -s -m ${milissegundos} --connect-to $dominio:$PortaSSL:$ip$i:$PortaSSL https://$dominio/ -vs >LogsProxyTest.txt 2>&1)
 
 test=$(cat LogsProxyTest.txt | grep -c "Connected")
 case $test in
