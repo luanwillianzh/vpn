@@ -1,0 +1,297 @@
+#!/bin/bash
+clear
+DESTACAR='\e[01;37m'
+MenuPrincipal(){
+echo -e " " >> True.txt
+clear
+echo -e "${DESTACAR}1 - Porta WS"
+echo -e "${DESTACAR}2 - Porta SSL"
+echo
+read -n1 -p "Escolha uma Opção: " Menu12
+case $Menu12 in
+1)Porra;;
+2)Porra2;;
+*)MenuPrincipal;;
+esac
+}
+
+
+Porra(){
+VermelhoAll='\e[01;37;41m'
+NADA='\033[0m'
+CINZA='\e[02;37m'
+DESTACAR='\e[01;37m'
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+SCOLOR='\033[0m'
+SEMCOR='\033[8m'
+
+termux-wake-lock
+
+rm -f IPsTestar.txt
+rm -f IPsDaVez.txt
+rm -f ipcasa.txt
+rm -f Proxy443.txt
+
+clear
+echo -e "${DESTACAR}ESSE SCRIPT SERVE PARA TESTAR IPS DA CLOUDFLARE EM PORTAS WEBSOCKET"
+echo
+echo -e "FUNCIONA COM 2 OU 3 CASAS, EX: 104.10. OU 104.10.10. ${NADA}"
+echo
+read -p "Dominio: " dominio
+echo
+read -p "Ip: " ip
+echo
+read -p "Porta WebSocket: " PortaWS
+echo
+read -n1 -p "Mais Algum IP? [Y/n] " Mais1
+case $Mais1 in
+y)Mais1ip;;
+Y)Mais1ip;;
+*)VerProxy;;
+esac
+}
+
+Mais1ip(){
+echo
+read -p "Ip: " OutroIP
+echo -e "$OutroIP" >> IPsTestar.txt
+read -n1 -p "Mais Algum IP? [Y/n] " Mais1
+case $Mais1 in
+y)Mais1ip;;
+Y)Mais1ip;;
+*)echo ; echo ; VerProxy;;
+esac
+}
+
+VerProxy(){
+dots=$(fgrep "." -o <<< $ip | wc -l)
+case $dots in
+  2)DuasCasas;;                                        3)Trescasas;;
+  *)Porra;;
+  esac
+}
+
+
+DuasCasas(){
+echo -e "1" >> ipcasa.txt
+for i in $(seq 255)
+do
+GRISS=$(cat ipcasa.txt | grep -c 1)
+
+case $GRISS in
+256)Chegou256;;
+*);;
+esac
+
+testeproxy=$(curl -m 1 -s -o /dev/null -H "Upgrade: websocket" -x $ip$GRISS.$i:$PortaWS $dominio -w %{http_code})
+
+test=$(echo "$testeproxy" | grep -c "101")
+case $test in
+1) echo -e "${YELLOW}$ip$GRISS.$i ${NADA}| ${GREEN}True${NADA}"; echo -e "$ip$GRISS.$i | TRUE" >> True.txt ;;
+0) echo -e "${YELLOW}$ip$GRISS.$i ${NADA}| ${RED}False${NADA}";;
+esac
+done
+echo
+cat True.txt | grep .
+echo
+
+DuasCasas
+}
+
+Chegou256(){
+rm -f ipcasa.txt
+echo -e "1" >> IPsDaVez.txt
+eiu=$(cat IPsDaVez.txt | grep -c 1)
+ip=$(cat IPsTestar.txt | grep -n . | grep "$eiu:" | cut -d':' -f2)
+VerProxy
+}
+
+
+
+
+Trescasas(){
+echo -e "1" >> ipcasa.txt
+for i in $(seq 255)
+do
+
+GRISS=$(cat ipcasa.txt | grep -c 1)
+
+case $GRISS in
+2)Chegou2;;
+*);;
+esac
+
+testeproxy=$(curl -m 3 -s -o /dev/null -H "Upgrade: websocket" -x $ip$i:$PortaWS $dominio -w %{http_code})
+
+test=$(echo "$testeproxy" | grep -c "101")
+case $test in
+1) echo -e "${YELLOW}$ip$i${NADA} | ${GREEN}True${NADA}" ; echo -e "$ip$i | TRUE" >> True.txt;;
+0) echo -e "${YELLOW}$ip$i${NADA} | ${RED}False${NADA}";;
+esac
+done
+echo
+cat True.txt | grep .
+Trescasas
+}
+
+Chegou2(){
+echo
+rm -f ipcasa.txt
+echo -e "1" >> IPsDaVez.txt
+eiu=$(cat IPsDaVez.txt | grep -c 1)
+ip=$(cat IPsTestar.txt | grep -n . | grep "$eiu:" | cut -d':' -f2)
+VerProxy
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Porra2(){
+VermelhoAll='\e[01;37;41m'
+NADA='\033[0m'
+CINZA='\e[02;37m'
+DESTACAR='\e[01;37m'
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+SCOLOR='\033[0m'
+SEMCOR='\033[8m'
+
+termux-wake-lock
+
+rm -f IPsTestar.txt
+rm -f IPsDaVez.txt
+rm -f ipcasa.txt
+rm -f Proxy443.txt
+
+clear
+echo -e "${DESTACAR}ESSE SCRIPT SERVE PARA TESTAR IPS DA CLOUDFLARE EM PORTAS SSL"
+echo
+echo -e "FUNCIONA COM 2 OU 3 CASAS, EX: 104.10. OU 104.10.10. ${NADA}"
+echo
+read -p "Dominio: " dominio
+echo
+read -p "Ip: " ip
+echo
+read -p "Porta SSL: " PortaWS
+echo
+read -n1 -p "Mais Algum IP? [Y/n] " Mais1
+case $Mais1 in
+y)Mais1ip2;;
+Y)Mais1ip2;;
+*)VerProxy2;;
+esac
+}
+
+Mais1ip2(){
+echo
+read -p "Ip: " OutroIP
+echo -e "$OutroIP" >> IPsTestar.txt
+read -n1 -p "Mais Algum IP? [Y/n] " Mais1
+case $Mais1 in
+y)Mais1ip2;;
+Y)Mais1ip2;;
+*)echo ; echo ; VerProxy2;;
+esac
+}
+
+VerProxy2(){
+dots=$(fgrep "." -o <<< $ip | wc -l)
+case $dots in
+  2)DuasCasas2;;                                        3)Trescasas2;;
+  *)Porra2;;
+  esac
+}
+
+
+
+DuasCasas2(){
+echo -e "1" >> ipcasa.txt
+for i in $(seq 255)
+do
+
+GRISS=$(cat ipcasa.txt | grep -c 1)
+rm -f LogsProxyTest.txt
+
+case $GRISS in
+256)Chegou2562;;
+*);;
+esac
+
+testeproxy=$(curl -s -m 0.1 --connect-to $dominio:$PortaSSL:$ip$GRISS.$i:$PortaSSL https://$dominio/ -vs >LogsProxyTest.txt 2>&1)
+
+test=$(cat LogsProxyTest.txt | grep -c "Connected")
+case $test in
+1) echo -e "${YELLOW}$ip$GRISS.$i ${NADA}| ${GREEN}True${NADA}"; echo -e "$ip$GRISS.$i | TRUE" >> True.txt ;;
+0) echo -e "${YELLOW}$ip$GRISS.$i ${NADA}| ${RED}False${NADA}";;
+esac
+done
+echo
+cat True.txt | grep .
+echo
+
+DuasCasas2
+}
+
+Chegou2562(){
+rm -f ipcasa.txt
+echo -e "1" >> IPsDaVez.txt
+eiu=$(cat IPsDaVez.txt | grep -c 1)
+ip=$(cat IPsTestar.txt | grep -n . | grep "$eiu:" | cut -d':' -f2)
+VerProxy2
+}
+
+
+
+Trescasas2(){
+echo -e "1" >> ipcasa.txt
+for i in $(seq 255)
+do
+
+GRISS=$(cat ipcasa.txt | grep -c 1)
+
+case $GRISS in
+2)Chegou22;;
+*);;
+esac
+
+rm -f LogsProxyTest.txt
+testeproxy=$(curl -s -m 0.1 --connect-to $dominio:$PortaSSL:$ip$i:$PortaSSL https://$dominio/ -vs >LogsProxyTest.txt 2>&1)
+
+test=$(cat LogsProxyTest.txt | grep -c "Connected")
+case $test in
+1) echo -e "${YELLOW}$ip$i${NADA} | ${GREEN}True${NADA}" ; echo -e "$ip$i | TRUE" >> True.txt;;
+0) echo -e "${YELLOW}$ip$i${NADA} | ${RED}False${NADA}";;
+esac
+done
+echo
+cat True.txt | grep .
+Trescasas2
+}
+
+Chegou22(){
+echo
+rm -f ipcasa.txt
+echo -e "1" >> IPsDaVez.txt
+eiu=$(cat IPsDaVez.txt | grep -c 1)
+ip=$(cat IPsTestar.txt | grep -n . | grep "$eiu:" | cut -d':' -f2)
+VerProxy2
+}
+
+MenuPrincipal
