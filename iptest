@@ -94,7 +94,7 @@ case $test in
 esac
 done
 echo
-cat True.txt | grep .
+cat True.txt | grep  "|"
 echo
 
 DuasCasas
@@ -132,7 +132,7 @@ case $test in
 esac
 done
 echo
-cat True.txt | grep .
+cat True.txt | grep  "|"
 Trescasas
 }
 
@@ -243,7 +243,7 @@ case $test in
 esac
 done
 echo
-cat True.txt | grep .
+cat True.txt | grep  "|"
 echo
 
 DuasCasas2
@@ -281,7 +281,7 @@ case $test in
 esac
 done
 echo
-cat True.txt | grep .
+cat True.txt | grep  "|"
 Trescasas2
 }
 
