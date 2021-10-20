@@ -102,6 +102,7 @@ DuasCasas
 
 Chegou256(){
 rm -f ipcasa.txt
+echo -e "2" >> ipcasa.txt
 echo -e "1" >> IPsDaVez.txt
 eiu=$(cat IPsDaVez.txt | grep -c 1)
 ip=$(cat IPsTestar.txt | grep -n . | grep "$eiu:" | cut -d':' -f2)
@@ -139,6 +140,7 @@ Trescasas
 Chegou2(){
 echo
 rm -f ipcasa.txt
+echo -e "2" >> ipcasa.txt
 echo -e "1" >> IPsDaVez.txt
 eiu=$(cat IPsDaVez.txt | grep -c 1)
 ip=$(cat IPsTestar.txt | grep -n . | grep "$eiu:" | cut -d':' -f2)
@@ -251,6 +253,7 @@ DuasCasas2
 
 Chegou2562(){
 rm -f ipcasa.txt
+echo -e "2" >> ipcasa.txt
 echo -e "1" >> IPsDaVez.txt
 eiu=$(cat IPsDaVez.txt | grep -c 1)
 ip=$(cat IPsTestar.txt | grep -n . | grep "$eiu:" | cut -d':' -f2)
@@ -288,6 +291,7 @@ Trescasas2
 Chegou22(){
 echo
 rm -f ipcasa.txt
+echo -e "2" >> ipcasa.txt
 echo -e "1" >> IPsDaVez.txt
 eiu=$(cat IPsDaVez.txt | grep -c 1)
 ip=$(cat IPsTestar.txt | grep -n . | grep "$eiu:" | cut -d':' -f2)
