@@ -336,6 +336,13 @@ VerProxy2
 
 
 
+
+
+
+
+
+
+
 Porra3(){
 VermelhoAll='\e[01;37;41m'
 NADA='\033[0m'
@@ -426,9 +433,9 @@ case $GRISS in
 *);;
 esac
 
-testeproxy=$(curl -s -m ${milissegundos} --connect-to $dominio:$PortaSSL:$ip$GRISS.$i:$PortaSSL https://$dominio/ -vs >LogsProxyTest.txt 2>&1)
+testeproxy=$(curl -m ${milissegundos} -s -o /dev/null -H "Upgrade: websocket" -x $ip$GRISS.$i:$PortaWS $dominio -vs >LogsProxyTest.txt 2>&1)
 
-test=$(cat LogsProxyTest.txt | grep -c "Connected")
+test=$(cat LogsProxyTest.txt | grep -c "Bad Request")
 case $test in
 1) echo -e "${YELLOW}$ip$GRISS.$i ${NADA}| ${GREEN}True${NADA}"; echo -e "$ip$GRISS.$i | TRUE" >> True.txt ;;
 0) echo -e "${YELLOW}$ip$GRISS.$i ${NADA}| ${RED}False${NADA}";;
@@ -465,9 +472,9 @@ case $GRISS in
 esac
 
 rm -f LogsProxyTest.txt
-testeproxy=$(curl -s -m ${milissegundos} --connect-to $dominio:$PortaSSL:$ip$i:$PortaSSL https://$dominio/ -vs >LogsProxyTest.txt 2>&1)
+testeproxy=$(curl -m ${milissegundos} -s -o /dev/null -H "Upgrade: websocket" -x $ip$i:$PortaWS $dominio -vs >LogsProxyTest.txt 2>&1)
 
-test=$(cat LogsProxyTest.txt | grep -c "Connected")
+test=$(cat LogsProxyTest.txt | grep -c "Bad Request")
 case $test in
 1) echo -e "${YELLOW}$ip$i${NADA} | ${GREEN}True${NADA}" ; echo -e "$ip$i | TRUE" >> True.txt;;
 0) echo -e "${YELLOW}$ip$i${NADA} | ${RED}False${NADA}";;
