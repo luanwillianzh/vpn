@@ -21,9 +21,9 @@ echo -e "2" >> ipcasa.txt
 echo -e "2" >> TrueAnalise.txt
 
 clear
-echo -e "${DESTACAR}ESSE SCRIPT SERVE PARA TESTAR PROXYS DA AMAZON"
+echo -e "${DESTACAR}ESSE SCRIPT SERVE PARA TESTAR PROXYS DA AMAZON/DATAMI"
 echo
-echo -e "FUNCIONA COM 2 OU 3 CASAS, EX: 104.10. OU 104.10.10. ${NADA}"
+echo -e "FUNCIONA COM 2 OU 3 CASAS, EX: 51.210. OU 51.210.118. ${NADA}"
 echo
 read -p "Ip: " ip
 echo
