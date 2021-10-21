@@ -1,0 +1,102 @@
+#!/bin/bash
+
+clear
+Porra(){
+VermelhoAll='\e[01;37;41m'
+NADA='\033[0m'
+CINZA='\e[02;37m'
+DESTACAR='\e[01;37m'
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+SCOLOR='\033[0m'
+SEMCOR='\033[8m'
+
+termux-wake-lock
+
+rm -f ipcasa.txt
+rm -f Proxy443.txt
+
+echo -e "2" >> ipcasa.txt
+echo -e "2" >> TrueAnalise.txt
+
+clear
+echo -e "${DESTACAR}ESSE SCRIPT SERVE PARA TESTAR PROXYS DA AMAZON"
+echo
+echo -e "FUNCIONA COM 2 OU 3 CASAS, EX: 104.10. OU 104.10.10. ${NADA}"
+echo
+read -p "Ip: " ip
+echo
+read -p "Porta Datami: " PortaDatami
+echo
+dots=$(fgrep "." -o <<< $ip | wc -l)
+case $dots in
+  2)DuasCasas;;                                        3)Trescasas;;
+  *)Porra;;
+  esac
+}
+
+
+DuasCasas(){
+for i in $(seq 255)
+do
+GRISS=$(cat ipcasa.txt | grep -c 1)
+rm -f LogsProxyTest.txt
+
+curl -s -m 0.8 -H "CONNECT vpn.cloudmi.datami.com:1194 HTTP/1.1" -x $ip$GRISS.$i:$PortaDatami vpn.cloudmi.datami.com -vs >LogsProxyTest.txt 2>&1
+
+test=$(cat LogsProxyTest.txt | grep -c "Mark bundle")
+test2=$(cat LogsProxyTest.txt | grep -c "Proxy Authentication Required") 
+
+case $test in
+0) echo -e "${YELLOW}$ip$GRISS.$i ${NADA}| ${RED}FALSE${NADA}";;
+*) 
+case $test2 in 
+0) echo -e "${YELLOW}$ip$GRISS.$i ${NADA}| ${GREEN}Analise...${NADA}"; analise=$(curl -s -H "CONNECT vpn.cloudmi.datami.com:1194 HTTP/1.1" -x $ip$GRISS.$i:$PortaDatami vpn.cloudmi.datami.com -w %{http_code}) ; echo -e "$ip$GRISS.$i | $analise" >> TrueAnalise.txt ;; 
+*) echo -e "${YELLOW}$ip$GRISS.$i ${NADA}| ${YELLOW}Proxy Authentication Required${NADA}"; echo -e "$ip$GRISS.$i | Proxy Authentication Required" >> True.txt ;;
+esac
+ ;;
+ 
+esac
+
+
+
+done
+echo
+cat True.txt | grep "|"
+cat TrueAnalise.txt | grep "|"
+echo
+echo -e "1" >> ipcasa.txt
+DuasCasas
+}
+
+
+Trescasas(){
+for i in $(seq 255)
+do
+rm -f LogsProxyTest.txt
+
+curl -s -m 0.8 -H "CONNECT vpn.cloudmi.datami.com:1194 HTTP/1.1" -x $ip$i:8043 vpn.cloudmi.datami.com -vs >LogsProxyTest.txt 2>&1
+
+
+test=$(cat LogsProxyTest.txt | grep -c "Mark bundle")
+test2=$(cat LogsProxyTest.txt | grep -c "Proxy Authentication Required") 
+
+case $test in
+
+0) echo -e "${YELLOW}$ip$i ${NADA}| ${RED}FALSE${NADA}";;
+*) 
+case $test2 in 
+0) echo -e "${YELLOW}$ip$i ${NADA}| ${GREEN}Analise...${NADA}"; analise=$(curl -s =-H "CONNECT vpn.cloudmi.datami.com:1194 HTTP/1.1" -x $ip$i:8043 vpn.cloudmi.datami.com -w %{http_code}) ; echo -e "$ip$i | $analise" >> TrueAnalise.txt ;; 
+*) echo -e "${YELLOW}$ip$i ${NADA}| ${YELLOW}Proxy Authentication Required${NADA}"; echo -e "$ip$i | Proxy Authentication Required" >> True.txt ;;
+esac
+ ;;
+ 
+esac
+done
+echo
+cat True.txt | grep "|"
+cat TrueAnalise.txt | grep "|"
+}
+
+Porra
