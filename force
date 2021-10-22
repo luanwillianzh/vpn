@@ -939,11 +939,24 @@ echo
 
 DDD(){
 clear
-clear ; read -p "DIGITE O DDD: " ddd
+clear ; read -p "DIGITE O DDD: " ddd1
 echo
-echo "CIDADES ENCONTRADAS: "
+PuxarDDD=$(curl -s https://www.guialince.com.br/ddd/$ddd1)
+Estado=$(echo "$PuxarDDD" | grep "/ddd/" | cut -d'>' -f7 | grep "/td" | grep "</td" | cut -d'<' -f1)
+
+Cidade=$(echo "$PuxarDDD" | grep "/ddd/" | cut -d'>' -f4 | grep "/a" | grep "</a" | cut -d'<' -f1)
+
+DDDQuanti=$(echo "$Cidade" | wc -l)
+
+echo -e "${DESTACAR}NUMERO DE CIDADES ENCONTRADAS: $DDDQuanti${NADA}"
 echo
-curl -s https://dddcidade.com.br/busca/ -d "search=$ddd" | grep "ddd-" | cut -d'>' -f3 | cut -d'<' -f1
+for i in $(seq $DDDQuanti)
+do
+CidadeEnd=$(echo "$Cidade" | sed -n "$i"p)
+EstadoEnd=$(echo "$Estado" | sed -n "$i"p) 
+echo -e "${YELLOW}$CidadeEnd${NADA} | ${GREEN}$EstadoEnd${NADA}"
+done
+
 echo
 read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   case $optione1 in
