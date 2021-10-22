@@ -37,7 +37,7 @@ echo
     3)Menu3;;
     4)Menu4;;
     5)Menu5;;
-    0)su -c killall com.termux;;
+    0)killall com.termux ; exit;;
     *) echo ; MenuPrincipal;;
     esac
      }
@@ -837,6 +837,7 @@ echo -e "            ${DESTACAR}[ 1 ] - Ver MBs Gastos ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 2 ] - X9 de IP"
 echo -e "            [ 3 ] - DNS Change ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 4 ] - SpeedTest"
+echo -e "            [ 5 ] - X9 de DDD"
 echo -e "            [ 0 ] - Voltar${NADA}"
 echo "         ==================================="
 echo
@@ -849,6 +850,7 @@ echo
    2)Alter2;;
    3)Alter3;;
    4)Speed;;
+   5)DDD;;
    0)MenuPrincipal;;
    *) Menu3;;
     esac
@@ -876,11 +878,16 @@ check2
 
 Alter2(){
 clear
-read -p "QUER SELECIONAR UM IP PERSONALIZADO? [Y/n]" optione1211
+echo -e "${DESTACAR}1 - IP Atual"
+echo -e "2 - IP Personalizado"
+echo -e "0 - Voltar ${NADA}"
+echo
+read -n1 -p "Escolha uma opção: " optione1211
   case $optione1211 in 
-  y)clear ; read -p "DIGITE O IP: " Plain ; opiiy;;
-  Y)clear ; read -p "DIGITE O IP: " Plain ; opiiy;;
-  *)clear ; Plain=$(curl -s ipecho.net/plain) ; echo -e "SEU IP ATUAL É: ${GREEN}$Plain${SCOLOR}" ; echo;;
+  2)clear ; read -p "DIGITE O IP: " Plain ; opiiy;;
+  1)clear ; Plain=$(curl -s ipecho.net/plain) ; echo -e "SEU IP ATUAL É: ${GREEN}$Plain${SCOLOR}" ; echo;;
+  0)Menu3;;
+  *)Alter2;;
   esac
 
 GREEN='\033[1;32m'
@@ -929,7 +936,20 @@ echo
   *)Menu3;;
   esac
 }
-  
+
+DDD(){
+clear
+clear ; read -p "DIGITE O DDD: " ddd
+echo
+echo "CIDADES ENCONTRADAS: "
+echo
+curl -s https://dddcidade.com.br/busca/ -d "search=$ddd" | grep "ddd-" | cut -d'>' -f3 | cut -d'<' -f1
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)Menu3;;
+  esac
+}
   
 Alter3(){
 check() {
