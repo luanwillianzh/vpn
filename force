@@ -838,6 +838,7 @@ echo -e "            ${DESTACAR}[ 2 ] - X9 de IP"
 echo -e "            [ 3 ] - DNS Change ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 4 ] - SpeedTest"
 echo -e "            [ 5 ] - X9 de DDD"
+echo -e "            [ 6 ] - SMS Anônimo"
 echo -e "            [ 0 ] - Voltar${NADA}"
 echo "         ==================================="
 echo
@@ -851,6 +852,7 @@ echo
    3)Alter3;;
    4)Speed;;
    5)DDD;;
+   6)SmsA;;
    0)MenuPrincipal;;
    *) Menu3;;
     esac
@@ -963,7 +965,51 @@ read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   *)Menu3;;
   esac
 }
-  
+
+SmsA(){
+clear
+read -p "DIGITE O DDD+NUMERO: " smsnumero
+echo
+read -p "DIGITE UMA MENSAGEM: " smsmensagem
+echo
+SMSenvio=$(curl -s -X POST https://textbelt.com/text --data-urlencode phone='+55 $smsnumero' --data-urlencode message='$smsmensagem' -d key=textbelt)
+
+smsresponse1=$(echo "$SMSenvio" | grep -i -c "true")
+case $smsresponse1 in
+1)echo -e "${GREEN}MENSAGEM ENVIADA COM SUCESSO${NADA}"; voltar111 ;;
+0);;
+esac
+
+smsresponse3=$(echo "$SMSenvio" | grep -i -c "Your phone number was not provided")
+case $smsresponse3 in
+1)echo -e "${RED}OCORREU UM ERRO, VERIFIQUE SEU NUMERO${NADA}" ;voltar111;;
+0);;
+esac
+
+smsresponse2=$(echo "$SMSenvio" | grep -i -c "Only one test text message is allowed per day")
+case $smsresponse2 in
+1)echo -e "${YELLOW}LIMITE DE MENSAGENS DIARIAS EXCEDIDO${NADA}" ;voltar111;;
+0);;
+esac
+
+
+smsresponse4=$(echo "$SMSenvio" | grep -i -c "false")
+case $smsresponse4 in
+*)echo -e "${YELLOW}OCORREU UM ERRO DESCONHECIDO${NADA}";;
+esac
+voltar111
+}
+voltar111(){
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)Menu3;;
+  esac
+}
+
+
+
+
 Alter3(){
 check() {
     su=$(su -h | grep -c "command")
@@ -2073,8 +2119,8 @@ echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
 
 echo -e "============================================${NADA}"
 
-echo -e "${DESTACAR}DESLIGUE O WI-FI, PARE A VPN E LIGUE OS DADOS "
-echo -e "MOVEIS PARA O SCRIPT GERAR O ${GREEN}PASS${DESTACAR} E CAPTURAR OS"
+echo -e "${RED}DESLIGUE O WI-FI, PARE A VPN E LIGUE OS DADOS "
+echo -e "MOVEIS${NADA}${DESTACAR} PARA O SCRIPT GERAR O ${GREEN}PASS${DESTACAR} E CAPTURAR OS"
 echo -e "TOKENS DE ADS QUE ESTÃO ATIVOS NA SUA LINHA"
 
 echo
@@ -2092,15 +2138,17 @@ echo -e "DIGITE ${GREEN}Y${DESTACAR} DEPOIS DE TER FEITO TUDO ${NADA}"
 
 AccessPass=$(curl -s -d "pageId=660224&version=2" i.vivo.ddivulga.com/i/gp | cut -d'"' -f4)
 echo -e "$AccessPass" >> chavedeacesso.txt
+
+
 clear
 echo -e "============================================${NADA}"
 
 echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
 
 echo -e "============================================${NADA}"
-echo -e "${DESTACAR}OK, PODE SE CONECTAR NOVAMENTE"
+echo -e "${DESTACAR}JÁ PODE SE CONECTAR EM VPNS OU WIFI SE QUISER"
 echo
-read -n1 -p $'APERTE QUALQUER TECLA PARA CONTINUAR' conectadoain
+read -n1 -p $'APERTE QUALQUER TECLA APÓS SE CONECTAR' conectadoain
 case $conectadoain in
 *)Buscartokens;;
 esac
@@ -2177,7 +2225,11 @@ X9deToken3=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A%22101%22%2C%22target%22%3A
 echo -e "$X9deToken" >> tokencreator.txt
 echo -e "$X9deToken2" >> tokencreator2.txt
 
-PassVencido=$(cat tokencreator2.txt | grep -c 'msisdn')
+NumeroDeTelefone=$(cat tokencreator2.txt | grep -o msisdn.................................... | cut -d '"' -f3 | grep -n 55 | grep 1: | cut -d':' -f2)
+
+PassCheck=$(cat tokencreator2.txt | grep -o msisdn)
+
+PassVencido=$(echo "$PassCheck" | grep -c 'msisdn')
 case $PassVencido in
 0) clear ; echo -e "============================================${NADA}" ; echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}" ; echo -e "============================================${NADA}" ; echo -e "${RED}ESSE PASS ESTÁ VENCIDO OU É INVALIDO${NADA}" ; sleep 5 ; Menu5;;
 *) ;;
@@ -2190,7 +2242,7 @@ impressionid=$(cat tokencreator.txt | grep -a -i -o impressionEventId...........
 echo -e "$impressionid" >> impressionidcriar.txt
 
 
-NumeroDeTelefone=$(curl -s -d "apass=$AccessPass" http://e.vivo.ddivulga.com/api/getMsisdn -H "Origin: http://navegue.vivo.com.br" | cut -d'"' -f4)
+
 NewTokensRev
 }
 
@@ -2254,7 +2306,6 @@ clear
 echo
 AZULALL='\e[01;37;44m'
 VermelhoAll='\e[01;37;41m'
-echo -e "${VermelhoAll}       NUMERO: $NumeroDeTelefone        ${NADA}"
 echo -e "${VermelhoAll}         TESTAGEM INICIADA          ${NADA}"
 echo -e "${AZULALL}====================================${NADA}"
 BrancoAll='\e\033[03;37;47m'
@@ -2563,7 +2614,6 @@ clear
 Ler12
 }
 Ler12(){
-NumeroDeTelefone=$(cat tokencreator2.txt | grep -o msisdn.................................... | cut -d '"' -f3 | grep -n 55 | grep 1: | cut -d':' -f2)
 echo -e "1" >> TestesFeitos.txt
 TestesFeitos=$(cat TestesFeitos.txt | wc -l)
 echo -e "${VermelhoAll}            TESTAGEM FINALIZADA             ${NADA}"
@@ -2762,7 +2812,6 @@ case $TokensNovos00 in
 *) echo -e "${RED}NENHUM TOKEN FOI ENCONTRADO${NADA}" ;;
 esac
 
-NumeroDeTelefone=$(cat tokencreator2.txt | grep -o msisdn.................................... | cut -d '"' -f3 | grep -n 55 | grep 1: | cut -d':' -f2)
 
 echo
 echo -e "${CINZA}NUMERO DE TELEFONE USADO:${NADA} ${GREEN}$NumeroDeTelefone${NADA}"
@@ -2811,7 +2860,6 @@ case $TokensNovos0 in
 *) echo -e "${RED}NENHUM TOKEN NOVO FOI ENCONTRADO${NADA}" ;;
 esac
 
-NumeroDeTelefone=$(cat tokencreator2.txt | grep -o msisdn.................................... | cut -d '"' -f3 | grep -n 55 | grep 1: | cut -d':' -f2)
 
 echo
 echo -e "${CINZA}NUMERO DE TELEFONE USADO:${NADA} ${GREEN}$NumeroDeTelefone${NADA}"
