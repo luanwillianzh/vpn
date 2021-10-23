@@ -949,8 +949,9 @@ Estado=$(echo "$PuxarDDD" | grep "/ddd/" | cut -d'>' -f7 | grep "/td" | grep "</
 Cidade=$(echo "$PuxarDDD" | grep "/ddd/" | cut -d'>' -f4 | grep "/a" | grep "</a" | cut -d'<' -f1)
 
 DDDQuanti=$(echo "$Cidade" | wc -l)
-
-echo -e "${DESTACAR}NUMERO DE CIDADES ENCONTRADAS: $DDDQuanti${NADA}"
+case $DDDQuanti in
+1)echo -e "${RED}NENHUMA CIDADE ENCONTRADA COM ESSE DDD${NADA}";;
+*)echo -e "${DESTACAR}NUMERO DE CIDADES ENCONTRADAS: $DDDQuanti${NADA}"
 echo
 for i in $(seq $DDDQuanti)
 do
@@ -958,6 +959,8 @@ CidadeEnd=$(echo "$Cidade" | sed -n "$i"p)
 EstadoEnd=$(echo "$Estado" | sed -n "$i"p) 
 echo -e "${YELLOW}$CidadeEnd${NADA} | ${GREEN}$EstadoEnd${NADA}"
 done
+;;
+esac
 
 echo
 read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
