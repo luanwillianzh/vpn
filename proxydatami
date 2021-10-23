@@ -27,8 +27,15 @@ echo -e "FUNCIONA COM 2 OU 3 CASAS, EX: 51.210. OU 51.210.118. ${NADA}"
 echo
 read -p "Ip: " ip
 echo
-read -p "Porta Datami: " PortaDatami
+read -p "Porta Datami (8043): " PortaDatami
 echo
+read -p "Digite quantos IPs quer pular Caso queira: " Casas
+echo
+for i in $(seq $Casas)
+do
+echo -e "1" >> ipcasa.txt
+done
+
 dots=$(fgrep "." -o <<< $ip | wc -l)
 case $dots in
   2)DuasCasas;;                                        3)Trescasas;;
