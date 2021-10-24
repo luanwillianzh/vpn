@@ -2271,7 +2271,7 @@ advreward=$(cat tokencreator.txt | grep -o rewardWebMessage2....................
 
 echo -e "$advreward" >> advrewardcriar.txt
 
-advmensagem=$(cat tokencreator.txt | grep -o headlineWebmessage1......................................................................... | cut -d'"' -f2-3 | cut -d'<' -f1 | cut -d'"' -f2 | cut -d'.' -f1 | cut -d',' -f1)
+advmensagem=$(cat tokencreator.txt | grep -o headlineWebmessage1......................................................................... | cut -d'"' -f2-3 | cut -d'<' -f1 | cut -d'"' -f2 | cut -d'.' -f1)
 
 echo -e "$advmensagem" >> advmensagem.txt
 
