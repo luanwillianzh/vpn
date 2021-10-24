@@ -2367,8 +2367,8 @@ do
 reward1=$(curl -s "http://e.vivo.ddivulga.com/api/clickEvent" -d "advId=$AdvIDTest&eventImpressionId=$ImpressionTest&apass=$AccessPass")
 rw1=$(echo $reward1 | grep -c "evtClickId")
 case $rw1 in
-1) echo -e "${GREEN}SUCESSO NO ENVIO DOS MBS - $i/25${NADA}" ;;
-0)echo -e "${RED}NÃO ELEGIVEL NESSE TESTADOR${NADA}"; echo ; echo ; Testador;;
+1) echo -e "${GREEN}SUCESSO NO ENVIO DOS MBS - $i/25${NADA}" ; sleep 2 ;;
+0)echo -e "${RED}NÃO ELEGIVEL NESSE TESTADOR${NADA}"; sleep 2 ; echo ; echo ; Testador;;
 esac
 
 done
