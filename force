@@ -24,6 +24,7 @@ echo -e "            ${DESTACAR}[ 2 ] - Rotear VPN ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 3 ] - Outros"
 echo -e "            ${DESTACAR}[ 4 ] - X9 de Arquivos ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 5 ] - MBs Free"
+echo -e "            ${DESTACAR}[ 6 ] - Atualizar"
 echo -e "            ${DESTACAR}[ 0 ] - Sair${NADA}"
 echo "         ==================================="
 echo
@@ -37,11 +38,21 @@ echo
     3)Menu3;;
     4)Menu4;;
     5)Menu5;;
+    6)Menu6;;
     0)killall com.termux ; exit;;
     *) echo ; MenuPrincipal;;
     esac
      }
 
+Menu6(){ 
+clear
+echo -e "LIGUE A INTERNET"
+read -p "DIGITE Y DEPOIS DE LIGAR" optione12 ; case $optione12 in 
+  y)curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/force && chmod +x force && cp force $PREFIX/bin/ ; clear ; echo -e "SCRIPT ATUALIZADO COM SUCESSO"; sleep 5 ;./force;;
+  Y)curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/force && chmod +x force && cp force $PREFIX/bin/ ; clear ; echo -e "SCRIPT ATUALIZADO COM SUCESSO"; sleep 5 ; ./force;;
+  *)Menu6;;
+  esac
+}
 Menu1() {
 check() {
     su=$(su -h | grep -c "command")
@@ -2259,7 +2270,7 @@ advreward=$(cat tokencreator.txt | grep -o rewardWebMessage2....................
 
 echo -e "$advreward" >> advrewardcriar.txt
 
-advmensagem=$(cat tokencreator.txt | grep -o headlineWebmessage1......................................................................... | cut -d'"' -f2-3 | cut -d'<' -f1 | cut -d'"' -f2)
+advmensagem=$(cat tokencreator.txt | grep -o headlineWebmessage1......................................................................... | cut -d'"' -f2-3 | cut -d'<' -f1 | cut -d'"' -f2 | cut -d'.' -f1 | cut -d',' -f1)
 
 echo -e "$advmensagem" >> advmensagem.txt
 
@@ -2279,7 +2290,7 @@ echo -e "$i1mpressionid" >> impressionid.txt
 a1dvname=$(cat advnamecriar.txt | grep -n '"' | cut -d':' -f2 | cut -d'"' -f1)
 echo -e "$a1dvname" >> advname.txt
 
-a1dvreward=$(cat advrewardcriar.txt | grep -n '"' | cut -d'"' -f3 | cut -d'>' -f2 | cut -d'<' -f1)
+a1dvreward=$(cat advrewardcriar.txt | grep -n '"' | cut -d '"' -f2 | cut -d'>' -f2 | cut -d'<' -f1)
 echo -e "$a1dvreward" >> advreward.txt
 
 Mensagem12
@@ -2466,40 +2477,40 @@ advmensagem=$(cat tokencreatorrev.txt | grep -o headlineWebmessage1.............
 
 echo -e "$advmensagem" >> advmensagemrev.txt
 
-advmensagem001=$(cat advmensagemrev.txt | grep -n '"' | grep "1:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1)
-advmensagem002=$(cat advmensagemrev.txt | grep -n '"' | grep "2:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1)
-advmensagem003=$(cat advmensagemrev.txt | grep -n '"' | grep "3:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1)
-advmensagem004=$(cat advmensagemrev.txt | grep -n '"' | grep "4:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1)
-advmensagem005=$(cat advmensagemrev.txt | grep -n '"' | grep "5:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1)
-advmensagem006=$(cat advmensagemrev.txt | grep -n '"' | grep "6:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1)
-advmensagem007=$(cat advmensagemrev.txt | grep -n '"' | grep "7:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1)
-advmensagem008=$(cat advmensagemrev.txt | grep -n '"' | grep "8:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1)
-advmensagem009=$(cat advmensagemrev.txt | grep -n '"' | grep "9:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1)
-advmensagem0010=$(cat advmensagemrev.txt | grep -n '"' | grep "10:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1)
+advmensagem001=$(cat advmensagemrev.txt | grep -n '"' | grep "1:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1 | cut -d'.' -f1 )
+advmensagem002=$(cat advmensagemrev.txt | grep -n '"' | grep "2:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1 | cut -d'.' -f1 )
+advmensagem003=$(cat advmensagemrev.txt | grep -n '"' | grep "3:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1 | cut -d'.' -f1 )
+advmensagem004=$(cat advmensagemrev.txt | grep -n '"' | grep "4:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1 | cut -d'.' -f1 )
+advmensagem005=$(cat advmensagemrev.txt | grep -n '"' | grep "5:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1 | cut -d'.' -f1 )
+advmensagem006=$(cat advmensagemrev.txt | grep -n '"' | grep "6:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1 | cut -d'.' -f1 )
+advmensagem007=$(cat advmensagemrev.txt | grep -n '"' | grep "7:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1 | cut -d'.' -f1 )
+advmensagem008=$(cat advmensagemrev.txt | grep -n '"' | grep "8:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1 | cut -d'.' -f1 )
+advmensagem009=$(cat advmensagemrev.txt | grep -n '"' | grep "9:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1 | cut -d'.' -f1 )
+advmensagem0010=$(cat advmensagemrev.txt | grep -n '"' | grep "10:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1 | cut -d'.' -f1 )
 
 
-advreward001=$(cat advrewardrev.txt | grep -n '"' | grep "1:" | cut -d'"' -f3)
-advreward002=$(cat advrewardrev.txt | grep -n '"' | grep "2:" | cut -d'"' -f3)
-advreward003=$(cat advrewardrev.txt | grep -n '"' | grep "3:" | cut -d'"' -f3)
-advreward004=$(cat advrewardrev.txt | grep -n '"' | grep "4:" | cut -d'"' -f3)
-advreward005=$(cat advrewardrev.txt | grep -n '"' | grep "5:" | cut -d'"' -f3)
-advreward006=$(cat advrewardrev.txt | grep -n '"' | grep "6:" | cut -d'"' -f3)
-advreward007=$(cat advrewardrev.txt | grep -n '"' | grep "7:" | cut -d'"' -f3)
-advreward008=$(cat advrewardrev.txt | grep -n '"' | grep "8:" | cut -d'"' -f3)
-advreward009=$(cat advrewardrev.txt | grep -n '"' | grep "9:" | cut -d'"' -f3)
-advreward0010=$(cat advrewardrev.txt | grep -n '"' | grep "10:" | cut -d'"' -f3)
+advreward001=$(cat advrewardrev.txt | grep -n '"' | grep "1:" | cut -d'"' -f2-3)
+advreward002=$(cat advrewardrev.txt | grep -n '"' | grep "2:" | cut -d'"' -f2-3)
+advreward003=$(cat advrewardrev.txt | grep -n '"' | grep "3:" | cut -d'"' -f2-3)
+advreward004=$(cat advrewardrev.txt | grep -n '"' | grep "4:" | cut -d'"' -f2-3)
+advreward005=$(cat advrewardrev.txt | grep -n '"' | grep "5:" | cut -d'"' -f2-3)
+advreward006=$(cat advrewardrev.txt | grep -n '"' | grep "6:" | cut -d'"' -f2-3)
+advreward007=$(cat advrewardrev.txt | grep -n '"' | grep "7:" | cut -d'"' -f2-3)
+advreward008=$(cat advrewardrev.txt | grep -n '"' | grep "8:" | cut -d'"' -f2-3)
+advreward009=$(cat advrewardrev.txt | grep -n '"' | grep "9:" | cut -d'"' -f2-3)
+advreward0010=$(cat advrewardrev.txt | grep -n '"' | grep "10:" | cut -d'"' -f2-3)
 
 
-advname001=$(cat advnamerev.txt | grep -n '"' | grep "1:" | cut -d':' -f2 | cut -d'"' -f1)
-advname002=$(cat advnamerev.txt | grep -n '"' | grep "2:" | cut -d':' -f2 | cut -d'"' -f1)
-advname003=$(cat advnamerev.txt | grep -n '"' | grep "3:" | cut -d':' -f2 | cut -d'"' -f1)
-advname004=$(cat advnamerev.txt | grep -n '"' | grep "4:" | cut -d':' -f2 | cut -d'"' -f1)
-advname005=$(cat advnamerev.txt | grep -n '"' | grep "5:" | cut -d':' -f2 | cut -d'"' -f1)
-advname006=$(cat advnamerev.txt | grep -n '"' | grep "6:" | cut -d':' -f2 | cut -d'"' -f1)
-advname007=$(cat advnamerev.txt | grep -n '"' | grep "7:" | cut -d':' -f2 | cut -d'"' -f1)
-advname008=$(cat advnamerev.txt | grep -n '"' | grep "8:" | cut -d':' -f2 | cut -d'"' -f1)
-advname009=$(cat advnamerev.txt | grep -n '"' | grep "9:" | cut -d':' -f2 | cut -d'"' -f1)
-advname0010=$(cat advnamerev.txt | grep -n '"' | grep "10:" | cut -d':' -f2 | cut -d'"' -f1)
+advname001=$(cat advnamerev.txt | grep -n '"' | grep "1:" | cut -d':' -f2)
+advname002=$(cat advnamerev.txt | grep -n '"' | grep "2:" | cut -d':' -f2)
+advname003=$(cat advnamerev.txt | grep -n '"' | grep "3:" | cut -d':' -f2)
+advname004=$(cat advnamerev.txt | grep -n '"' | grep "4:" | cut -d':' -f2)
+advname005=$(cat advnamerev.txt | grep -n '"' | grep "5:" | cut -d':' -f2)
+advname006=$(cat advnamerev.txt | grep -n '"' | grep "6:" | cut -d':' -f2)
+advname007=$(cat advnamerev.txt | grep -n '"' | grep "7:" | cut -d':' -f2)
+advname008=$(cat advnamerev.txt | grep -n '"' | grep "8:" | cut -d':' -f2)
+advname009=$(cat advnamerev.txt | grep -n '"' | grep "9:" | cut -d':' -f2)
+advname0010=$(cat advnamerev.txt | grep -n '"' | grep "10:" | cut -d':' -f2)
 
 
 
