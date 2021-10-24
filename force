@@ -47,7 +47,8 @@ echo
 Menu6(){ 
 clear
 echo -e "LIGUE A INTERNET"
-read -p "DIGITE Y DEPOIS DE LIGAR" optione12 ; case $optione12 in 
+echo
+read -n1 -p "DIGITE Y DEPOIS DE LIGAR" optione12 ; case $optione12 in 
   y)curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/force && chmod +x force && cp force $PREFIX/bin/ ; clear ; echo -e "SCRIPT ATUALIZADO COM SUCESSO"; sleep 5 ;./force;;
   Y)curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/force && chmod +x force && cp force $PREFIX/bin/ ; clear ; echo -e "SCRIPT ATUALIZADO COM SUCESSO"; sleep 5 ; ./force;;
   *)Menu6;;
