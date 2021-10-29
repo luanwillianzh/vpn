@@ -987,7 +987,7 @@ read -p "DIGITE O DDD+NUMERO: " smsnumero
 echo
 read -p "DIGITE UMA MENSAGEM: " smsmensagem
 echo
-SMSenvio=$(curl -s -X POST https://textbelt.com/text --data-urlencode phone='+55 $smsnumero' --data-urlencode message='$smsmensagem' -d key=textbelt)
+SMSenvio=$(curl -s -X POST https://textbelt.com/text --data-urlencode phone="+55 $smsnumero" --data-urlencode message="$smsmensagem" -d key=textbelt)
 
 smsresponse1=$(echo "$SMSenvio" | grep -i -c "true")
 case $smsresponse1 in
