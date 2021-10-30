@@ -1,6 +1,7 @@
 #!/bin/bash
 clear
 
+BRANCO='\033[1;29m'
 VermelhoAll='\e[01;37;41m'
 NADA='\033[0m'
 CINZA='\e[02;37m'
@@ -37,23 +38,40 @@ echo
     2)Menu2;;
     3)Menu3;;
     4)Menu4;;
-    5)Menu5;;
+    5)Main5;;
     6)Menu6;;
-    0)killall com.termux ; exit;;
+    0)killall com.termux ;clear ; exit;;
     *) echo ; MenuPrincipal;;
     esac
      }
 
 Menu6(){ 
 clear
-echo -e "LIGUE A INTERNET"
+echo -e "${DESTACAR}ATUALIZE DIARIAMENTE..."
+echo
+echo -e "${DESTACAR}1 - ATUALIZAR"
+echo -e "${DESTACAR}0 - VOLTAR${NADA}"
+echo
+read -n1 -p "Escolha uma Opção: " optione12 ; case $optione12 in 
+1);;
+0)MenuPrincipal;;
+*)Menu6;;
+esac
+
+echo
+echo
+echo -e "${DESTACAR}LIGUE A INTERNET${NADA}"
 echo
 read -n1 -p "DIGITE Y DEPOIS DE LIGAR" optione12 ; case $optione12 in 
-  y)curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/force && chmod +x force && cp force $PREFIX/bin/ ; clear ; echo -e "SCRIPT ATUALIZADO COM SUCESSO"; sleep 5 ;./force;;
-  Y)curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/force && chmod +x force && cp force $PREFIX/bin/ ; clear ; echo -e "SCRIPT ATUALIZADO COM SUCESSO"; sleep 5 ; ./force;;
-  *)Menu6;;
+  y)echo ; echo ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/force && chmod +x force && cp force $PREFIX/bin/  ; echo -e "${GREEN}SCRIPT ATUALIZADO COM SUCESSO${NADA}"; sleep 5 ;./force;;
+  
+  Y)echo ; echo ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/force && chmod +x force && cp force $PREFIX/bin/  ; echo -e "${GREEN}SCRIPT ATUALIZADO COM SUCESSO${NADA}"; sleep 5 ; ./force;;
+  *)MenuPrincipal;;
   esac
 }
+
+
+
 Menu1() {
 check() {
     su=$(su -h | grep -c "command")
@@ -542,7 +560,14 @@ check1
 
 wifiip1=$( cat wifiip1 | grep "1" | cut -d'.' -f1-3)
 
-su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $wifiip1.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $wifiip1.0/24 dev wlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev wlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux
+Rotear=$(su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $wifiip1.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $wifiip1.0/24 dev wlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev wlan0 scope link table 61)
+clear 
+
+route=$(echo $Rotear | grep -c "File exists")
+case $route in
+0)echo -e "${GREEN}Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux;;
+1)echo -e "${RED}Pare o roteamento Wi-Fi atual antes de iniciar um novo${NADA}" ; sleep 7 && MetodoWIFI1;;
+esac
 }
 
 AltRW2(){
@@ -632,7 +657,13 @@ check1
 
 wifiip2=$( cat wifiip2 | grep "1" | cut -d'.' -f1-3)
 
-su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $wifiip2.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $wifiip2.0/24 dev swlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev swlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux
+Rotear=$(su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $wifiip2.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $wifiip2.0/24 dev swlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev swlan0 scope link table 61) 
+
+route=$(echo $Rotear | grep -c "File exists")
+case $route in
+0)echo -e "${GREEN}Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux;;
+1)echo -e "${RED}Pare o roteamento Wi-Fi atual antes de iniciar um novo${NADA}" ; sleep 7 && MetodoWIFI2;;
+esac
 }
 
 AltRW22(){
@@ -721,8 +752,13 @@ check1() {
 check1
 
 usbip=$( cat usbip | grep "1" | cut -d'.' -f1-3)
+Rotear=$(su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $usbip.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $usbip.0/24 dev rndis0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev rndis0 scope link table 61) 
 
-su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $usbip.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $usbip.0/24 dev rndis0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev rndis0 scope link table 61 && clear ; echo "Compartilhamento via USB iniciado" ; sleep 5 && su -c killall com.termux
+route=$(echo $Rotear | grep -c "File exists")
+case $route in
+0)echo -e "${GREEN}Compartilhamento via USB iniciado" ; sleep 5 && su -c killall com.termux;;
+1)echo -e "${RED}Pare o roteamento USB atual antes de iniciar um novo${NADA}" ; sleep 7 && USB;;
+esac
 }
 
 
@@ -815,7 +851,13 @@ check1
 
 btip=$( cat btip | grep "1" | cut -d'.' -f1-3)
 
-su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $btip.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $btip.0/24 dev bt-pan scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev bt-pan scope link table 61 && echo "Compartilhamento via Bluetooth iniciado" ; sleep 5 && su -c killall com.termux
+Rotear=$(su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $btip.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $btip.0/24 dev bt-pan scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev bt-pan scope link table 61)
+
+route=$(echo $Rotear | grep -c "File exists")
+case $route in
+0)echo -e "${GREEN}Compartilhamento via Bluetooth iniciado" ; sleep 5 && su -c killall com.termux;;
+1)echo -e "${RED}Pare o roteamento Bluetooth atual antes de iniciar um novo${NADA}" ; sleep 7 && Bluetooth;;
+esac
 }
 
 AltRB2(){
@@ -850,7 +892,6 @@ echo -e "            ${DESTACAR}[ 2 ] - X9 de IP"
 echo -e "            [ 3 ] - DNS Change ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 4 ] - SpeedTest"
 echo -e "            [ 5 ] - X9 de DDD"
-echo -e "            [ 6 ] - SMS Anônimo"
 echo -e "            [ 0 ] - Voltar${NADA}"
 echo "         ==================================="
 echo
@@ -864,7 +905,6 @@ echo
    3)Alter3;;
    4)Speed;;
    5)DDD;;
-   6)SmsA;;
    0)MenuPrincipal;;
    *) Menu3;;
     esac
@@ -956,9 +996,9 @@ clear
 clear ; read -p "DIGITE O DDD: " ddd1
 echo
 PuxarDDD=$(curl -s https://www.guialince.com.br/ddd/$ddd1)
-Estado=$(echo "$PuxarDDD" | grep "/ddd/" | cut -d'>' -f7 | grep "/td" | grep "</td" | cut -d'<' -f1)
+Estado=$(echo "$PuxarDDD" | grep -a "/ddd/" | cut -d'>' -f7 | grep -a "/td" | grep -a "</td" | cut -d'<' -f1)
 
-Cidade=$(echo "$PuxarDDD" | grep "/ddd/" | cut -d'>' -f4 | grep "/a" | grep "</a" | cut -d'<' -f1)
+Cidade=$(echo "$PuxarDDD" | grep -a "/ddd/" | cut -d'>' -f4 | grep -a "/a" | grep -a "</a" | cut -d'<' -f1)
 
 DDDQuanti=$(echo "$Cidade" | wc -l)
 case $DDDQuanti in
@@ -980,48 +1020,6 @@ read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   *)Menu3;;
   esac
 }
-
-SmsA(){
-clear
-read -p "DIGITE O DDD+NUMERO: " smsnumero
-echo
-read -p "DIGITE UMA MENSAGEM: " smsmensagem
-echo
-SMSenvio=$(curl -s -X POST https://textbelt.com/text --data-urlencode phone="+55 $smsnumero" --data-urlencode message="$smsmensagem" -d key=textbelt)
-
-smsresponse1=$(echo "$SMSenvio" | grep -i -c "true")
-case $smsresponse1 in
-1)echo -e "${GREEN}MENSAGEM ENVIADA COM SUCESSO${NADA}"; voltar111 ;;
-0);;
-esac
-
-smsresponse3=$(echo "$SMSenvio" | grep -i -c "Your phone number was not provided")
-case $smsresponse3 in
-1)echo -e "${RED}OCORREU UM ERRO, VERIFIQUE SEU NUMERO${NADA}" ;voltar111;;
-0);;
-esac
-
-smsresponse2=$(echo "$SMSenvio" | grep -i -c "Only one test text message is allowed per day")
-case $smsresponse2 in
-1)echo -e "${YELLOW}LIMITE DE MENSAGENS DIARIAS EXCEDIDO${NADA}" ;voltar111;;
-0);;
-esac
-
-
-smsresponse4=$(echo "$SMSenvio" | grep -i -c "false")
-case $smsresponse4 in
-*)echo -e "${YELLOW}OCORREU UM ERRO DESCONHECIDO${NADA}";;
-esac
-voltar111
-}
-voltar111(){
-echo
-read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
-  case $optione1 in
-  *)Menu3;;
-  esac
-}
-
 
 
 
@@ -2092,8 +2090,13 @@ read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
 
 
 
-Menu5(){
-rm -f chavedeacesso.txt
+
+
+
+
+
+
+Main5(){
 clear
 echo -e '\n'
 echo "     ==================================="
@@ -2102,10 +2105,93 @@ echo "         ==================================="
 echo "                ESCOLHA UMA OPÇÃO"
 echo
 echo "        ==================================="
+echo -e "              ${DESTACAR}[ 1 ] - Vivo"
+echo -e "              [ 2 ] - Oi"
+echo -e "              [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo 
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
+read -n1 -p "ESCOLHA UMA OPÇÃO: " TokensNews01
+case $TokensNews01 in
+
+1)
+Repet1r="30"
+UrlAds="http://e.vivo.ddivulga.com/api/v2.1/fetch"
+UrlOrigin="http://navegue.vivo.com.br"
+UrlClick="http://e.vivo.ddivulga.com/api/clickEvent"
+UrlReferer="internetgratis.vivo.com.br"
+UrlResponse="http://e.vivo.ddivulga.com/api/leadConversionEvent"
+UrlPass="i.vivo.ddivulga.com/i/gp"
+UrlVideo="http://e.vivo.ddivulga.com/api/videoActionEvent"
+UrlVIdeo2="http://e.vivo.ddivulga.com/api/videoConversionEvent"
+OPERADORA="VIVO"
+
+
+Mensagens1="Informe Vivo: IMEI capturado, pode ser bloqueado pelo uso indevido conforme regulamento em nossa Rede. ligue no 1058
+Informe Vivo: Essa linha foi cancelada por uso indevido conforme regulamento em nossa Rede. ligue no 1058
+Voce ganhou 1GB de internet para usar em 30 dias ou ate consumir 100%. Em ate 1 hora o pacote estara ativo.
+Voce ganhou 10GB de internet para usar em 30 dia ou ate consumir 100%. Em ate 1 hora o pacote estara ativo.
+Voce ganhou 5GB de internet para usar em 30 dias ou ate consumir 100%. Em ate 1 hora o pacote estara ativo.
+Informe Vivo: Esse IMEI está sobre analise, caso seja detectado algum uso indevido ele será bloqueado. ligue no 1058
+Informe Vivo: Esse IMEI está sobre analise, caso seja detectado algum uso indevido ele será bloqueado. ligue no 1058
+Voce recarregou R$100 validos por 45 dias. Envie SMS p/8000 e receba seu saldo.
+Voce recarregou R$150 validos por 60 dias. Envie SMS p/8000 e receba seu saldo."
+
+Menu5
+;;
+
+
+2)
+Repet1r="9999"
+UrlAds="http://e.oi.ddivulga.com/api/v2.1/fetch" 
+UrlOrigin="http://e.oi.ddivulga.com"
+UrlClick="http://e.oi.ddivulga.com/api/clickEvent"
+UrlReferer="oi.ddivulga.com"
+UrlResponse="http://e.oi.ddivulga.com/api/leadConversionEvent"
+UrlPass="e.oi.ddivulga.com/api/gp"
+UrlVideo="http://e.oi.ddivulga.com/api/videoActionEvent"
+UrlVIdeo2="http://e.oi.ddivulga.com/api/videoConversionEvent"
+OPERADORA="OI"
+
+
+Mensagens1="Informe Oi: IMEI capturado, pode ser bloqueado pelo uso indevido conforme regulamento em nossa Rede
+Informe Vivo: Essa linha foi cancelada por uso indevido conforme regulamento em nossa Rede
+Voce ganhou um pacote de dados de 5.0 GB. Se ainda nao usou, aproveite e navegue agora
+Voce ganhou um pacote de dados de 1.0 GB. Se ainda nao usou, aproveite e navegue agora
+Voce ganhou um pacote de dados de 10.0 GB. Se ainda nao usou, aproveite e navegue agora
+Informe Oi: Esse IMEI está sobre analise, caso seja detectado algum uso indevido ele será bloqueado
+Informe Oi: Esse IMEI está sobre analise, caso seja detectado algum uso indevido ele será bloqueado
+Voce recarregou R$100 validos por 45 dias
+Voce recarregou R$150 validos por 45 dias"
+
+
+Menu5
+;;
+
+
+0)MenuPrincipal;;
+*)Main5;;
+esac
+}
+
+
+Menu5(){
+rm -f chavedeacesso.txt
+clear
+echo -e '\n'
+echo "     ==================================="
+echo "                    MBS $OPERADORA     "
+echo "         ===================================" 
+echo "                ESCOLHA UMA OPÇÃO"
+echo
+echo "        ==================================="
 echo -e "              ${DESTACAR}[ 1 ] - Procurar Pass"
 echo -e "              [ 2 ] - Usar Pass Personalizado"
 echo -e "              [ 3 ] - Usar Pass Salvos"
 echo -e "              [ 4 ] - Pegar Pass de Outras Pessoas"
+echo -e "              [ 5 ] - SMS Anônimo"
 echo -e "              [ 0 ] - Voltar${NADA}"
 echo "         ==================================="
 echo 
@@ -2118,7 +2204,8 @@ case $TokensNews01 in
 2)chavecustom ;;
 3)PassSalvos0;;
 4)ComoPegarOPass;;
-0)MenuPrincipal;;
+5)SmsA;;
+0)Main5;;
 *)Menu5;;
 esac
 }
@@ -2130,7 +2217,7 @@ LETRAPRETA='\e\033[02;30;47m'
 
 echo -e "============================================${NADA}"
 
-echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 
 echo -e "============================================${NADA}"
 
@@ -2139,6 +2226,7 @@ echo -e "MOVEIS${NADA}${DESTACAR} PARA O SCRIPT GERAR O ${GREEN}PASS${DESTACAR} 
 echo -e "TOKENS DE ADS QUE ESTÃO ATIVOS NA SUA LINHA"
 
 echo
+sleep 6
 
 echo -e "DIGITE ${GREEN}Y${DESTACAR} DEPOIS DE TER FEITO TUDO ${NADA}"
 
@@ -2151,14 +2239,14 @@ echo -e "DIGITE ${GREEN}Y${DESTACAR} DEPOIS DE TER FEITO TUDO ${NADA}"
  
  
 
-AccessPass=$(curl -s -d "pageId=660224&version=2" i.vivo.ddivulga.com/i/gp | cut -d'"' -f4)
-echo -e "$AccessPass" >> chavedeacesso.txt
+AccessPass=$(curl -s -d "pageId=660224&version=2" $UrlPass -H "Origin: $UrlOrigin" | cut -d'"' -f4)
+
 
 
 clear
 echo -e "============================================${NADA}"
 
-echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 
 echo -e "============================================${NADA}"
 echo -e "${DESTACAR}JÁ PODE SE CONECTAR EM VPNS OU WIFI SE QUISER"
@@ -2175,7 +2263,7 @@ BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 echo -e "============================================${NADA}"
 
-echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 
 echo -e "============================================${NADA}"
 read -p $'\e[01;37mCOLE O PASS: \033[1;32m' AccessPass
@@ -2189,7 +2277,7 @@ BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 echo -e "${NADA}============================================${NADA}"
 
-echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 
 echo -e "============================================${NADA}"
 read -p $'\e[01;37mQUER SALVAR ESSE PASS? [Y/n] ' AccessPassSave
@@ -2197,8 +2285,8 @@ echo
 case $AccessPassSave in
 n)Buscartokens;;
 N)Buscartokens;;
-Y)read -p $'\e[01;37mDIGITE UM NOME PARA O PASS: ' PassName ; echo -e " ${GREEN} $PassName${NADA}-$AccessPass" >> TokensSave.txt ; Buscartokens;;
-y)read -p $'\e[01;37mDIGITE UM NOME PARA O PASS: ' PassName ; echo -e "${GREEN} $PassName${NADA}-$AccessPass" >> TokensSave.txt ; Buscartokens;;
+Y)read -p $'\e[01;37mDIGITE UM NOME PARA O PASS: ' PassName ; echo -e " ${GREEN} $PassName${NADA}- $OPERADORA -$AccessPass" >> TokensSave.txt ; Buscartokens;;
+y)read -p $'\e[01;37mDIGITE UM NOME PARA O PASS: ' PassName ; echo -e " ${GREEN} $PassName${NADA}- $OPERADORA -$AccessPass" >> TokensSave.txt ; Buscartokens;;
 *)SalvarPass;;
 esac
 }
@@ -2209,13 +2297,15 @@ CINZA='\e[02;37m'
 DESTACAR='\e[01;37m'
 SCOLOR='\033[0m'
 echo
+rm -f TokensEncontrados.txt
+rm -f ReinicioAltomatico.txt
+rm -f ConversionEvent.txt
 rm -f advmensagem.txt
 rm -f advreward.txt
 rm -f advrewardcriar.txt
 rm -f advnamecriar.txt
 rm -f advname.txt
 rm -f TestesFeitos.txt
-rm -f TokensEncontrados.txt
 rm -f tokencreator.txt
 rm -f impressionid.txt
 rm -f tokencreator2.txt
@@ -2228,22 +2318,28 @@ BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 echo -e "${NADA}============================================${NADA}"
 
-echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 
 echo -e "============================================${NADA}"
 echo -e "${DESTACAR}PROCURANDO TOKENS...${NADA}"
 
- 
+X9deToken4=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A110%2C%22target%22%3A%22%22%7D%5D&pageId=693930&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2Fportalrecarga.vivo.com.br%2F&accessPass=$AccessPass" $UrlAds -H "Origin: $UrlOrigin")
 
-X9deToken2=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A102%2C%22target%22%3A%22slot%3D102%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852321632267696163226764515871178651666272523390%3BCTData%3Dgpv%3D3ckp%3Dcddm%3Dvivocombrapv15www44%3D4cpv15www44%3D3rpv15www44%3D3%3BgaGB9C14SX2D%3DGS11163227460731163227463532%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401696994391sessionf4b43fa1a5d44b1caff998388c8331e71633751668%3BgaDMLPJDP0E3%3DGS1116337495891116337498100%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1310319720541633906861%3Bttnprf%3D%3BgatgtagUA1640616782%3D1%3BgatgtagUA1640616781%3D1%3Bttcvmt%3D1633992745%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1633992745047%3Bos%3Dandroid%3BtailCity%3Dcuiaba%3BtailtState%3Dmato%2520grosso%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3Dbr%22%7D%5D&pageId=660224&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2Finternetgratis.vivo.com.br%2F&accessPass=$AccessPass" http://e.vivo.ddivulga.com/api/v2.1/fetch -H "Origin: http://navegue.vivo.com.br") 
+X9deToken2=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A102%2C%22target%22%3A%22slot%3D102%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852321632267696163226764515871178651666272523390%3BCTData%3Dgpv%3D3ckp%3Dcddm%3Dvivocombrapv15www44%3D4cpv15www44%3D3rpv15www44%3D3%3BgaGB9C14SX2D%3DGS11163227460731163227463532%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401696994391sessionf4b43fa1a5d44b1caff998388c8331e71633751668%3BgaDMLPJDP0E3%3DGS1116337495891116337498100%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1310319720541633906861%3Bttnprf%3D%3BgatgtagUA1640616782%3D1%3BgatgtagUA1640616781%3D1%3Bttcvmt%3D1633992745%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1633992745047%3Bos%3Dandroid%3BtailCity%3Dcuiaba%3BtailtState%3Dmato%2520grosso%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3Dbr%22%7D%5D&pageId=660224&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2F$UrlReferer%2F&accessPass=$AccessPass" $UrlAds -H "Origin: $UrlOrigin") 
 
 
-X9deToken=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A%22101%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22102%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22103%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22104%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%5D&pageId=660224&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2Finternetgratis.vivo.com.br%2F&accessPass=$AccessPass" http://e.vivo.ddivulga.com/api/v2.1/fetch -H "Origin: http://a.vivo.ddivulga.com")
+X9deToken=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A%22105%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22107%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22109%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22106%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22101%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22100%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22108%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22102%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22104%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22110%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22113%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22103%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22111%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22119%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22114%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22112%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22116%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22118%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22120%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22117%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22115%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%5D&pageId=660224&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2F$UrlReferer%2F&accessPass=$AccessPass" $UrlAds -H "Origin: $UrlOrigin")
 
-X9deToken3=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A%22101%22%2C%22target%22%3A%22os%3Dandroid%3B%22%7D%5D&pageId=999534&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2Fclubefacil.com%2F&accessPass=$AccessPass" http://e.vivo.ddivulga.com/api/v2.1/fetch -H "Origin:http://a.vivo.ddivulga.com")
+X9deToken3=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A%22101%22%2C%22target%22%3A%22os%3Dandroid%3B%22%7D%5D&pageId=999534&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2Fclubefacil.com%2F&accessPass=$AccessPass" $UrlAds -H "Origin: $UrlOrigin")
 
+X9Oi=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A301%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Dmanaus%3BtailtState%3Damazonas%3BtailCountry%3Dbr%22%7D%5D&pageId=822068&insertionId=&insertionUUID=&insertionType=ANY&referer=&accessPass=$AccessPass" -H "Origin: $UrlOrigin" $UrlAds)
+
+
+echo -e "$X9deToken4" >> tokencreator.txt
 echo -e "$X9deToken" >> tokencreator.txt
 echo -e "$X9deToken2" >> tokencreator2.txt
+echo -e "$X9Oi" >> tokencreator.txt
+
 
 NumeroDeTelefone=$(cat tokencreator2.txt | grep -o msisdn.................................... | cut -d '"' -f3 | grep -n 55 | grep 1: | cut -d':' -f2)
 
@@ -2253,7 +2349,7 @@ PassVencido=$(echo "$PassCheck" | grep -c 'msisdn')
 
 
 case $PassVencido in
-0) clear ; echo -e "============================================${NADA}" ; echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}" ; echo -e "============================================${NADA}" ; echo -e "${RED}ESSE PASS ESTÁ VENCIDO OU É INVALIDO${NADA}" ; sleep 5 ; Menu5;;
+0) clear ; echo -e "============================================${NADA}" ; echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}" ; echo -e "============================================${NADA}" ; echo -e "${RED}ESSE PASS ESTÁ VENCIDO OU É INVALIDO${NADA}" ; sleep 5 ; Menu5;;
 *) ;;
 esac
 
@@ -2282,6 +2378,31 @@ NewTokensRev
 
 GerarOsTokens(){
 echo
+echo
+echo -e "${DESTACAR}PAUSA ENTRE OS TESTES DOS TOKENS: "
+echo
+echo -e "${DESTACAR}0 - Sem Pausa"
+echo -e "${DESTACAR}1 - 1 Segundo"
+echo -e "2 - 2 Segundos"
+echo -e "3 - 3 Segundos"
+echo -e "4 - 5 Segundos"
+echo -e "5 - 7 Segundos"
+echo -e "6 - 10 Segundos"
+echo -e "7 - 15 Segundos${NADA}"
+echo
+read -p "ESCOLHA UMA OPÇÃO: " duracao
+case $duracao in
+0) Pausa="0";;
+1) Pausa="1";;
+2) Pausa="2";;
+3) Pausa="3";;
+4) Pausa="5";;
+5) Pausa="7";;
+6) Pausa="10";;
+7) Pausa="15";;
+*) Pausa="2";;
+esac
+echo
 a1dvid=$(cat advidcriar.txt | grep -n , | cut -d':' -f2)
 echo -e "$a1dvid" >> advid.txt
 
@@ -2291,8 +2412,9 @@ echo -e "$i1mpressionid" >> impressionid.txt
 a1dvname=$(cat advnamecriar.txt | grep -n '"' | cut -d':' -f2 | cut -d'"' -f1)
 echo -e "$a1dvname" >> advname.txt
 
-a1dvreward=$(cat advrewardcriar.txt | grep -n '"' | cut -d '"' -f2 | cut -d'>' -f2 | cut -d'<' -f1)
+a1dvreward=$(cat advrewardcriar.txt | grep -n ':' | cut -d '"' -f2 | cut -d'>' -f2 | cut -d'<' -f1)
 echo -e "$a1dvreward" >> advreward.txt
+
 
 Mensagem12
 }
@@ -2343,6 +2465,7 @@ esac
 BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 echo -e "${LETRAPRETA}           TESTADOR $TokenVez           ${NADA}"
+
 echo -e "${YELLOW}ADV NAME: ${NADA}${YELLOW}$AdvNameTest${NADA}"
 
 echo -e "${YELLOW}ADV MENSAGEM: ${NADA}${YELLOW}$AdvMensagemTest${NADA}"
@@ -2351,7 +2474,7 @@ rewardcheck=$(echo "$AdvRewardTest" | grep -c "ganhou")
 case $rewardcheck in
 2)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}$AdvRewardTest${NADA}";;
 1)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}$AdvRewardTest${NADA}";;
-0)echo -e "${YELLOW}ADV REWARD: ${NADA}${RED}Null${NADA}";;
+0)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}Null${NADA}";;
 esac
 
 echo -e "${YELLOW}IMPRESSION EVENT ID: ${NADA}${YELLOW}$ImpressionTest${NADA}"
@@ -2361,17 +2484,119 @@ echo -e "${YELLOW}ADV ID: ${NADA}${YELLOW}$AdvIDTest${NADA}"
 
 
 
-for i in $(seq 25);
+for i in $(seq $Repet1r);
 do
 
-reward1=$(curl -s "http://e.vivo.ddivulga.com/api/clickEvent" -d "advId=$AdvIDTest&eventImpressionId=$ImpressionTest&apass=$AccessPass")
+reward1=$(curl -s $UrlClick -d "advId=$AdvIDTest&eventImpressionId=$ImpressionTest&apass=$AccessPass")
 rw1=$(echo $reward1 | grep -c "evtClickId")
 case $rw1 in
-1) echo -e "${GREEN}SUCESSO NO ENVIO DOS MBS - $i/25${NADA}" ; sleep 2 ;;
-0)echo -e "${RED}NÃO ELEGIVEL NESSE TESTADOR${NADA}"; sleep 2 ; echo ; echo ; Testador;;
+0)echo -e "${RED}NÃO ELEGIVEL NESSE TESTADOR${NADA}"; sleep $Pausa ; echo ; echo ; Testador;;
+1) echo -e "${GREEN}SUCESSO NO ENVIO DOS MBS - $i${NADA}" ; sleep $Pausa ;;
+esac 
+
+
+case $i in
+1)evtClickId=$(echo $reward1 | grep "evtClickId" | cut -d':' -f2 | cut -d',' -f1)
+rm -f EnvioResposta.txt
+AdvIDBr=$(echo "$AdvIDTest")
+case $AdvIDBr in 
+
+34106)echo -e "1" >> EnvioResposta.txt
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventActionId=&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&answer=%7B%22device%22%3A%22Linux%3B+Android+10%3B+SM-A750FN%22%2C%22telefone%22%3A$NumeroDeTelefone%2C%22timestamp%22%3A%2224%2F10%2F2021+22%3A52%3A23%22%2C%22email_E6bwC%22%3A%22emailaleatorio.123%40gmail.com%22%2C%22text_HKztz%22%3A%22NOMEALEATORIO%22%2C%22radiogroup_TtNfR%22%3A%22si_pVJcP%22%7D&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlResponse) ;;
+
+4415)echo -e "1" >> EnvioResposta.txt
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventActionId=&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&answer=%7B%22device%22%3A%22Linux%3B+Android+10%3B+SM-A750FN%22%2C%22telefone%22%3A%22$NumeroDeTelefone%22%2C%22timestamp%22%3A%2224%2F10%2F2021+23%3A48%3A24%22%2C%22aceito%22%3A%5B%22sim%22%5D%7D&apass=$AccessPass&pageId=655437&referer=" $UrlResponse);;
+
+35203)echo -e "1" >> EnvioResposta.txt
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventActionId=&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&answer=%7B%22device%22%3A%22Linux%3B+Android+10%3B+SM-A750FN%22%2C%22telefone%22%3A%22$NumeroDeTelefone%22%2C%22timestamp%22%3A%2225%2F10%2F2021+00%3A53%3A07%22%2C%22text_3RtJq%22%3A%22Aleatorio%22%2C%22email_zIgr1%22%3A%22aleatorio123%40gmail.com%22%2C%22radiogroup_XcQEH%22%3A%22si_a6yKt%22%7D&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlResponse);;
+
+35071)echo -e "1" >> EnvioResposta.txt
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventActionId=&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&answer=%7B%22device%22%3A%22Linux%3B+Android+10%3B+SM-A750FN%22%2C%22telefone%22%3A%22$NumeroDeTelefone%22%2C%22timestamp%22%3A%2225%2F10%2F2021+00%3A54%3A53%22%2C%22radiogroup_4h9pj%22%3A%22si_WQAZJ%22%2C%22text_yhNz5%22%3A%22Aleatorio123%40gmail.com%22%2C%22email_G6vgB%22%3A%22aleatorio123%40gmail.con%22%2C%22radiogroup_kJi42%22%3A%22noname_g1tOR%22%2C%22radiogroup_7AKgC%22%3A%22si_tScXJ%22%7D&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlResponse);;
+
+35005)echo -e "1" >> EnvioResposta.txt
+VideoEventID1=$(curl -s -d "advId=$AdvIDTest&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&tsPlayStart=1635125509435&tsPlayFinish=1635125524412&apass=$AccessPass" $UrlVideo)
+
+VideoEventID=$(echo "$VideoEventID1" | cut -d'"' -f7 | tr -d ':}')
+
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventClickId=$evtClickId&eventActionId=$VideoEventID&eventImpressionId=$ImpressionTest&answer=Usando+camisinha&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlVIdeo2);;
+
+35104)echo -e "1" >> EnvioResposta.txt
+VideoEventID1=$(curl -s -d "advId=$AdvIDTest&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&tsPlayStart=1635130479727&tsPlayFinish=1635130496897&apass=$AccessPass" $UrlVideo)
+
+VideoEventID=$(echo "$VideoEventID1" | cut -d'"' -f7 | tr -d ':}')
+
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventClickId=$evtClickId&eventActionId=$VideoEventID&eventImpressionId=$ImpressionTest&answer=C%C3%BArcuma+e+Hortel%C3%A3&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlVIdeo2);;
+
+34907)echo -e "1" >> EnvioResposta.txt
+VideoEventID1=$(curl -s -d "advId=$AdvIDTest&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&tsPlayStart=1635138772417&tsPlayFinish=1635138792313&apass=$AccessPass" $UrlVideo)
+
+VideoEventID=$(echo "$VideoEventID1" | cut -d'"' -f7 | tr -d ':}')
+
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventClickId=$evtClickId&eventActionId=$VideoEventID&eventImpressionId=$ImpressionTest&answer=Atualizar+a+caderneta&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlVIdeo2);;
+
+35204)echo -e "1" >> EnvioResposta.txt
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventActionId=&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&answer=%7B%22device%22%3A%22Linux%3B+Android+10%3B+SM-A750FN%22%2C%22telefone%22%3A%22$NumeroDeTelefone%22%2C%22timestamp%22%3A%2225%2F10%2F2021+02%3A38%3A23%22%2C%22text_3RtJq%22%3A%22AleatorioSousa%22%2C%22email_zIgr1%22%3A%22aleatorioSousa009%40gmail.com%22%2C%22radiogroup_XcQEH%22%3A%22si_a6yKt%22%7D&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlResponse);; 
+
+34510)echo -e "1" >> EnvioResposta.txt
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventActionId=&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&answer=%7B%22device%22%3A%22Linux%3B+Android+10%3B+SM-A750FN%22%2C%22telefone%22%3A%22$NumeroDeTelefone%22%2C%22timestamp%22%3A%2225%2F10%2F2021+02%3A43%3A40%22%2C%22tcpp%22%3A%5B%22true%22%5D%2C%22marketing%22%3A%22true%22%2C%22name%22%3A%22bruno+rios+gangster%22%2C%22cpf%22%3A%22310.546.473-22%22%2C%22birthdate%22%3A%2215%2F01%2F2002%22%2C%22email%22%3A%22aleatorio071%40gmail.com%22%2C%22password%22%3A%22oidhdhsh%22%7D&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlResponse);;
+
+34845) echo -e "1" >> EnvioResposta.txt
+VideoEventID1=$(curl -s -d "advId=$AdvIDTest&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&tsPlayStart=1635125509435&tsPlayFinish=1635125524412&apass=$AccessPass" $UrlVideo)
+
+VideoEventID=$(echo "$VideoEventID1" | cut -d'"' -f7 | tr -d ':}')
+
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventClickId=$evtClickId&eventActionId=$VideoEventID&eventImpressionId=$ImpressionTest&answer=Usando+camisinha&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlVIdeo2);;
+
+
+
+35205)echo -e "1" >> EnvioResposta.txt
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventActionId=&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&answer=%7B%22device%22%3A%22Linux%3B+Android+10%3B+SM-A750FN%22%2C%22telefone%22%3A%22$NumeroDeTelefone%22%2C%22timestamp%22%3A%2226%2F10%2F2021+00%3A39%3A55%22%2C%22text_3RtJq%22%3A%22aleatorio123%22%2C%22email_zIgr1%22%3A%22aleatorio123%40gmail.com%22%2C%22radiogroup_XcQEH%22%3A%22si_a6yKt%22%7D&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlResponse);; 
+
+34187)echo -e "1" >> EnvioResposta.txt
+VideoEventID1=$(curl -s -d "advId=$AdvIDTest&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&tsPlayStart=1635138772417&tsPlayFinish=1635138792313&apass=$AccessPass" $UrlVideo)
+
+VideoEventID=$(echo "$VideoEventID1" | cut -d'"' -f7 | tr -d ':}')
+
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventClickId=$evtClickId&eventActionId=$VideoEventID&eventImpressionId=$ImpressionTest&answer=Tudo+tem+ind%C3%BAstria&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlVIdeo2);;
+
+35368)echo -e "1" >> EnvioResposta.txt
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventActionId=&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&answer=%7B%22device%22%3A%22Linux%3B+Android+10%3B+SM-A750FN%22%2C%22telefone%22%3A%225577998664832%22%2C%22timestamp%22%3A%2227%2F10%2F2021+15%3A55%3A23%22%2C%22radiogroup_htpjX%22%3A%22noname_Oi7Ou%22%7D&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlResponse);; 
+
+35440)echo -e "1" >> EnvioResposta.txt
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventActionId=&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&answer=%7B%22device%22%3A%22Linux%3B+Android+10%3B+SM-A750FN%22%2C%22telefone%22%3A%22$NumeroDeTelefone%22%2C%22timestamp%22%3A%2228%2F10%2F2021+01%3A31%3A01%22%2C%22radiogroup_4h9pj%22%3A%22si_WQAZJ%22%2C%22email_G6vgB%22%3A%22aleatorio22%40gmail.com%22%2C%22text_yhNz5%22%3A%22Aleatorio01019%22%2C%22radiogroup_7AKgC%22%3A%22si_tScXJ%22%7D&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlResponse);; 
+
+35500) echo -e "1" >> EnvioResposta.txt
+VideoEventID1=$(curl -s -d "advId=$AdvIDTest&eventClickId=$evtClickId&eventImpressionId=$ImpressionTest&tsPlayStart=1635138772417&tsPlayFinish=1635138792313&apass=$AccessPass" $UrlVideo)
+
+VideoEventID=$(echo "$VideoEventID1" | cut -d'"' -f7 | tr -d ':}')
+
+ConversionEvent=$(curl -s -d "advId=$AdvIDTest&eventClickId=$evtClickId&eventActionId=$VideoEventID&eventImpressionId=$ImpressionTest&answer=5G&apass=$AccessPass&pageId=660224&referer=http%3A%2F%2F$UrlReferer%2F" $UrlVIdeo2);;
+
+
+*)rm -f EnvioResposta.txt;;
+esac
+;;
+
+
+*);;
 esac
 
+
 done
+echo -e "2" >> EnvioResposta.txt
+VerEnvioResposta=$(cat EnvioResposta.txt | grep -c "1")
+case $VerEnvioResposta in
+1)
+rw1=$(echo $ConversionEvent | grep -c "evtConversionId")
+case $rw1 in
+1) echo -e "${BRANCO}RESPOSTA ENVIADA COM SUCESSO${NADA}" ; echo -e "$ConversionEvent" >> ConversionEvent.txt; sleep 2 ;ConversionEvent="1";;
+0)echo -e "${RED}FALHA NO ENVIO DA RESPOSTA${NADA}" ; echo -e "$ConversionEvent Falha" >> ConversionEvent.txt ; sleep 2 ;ConversionEvent="1";;
+esac
+
+;;
+
+*);;
+esac
 echo
 echo
 
@@ -2385,29 +2610,55 @@ Testador
 
 
 Ler11(){ 
-am start -n com.termux/com.termux.app.TermuxActivity
-clear
+echo -e "1" >> ReinicioAltomatico.txt
+
+ReinicioAutomatico=$(cat ReinicioAltomatico.txt | grep -c 1)
+case $ReinicioAutomatico in
+1)echo -e "1" >> TestesFeitos.txt
+echo -e "${VermelhoAll}            TESTAGEM FINALIZADA             ${NADA}"
+echo -e "${DESTACAR}A TESTAGEM SERÁ REINICIADA ALTOMATICAMENTE${NADA}"
+echo
+echo
+Mensagem12;;
+*);;
+esac
+
+
+smsnumero=$(echo "$NumeroDeTelefone" | cut -c3-13)
+
+Mensagem1=$(echo $[ 1 + $[ RANDOM % 9  ]])
+
+smsmensagem=$( echo "$Mensagens1" | sed -n "$Mensagem1"p)
+
+
+SMSenvio=$(curl -s -m 13 -X POST https://textbelt.com/text --data-urlencode phone="+55 $smsnumero" --data-urlencode message="$smsmensagem" -d key=textbelt)
+
+
+
+am start -n com.termux/com.termux.app.TermuxActivity > /dev/null 2>&1
+sleep 8
 Ler12
 }
 Ler12(){
 echo -e "1" >> TestesFeitos.txt
 TestesFeitos=$(cat TestesFeitos.txt | wc -l)
+clear
 echo -e "${VermelhoAll}            TESTAGEM FINALIZADA             ${NADA}"
 echo -e "${NADA}============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 echo -e "============================================${NADA}"
 echo -e "${CINZA}NUMERO DE TELEFONE USADO:${NADA} ${GREEN}$NumeroDeTelefone${NADA}"
 echo -e "${CINZA}TESTES FEITOS COM ESSES TOKENS:${NADA} ${GREEN}$TestesFeitos${NADA}"
 echo
 
 echo -e "${NADA}${DESTACAR}1 - PROCURAR NOVOS TOKENS ${CINZA}MELHOR ESPERAR UM POUCO...${NADA}"
-echo -e "${DESTACAR}2 - REPETIR OS TOKENS USADOS ${CINZA}RECOMENDADO 1X${NADA}"
+echo -e "${DESTACAR}2 - REPETIR OS TOKENS USADOS ${CINZA}ATÉ PARAR DE CAIR MBS${NADA}"
 echo -e "${DESTACAR}0 - VOLTAR${NADA}" 
 echo
 read -p "ESCOLHA UMA OPÇÃO: " denovo1
 case $denovo1 in
 1)rm -f TestesFeitos.txt ; Buscartokens;;
-2)rm -f TokenVez.txt ;Mensagem12;;
+2)rm -f TokenVez.txt ;Mensagem12 ;rm -f ReinicioAltomatico.txt;;
 0)MenuPrincipal;;
 *)clear  ; Ler12;;
 esac
@@ -2418,6 +2669,7 @@ esac
 
 
 ProcurarMaisTokens(){
+rm -f X9NavegueVivo.txt
 rm -f advmensagemrev.txt
 rm -f advrewardrev.txt
 rm -f advnamerev.txt
@@ -2432,36 +2684,34 @@ BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 echo -e "============================================${NADA}"
 
-echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 
 echo -e "============================================${NADA}"
 echo -e "${DESTACAR}PROCURANDO NOVOS TOKENS...${NADA}"
 
-X9deToken2=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A102%2C%22target%22%3A%22slot%3D102%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852321632267696163226764515871178651666272523390%3BCTData%3Dgpv%3D3ckp%3Dcddm%3Dvivocombrapv15www44%3D4cpv15www44%3D3rpv15www44%3D3%3BgaGB9C14SX2D%3DGS11163227460731163227463532%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401696994391sessionf4b43fa1a5d44b1caff998388c8331e71633751668%3BgaDMLPJDP0E3%3DGS1116337495891116337498100%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1310319720541633906861%3Bttnprf%3D%3BgatgtagUA1640616782%3D1%3BgatgtagUA1640616781%3D1%3Bttcvmt%3D1633992745%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1633992745047%3Bos%3Dandroid%3BtailCity%3Dcuiaba%3BtailtState%3Dmato%2520grosso%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3Dbr%22%7D%5D&pageId=660224&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2Finternetgratis.vivo.com.br%2F&accessPass=$AccessPass" http://e.vivo.ddivulga.com/api/v2.1/fetch -H "Origin: http://navegue.vivo.com.br") 
+X9deToken2=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A102%2C%22target%22%3A%22slot%3D102%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852321632267696163226764515871178651666272523390%3BCTData%3Dgpv%3D3ckp%3Dcddm%3Dvivocombrapv15www44%3D4cpv15www44%3D3rpv15www44%3D3%3BgaGB9C14SX2D%3DGS11163227460731163227463532%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401696994391sessionf4b43fa1a5d44b1caff998388c8331e71633751668%3BgaDMLPJDP0E3%3DGS1116337495891116337498100%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1310319720541633906861%3Bttnprf%3D%3BgatgtagUA1640616782%3D1%3BgatgtagUA1640616781%3D1%3Bttcvmt%3D1633992745%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1633992745047%3Bos%3Dandroid%3BtailCity%3Dcuiaba%3BtailtState%3Dmato%2520grosso%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3Dbr%22%7D%5D&pageId=660224&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2F$UrlReferer%2F&accessPass=$AccessPass" $UrlAds -H "Origin: $UrlOrigin") 
 
 
+X9Oi=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A301%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Dmanaus%3BtailtState%3Damazonas%3BtailCountry%3Dbr%22%7D%5D&pageId=822068&insertionId=&insertionUUID=&insertionType=ANY&referer=&accessPass=$AccessPass" -H "Origin: $UrlOrigin" $UrlAds)
 
 
+X9deToken=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A%22105%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22107%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22100%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22106%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22101%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22109%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22108%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22102%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22104%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22110%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22113%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22103%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22111%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22119%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22114%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22112%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22116%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22118%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22120%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22125%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22124%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22123%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22122%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22121%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22117%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22126%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22115%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%5D&pageId=660224&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2F$UrlReferer%2F&accessPass=$AccessPass" $UrlAds -H "Origin: $UrlOrigin")
 
-X9deToken=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A%22101%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22102%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22103%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22104%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%5D&pageId=660224&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2Finternetgratis.vivo.com.br%2F&accessPass=$AccessPass" http://e.vivo.ddivulga.com/api/v2.1/fetch -H "Origin: http://a.vivo.ddivulga.com")
+X9deToken4=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A%22101%22%2C%22target%22%3A%22os%3Dandroid%3B%22%7D%5D&pageId=999534&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2Fclubefacil.com%2F&accessPass=$AccessPass" $UrlAds -H "Origin: $UrlOrigin")
 
-X9deToken4=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A%22101%22%2C%22target%22%3A%22os%3Dandroid%3B%22%7D%5D&pageId=999534&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2Fclubefacil.com%2F&accessPass=$AccessPass" http://e.vivo.ddivulga.com/api/v2.1/fetch -H "Origin:http://a.vivo.ddivulga.com")
+X9deToken3=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A110%2C%22target%22%3A%22%22%7D%5D&pageId=693930&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2Fportalrecarga.vivo.com.br%2F&accessPass=$AccessPass" $UrlAds -H "Origin: $UrlOrigin")
 
-X9deToken3=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A110%2C%22target%22%3A%22%22%7D%5D&pageId=693930&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2Fportalrecarga.vivo.com.br%2F&accessPass=$AccessPass" http://e.vivo.ddivulga.com/api/v2.1/fetch -H "Origin: http://a.vivo.ddivulga.com" -w '%{response_code}')
-
-X9ClubeFacil=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A101%2C%22target%22%3A%22slot%3D101%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A102%2C%22target%22%3A%22slot%3D102%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A103%2C%22target%22%3A%22slot%3D103%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A104%2C%22target%22%3A%22slot%3D104%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A107%2C%22target%22%3A%22slot%3D107%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A108%2C%22target%22%3A%22slot%3D108%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A105%2C%22target%22%3A%22slot%3D105%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A106%2C%22target%22%3A%22slot%3D106%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A100%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1001%2C%22target%22%3A%22slot%3D1001%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1002%2C%22target%22%3A%22slot%3D1002%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1003%2C%22target%22%3A%22slot%3D1003%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1004%2C%22target%22%3A%22slot%3D1004%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1005%2C%22target%22%3A%22slot%3D1005%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1006%2C%22target%22%3A%22slot%3D1006%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1007%2C%22target%22%3A%22slot%3D1007%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1008%2C%22target%22%3A%22slot%3D1008%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1009%2C%22target%22%3A%22slot%3D1009%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1010%2C%22target%22%3A%22slot%3D1010%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1114%2C%22target%22%3A%22slot%3D1114%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%5D&pageId=655437&insertionId=&insertionUUID=&insertionType=NATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CANY%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE&referer=&accessPass=$AccessPass" http://e.vivo.ddivulga.com/api/v2.1/fetch -H "Origin:http://navegue.vivo.com.br") 
-
-ClubeFacilAds=$(echo -e "$X9ClubeFacil" | grep -o ...........................ClubeFacil_ESP..............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................)
-
-ClubeFacilAds2=$(echo -e "$X9ClubeFacil" | grep -o "...........................VitrineSVA Scomm ClubeFacil_AGO21.......................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................")
 
 echo -e "$X9deToken4" >> tokencreatorrev.txt
 echo -e "$X9deToken2" >> tokencreatorrev.txt
 echo -e "$X9deToken3" >> tokencreatorrev.txt
-echo -e "$ClubeFacilAds" >> tokencreatorrev.txt
-echo -e "$ClubeFacilAds2" >> tokencreatorrev.txt
 echo -e "$X9deToken" >> tokencreatorrev.txt
+echo -e "$X9Oi" >> tokencreatorrev.txt
 
+CriandoOsTokens1
+}
+CriandoOsTokens1(){
+rm -f TokensEncontrados.txt
 
 advid=$(cat tokencreatorrev.txt | grep -a -i -o advid..............| cut -d':' -f2 | cut -d'"' -f1)
 echo -e "$advid" >> advidrev.txt
@@ -2493,16 +2743,16 @@ advmensagem009=$(cat advmensagemrev.txt | grep -n '"' | grep "9:" | cut -d'"' -f
 advmensagem0010=$(cat advmensagemrev.txt | grep -n '"' | grep "10:" | cut -d'"' -f2 | cut -d":" -f1 | cut -d'<' -f1 | cut -d'.' -f1 )
 
 
-advreward001=$(cat advrewardrev.txt | grep -n '"' | grep "1:" | cut -d'"' -f2-3)
-advreward002=$(cat advrewardrev.txt | grep -n '"' | grep "2:" | cut -d'"' -f2-3)
-advreward003=$(cat advrewardrev.txt | grep -n '"' | grep "3:" | cut -d'"' -f2-3)
-advreward004=$(cat advrewardrev.txt | grep -n '"' | grep "4:" | cut -d'"' -f2-3)
-advreward005=$(cat advrewardrev.txt | grep -n '"' | grep "5:" | cut -d'"' -f2-3)
-advreward006=$(cat advrewardrev.txt | grep -n '"' | grep "6:" | cut -d'"' -f2-3)
-advreward007=$(cat advrewardrev.txt | grep -n '"' | grep "7:" | cut -d'"' -f2-3)
-advreward008=$(cat advrewardrev.txt | grep -n '"' | grep "8:" | cut -d'"' -f2-3)
-advreward009=$(cat advrewardrev.txt | grep -n '"' | grep "9:" | cut -d'"' -f2-3)
-advreward0010=$(cat advrewardrev.txt | grep -n '"' | grep "10:" | cut -d'"' -f2-3)
+advreward001=$(cat advrewardrev.txt | grep -n ':' | grep "1:" | cut -d'"' -f2-3)
+advreward002=$(cat advrewardrev.txt | grep -n ':' | grep "2:" | cut -d'"' -f2-3)
+advreward003=$(cat advrewardrev.txt | grep -n ':' | grep "3:" | cut -d'"' -f2-3)
+advreward004=$(cat advrewardrev.txt | grep -n ':' | grep "4:" | cut -d'"' -f2-3)
+advreward005=$(cat advrewardrev.txt | grep -n ':' | grep "5:" | cut -d'"' -f2-3)
+advreward006=$(cat advrewardrev.txt | grep -n ':' | grep "6:" | cut -d'"' -f2-3)
+advreward007=$(cat advrewardrev.txt | grep -n ':' | grep "7:" | cut -d'"' -f2-3)
+advreward008=$(cat advrewardrev.txt | grep -n ':' | grep "8:" | cut -d'"' -f2-3)
+advreward009=$(cat advrewardrev.txt | grep -n ':' | grep "9:" | cut -d'"' -f2-3)
+advreward0010=$(cat advrewardrev.txt | grep -n ':' | grep "10:" | cut -d'"' -f2-3)
 
 
 advname001=$(cat advnamerev.txt | grep -n '"' | grep "1:" | cut -d':' -f2)
@@ -2542,6 +2792,11 @@ advid008=$(cat advidrev.txt | grep -n , | grep 8: | cut -d':' -f2 )
 advid009=$(cat advidrev.txt | grep -n , | grep 9: | cut -d':' -f2 )
 advid0010=$(cat advidrev.txt | grep -n , | grep 10: | cut -d':' -f2 )
 
+aiy=$(echo "$advid001" | grep -c ,)
+case $aiy in
+1);;
+0)NewTokens;;
+esac
 
 test001=$(cat advidcriar.txt | grep -n , | grep -c "$advid001")
 case $test001 in
@@ -2600,7 +2855,7 @@ esac
 test0010=$(cat advidcriar.txt | grep -n , | grep -c "$advid0010")
 case $test0010 in
 1) ;;
-0) echo -e "$advid0010" >> advidcriar.txt ; echo -e "$impressionid0010" >> impressionidcriar.txt ;echo -e "$advname0010" >> advname.txt ;  echo -e "$advreward0010" >> advrewardcriar.txt;echo -e "$advmensagem0010" >> advmensagem.txt ; echo -e "1" >> TokensEncontrados.txt;;
+0) echo -e "$advid0010" >> advidcriar.txt ; echo -e "$impressionid0010" >> impressionidcriar.txt ;echo -e "$advname0010" >> advnamecriar.txt ;  echo -e "$advreward0010" >> advrewardcriar.txt;echo -e "$advmensagem0010" >> advmensagem.txt ; echo -e "1" >> TokensEncontrados.txt;;
 esac
 NewTokens
 }
@@ -2614,7 +2869,7 @@ BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 clear
 echo -e "============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 echo -e "============================================${NADA}"
 
 TokensNovos00=$(cat advidcriar.txt |  grep -c ,)
@@ -2624,20 +2879,13 @@ LETRAPRETA='\e\033[02;30;47m'
 
 clear
 echo -e "============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 echo -e "============================================${NADA}"
 
 case $TokensNovos00 in
-1) echo -e "${GREEN}1 TOKEN FOI ENCONTRADO ${NADA}" ;;
-2) echo -e "${GREEN}2 TOKEN FORAM ENCONTRADOS ${NADA}" ;;
-3) echo -e "${GREEN}3 TOKEN FORAM ENCONTRADOS ${NADA}" ;;
-4) echo -e "${GREEN}4 TOKEN FORAM ENCONTRADOS ${NADA}" ;;
-5) echo -e "${GREEN}5 TOKEN FORAM ENCONTRADOS ${NADA}" ;;
-6) echo -e "${GREEN}6 TOKEN FORAM ENCONTRADOS ${NADA}" ;;
-7) echo -e "${GREEN}7 TOKEN FORAM ENCONTRADOS ${NADA}" ;;
-8) echo -e "${GREEN}8 TOKEN FORAM ENCONTRADOS ${NADA}" ;;
-9) echo -e "${GREEN}9 TOKEN FORAM ENCONTRADOS ${NADA}" ;;
-10) echo -e "${GREEN}10 TOKEN FORAM ENCONTRADOS ${NADA}" ;;
+0) echo -e "${RED}NENHUM TOKEN FOI ENCONTRADO${NADA}" ;;
+1) echo -e "${GREEN}$TokensNovos00 TOKEN FOI ENCONTRADO ${NADA}" ;;
+$TokensNovos00) echo -e "${GREEN}$TokensNovos00 TOKEN FORAM ENCONTRADOS ${NADA}" ;;
 *) echo -e "${RED}NENHUM TOKEN FOI ENCONTRADO${NADA}" ;;
 esac
 
@@ -2647,7 +2895,7 @@ echo -e "${CINZA}NUMERO DE TELEFONE USADO:${NADA} ${GREEN}$NumeroDeTelefone${NAD
 echo -e "${CINZA}TOTAL DE TOKENS ENCONTRADOS:${NADA} ${GREEN}$TokensNovos00"
 echo
 
-echo -e "${DESTACAR}1 - PROCURAR NOVOS TOKENS${NADA} ${CINZA}RECOMENDADO 2X${NADA}"
+echo -e "${DESTACAR}1 - PROCURAR NOVOS TOKENS${NADA} ${CINZA}ATÉ PARAR DE APARECER${NADA}"
 echo -e "${DESTACAR}2 - TESTAR TOKENS ENCONTRADOS${NADA} ${CINZA}INICIAR O ENVIO DE MBS${NADA}"
 echo -e "${DESTACAR}0 - VOLTAR${NADA} ${CINZA}NENHUM TOKEN ENCONTRADO${NADA}"
 echo
@@ -2665,6 +2913,7 @@ esac
 
 
 NewTokens(){
+echo -e "2" >> TokensEncontrados.txt
 TokensNovos00=$(cat advidcriar.txt |  grep -c ,)
 TokensNovos0=$(cat TokensEncontrados.txt |  grep -c 1)
 
@@ -2673,14 +2922,13 @@ BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 
 echo -e "============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 echo -e "============================================${NADA}"
 
 case $TokensNovos0 in
+0) echo -e "${RED}NENHUM TOKEN NOVO FOI ENCONTRADO${NADA}" ;;
 1) echo -e "${GREEN}1 TOKEN NOVO FOI ENCONTRADO ${NADA}" ;;
-2) echo -e "${GREEN}2 TOKEN NOVOS FORAM ENCONTRADOS ${NADA}" ;;
-3) echo -e "${GREEN}3 TOKEN NOVOS FORAM ENCONTRADOS ${NADA}" ;;
-4) echo -e "${GREEN}4 TOKEN NOVOS FORAM ENCONTRADOS ${NADA}" ;;
+$TokensNovos0) echo -e "${GREEN}$TokensNovos0 TOKEN NOVOS FORAM ENCONTRADOS ${NADA}" ;;
 *) echo -e "${RED}NENHUM TOKEN NOVO FOI ENCONTRADO${NADA}" ;;
 esac
 
@@ -2690,14 +2938,16 @@ echo -e "${CINZA}NUMERO DE TELEFONE USADO:${NADA} ${GREEN}$NumeroDeTelefone${NAD
 echo -e "${CINZA}TOTAL DE TOKENS ENCONTRADOS:${NADA} ${GREEN}$TokensNovos00"
 echo
 
-echo -e "${DESTACAR}1 - PROCURAR NOVOS TOKENS${NADA} ${CINZA}RECOMENDADO 2X${NADA}"
+echo -e "${DESTACAR}1 - PROCURAR NOVOS TOKENS${NADA} ${CINZA}ATÉ PARAR DE APARECER${NADA}"
 echo -e "${DESTACAR}2 - TESTAR TOKENS ENCONTRADOS${NADA} ${CINZA}INICIAR O ENVIO DE MBS${NADA}"
+echo -e "${DESTACAR}3 - ADICIONAR TOKENS EXTRAS${NADA} ${CINZA}SEM GARANTIA DE GANHOS${NADA}"
 echo -e "${DESTACAR}0 - VOLTAR${NADA} ${CINZA}NENHUM TOKEN ENCONTRADO${NADA}"
 echo
 read -p "ESCOLHA UMA OPÇÃO: " TokensNews
 case $TokensNews in
 1)ProcurarMaisTokens;;
 2)GerarOsTokens;;
+3)AdsExtras;;
 0)Menu5;;
 *)NewTokens;;
 esac
@@ -2706,24 +2956,51 @@ esac
 
 
 
+AdsExtras(){
+clear
+echo -e "============================================${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
+echo -e "============================================${NADA}"
+echo -e "${DESTACAR}ADICIONANDO TOKENS EXTRAS...${NADA}"
+
+
+rm -f X9NavegueVivo.txt
+rm -f advmensagemrev.txt
+rm -f advrewardrev.txt
+rm -f advnamerev.txt
+rm -f ClubeFacilToken.txt
+rm -f TokensEncontrados.txt
+rm -f impressionidrev.txt
+rm -f tokencreatorrev.txt
+rm -f tokencreator2rev.txt
+rm -f advidrev.txt
+
+X9NavegueVivo=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A101%2C%22target%22%3A%22slot%3D101%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A102%2C%22target%22%3A%22slot%3D102%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A103%2C%22target%22%3A%22slot%3D103%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A104%2C%22target%22%3A%22slot%3D104%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A107%2C%22target%22%3A%22slot%3D107%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A108%2C%22target%22%3A%22slot%3D108%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A105%2C%22target%22%3A%22slot%3D105%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A106%2C%22target%22%3A%22slot%3D106%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A100%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1001%2C%22target%22%3A%22slot%3D1001%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1002%2C%22target%22%3A%22slot%3D1002%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1003%2C%22target%22%3A%22slot%3D1003%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1004%2C%22target%22%3A%22slot%3D1004%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1005%2C%22target%22%3A%22slot%3D1005%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1006%2C%22target%22%3A%22slot%3D1006%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1007%2C%22target%22%3A%22slot%3D1007%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1008%2C%22target%22%3A%22slot%3D1008%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1009%2C%22target%22%3A%22slot%3D1009%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1010%2C%22target%22%3A%22slot%3D1010%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%2C%7B%22slotId%22%3A1114%2C%22target%22%3A%22slot%3D1114%3Baamat%3Daamat3D19882337%3Badobeaamcookie%3DpossePre3D163978882Caamat3D19882337%3Bttu%3D0100007FD8F82C614D0723620299EE11%3Bgclau%3D1118538882921632093158%3BgaZX7D4NYJHK%3DGS11163209315710163209317146%3Bvivoprettycity%3DUyVDMyVBM28rUGF1bG8%3D%3Bfbp%3Dfb216321025485331651747283%3Baamuuid%3D27368184449230620631777943451298409598%3Bvivoregcity%3Dsaopaulo%3Bvivoregstate%3DSP%3Bregional%3DSP%3Bvivoregddd%3D11%3Bhjid%3Ded626780d5f94597b12dbf03c573f476%3Bcsc%3D1%3BCTRS%3DRecording%3BWRUIDCD%3D3474032550068585%3BAMCVF93F88C35ABCCD070A495CF840AdobeOrg%3D11241066807CMCIDTS7C188917CMCMID7C289750017116187312115408938543902396647CMCAAMLH16328724437C47CMCAAMB16328724437CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y7CMCOPTOUT1632274843s7CNONE7CMCCIDH7C13319136787CvVersion7C520%3BgaGB9C14SX2D%3DGS11163426222641163426223353%3Bmbox%3DPCb79201a4e076420fae9791f9d7f0dfe03401697507058session4a5c091cceb640788043d68dd4a2760c1634264118%3Buetvid%3D61b5c3602d5911ecaf54af42512bd134%3BgaDMLPJDP0E3%3DGS1116342622412116342622570%3Bcsid%3D7446c9b6736da532ae8de6f48f892f14163210852331634262259163426224815871178651666272523390%3BCTData%3Dgpv%3D5ckp%3Dcddm%3Dvivocombrapv15www44%3D6cpv15www44%3D5rpv15www44%3D4%3Bga%3DGA1315675778471631021157%3Bgid%3DGA1320601804671634423603%3Bttnprf%3D%3Bttcvmt%3D1634529633%3Bttcc%3Ddirect%3Bttcs%3Ddirect%3Bttcm%3Ddirect%3Bttuus%3D1634531616272%3Bos%3Dandroid%3BtailCity%3Dsalvador%3BtailtState%3Dbahia%3BtailCountry%3Dbr%3BtailEquipment%3D9%3BtailGender%3D1%22%7D%5D&pageId=655437&insertionId=&insertionUUID=&insertionType=NATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CANY%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE%2CNATIVE&referer=&accessPass=$AccessPass" $UrlAds -H "Origin: $UrlOrigin") 
+
+echo -e "$X9NavegueVivo" >> tokencreatorrev.txt
+
+CriandoOsTokens1
+}
+
+
 PassSalvos0(){
 clear
 BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 
 echo -e "============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 echo -e "============================================${NADA}"
 TokensSave001=$(cat TokensSave.txt | grep -n - | grep -c 1:)
     case $TokensSave001 in
     1) ;;
     2) ;;
     3) ;;
-    *) clear ; echo -e "============================================${NADA}" ; echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}" ; echo -e "============================================${NADA}" ; echo -e "${RED}NENHUM PASS ENCONTRADO${NADA}" ; sleep 5 ; Menu5;;
+    *) clear ; echo -e "============================================${NADA}" ; echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}" ; echo -e "============================================${NADA}" ; echo -e "${RED}NENHUM PASS ENCONTRADO${NADA}" ; sleep 5 ; Menu5;;
     esac
     
 echo -e "${DESTACAR}ESCOLHA UM NUMERO:${NADA}"
-cat TokensSave.txt | grep -n - | cut -d'-' -f1
+cat TokensSave.txt | grep -n "$OPERADORA" | cut -d'-' -f1
 echo
 echo -e "0: ${DESTACAR}APAGAR TODOS${NADA}"
 echo
@@ -2733,7 +3010,7 @@ case $NumeroPass in
 *) ;;
 esac
 
-AccessPass=$(cat TokensSave.txt | grep -n - | grep "$NumeroPass": | cut -d':' -f2 | grep -n - | cut -d'-' -f2-9)
+AccessPass=$(cat TokensSave.txt | grep -n "$OPERADORA" | grep "$NumeroPass": | cut -d':' -f2 | grep -n - | cut -d'-' -f3-9)
 echo -e "$AccessPass" >> chavedeacesso.txt
 Buscartokens
 }
@@ -2747,7 +3024,7 @@ clear
 BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 echo -e "============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS FREE                  ${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 echo -e "============================================${NADA}"
 echo -e "${GREEN}COMO PEGAR O PASS DE OUTRAS PESSOAS${NADA}"
 echo
@@ -2758,12 +3035,12 @@ echo
 echo -e "COMANDO DO TERMUX:${GREEN}"
 cat <<- EOF
 
-clear ; curl -s -d "pageId=660224&version=2" i.vivo.ddivulga.com/i/gp | cut -d '"' -f4 ; echo
+clear ; curl -s -d "pageId=660224&version=2" $UrlPass | cut -d '"' -f4 ; echo
 EOF
 echo
 echo -e "${NADA}${DESTACAR}LINK DO NAVEGADOR:"
 echo
-echo -e "${GREEN}http://i.vivo.ddivulga.com/i/gp${NADA}"
+echo -e "${GREEN}$UrlPass${NADA}"
 echo
 echo -e "${NADA}${DESTACAR}3 - COPIE RESPOSTA/PASS, RECORTE ELE COMO NO EXEMPLO ABAIXO, CASO PRECISE, COLE NO TESTADOR PERSONALIZADO E SALVE${NADA}"
 echo
@@ -2775,5 +3052,63 @@ read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
   esac
 }
 
+
+SmsA(){
+clear
+BrancoAll='\e\033[03;37;47m'
+LETRAPRETA='\e\033[02;30;47m'
+echo -e "============================================${NADA}"
+echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
+echo -e "============================================${NADA}${DESTACAR}"
+read -p "DIGITE O DDD+NUMERO: " smsnumero1
+echo
+
+smsnumero=$(echo "$smsnumero1" | tr -d '+ -')
+
+Digitos11=$(echo "$smsnumero" | wc -m)
+case $Digitos11 in
+12);;
+*)echo -e "${RED}11 DIGITOS, POR FAVOR${NADA}"
+sleep 3
+Menu5;;
+esac
+
+
+read -p "DIGITE UMA MENSAGEM: " smsmensagem
+echo
+SMSenvio=$(curl -s -X POST https://textbelt.com/text --data-urlencode phone="+55 $smsnumero" --data-urlencode message="$smsmensagem" -d key=textbelt)
+
+smsresponse1=$(echo "$SMSenvio" | grep -i -c "true")
+case $smsresponse1 in
+1)echo -e "${GREEN}MENSAGEM ENVIADA COM SUCESSO${NADA}"; voltar111 ;;
+0);;
+esac
+
+smsresponse3=$(echo "$SMSenvio" | grep -i -c "Your phone number was not provided")
+case $smsresponse3 in
+1)echo -e "${RED}OCORREU UM ERRO, VERIFIQUE SEU NUMERO${NADA}" ;voltar111;;
+0);;
+esac
+
+smsresponse2=$(echo "$SMSenvio" | grep -i -c "Only one test text message is allowed per day")
+case $smsresponse2 in
+1)echo -e "${YELLOW}LIMITE DE MENSAGENS DIARIAS EXCEDIDO\nUSE OUTRA VPN OU MUDE O NUMERO${NADA}" ;voltar111;;
+0);;
+esac
+
+
+smsresponse4=$(echo "$SMSenvio" | grep -i -c "false")
+case $smsresponse4 in
+*)echo -e "${YELLOW}OCORREU UM ERRO DESCONHECIDO${NADA}";;
+esac
+voltar111
+}
+voltar111(){
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+  case $optione1 in
+  *)Menu3;;
+  esac
+}
 
 MenuPrincipal
