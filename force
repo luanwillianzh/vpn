@@ -560,14 +560,7 @@ check1
 
 wifiip1=$( cat wifiip1 | grep "1" | cut -d'.' -f1-3)
 
-Rotear=$(su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $wifiip1.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $wifiip1.0/24 dev wlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev wlan0 scope link table 61)
-clear 
-
-route=$(echo $Rotear | grep -c "File exists")
-case $route in
-0)echo -e "${GREEN}Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux;;
-1)echo -e "${RED}Pare o roteamento Wi-Fi atual antes de iniciar um novo${NADA}" ; sleep 7 && MetodoWIFI1;;
-esac
+su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $wifiip1.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $wifiip1.0/24 dev wlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev wlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux
 }
 
 AltRW2(){
@@ -657,13 +650,7 @@ check1
 
 wifiip2=$( cat wifiip2 | grep "1" | cut -d'.' -f1-3)
 
-Rotear=$(su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $wifiip2.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $wifiip2.0/24 dev swlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev swlan0 scope link table 61) 
-
-route=$(echo $Rotear | grep -c "File exists")
-case $route in
-0)echo -e "${GREEN}Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux;;
-1)echo -e "${RED}Pare o roteamento Wi-Fi atual antes de iniciar um novo${NADA}" ; sleep 7 && MetodoWIFI2;;
-esac
+su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $wifiip2.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $wifiip2.0/24 dev swlan0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev swlan0 scope link table 61 && clear ; echo "Compartilhamento via Wi-Fi iniciado" ; sleep 5 && su -c killall com.termux
 }
 
 AltRW22(){
@@ -752,13 +739,8 @@ check1() {
 check1
 
 usbip=$( cat usbip | grep "1" | cut -d'.' -f1-3)
-Rotear=$(su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $usbip.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $usbip.0/24 dev rndis0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev rndis0 scope link table 61) 
 
-route=$(echo $Rotear | grep -c "File exists")
-case $route in
-0)echo -e "${GREEN}Compartilhamento via USB iniciado" ; sleep 5 && su -c killall com.termux;;
-1)echo -e "${RED}Pare o roteamento USB atual antes de iniciar um novo${NADA}" ; sleep 7 && USB;;
-esac
+su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $usbip.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $usbip.0/24 dev rndis0 scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev rndis0 scope link table 61 && clear ; echo "Compartilhamento via USB iniciado" ; sleep 5 && su -c killall com.termux
 }
 
 
@@ -851,13 +833,7 @@ check1
 
 btip=$( cat btip | grep "1" | cut -d'.' -f1-3)
 
-Rotear=$(su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $btip.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $btip.0/24 dev bt-pan scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev bt-pan scope link table 61)
-
-route=$(echo $Rotear | grep -c "File exists")
-case $route in
-0)echo -e "${GREEN}Compartilhamento via Bluetooth iniciado" ; sleep 5 && su -c killall com.termux;;
-1)echo -e "${RED}Pare o roteamento Bluetooth atual antes de iniciar um novo${NADA}" ; sleep 7 && Bluetooth;;
-esac
+su -c iptables -t filter -F FORWARD && su -c iptables -t nat -F POSTROUTING && su -c iptables -t filter -I FORWARD -j ACCEPT && su -c iptables -t nat -I POSTROUTING -j MASQUERADE && su -c ip rule add from $btip.0/24 lookup 61 && su -c ip route add default dev tun0 scope link table 61 && su -c ip route add $btip.0/24 dev bt-pan scope link table 61 && su -c ip route add broadcast 255.255.255.255 dev bt-pan scope link table 61 && echo "Compartilhamento via Bluetooth iniciado" ; sleep 5 && su -c killall com.termux
 }
 
 AltRB2(){
