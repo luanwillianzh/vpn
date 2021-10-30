@@ -2317,9 +2317,9 @@ echo -e "$X9deToken2" >> tokencreator2.txt
 echo -e "$X9Oi" >> tokencreator.txt
 
 
-NumeroDeTelefone=$(cat tokencreator2.txt | grep -o msisdn.................................... | cut -d '"' -f3 | grep -n 55 | grep 1: | cut -d':' -f2)
+NumeroDeTelefone=$(cat tokencreator.txt | grep -o msisdn.................................... | cut -d '"' -f3 | grep -n 55 | grep 1: | cut -d':' -f2)
 
-PassCheck=$(cat tokencreator2.txt | grep -o msisdn)
+PassCheck=$(cat tokencreator.txt | grep -o msisdn)
 
 PassVencido=$(echo "$PassCheck" | grep -c 'msisdn')
 
