@@ -2215,7 +2215,7 @@ echo -e "DIGITE ${GREEN}Y${DESTACAR} DEPOIS DE TER FEITO TUDO ${NADA}"
  
  
 
-AccessPass=$(curl -s -d "pageId=660224&version=2" $UrlPass -H "Origin: $UrlOrigin" | cut -d'"' -f4)
+AccessPass=$(curl -s -d "version=2" $UrlPass -H "Origin: $UrlOrigin" | cut -d'"' -f4)
 
 
 
@@ -3011,7 +3011,7 @@ echo
 echo -e "COMANDO DO TERMUX:${GREEN}"
 cat <<- EOF
 
-clear ; curl -s -d "pageId=660224&version=2" $UrlPass | cut -d '"' -f4 ; echo
+clear ; curl -s -d "version=2" $UrlPass | cut -d '"' -f4 ; echo
 EOF
 echo
 echo -e "${NADA}${DESTACAR}LINK DO NAVEGADOR:"
