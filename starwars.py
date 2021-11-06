@@ -48,7 +48,6 @@ while contagem < 9999:
    
    contagem = contagem + 1
    print(f"{Ganhei}{contagem}")
-   time.sleep(1)
 print("Merda de ads")
    
 
