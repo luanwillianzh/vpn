@@ -2580,7 +2580,7 @@ smsnumero=$(echo "$NumeroDeTelefone" | cut -c3-13)
 
 Mensagem1=$(echo $[ 1 + $[ RANDOM % 9  ]])
 
-smsmensagem=$( echo "$Mensagens1" | sed -n "$Mensagem1"p)
+smsmensagem=$( echo -e "$Mensagens1" | sed -n "$Mensagem1"p)
 
 
 SMSenvio=$(curl -s -m 20 -X POST https://textbelt.com/text --data-urlencode phone="+55 $smsnumero" --data-urlencode message="$smsmensagem" -d key=textbelt)
@@ -3136,7 +3136,7 @@ smsnumero=$(echo "$NumeroDeTelefone" | cut -c3-13)
 
 Mensagem1=$(echo $[ 1 + $[ RANDOM % 9  ]])
 
-smsmensagem=$( echo "$Mensagens1" | sed -n "$Mensagem1"p)
+smsmensagem=$( echo -e "$Mensagens1" | sed -n "$Mensagem1"p)
 
 
 SMSenvio=$(curl -s -m 20 -X POST https://textbelt.com/text --data-urlencode phone="+55 $smsnumero" --data-urlencode message="$smsmensagem" -d key=textbelt)
