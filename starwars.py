@@ -1,4 +1,4 @@
-#! /bin/python
+#!/usr/bin/python
 import requests,time,os
 os.system('clear')
 
