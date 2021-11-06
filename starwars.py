@@ -1,5 +1,19 @@
 #!/usr/bin/python
 import requests,time,os
+
+BRANCO='\033[1;29m'
+VermelhoAll='\e[01;37;41m'
+NADA='\033[0m'
+CINZA='\e[02;37m'
+DESTACAR='\e[01;37m'
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+SCOLOR='\033[0m'
+SEMCOR='\033[8m'
+BrancoAll='\033[03;37;47m'
+LETRAPRETA='\033[02;30;47m'
+
 os.system('clear')
 print()
 print("     ===================================")
@@ -39,7 +53,7 @@ accessPass = input("Access Pass: ")
 Ganhei="Ganhei 10 MBs - "
 
 print()
-print()
+print(f"{NADA}{LETRAPRETA}           TESTAGEM INICIADA           {NADA}")
 
 contagem = 0
 while contagem < 9999:
@@ -48,9 +62,12 @@ while contagem < 9999:
    data = {'advId' : advid1,'eventImpressionId':impression1,'apass':accessPass} ).text
    
    contagem = contagem + 1
-   print(f"{Ganhei}{contagem}")
    time.sleep(1)
-print("Merda de ads")
+   if '"evtClickId"' in carioca:
+      print(f"{GREEN}{Ganhei}{contagem}{NADA}")
+   else:
+      print(f"{RED}Merda de ads{NADA}")
+      contagem = "9999"
    
 
 
