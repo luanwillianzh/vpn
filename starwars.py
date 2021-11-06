@@ -28,6 +28,7 @@ elif( option == '2' or option == '02'):
    UrlReward="http://e.oi.ddivulga.com/api/clickEvent"
    
 else:
+  os.system('clear')
   exit()
 
 advid1 = input("Adv ID: ")
