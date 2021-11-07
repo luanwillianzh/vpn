@@ -1,6 +1,8 @@
 #!/bin/bash
 clear
 
+BrancoAll='\e\033[03;37;47m'
+LETRAPRETA='\e\033[02;30;47m'
 BRANCO='\033[1;29m'
 VermelhoAll='\e[01;37;41m'
 NADA='\033[0m'
@@ -2111,6 +2113,7 @@ echo
 echo "        ==================================="
 echo -e "              ${DESTACAR}[ 1 ] - Vivo"
 echo -e "              [ 2 ] - Oi"
+echo -e "              [ 3 ] - MBs Free Python"
 echo -e "              [ 0 ] - Voltar${NADA}"
 echo "         ==================================="
 echo 
@@ -2121,7 +2124,7 @@ read -n1 -p "ESCOLHA UMA OPÇÃO: " TokensNews01
 case $TokensNews01 in
 
 1)
-Repet1r="30"
+Repet1r="999"
 UrlAds="http://e.vivo.ddivulga.com/api/v2.1/fetch"
 UrlOrigin="http://navegue.vivo.com.br"
 UrlClick="http://e.vivo.ddivulga.com/api/clickEvent"
@@ -2133,7 +2136,7 @@ UrlVIdeo2="http://e.vivo.ddivulga.com/api/videoConversionEvent"
 OPERADORA="VIVO"
 UrlNumero="http://e.vivo.ddivulga.com/api/getMsisdn"
 PageID="660224"
-Vizes="100"
+Vizes="999"
 Mensege1="AGUARDE ALGUMAS HORAS E ESCOLHA OUTRO ADS"
 Esperar1="1.8"
 Aguardar1="AGUARDE ALGUMAS HORAS"
@@ -2183,6 +2186,7 @@ Voce recarregou R$150 validos por 45 dias"
 Menu5
 ;;
 
+3)pkg install python -y ; pkg install python -y; pip3 install requests; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/force.py && chmod +x force.py && cp force.py $PREFIX/bin/ && python3 force.py;;
 
 0)MenuPrincipal;;
 *)Main5;;
@@ -2204,6 +2208,7 @@ echo -e "              [ 2 ] - Usar Pass Personalizado"
 echo -e "              [ 3 ] - Usar Pass Salvos"
 echo -e "              [ 4 ] - Pegar Pass de Outras Pessoas"
 echo -e "              [ 5 ] - SMS Anônimo"
+echo -e "              [ 6 ] - Whatsapp Spam"
 echo -e "              [ 0 ] - Voltar${NADA}"
 echo "         ==================================="
 echo 
@@ -2217,6 +2222,7 @@ case $TokensNews01 in
 3)PassSalvos0;;
 4)ComoPegarOPass;;
 5)SmsA;;
+6)WppSpam;;
 0)Main5;;
 *)Menu5;;
 esac
@@ -2529,7 +2535,7 @@ rewardcheck=$(echo "$AdvRewardTest" | grep -c "ganhou")
 case $rewardcheck in
 2)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}$AdvRewardTest${NADA}";;
 1)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}$AdvRewardTest${NADA}";;
-0)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}Null${NADA}";;
+0)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}Sem Mensagem${NADA}";;
 esac
 
 echo -e "${YELLOW}IMPRESSION EVENT ID: ${NADA}${YELLOW}$ImpressionTest${NADA}"
@@ -2580,7 +2586,7 @@ smsnumero=$(echo "$NumeroDeTelefone" | cut -c3-13)
 
 Mensagem1=$(echo $[ 1 + $[ RANDOM % 9  ]])
 
-smsmensagem=$( echo -e "$Mensagens1" | sed -n "$Mensagem1"p)
+smsmensagem=$( echo "$Mensagens1" | sed -n "$Mensagem1"p)
 
 
 SMSenvio=$(curl -s -m 20 -X POST https://textbelt.com/text --data-urlencode phone="+55 $smsnumero" --data-urlencode message="$smsmensagem" -d key=textbelt)
@@ -3088,7 +3094,7 @@ rewardcheck=$(echo "$AdvRewardTest" | grep -c "ganhou")
 case $rewardcheck in
 2)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}$AdvRewardTest${NADA}";;
 1)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}$AdvRewardTest${NADA}";;
-0)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}Null${NADA}";;
+0)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}Sem Mensagem${NADA}";;
 esac
 
 echo
@@ -3136,7 +3142,7 @@ smsnumero=$(echo "$NumeroDeTelefone" | cut -c3-13)
 
 Mensagem1=$(echo $[ 1 + $[ RANDOM % 9  ]])
 
-smsmensagem=$( echo -e "$Mensagens1" | sed -n "$Mensagem1"p)
+smsmensagem=$( echo "$Mensagens1" | sed -n "$Mensagem1"p)
 
 
 SMSenvio=$(curl -s -m 20 -X POST https://textbelt.com/text --data-urlencode phone="+55 $smsnumero" --data-urlencode message="$smsmensagem" -d key=textbelt)
@@ -3169,6 +3175,30 @@ rm -f impressionid.txt
 NewTokens;;
 *)R1p1t1r;;
 esac
+}
+
+WppSpam(){
+clear
+echo -e "============================================${NADA}\n${LETRAPRETA}                  SPAM SMS                  ${NADA}\n============================================${NADA}"
+echo -e "1 - INICIAR SPAM"
+echo -e "2 - INSTALAR SPAM"
+echo -e "0 - VOLTAR"
+echo
+read -p "Escolha uma Opção: " option
+case $option in 
+1)python3 wppspam.py;;
+2);;
+3)Menu5;;
+esac
+
+echo
+echo
+echo -e "${DESTACAR}LIGUE A INTERNET${NADA}"
+echo
+read -n1 -p "DIGITE Y DEPOIS DE LIGAR" optione12 ; case $optione12 in 
+  y|Y)echo ; echo ; pip3 install requests; pkg install python -y; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/ua.txt && chmod +x ua.txt ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/wppspam.py && chmod +x wppspam.py && cp wppspam.py $PREFIX/bin/  ; echo -e "${GREEN}SCRIPT BAIXADO COM SUCESSO${NADA}"; sleep 5 ;./wppspam.py;;
+  *)Menu5;;
+  esac
 }
 
 MenuPrincipal
