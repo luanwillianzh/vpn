@@ -84,7 +84,7 @@ if( option == '1' or option == '01'):
  headers = CaseInsensitiveDict()
  headers["Origin"] = "http://a.vivo.ddivulga.com"
  headers["Content-Type"] = "application/x-www-form-urlencoded"
- reapit=60
+ reapit=9999
    
   
   
