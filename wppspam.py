@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import requests, random,json,time,sys,os,re
 def Main():
  BRANCO='\033[1;29m'
