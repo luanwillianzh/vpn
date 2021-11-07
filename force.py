@@ -30,7 +30,7 @@ print("                ESCOLHA UMA OPÇÃO\n")
 print("        ===================================")
 print("              [ 1 ] - Vivo")
 print("              [ 2 ] - Oi")
-print("              [ 0 ] - Voltar")
+print("              [ 0 ] - Sair")
 print("         ===================================")
 print()
  
