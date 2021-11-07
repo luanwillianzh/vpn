@@ -200,7 +200,7 @@ headers = CaseInsensitiveDict()
 headers["Content-Type"] = "application/x-www-form-urlencoded"
 
 testador = 0
-
+testestokens = 0
 for ih in range(999):
  for token in range(tokens_on):
   
@@ -228,7 +228,6 @@ for ih in range(999):
     pass
 
  os.system('clear')
- testestokens = 0
  testestokens = testestokens + 1
  print(f"{BANNER}")
  print(f"NUMERO DE TELEFONE: {GREEN}{Numero}{NADA}")
