@@ -239,7 +239,9 @@ for ih in range(999):
  optio = input("Escolha uma Opção: ")
  
  if option == '1':
+    testador = 0
     print()
  else:
+    testador = 0
     print()
    
