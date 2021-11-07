@@ -199,9 +199,11 @@ else:
 headers = CaseInsensitiveDict()
 headers["Content-Type"] = "application/x-www-form-urlencoded"
 
+testador = 0
+
 for ih in range(999):
  for token in range(tokens_on):
-  testador = 0
+  
   testador = testador + 1
   print()
   print(f"{NADA}{LETRAPRETA}           TESTADOR {testador}           {NADA}")
