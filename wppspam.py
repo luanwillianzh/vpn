@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import requests, random,json,time,sys,os,re
 def Main():
  BRANCO='\033[1;29m'
@@ -28,6 +27,25 @@ def Main():
 
 
  tempo = 15
+
+ if ' ' in nomer:
+  nomer = nomer.replace('-','')
+  nomer = nomer.replace(' ', '') 
+  ddd = (f'{nomer[0:2]}')
+ 
+  nun = (f'{nomer[2:11]}')
+  
+
+  nomer = (f'{ddd} {nun}')
+ 
+ else:
+   ddd = (f'{nomer[0:2]}')
+ 
+   nun= (f'{nomer[2:11]}')
+
+   nomer = (f'{ddd} {nun}')
+
+
  nomero = nomer.replace(" ", "%20")
  nimero = nomer.replace(" ", "")
  numero = f"+55{nimero}"
