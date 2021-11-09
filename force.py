@@ -137,6 +137,7 @@ def Main():
   url = "http://e.oi.ddivulga.com/api/v2.1/fetch"
   headers = CaseInsensitiveDict()
   headers["Origin"] = "http://e.oi.ddivulga.com"
+  headers["Referer"] = "http://e.oi.ddivulga.com"
   headers["Content-Type"] = "application/x-www-form-urlencoded"
   reapit=9999
    
