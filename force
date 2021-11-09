@@ -3220,7 +3220,7 @@ echo
 echo -e "${DESTACAR}LIGUE A INTERNET${NADA}"
 echo
 read -n1 -p "DIGITE Y DEPOIS DE LIGAR" optione12 ; case $optione12 in 
-  y|Y)echo ; echo ; pip3 install requests; pkg install python -y; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/ua.txt && chmod +x ua.txt ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/wppspam.py && chmod +x wppspam.py && cp wppspam.py $PREFIX/bin/  ; echo -e "${GREEN}SCRIPT BAIXADO COM SUCESSO${NADA}"; sleep 5 ;./wppspam.py;;
+  y|Y)echo ; echo ; pip3 install requests; pkg install python -y; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/ua.txt && chmod +x ua.txt ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/wppspam.py && chmod +x wppspam.py && cp wppspam.py $PREFIX/bin/  ; echo -e "${GREEN}SCRIPT BAIXADO COM SUCESSO${NADA}"; sleep 5 ;python3 wppspam.py;;
   *)Menu5;;
   esac
 }
