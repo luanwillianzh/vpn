@@ -155,11 +155,12 @@ def Main():
  tokens_on = 0
  iu = 0
  AdvName = [ ]
+ adsON = "Mercedes"
  
- buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, tokens_on, AdvName, iu, op)
+ buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, tokens_on, AdvName, iu, op, adsON)
 
  
-def buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, tokens_on, AdvName, iu, op):
+def buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, tokens_on, AdvName, iu, op, adsON):
  os.system('clear')
  print(f"{NADA}{BANNER}\nPROCURANDO ARQUIVOS QUE ROTIA...")
  time.sleep(4)
@@ -176,7 +177,6 @@ def buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlRew
  while iu < 4:
   iu = iu + 1
   try:
-  
    advidchecar = (X9deToken[f'10{iu}']['advId'])
    
    if advidchecar in advid:
@@ -201,13 +201,14 @@ def buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlRew
    
    tokens_on = tokens_on + 1
    tokensnovos = tokensnovos + 1
+   adsON = "Audi"
   except:
    pass
    
  Numero = X9deToken['msisdn']
- FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, AdvName, iu, op, tokensnovos, tokens_on, Numero)
+ FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, AdvName, iu, op, tokensnovos, tokens_on, Numero, adsON)
 
-def FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, AdvName, iu, op, tokensnovos, tokens_on, Numero):
+def FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, AdvName, iu, op, tokensnovos, tokens_on, Numero, adsON):
 
 
  os.system('clear')
@@ -225,18 +226,33 @@ def FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlR
  resl = input("Escolha uma opção: ")
  
  if resl == '2':
-  pass
+  if "Audi" in adsON:
+   pass
+  else:
+   print()
+   print(f"{RED}PARECE QUE ALGUÉM PRECISA DE UM OCULOS{NADA}")
+   time.sleep(4)
+   FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, AdvName, iu, op, tokensnovos, tokens_on, Numero, adsON)
+   
    
  elif resl == '1':
-  buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, tokens_on, AdvName, iu, op)    
+  buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, tokens_on, AdvName, iu, op, adsON)    
   
  elif resl == '3':
-   TestagemIndividual(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, tokensnovos, tokens_on)
+ 
+  if "Audi" in adsON:
+   TestagemIndividual(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, tokensnovos, tokens_on, adsON)
+   
+  else:
+   print()
+   print(f"{RED}PARECE QUE ALGUÉM PRECISA DE UM OCULOS{NADA}")
+   time.sleep(4)
+   FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, AdvName, iu, op, tokensnovos, tokens_on, Numero, adsON)
  
  elif resl == '0':
   Main()
  else:
-  FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, AdvName, iu, op, tokensnovos, tokens_on, Numero)
+  FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, AdvName, iu, op, tokensnovos, tokens_on, Numero, adsON)
  
  print()
  headersi = CaseInsensitiveDict()
@@ -246,10 +262,11 @@ def FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlR
  testestokens = 0
 
 
- Envio(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, tokens_on, testador, testestokens, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data)
+ Envio(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, tokens_on, testador, testestokens, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, adsON)
 
 
-def Envio(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, tokens_on, testador, testestokens, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data):
+def Envio(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, tokens_on, testador, testestokens, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, adsON):
+  
  os.system('termux-wake-lock')
  for token in range(tokens_on):
   
@@ -280,9 +297,9 @@ def Envio(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, tok
     pass
     
  testestokens = testestokens + 1
- Acabou(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, tokens_on, testador, testestokens, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data)
+ Acabou(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, tokens_on, testador, testestokens, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, adsON)
 
-def Acabou(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, tokens_on, testador, testestokens, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data):
+def Acabou(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, tokens_on, testador, testestokens, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, adsON):
 
  os.system('clear')
  print(f"{BANNER}")
@@ -297,7 +314,7 @@ def Acabou(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, to
  
  if option == '2':
     testador = 0
-    Envio(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, tokens_on, testador, testestokens, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data)
+    Envio(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, tokens_on, testador, testestokens, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, adsON)
  
  if option == '1':
   advid = [ ]
@@ -305,16 +322,16 @@ def Acabou(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, to
   tokens_on = 0
   iu = 0
   AdvName = [ ]
-  buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, tokens_on, AdvName, iu, op)
+  buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, tokens_on, AdvName, iu, op, adsON)
  elif option == "0":
     testador = 0
     Main()    
     
  else:
-    Acabou(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, tokens_on, testador, testestokens, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data)
+    Acabou(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, tokens_on, testador, testestokens, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, adsON)
     
 
-def TestagemIndividual(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, tokensnovos, tokens_on):
+def TestagemIndividual(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, tokensnovos, tokens_on, adsON):
  os.system('clear')
  print(f"{BANNER}")
  print(f"{GREEN}NUMERO DE TELEFONE: {GREEN}{Numero}{NADA}")
@@ -329,19 +346,19 @@ def TestagemIndividual(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED
    print(f"AdvID: {advid[i]}{NADA}")
    print()
  except:
-  buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, tokens_on, AdvName, iu, op)
+  buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, tokens_on, AdvName, iu, op, adsON)
  
  print("0 - VOLTAR") 
  print()
  try:
   Escolha = int(input("Escolha um ADS: "))
   if Escolha == 0:
-   FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, AdvName, iu, op, tokensnovos, tokens_on, Numero)
+   FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, AdvName, iu, op, tokensnovos, tokens_on, Numero, adsON)
 
   else:
    pass
  except:
-  TestagemIndividual(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, tokensnovos, tokens_on)
+  TestagemIndividual(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, tokensnovos, tokens_on, adsON)
   
  print()
  print(f"{NADA}{LETRAPRETA}           TESTAGEM INICIADA           {NADA}")
@@ -376,16 +393,16 @@ def TestagemIndividual(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED
  option = input("Escolha uma Opção: ")
  
  if option == '1':
-  TestagemIndividual(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, tokensnovos, tokens_on)
+  TestagemIndividual(BANNER, NADA, LETRAPRETA, advid, impressionid, GREEN, RED, Numero, sctoken, reapit, headers, AdvName, UrlReward, url, op, iu, data, tokensnovos, tokens_on, adsON)
  
  elif option == '2':
-  buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, tokens_on, AdvName, iu, op)
+  buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, tokens_on, AdvName, iu, op, adsON)
  
  elif option == '3':
   Main()
   
  else: 
-  FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, AdvName, iu, op, tokensnovos, tokens_on, Numero)
+  FreeFire(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlReward, impressionid, advid, AdvName, iu, op, tokensnovos, tokens_on, Numero, adsON)
   
   
     
