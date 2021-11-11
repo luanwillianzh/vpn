@@ -2124,7 +2124,7 @@ read -n1 -p "ESCOLHA UMA OPÇÃO: " TokensNews01
 case $TokensNews01 in
 
 1)
-Repet1r="999"
+Repet1r="9999"
 UrlAds="http://e.vivo.ddivulga.com/api/v2.1/fetch"
 UrlOrigin="http://navegue.vivo.com.br"
 UrlClick="http://e.vivo.ddivulga.com/api/clickEvent"
@@ -2136,7 +2136,7 @@ UrlVIdeo2="http://e.vivo.ddivulga.com/api/videoConversionEvent"
 OPERADORA="VIVO"
 UrlNumero="http://e.vivo.ddivulga.com/api/getMsisdn"
 PageID="660224"
-Vizes="999"
+Vizes="9999"
 Mensege1="AGUARDE ALGUMAS HORAS E ESCOLHA OUTRO ADS"
 Esperar1="1.8"
 Aguardar1="AGUARDE ALGUMAS HORAS"
