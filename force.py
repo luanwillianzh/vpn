@@ -174,7 +174,7 @@ def buscar(BANNER, url, headers, data, RED, GREEN, NADA, sctoken, reapit, UrlRew
   Main()
 
  tokensnovos = 0
- while iu < 4:
+ while iu < 9:
   iu = iu + 1
   try:
    advidchecar = (X9deToken[f'10{iu}']['advId'])
