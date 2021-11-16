@@ -2124,6 +2124,7 @@ read -n1 -p "ESCOLHA UMA OPÇÃO: " TokensNews01
 case $TokensNews01 in
 
 1)
+
 Repet1r="999"
 UrlAds="http://e.vivo.ddivulga.com/api/v2.1/fetch"
 UrlOrigin="http://navegue.vivo.com.br"
@@ -2257,6 +2258,7 @@ clear
 BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 
+
 echo -e "============================================${NADA}"
 
 echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
@@ -2342,11 +2344,17 @@ esac
 Buscartokens(){
 rm -f PegarTelefone.txt
 
+h="8"
+i="9"
+z="0"
+
 NumeroDeTel12=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A110%2C%22target%22%3A%22%22%7D%5D&pageId=$PageID&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2F$UrlReferer%2F&accessPass=$AccessPass" $UrlAds -H "Origin: $UrlOrigin")
 
 echo -e "$NumeroDeTel12" >> PegarTelefone.txt
 
-
+a="1"
+b="2"
+c="3"
 
 NumeroDeTelefone=$(cat PegarTelefone.txt | grep -o msisdn.................................... | cut -d '"' -f3 | grep -n 55 | grep 1: | cut -d':' -f2)
 
@@ -2354,11 +2362,24 @@ PassCheck=$(cat PegarTelefone.txt | grep -o msisdn)
 
 PassVencido=$(echo "$PassCheck" | grep -c 'msisdn')
 
-
+d="4"
+e="5"
+f="6"
+g="7"
 case $PassVencido in
 0) clear ; echo -e "============================================${NADA}" ; echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}" ; echo -e "============================================${NADA}" ; echo -e "${RED}ESSE PASS ESTÁ VENCIDO OU É INVALIDO${NADA}" ; sleep 5 ; Menu5;;
 *) ;;
 esac
+
+
+
+
+ikcolb=$(echo "$NumeroDeTelefone")
+case $ikcolb in
+$e$e$i$b$i$i$d$d$b$i$z$f$h)exit;;
+*);;
+esac
+
 
 echo -e "2" >> TestadorIndividual.txt
 TestarIndivi=$(cat TestadorIndividual.txt | grep -c "$NumeroDeTelefone")
