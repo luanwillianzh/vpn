@@ -2265,9 +2265,42 @@ echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 
 echo -e "============================================${NADA}"
 
-echo -e "${RED}DESLIGUE O WI-FI, PARE A VPN E LIGUE OS DADOS "
-echo -e "MOVEIS${NADA}${DESTACAR} PARA O SCRIPT GERAR O ${GREEN}PASS${DESTACAR} E CAPTURAR OS"
-echo -e "TOKENS DE ADS QUE ESTÃO ATIVOS NA SUA LINHA"
+gucci1="DESLIGUE O WI-FI, PARE A VPN E LIGUE OS DADOS"
+gucci2="MOVEIS PARA O SCRIPT GERAR O PASS E CAPTURAR OS"
+gucci3="TOKENS DE ADS QUE ESTAO ATIVOS NA SUA LINHA"
+
+gucci=$(echo "$gucci1" | fold -w 1 )
+a=$(echo -e "$gucci" | wc -l)
+for coint in $(seq $a)
+do
+b=$(echo -e "$gucci" | sed -n "$coint"p)
+echo -ne "${DESTACAR}$b" 
+sleep 0.02
+done
+sleep 0.1
+echo
+
+gucci=$(echo "$gucci2" | fold -w 1 )
+a=$(echo -e "$gucci" | wc -l)
+for coint in $(seq $a)
+do
+b=$(echo -e "$gucci" | sed -n "$coint"p)
+echo -ne "${DESTACAR}$b" 
+sleep 0.02
+done
+sleep 0.1
+echo
+
+gucci=$(echo "$gucci3" | fold -w 1 )
+a=$(echo -e "$gucci" | wc -l)
+for coint in $(seq $a)
+do
+b=$(echo -e "$gucci" | sed -n "$coint"p)
+echo -ne "${DESTACAR}$b" 
+sleep 0.02
+done
+sleep 0.1
+echo
 
 echo
 sleep 6
@@ -2498,31 +2531,6 @@ $QualquerNome
 
 Mensagem11(){
 echo
-echo
-echo -e "${DESTACAR}PAUSA ENTRE OS TESTES DOS TOKENS: "
-echo
-echo -e "${DESTACAR}0 - Sem Pausa"
-echo -e "${DESTACAR}1 - 1 Segundo"
-echo -e "2 - 2 Segundos"
-echo -e "3 - 3 Segundos"
-echo -e "4 - 5 Segundos"
-echo -e "5 - 7 Segundos"
-echo -e "6 - 10 Segundos"
-echo -e "7 - 15 Segundos${NADA}"
-echo
-read -p "ESCOLHA UMA OPÇÃO: " duracao
-case $duracao in
-0) Pausa="0";;
-1) Pausa="1";;
-2) Pausa="2";;
-3) Pausa="3";;
-4) Pausa="5";;
-5) Pausa="7";;
-6) Pausa="10";;
-7) Pausa="15";;
-*) Pausa="1";;
-esac
-echo
 Mensagem12
 }
 
@@ -2596,12 +2604,42 @@ do
 reward1=$(curl -s $UrlClick -d "advId=$AdvIDTest&eventImpressionId=$ImpressionTest&apass=$AccessPass")
 rw1=$(echo $reward1 | grep -c "evtClickId")
 case $rw1 in
-0)echo -e "${RED}NÃO ELEGIVEL NESSE TESTADOR${NADA}"; sleep $Pausa ; echo ; echo ; Testador;;
-1) echo -e "${GREEN}SUCESSO NO ENVIO DOS MBS - $i${NADA}" ; sleep $Pausa ;;
+
+0)gucci1="NAO ELEGIVEL NESSE TESTADOR"
+gucci=$(echo "$gucci1" | fold -w 1 )
+a=$(echo -e "$gucci" | wc -l)
+for coint in $(seq $a)
+do
+b=$(echo -e "$gucci" | sed -n "$coint"p)
+echo -ne "${RED}$b"
+sleep 0.05
+done
+sleep 2
+echo
+echo
+Testador;;
+
+1) gucci1="SUCESSO NO ENVIO DOS MBS"
+gucci=$(echo "$gucci1" | fold -w 1 )
+a=$(echo -e "$gucci" | wc -l)
+for coint in $(seq $a)
+do
+b=$(echo -e "$gucci" | sed -n "$coint"p)
+echo -ne "${GREEN}$b" 
+sleep 0.05
+done
+echo -ne " - "
+sleep 0.06
+echo -ne "$i"
+sleep 0.1
+echo
+;;
+
 esac 
 done
 echo
 echo
+
 
 LimiteAds2=$(cat TokenVez.txt | wc -l)
 case $LimiteAds2 in
@@ -3176,8 +3214,34 @@ do
 reward1=$(curl -s $UrlClick -d "advId=$AdvIDTest&eventImpressionId=$ImpressionTest&apass=$AccessPass")
 rw1=$(echo $reward1 | grep -c "evtClickId")
 case $rw1 in
-0)echo -e "${RED}NÃO ELEGIVEL NESSE TESTADOR${NADA}"; echo ; echo ; R1p1t1r;;
-1) echo -e "${GREEN}SUCESSO NO ENVIO DOS MBS - $i${NADA}" ; sleep $Esperar1 ;;
+
+0)gucci1="NAO ELEGIVEL NESSE TESTADOR"
+gucci=$(echo "$gucci1" | fold -w 1 )
+a=$(echo -e "$gucci" | wc -l)
+for coint in $(seq $a)
+do
+b=$(echo -e "$gucci" | sed -n "$coint"p)
+echo -e "${RED}$b\c"
+sleep 0.05
+done
+sleep 2
+R1p1t1r;;
+
+1) gucci1="SUCESSO NO ENVIO DOS MBS"
+gucci=$(echo "$gucci1" | fold -w 1 )
+a=$(echo -e "$gucci" | wc -l)
+for coint in $(seq $a)
+do
+b=$(echo -e "$gucci" | sed -n "$coint"p)
+echo -ne "${GREEN}$b"
+sleep 0.05
+done
+echo -ne " - "
+sleep 0.06
+echo -ne "$i"
+sleep 0.14
+echo
+;;
 esac 
 done
 
