@@ -2204,7 +2204,7 @@ read -p "Escolha uma Opção: " option
 case $option in 
 1)python3 force.py;;
 2);;
-3)Menu5;;
+0)Menu5;;
 esac
 
 echo
