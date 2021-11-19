@@ -2124,6 +2124,10 @@ read -n1 -p "ESCOLHA UMA OPÇÃO: " TokensNews01
 case $TokensNews01 in
 
 1)
+BrancoAll='\e\033[03;37;47m'
+LETRAPRETA='\e\033[02;30;47m'
+OPERADORA="VIVO"
+BANNER="${NADA}============================================${NADA}\n${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}\n============================================${DESTACAR}"
 
 Repet1r="999"
 UrlAds="http://e.vivo.ddivulga.com/api/v2.1/fetch"
@@ -2167,6 +2171,9 @@ UrlPass="e.oi.ddivulga.com/api/gp"
 UrlVideo="http://e.oi.ddivulga.com/api/videoActionEvent"
 UrlVIdeo2="http://e.oi.ddivulga.com/api/videoConversionEvent"
 OPERADORA="OI  "
+
+BANNER="${NADA}============================================${NADA}\n${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}\n============================================${DESTACAR}"
+
 PageID="822068"
 Vizes="9999"
 Mensege1="ESCOLHA OUTRO TOKEN"
@@ -2259,60 +2266,47 @@ BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 
 
-echo -e "============================================${NADA}"
+echo -e "${BANNER}"
 
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
 
-echo -e "============================================${NADA}"
 
-gucci1="DESLIGUE O WI-FI, PARE A VPN E LIGUE OS DADOS"
-gucci2="MOVEIS PARA O SCRIPT GERAR O PASS E CAPTURAR OS"
-gucci3="TOKENS DE ADS QUE ESTAO ATIVOS NA SUA LINHA"
 
-gucci=$(echo "$gucci1" | fold -w 1 )
-a=$(echo -e "$gucci" | wc -l)
-for coint in $(seq $a)
+
+for i in $(seq 3)
 do
-b=$(echo -e "$gucci" | sed -n "$coint"p)
-echo -ne "${DESTACAR}$b" 
+case $i in
+1)gucci="DESLIGUE O WI-FI, PARE A VPN E LIGUE OS DADOS";;
+2)gucci="MOVEIS PARA O SCRIPT GERAR O PASS E CAPTURAR OS";;
+3)gucci="TOKENS DE ADS QUE ESTÃO ATIVOS NA SUA LINHA";;
+esac
+
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
 sleep 0.02
 done
-sleep 0.1
+echo
+done
+
+sleep 4
 echo
 
-gucci=$(echo "$gucci2" | fold -w 1 )
-a=$(echo -e "$gucci" | wc -l)
-for coint in $(seq $a)
+echo
+
+Xta="DIGITE ENTER DEPOIS DE TER FEITO TUDO"
+
+gucci="$Xta"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
 do
-b=$(echo -e "$gucci" | sed -n "$coint"p)
-echo -ne "${DESTACAR}$b" 
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
 sleep 0.02
 done
-sleep 0.1
-echo
 
-gucci=$(echo "$gucci3" | fold -w 1 )
-a=$(echo -e "$gucci" | wc -l)
-for coint in $(seq $a)
-do
-b=$(echo -e "$gucci" | sed -n "$coint"p)
-echo -ne "${DESTACAR}$b" 
-sleep 0.02
-done
-sleep 0.1
-echo
-
-echo
-sleep 6
-
-echo -e "DIGITE ${GREEN}Y${DESTACAR} DEPOIS DE TER FEITO TUDO ${NADA}"
-
- read -n1 Option005
- case $Option005 in
- Y);;
- y);;
- *)Menu5;;
- esac
+ read Option005
  
  
 
@@ -2322,14 +2316,29 @@ AccessPass=$(curl -s -d "version=2" $UrlPass -H "Origin: $UrlOrigin" | cut -d'"'
 
 
 clear
-echo -e "============================================${NADA}"
+echo -e "${BANNER}"
 
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
+gucci="JÁ PODE SE CONECTAR EM VPNS OU WIFI SE QUISER"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${gucci:$b:1}" 
+sleep 0.02
+done
 
-echo -e "============================================${NADA}"
-echo -e "${DESTACAR}JÁ PODE SE CONECTAR EM VPNS OU WIFI SE QUISER"
 echo
-read -n1 -p $'APERTE QUALQUER TECLA APÓS SE CONECTAR' conectadoain
+echo
+gucci="APERTE QUALQUER TECLA APÓS SE CONECTAR"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.02
+done
+
+read -n1 conectadoain
 Buscartokens
 }
 
@@ -2337,32 +2346,55 @@ chavecustom(){
 clear
 BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
-echo -e "============================================${NADA}"
+echo -e "${BANNER}"
 
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
+gucci="COLE O PASS: "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.03
+done
 
-echo -e "============================================${NADA}"
-read -p $'\e[01;37mCOLE O PASS: \033[1;32m' AccessPass
+echo -ne "${GREEN}"
+read AccessPass
+echo -ne "${NADA}"
+
 echo
 SalvarPass
 }
 
 SalvarPass(){
 clear
-BrancoAll='\e\033[03;37;47m'
-LETRAPRETA='\e\033[02;30;47m'
-echo -e "${NADA}============================================${NADA}"
+echo -e "${BANNER}"
 
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
+gucci="QUER SALVAR ESSE PASS? [Y/n] "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${gucci:$b:1}" 
+sleep 0.03
+done
 
-echo -e "============================================${NADA}"
-read -p $'\e[01;37mQUER SALVAR ESSE PASS? [Y/n] ' AccessPassSave
+read -n1 AccessPassSave
+
+echo
 echo
 case $AccessPassSave in
 n)Buscartokens;;
 N)Buscartokens;;
-Y)read -p $'\e[01;37mDIGITE UM NOME PARA O PASS: ' PassName ; echo -e " ${GREEN} $PassName${NADA}- $OPERADORA -$AccessPass" >> TokensSave.txt ; Buscartokens;;
-y)read -p $'\e[01;37mDIGITE UM NOME PARA O PASS: ' PassName ; echo -e " ${GREEN} $PassName${NADA}- $OPERADORA -$AccessPass" >> TokensSave.txt ; Buscartokens;;
+Y|y)gucci="DIGITE UM NOME PARA O PASS: "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${gucci:$b:1}" 
+sleep 0.03
+done
+read PassName
+echo -e " ${GREEN} $PassName${NADA}- $OPERADORA -$AccessPass" >> TokensSave.txt ; Buscartokens;;
 *)SalvarPass;;
 esac
 }
@@ -2400,7 +2432,21 @@ e="5"
 f="6"
 g="7"
 case $PassVencido in
-0) clear ; echo -e "============================================${NADA}" ; echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}" ; echo -e "============================================${NADA}" ; echo -e "${RED}ESSE PASS ESTÁ VENCIDO OU É INVALIDO${NADA}" ; sleep 5 ; Menu5;;
+0) clear
+echo -e "${BANNER}"
+gucci="ESSE PASS ESTÁ VENCIDO OU É INVALIDO"
+
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${RED}${gucci:$b:1}${NADA}" 
+sleep 0.02
+done
+
+sleep 4
+echo -e "${NADA}"
+Menu5;;
 *) ;;
 esac
 
@@ -2423,12 +2469,18 @@ case $TestarIndivi in
 clear
 BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
-echo -e "============================================${NADA}"
+echo -e "${BANNER}"
 
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
+gucci="QUER CONTINUAR A TESTAGEM INDIVIDUAL? [Y/n]"
 
-echo -e "============================================${NADA}"
-echo -e "${DESTACAR}QUER CONTINUAR A TESTAGEM INDIVIDUAL? [Y/n]"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.03
+done
+
 read -n1 conectadoain
 case $conectadoain in
 n)rm -f TestadorIndividual.txt;;
@@ -2471,20 +2523,31 @@ rm -f TestadorIndividual.txt
 clear
 BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
-echo -e "${NADA}============================================${NADA}"
+echo -e "${BANNER}"
 
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
+gucci="PROCURANDO TOKENS"
 
-echo -e "============================================${NADA}"
-echo -e "${DESTACAR}PROCURANDO TOKENS...${NADA}"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.03
+done
+
+echo -ne "."
+sleep 0.5
 
 X9deToken=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A%22100%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22102%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22103%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22104%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22105%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22106%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22107%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22108%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22109%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22110%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22111%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22112%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22113%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22114%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22115%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22116%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22117%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22118%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22119%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22120%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22121%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22122%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22123%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22124%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%5D&pageId=660224&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2F$UrlReferer%2F&accessPass=$AccessPass" $UrlAds -H "Origin: $UrlOrigin")
 
 X9Oi=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A301%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Dmanaus%3BtailtState%3Damazonas%3BtailCountry%3Dbr%22%7D%5D&pageId=822068&insertionId=&insertionUUID=&insertionType=ANY&referer=&accessPass=$AccessPass" -H "Origin: $UrlOrigin" $UrlAds)
 
+echo -ne "."
+sleep 1
 
 echo -e "$X9deToken" >> tokencreator.txt
 echo -e "$X9Oi" >> tokencreator.txt
+
 
 
 advid=$(cat tokencreator.txt | grep -a -i -o advid..............| cut -d':' -f2 | cut -d'"' -f1)
@@ -2504,6 +2567,9 @@ echo -e "$advreward" >> advrewardcriar.txt
 advmensagem=$(cat tokencreator.txt | grep -o headlineWebmessage1......................................................................... | cut -d'"' -f2-3 | cut -d'<' -f1 | cut -d'"' -f2 | cut -d'.' -f1)
 
 echo -e "$advmensagem" >> advmensagem.txt
+
+echo -ne "."
+sleep 0.8
 
 NewTokensRev
 }
@@ -2580,21 +2646,63 @@ BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 echo -e "${LETRAPRETA}           TESTADOR $TokenVez           ${NADA}"
 
-echo -e "${YELLOW}ADV NAME: ${NADA}${YELLOW}$AdvNameTest${NADA}"
+gucci="ADV NAME: $AdvNameTest"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${YELLOW}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+echo
 
-echo -e "${YELLOW}ADV MENSAGEM: ${NADA}${YELLOW}$AdvMensagemTest${NADA}"
+
+gucci="ADV MENSAGEM: $AdvMensagemTest"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${YELLOW}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+echo
 
 rewardcheck=$(echo "$AdvRewardTest" | grep -c "ganhou")
 case $rewardcheck in
-2)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}$AdvRewardTest${NADA}";;
-1)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}$AdvRewardTest${NADA}";;
-0)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}Sem Mensagem${NADA}";;
+0)rick="ADV REWARD: Sem Mensagem";;
+*)rick="ADV REWARD: $AdvRewardTest"
 esac
 
-echo -e "${YELLOW}IMPRESSION EVENT ID: ${NADA}${YELLOW}$ImpressionTest${NADA}"
+gucci="$rick"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${YELLOW}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+echo
 
-echo -e "${YELLOW}ADV ID: ${NADA}${YELLOW}$AdvIDTest${NADA}"
+gucci="IMPRESSION EVENT ID: $ImpressionTest"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${YELLOW}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+echo
 
+
+gucci="ADV ID: $AdvIDTest"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${YELLOW}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+echo
 
 
 
@@ -2657,7 +2765,17 @@ ReinicioAutomatico=$(cat ReinicioAltomatico.txt | grep -c 1)
 case $ReinicioAutomatico in
 1)echo -e "1" >> TestesFeitos.txt
 echo -e "${VermelhoAll}            TESTAGEM FINALIZADA             ${NADA}"
-echo -e "${DESTACAR}A TESTAGEM SERÁ REINICIADA ALTOMATICAMENTE${NADA}"
+
+gucci="A TESTAGEM SERÁ REINICIADA ALTOMATICAMENTE"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.009
+done
+
+echo
 echo
 echo
 Mensagem12;;
@@ -2685,21 +2803,125 @@ Ler12(){
 TestesFeitos=$(cat TestesFeitos.txt | wc -l)
 clear
 echo -e "${VermelhoAll}            TESTAGEM FINALIZADA             ${NADA}"
-echo -e "${NADA}============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
-echo -e "============================================${NADA}"
-echo -e "${CINZA}NUMERO DE TELEFONE USADO:${NADA} ${GREEN}$NumeroDeTelefone${NADA}"
-echo -e "${CINZA}TESTES FEITOS COM ESSES TOKENS:${NADA} ${GREEN}$TestesFeitos${NADA}"
+echo -e "${BANNER}"
+
+
+gucci="NUMERO DE TELEFONE USADO: "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+
+gucci="$NumeroDeTelefone"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${GREEN}${gucci:$b:1}${NADA}" 
+sleep 0.07
+done
 echo
 
-echo -e "${NADA}${DESTACAR}1 - PROCURAR NOVOS TOKENS ${CINZA}MELHOR ESPERAR UM POUCO...${NADA}"
-echo -e "${DESTACAR}2 - REPETIR OS TOKENS USADOS ${CINZA}ATÉ PARAR DE CAIR MBS${NADA}"
-echo -e "${DESTACAR}0 - VOLTAR${NADA}" 
+
+
+gucci="TESTES FEITOS COM ESSES TOKENS: "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+
+gucci="$TestesFeitos"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${GREEN}${gucci:$b:1}${NADA}" 
+sleep 0.07
+done
 echo
-read -p "ESCOLHA UMA OPÇÃO: " denovo1
+echo
+
+
+gucci="1 - PROCURAR NOVOS TOKENS "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+
+gucci="MELHOR ESPERAR UM POUCO"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.009
+done
+echo
+
+
+
+gucci="2 - REPETIR OS TOKENS USADOS "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+
+gucci="ATÉ PARAR DE CAIR MBS"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.009
+done
+echo
+
+
+gucci="0 - VOLTAR "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+
+gucci="MERDA DE CHIP"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.009
+done
+echo
+echo
+
+gucci="ESCOLHA UMA OPÇÃO: "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.05
+done
+
+read denovo1
 case $denovo1 in
 1)rm -f TestesFeitos.txt ; Buscartokens;;
-2)rm -f TokenVez.txt ;Mensagem12 ;rm -f ReinicioAltomatico.txt;;
+2)echo; rm -f TokenVez.txt ;Mensagem12 ;rm -f ReinicioAltomatico.txt;;
 0)MenuPrincipal;;
 *)clear  ; Ler12;;
 esac
@@ -2723,12 +2945,20 @@ rm -f advidrev.txt
 clear
 BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
-echo -e "============================================${NADA}"
+echo -e "${BANNER}"
 
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
+gucci="PROCURANDO NOVOS TOKENS"
 
-echo -e "============================================${NADA}"
-echo -e "${DESTACAR}PROCURANDO NOVOS TOKENS...${NADA}"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}" 
+sleep 0.03
+done
+
+echo -ne "."
+sleep 0.5
 
 
 X9deToken=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A%22100%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22102%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22103%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22104%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22105%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22106%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22107%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22108%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22109%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22110%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22111%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22112%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22113%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22114%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22115%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22116%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22117%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22118%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22119%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22120%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22121%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22122%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22123%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%2C%7B%22slotId%22%3A%22124%22%2C%22target%22%3A%22os%3Dandroid%3BtailCity%3Drio%2520de%2520janeiro%3BtailtState%3Drio%2520de%2520janeiro%3BtailCountry%3Dbr%22%7D%5D&pageId=660224&insertionId=&insertionUUID=&insertionType=&referer=http%3A%2F%2F$UrlReferer%2F&accessPass=$AccessPass" $UrlAds -H "Origin: $UrlOrigin")
@@ -2739,6 +2969,8 @@ X9Oi=$(curl -s -d "slotId=%5B%7B%22slotId%22%3A301%2C%22target%22%3A%22os%3Dandr
 echo -e "$X9deToken" >> tokencreatorrev.txt
 echo -e "$X9Oi" >> tokencreatorrev.txt
 
+echo -ne "."
+sleep 0.5
 CriandoOsTokens1
 }
 
@@ -2824,10 +3056,15 @@ advid008=$(cat advidrev.txt | grep -n , | grep 8: | cut -d':' -f2 )
 advid009=$(cat advidrev.txt | grep -n , | grep 9: | cut -d':' -f2 )
 advid0010=$(cat advidrev.txt | grep -n , | grep 10: | cut -d':' -f2 )
 
+visa="NOVO "
+visa2="NOVOS "
+echo -ne "."
+sleep 0.5
+
 aiy=$(echo "$advid001" | grep -c ,)
 case $aiy in
 1);;
-0)NewTokens;;
+0)NewTokensRev;;
 esac
 
 test001=$(cat advidcriar.txt | grep -n , | grep -c "$advid001")
@@ -2889,7 +3126,7 @@ case $test0010 in
 1) ;;
 0) echo -e "$advid0010" >> advidcriar.txt ; echo -e "$impressionid0010" >> impressionidcriar.txt ;echo -e "$advname0010" >> advnamecriar.txt ;  echo -e "$advreward0010" >> advrewardcriar.txt;echo -e "$advmensagem0010" >> advmensagem.txt ; echo -e "1" >> TokensEncontrados.txt;;
 esac
-NewTokens
+NewTokensRev
 }
 
 
@@ -2900,9 +3137,7 @@ AZUL='\e[01;36;m'
 BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 clear
-echo -e "============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
-echo -e "============================================${NADA}"
+echo -e "${BANNER}"
 
 TokensNovos00=$(cat advidcriar.txt |  grep -c ,)
 
@@ -2910,84 +3145,191 @@ BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 
 clear
-echo -e "============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
-echo -e "============================================${NADA}"
+echo -e "${BANNER}"
 
 case $TokensNovos00 in
-0) echo -e "${RED}NENHUM TOKEN FOI ENCONTRADO${NADA}" ;;
-1) echo -e "${GREEN}$TokensNovos00 TOKEN FOI ENCONTRADO ${NADA}" ;;
-$TokensNovos00) echo -e "${GREEN}$TokensNovos00 TOKEN FORAM ENCONTRADOS ${NADA}" ;;
-*) echo -e "${RED}NENHUM TOKEN FOI ENCONTRADO${NADA}" ;;
+0) eixo="NENHUM TOKEN ${visa}FOI ENCONTRADO" ; COR="${RED}" ;;
+
+1) eixo="$TokensNovos00 TOKEN ${visa}FOI ENCONTRADO" ; COR="${GREEN}" ;;
+
+$TokensNovos00) eixo="$TokensNovos00 TOKEN ${visa2}FORAM ENCONTRADOS" ;COR="${GREEN}" ;;
+
+*) eixo="NENHUM TOKEN ${visa}FOI ENCONTRADO" ;COR="${NADA}" ;;
 esac
 
+gucci="$eixo"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${COR}${gucci:$b:1}${NADA}" 
+sleep 0.015
+done
+echo
+echo
 
-echo
-echo -e "${CINZA}NUMERO DE TELEFONE USADO:${NADA} ${GREEN}$NumeroDeTelefone${NADA}"
-echo -e "${CINZA}TOTAL DE TOKENS ENCONTRADOS:${NADA} ${GREEN}$TokensNovos00"
+
+gucci="NUMERO DE TELEFONE USADO: "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.00001
+done
+
+gucci="$NumeroDeTelefone"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${GREEN}${gucci:$b:1}${NADA}" 
+sleep 0.07
+done
 echo
 
-echo -e "${DESTACAR}1 - PROCURAR NOVOS TOKENS${NADA} ${CINZA}ATÉ PARAR DE APARECER${NADA}"
-echo -e "${DESTACAR}2 - TESTAR TOKENS ENCONTRADOS${NADA} ${CINZA}USAR TODOS OS TOKENS${NADA}"
-echo -e "${DESTACAR}3 - TESTAGEM INDIVIDUAL${NADA} ${CINZA}ESCOLHER UM TOKEN${NADA}"
-echo -e "${DESTACAR}0 - VOLTAR${NADA} ${CINZA}NENHUM TOKEN ENCONTRADO${NADA}"
+
+
+gucci="TOTAL DE TOKENS ENCONTRADOS: "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.00001
+done
+
+gucci="$TokensNovos00"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${GREEN}${gucci:$b:1}${NADA}" 
+sleep 0.07
+done
 echo
-read -p "ESCOLHA UMA OPÇÃO: " TokensNews01
+echo
+
+gucci="1 - PROCURAR NOVOS TOKENS "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.00001
+done
+
+gucci="ATÉ PARAR DE APARECER"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.009
+done
+echo
+
+
+
+
+gucci="2 - TESTAR TOKENS ENCONTRADOS "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.00001
+done
+
+gucci="USAR TODOS OS TOKENS"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.009
+done
+echo
+
+
+
+
+gucci="3 - TESTAGEM INDIVIDUAL "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.00001
+done
+
+gucci="ESCOLHER UM TOKEN"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.009
+done
+echo
+
+
+
+
+gucci="0 - VOLTAR "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.00001
+done
+
+gucci="NENHUM TOKEN ENCONTRADO"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.009
+done
+echo
+echo
+
+
+
+gucci="ESCOLHA UMA OPÇÃO: "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.05
+done
+
+read TokensNews01
 case $TokensNews01 in
 1)ProcurarMaisTokens;;
-2)QualquerNome="Mensagem11"; GerarOsTokens;;
-3)QualquerNome="TestadorIndividual" ; GerarOsTokens;;
+
+2)
+case $TokensNovos00 in
+0)NewTokensRev;;
+*);;
+esac
+QualquerNome="Mensagem11"; GerarOsTokens;;
+
+3)
+case $TokensNovos00 in
+0)NewTokensRev;;
+*);;
+esac
+QualquerNome="TestadorIndividual" ; GerarOsTokens;;
+
 0)Menu5;;
+
 *)NewTokensRev;;
 esac
 } 
-
-
-
-
-
-NewTokens(){
-echo -e "2" >> TokensEncontrados.txt
-TokensNovos00=$(cat advidcriar.txt |  grep -c ,)
-TokensNovos0=$(cat TokensEncontrados.txt |  grep -c 1)
-
-clear
-BrancoAll='\e\033[03;37;47m'
-LETRAPRETA='\e\033[02;30;47m'
-
-echo -e "============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
-echo -e "============================================${NADA}"
-
-case $TokensNovos0 in
-0) echo -e "${RED}NENHUM TOKEN NOVO FOI ENCONTRADO${NADA}" ;;
-1) echo -e "${GREEN}1 TOKEN NOVO FOI ENCONTRADO ${NADA}" ;;
-$TokensNovos0) echo -e "${GREEN}$TokensNovos0 TOKEN NOVOS FORAM ENCONTRADOS ${NADA}" ;;
-*) echo -e "${RED}NENHUM TOKEN NOVO FOI ENCONTRADO${NADA}" ;;
-esac
-
-
-echo
-echo -e "${CINZA}NUMERO DE TELEFONE USADO:${NADA} ${GREEN}$NumeroDeTelefone${NADA}"
-echo -e "${CINZA}TOTAL DE TOKENS ENCONTRADOS:${NADA} ${GREEN}$TokensNovos00"
-echo
-
-echo -e "${DESTACAR}1 - PROCURAR NOVOS TOKENS${NADA} ${CINZA}ATÉ PARAR DE APARECER${NADA}"
-echo -e "${DESTACAR}2 - TESTAR TOKENS ENCONTRADOS${NADA} ${CINZA}USAR TODOS OS TOKENS${NADA}"
-echo -e "${DESTACAR}3 - TESTAGEM INDIVIDUAL${NADA} ${CINZA}ESCOLHER UM TOKEN${NADA}"
-
-echo -e "${DESTACAR}0 - VOLTAR${NADA} ${CINZA}NENHUM TOKEN ENCONTRADO${NADA}"
-echo
-read -p "ESCOLHA UMA OPÇÃO: " TokensNews
-case $TokensNews in
-1)ProcurarMaisTokens;;
-2)QualquerNome="Mensagem11"; GerarOsTokens;;
-3)QualquerNome="TestadorIndividual"; GerarOsTokens;;
-0)Menu5;;
-*)NewTokens;;
-esac
-} 
-
 
 
 
@@ -2996,15 +3338,15 @@ clear
 BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
 
-echo -e "============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
-echo -e "============================================${NADA}"
+echo -e "${BANNER}"
 TokensSave001=$(cat TokensSave.txt | grep -n - | grep -c 1:)
     case $TokensSave001 in
     1) ;;
     2) ;;
     3) ;;
-    *) clear ; echo -e "============================================${NADA}" ; echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}" ; echo -e "============================================${NADA}" ; echo -e "${RED}NENHUM PASS ENCONTRADO${NADA}" ; sleep 5 ; Menu5;;
+    *) clear
+    echo -e "${BANNER}"
+    echo -e "${RED}NENHUM PASS ENCONTRADO${NADA}" ; sleep 5 ; Menu5;;
     esac
     
 echo -e "${DESTACAR}ESCOLHA UM NUMERO:${NADA}"
@@ -3033,9 +3375,8 @@ ComoPegarOPass(){
 clear
 BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
-echo -e "============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
-echo -e "============================================${NADA}"
+echo -e "${BANNER}"
+
 echo -e "${GREEN}COMO PEGAR O PASS DE OUTRAS PESSOAS${NADA}"
 echo
 echo -e "${DESTACAR}1 - DESLIGUE A VPN, WI-FI E DEIXE APENAS OS DADOS MOVEIS LIGADOS"
@@ -3070,9 +3411,8 @@ SmsA(){
 clear
 BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
-echo -e "============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
-echo -e "============================================${NADA}${DESTACAR}"
+echo -e "${BANNER}"
+
 read -p "DIGITE O DDD+NUMERO: " smsnumero1
 echo
 
@@ -3129,14 +3469,6 @@ read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
 
 TestadorIndividual(){
 clear
-EligibilityG=$(cat impressionid.txt | sed -n "1"p)
-clear
-TesterElegibility=$(echo "$EligibilityG" | grep -n - | grep -c 1:)
-clear
-case $TesterElegibility in
-1) ;;
-*)NewTokens;;
-esac
 
 NomeAne=$(cat ChavePass.txt | wc -l)
 clear
@@ -3148,13 +3480,28 @@ clear
 echo -e "$NumeroDeTelefone" >> TestadorIndividual.txt
 BrancoAll='\e\033[03;37;47m'
 LETRAPRETA='\e\033[02;30;47m'
-echo -e "============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
-echo -e "============================================${NADA}"
+echo -e "${BANNER}"
 
 LimiteAds=$(cat advid.txt | wc -l)
 
-echo -e "${DESTACAR}NUMERO DE TELEFONE: ${GREEN}$NumeroDeTelefone${NADA}"
+gucci="NUMERO DE TELEFONE USADO: "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+
+gucci="$NumeroDeTelefone"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${GREEN}${gucci:$b:1}${NADA}" 
+sleep 0.07
+done
+echo
 echo
 
 for i in $(seq $LimiteAds)
@@ -3166,37 +3513,92 @@ AdvRewardTest=$(cat advreward.txt | sed -n "$i"p)
 
 AdvMensagemTest=$(cat advmensagem.txt | sed -n "$i"p)
 
-echo -e "${DESTACAR}$i - ADS $i${NADA}"
+gucci="$i - ADS $i"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+echo
 
-echo -e "${YELLOW}ADV NAME: $AdvNameTest"
+gucci="ADV NAME: $AdvNameTest"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${YELLOW}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+echo
 
-echo -e "${YELLOW}ADV MENSAGEM: $AdvMensagemTest"
 
+gucci="ADV MENSAGEM: $AdvMensagemTest"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${YELLOW}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+echo
 
 rewardcheck=$(echo "$AdvRewardTest" | grep -c "ganhou")
 case $rewardcheck in
-2)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}$AdvRewardTest${NADA}";;
-1)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}$AdvRewardTest${NADA}";;
-0)echo -e "${YELLOW}ADV REWARD: ${NADA}${YELLOW}Sem Mensagem${NADA}";;
+0)rick="ADV REWARD: Sem Mensagem";;
+*)rick="ADV REWARD: $AdvRewardTest"
 esac
 
+gucci="$rick"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${YELLOW}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+
+
+echo
 echo
 echo
 done
 
-echo -e "${DESTACAR}0 - Voltar${NADA}"
+gucci="0 - VOLTAR"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.05
+done
+
+
 echo
 echo
-read -p "ESCOLHA UM ADS: " adstestado
+echo
+
+gucci="ESCOLHA UM ADS: "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.05
+done
+
+read adstestado
 case $adstestado in
 0)rm -f advname.txt
 rm -f advreward.txt
 rm -f advid.txt
 rm -f impressionid.txt
-NewTokens;;
+NewTokensRev;;
 *);;
 esac
 
+echo
 echo
 echo
 BrancoAll='\e\033[03;37;47m'
@@ -3265,23 +3667,93 @@ R1p1t1r
 R1p1t1r(){
 clear
 echo -e "${VermelhoAll}            TESTAGEM FINALIZADA             ${NADA}"
-echo -e "${NADA}============================================${NADA}"
-echo -e "${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}"
-echo -e "============================================${NADA}"
-echo -e "${DESTACAR}NUMERO DE TELEFONE: ${GREEN}$NumeroDeTelefone${NADA}"
-echo -e "${DESTACAR}$Mensege1${NADA}"
+echo -e "${BANNER}"
+
+gucci="NUMERO DE TELEFONE USADO: "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+
+gucci="$NumeroDeTelefone"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${GREEN}${gucci:$b:1}${NADA}" 
+sleep 0.07
+done
 echo
-echo -e "${DESTACAR}1 - ESCOLHER OUTRO TOKEN ${CINZA}$Aguardar1${NADA}"
-echo -e "${DESTACAR}0 - VOLTAR ${CINZA}PROCURAR NOVOS TOKENS${NADA}"
 echo
-read -p "ESCOLHA UMA OPÇÃO: " TokensNews
+
+
+
+
+
+gucci="1 - ESCOLHER OUTRO TOKEN "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+
+
+gucci="$Aguardar1"
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.009
+done
+echo
+
+
+gucci="0 - VOLTAR "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.0001
+done
+
+
+gucci="PROCURAR NOVOS TOKENS "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${CINZA}${gucci:$b:1}${NADA}" 
+sleep 0.009
+done
+echo
+echo
+
+
+
+gucci="ESCOLHA UMA OPÇÃO: "
+opa=$(echo -e "$gucci" | wc -m)
+for i in $(seq $opa)
+do
+b=$(($i-1))
+echo -ne "${DESTACAR}${gucci:$b:1}${NADA}" 
+sleep 0.06
+done
+
+read TokensNews
 case $TokensNews in
 1)TestadorIndividual;;
 0)rm -f advname.txt
 rm -f advreward.txt
 rm -f advid.txt
 rm -f impressionid.txt
-NewTokens;;
+NewTokensRev;;
 *)R1p1t1r;;
 esac
 }
@@ -3297,7 +3769,7 @@ read -p "Escolha uma Opção: " option
 case $option in 
 1)python3 wppspam.py;;
 2);;
-3)Menu5;;
+0)Menu5;;
 esac
 
 echo
