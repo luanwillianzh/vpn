@@ -1,7 +1,8 @@
 #!/bin/bash
 main(){
 clear
-MODDIR='/data/adb/modules/v2ray/'
+echo -e "V2ray magisk modulo"
+echo
 echo -e "1 - Iniciar serviços v2ray"
 echo -e "2 - Parar serviços v2ray"
 echo -e "3 - Instalar sudo"
