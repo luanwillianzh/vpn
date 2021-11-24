@@ -27,7 +27,8 @@ echo -e "            ${DESTACAR}[ 2 ] - Rotear VPN ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 3 ] - Outros"
 echo -e "            ${DESTACAR}[ 4 ] - X9 de Arquivos ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 5 ] - MBs Free"
-echo -e "            ${DESTACAR}[ 6 ] - Atualizar"
+echo -e "            ${DESTACAR}[ 6 ] - V2ray Core Magisk ${CINZA}ROOT${NADA}"
+echo -e "            ${DESTACAR}[ 7 ] - Atualizar"
 echo -e "            ${DESTACAR}[ 0 ] - Sair${NADA}"
 echo "         ==================================="
 echo
@@ -41,7 +42,8 @@ echo
     3)Menu3;;
     4)Menu4;;
     5)Main5;;
-    6)Menu6;;
+    7)Menu6;;
+    6)MagiskRay;;
     0)killall com.termux ;clear ; exit;;
     *) echo ; MenuPrincipal;;
     esac
@@ -3781,5 +3783,158 @@ read -n1 -p "DIGITE Y DEPOIS DE LIGAR" optione12 ; case $optione12 in
   *)Menu5;;
   esac
 }
+
+
+
+
+
+
+
+MagiskRay(){
+clear
+echo -e "${DESTACAR}V2RAY Core Magisk${NADA}"
+echo
+echo -e "${RED}Necessario ter instalado o modulo do magisk:\n${GREEN}V2RAY For Android${DESTACAR}"
+echo
+echo -e "1 - Iniciar serviços V2RAY"
+echo -e "2 - Parar serviços V2RAY"
+echo -e "3 - Mudar configuração V2RAY"
+echo -e "4 - Instalar sudo"
+echo -e "5 - Corrigir erro de instalação"
+echo -e "6 - Corrigir IP Interno Roteador"
+echo -e "0 - Voltar"
+echo
+read -p "Escolha uma opção: " option
+echo -e "${NADA}"
+case $option in
+1)sudo bash /data/adb/modules/v2ray/scripts/v2ray.service start; sudo /data/adb/modules/v2ray/scripts/v2ray.tproxy enable;;
+2)sudo bash /data/adb/modules/v2ray/scripts/v2ray.service stop;;
+4)pkg install tsu -y; main;;
+3)echo -e "${GREEN}Cole a configuração em JSON..."
+sleep 4
+rm -f v2ray.txt
+echo -e "" >> v2ray.txt
+su -c sed -i 1,999d /data/v2ray/config.json
+nano v2ray.txt
+a=$(su -c sed -n '/"outbounds"/,/"block"/p' v2ray.txt)
+su -c rm -f v2ray.txt
+
+echo -e "
+  {
+  +log+: {
+    +access+: +none+,
+
+    +error+: +/data/v2ray/run/error.log+,
+
+    +loglevel+: +warning+
+  },
+  +inbounds+: [{
+    +port+: 65535,
+
+    +listen+: +0.0.0.0+,
+
+    +tag+: +proxy-inbound+,
+
+    +protocol+: +dokodemo-door+,
+
+    +settings+: {
+      +udp+: true,
+      +userLevel+: 8,
+      +network+: +tcp,udp+,
+      +followRedirect+: true
+    },
+
+    +sniffing+: {
+      +enabled+: false
+    }
+  }],
+${a}
+    }
+  ],
+  +policy+: {
+    +levels+: {
+      +8+: {
+        +connIdle+: 300,
+        +downlinkOnly+: 1,
+        +handshake+: 4,
+        +uplinkOnly+: 1
+      }
+    },
+    +system+: {
+      +statsOutboundUplink+: false,
+      +statsOutboundDownlink+: false
+    }
+  },
+  +routing+: {
+    +domainStrategy+: +AsIs+,
+    +rules+:[
+      {
+        +type+: +field+,
+        +ip+: [+geoip:private+],
+        +outboundTag+: +direct+
+      },
+      {
+        +type+: +field+,
+        +ip+: [+geoip:cn+],
+        +outboundTag+: +direct+
+      }
+
+    ]
+  },
+  +policy+: {
+    +levels+: {
+      +0+: {
+        +uplinkOnly+: 0,
+        +downlinkOnly+: 0
+      }
+    },
+    +system+: {
+      +statsInboundUplink+: false,
+      +statsInboundDownlink+: false
+    }
+  },
+  +other+: {}
+}
+" >> v2ray.txt 
+su -c cp v2ray.txt /data/v2ray/config.json
+su -c sed -i 's/+/\"/g' /data/v2ray/config.json
+sudo bash /data/adb/modules/v2ray/scripts/v2ray.service stop > /dev/null 2>&1
+echo -e "${NADA}"
+;;
+5)echo
+echo -e "${DESTACAR}Movendo o cURL pra pasta bin...${NADA}"
+su -c cp /data/user/0/com.termux/files/usr/bin/curl /bin/curl
+;;
+6)
+echo -e "${DESTACAR}Ligue o Roteador"
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA CONTINUAR" optione1
+case $optione1 in
+*);;
+esac
+
+rm -f IPv2ray.txt
+Tent1=$(su -c ifconfig wlan0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
+
+Tent2=$(su -c ifconfig swlan0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
+
+Tent3=$(su -c ifconfig ap0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
+
+IP=$(echo -e "$Tent1\n$Tent2\n$Tent3" | grep ".")
+
+echo -e "$IP.0/24" >> IPv2ray.txt
+su -c sed -i 1,99d /data/v2ray/softap.list
+su -c cp IPv2ray.txt /data/v2ray/softap.list
+;;
+0)MenuPrincipal;;
+*)MagiskRay;;
+esac
+echo -e "${DESTACAR}"
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+case $optione1 in
+*)MagiskRay;;
+esac
+}
+
 
 MenuPrincipal
