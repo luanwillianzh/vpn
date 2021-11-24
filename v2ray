@@ -1,0 +1,18 @@
+#!/bin/bash
+main(){
+clear
+MODDIR='/data/adb/modules/v2ray/'
+echo -e "1 - Iniciar serviços v2ray"
+echo -e "2 - Parar serviços v2ray"
+echo -e "3 - Instalar sudo"
+echo
+read -p "Escolha uma opção: " option
+echo
+case $option in
+1)sudo bash /data/adb/modules/v2ray/scripts/v2ray.service start; sudo /data/adb/modules/v2ray/scripts/v2ray.tproxy enable;;
+2)sudo bash /data/adb/modules/v2ray/scripts/v2ray.service stop;;
+3)pkg install sudo -y;;
+*)main;;
+esac
+}
+main
