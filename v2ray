@@ -12,7 +12,7 @@ echo
 case $option in
 1)sudo bash /data/adb/modules/v2ray/scripts/v2ray.service start; sudo /data/adb/modules/v2ray/scripts/v2ray.tproxy enable;;
 2)sudo bash /data/adb/modules/v2ray/scripts/v2ray.service stop;;
-3)pkg install sudo -y;;
+3)pkg install tsu -y; main;;
 *)main;;
 esac
 }
