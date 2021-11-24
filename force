@@ -3905,7 +3905,8 @@ echo -e "${NADA}"
 echo -e "${DESTACAR}Movendo o cURL pra pasta bin...${NADA}"
 su -c cp /data/user/0/com.termux/files/usr/bin/curl /bin/curl
 ;;
-6)
+6)su -c 'svc wifi disable'
+sleep 4
 echo -e "${DESTACAR}Ligue o Roteador"
 echo
 read -n1 -p "APERTE QUALQUER TECLA PARA CONTINUAR" optione1
