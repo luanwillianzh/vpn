@@ -3801,7 +3801,9 @@ echo -e "2 - Parar serviços V2RAY"
 echo -e "3 - Mudar configuração V2RAY"
 echo -e "4 - Instalar sudo"
 echo -e "5 - Corrigir erro de instalação"
-echo -e "6 - Corrigir IP Interno Roteador"
+echo -e "6 - IP Roteamento Wi-Fi"
+echo -e "7 - IP Roteamento USB"
+echo -e "8 - IP Roteamento Bluetooth"
 echo -e "0 - Voltar"
 echo
 read -p "Escolha uma opção: " option
@@ -3904,6 +3906,7 @@ ${a}
 " >> v2ray.txt 
 su -c cp v2ray.txt /data/v2ray/config.json
 su -c sed -i 's/+/\"/g' /data/v2ray/config.json
+su -c chmod 777 /data/v2ray/config.json
 
 rm -f appid.list
 abc=$(su -c cat /data/v2ray/appid.list | grep -c '0')
@@ -3919,7 +3922,8 @@ echo -e "${NADA}"
 echo -e "${DESTACAR}Movendo o cURL pra pasta bin...${NADA}"
 su -c cp /data/user/0/com.termux/files/usr/bin/curl /bin/curl
 ;;
-6)su -c 'svc wifi disable'
+6)su -c rm -f /data/v2ray/softap.list
+su -c 'svc wifi disable'
 sleep 4
 echo -e "${DESTACAR}Ligue o Roteador"
 echo
@@ -3941,6 +3945,50 @@ echo -e "$IP.0/24" >> IPv2ray.txt
 su -c sed -i 1,99d /data/v2ray/softap.list
 su -c cp IPv2ray.txt /data/v2ray/softap.list
 ;;
+
+
+7)rm -f IPv2ray.txt
+su -c 'svc wifi disable'
+sleep 4
+echo -e "${DESTACAR}Ligue o Roteamento USB"
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA CONTINUAR" optione1
+case $optione1 in
+*);;
+esac
+
+
+Tent=$(su -c ifconfig rndis0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
+
+IP=$(echo -e "$Tent" | grep ".")
+
+echo -e "$IP.0/24" >> IPv2ray.txt
+su -c sed -i 1,99d /data/v2ray/softap.list
+su -c cp IPv2ray.txt /data/v2ray/softap.list
+;;
+
+
+8)rm -f IPv2ray.txt
+su -c 'svc wifi disable'
+sleep 4
+echo -e "${DESTACAR}Ligue o Roteamento Bluetooth"
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA CONTINUAR" optione1
+case $optione1 in
+*);;
+esac
+
+
+Tent=$(su -c ifconfig bt-pan | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
+
+IP=$(echo -e "$Tent" | grep ".")
+
+echo -e "$IP.0/24" >> IPv2ray.txt
+su -c sed -i 1,99d /data/v2ray/softap.list
+su -c cp IPv2ray.txt /data/v2ray/softap.list
+;;
+
+
 0)MenuPrincipal;;
 *)MagiskRay;;
 esac
