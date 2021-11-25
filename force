@@ -3832,7 +3832,7 @@ echo -e "
 
     +error+: +/data/v2ray/run/error.log+,
 
-    +loglevel+: +warning+
+    +loglevel+: +none+
   },
   +inbounds+: [{
     +port+: 65535,
