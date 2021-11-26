@@ -4027,26 +4027,16 @@ esac
 
 UrlVmess(){
 su -c rm -f v2ray.txt
-echo -e "${DESTACAR}O processo precisa ser feito com internet"
-echo
-read -n1 -p "APERTE QUALQUER TECLA APÓS LIGAR A INTERNET" optione1
-case $optione1 in
-*);;
-esac
 
 echo
 echo -ne "${DESTACAR}Cole a URL VMESS: ${GREEN}"
 read configur
 
-v2=$(echo -e "$configur" | sed 's/\//%2F/g' | sed 's/:/%3A/g' | sed 's/=/%3D/g' | sed 's/+/%2B/g')
-
-confi=$(echo -e "config=$v2&submitDecode=Decode")
-
-AK47=$(curl -s -d "$confi" https://www.fastssh.com/page/v2ray-to-json/ -A Android -H "referer:https://www.fastssh.com/page/v2ray-to-json/" -H "origin:https://www.fastssh.com")
 
 su -c sed -i 1,999d /data/v2ray/config.json
 
-XequeMate=$(echo -e "$AK47" | grep 'cols="100">"'| cut -d'{' -f2 | cut -d'}' -f1)
+
+XequeMate=$(echo -e "$configur" | cut -d'/' -f3 | base64 -d)
 
 WSBug=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep add | cut -d'"' -f4)
 
