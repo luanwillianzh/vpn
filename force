@@ -3820,6 +3820,7 @@ sudo bash /data/adb/modules/v2ray/scripts/v2ray.service start; sudo /data/adb/mo
 echo -e "${DESTACAR}1 - Configuração JSON"
 echo -e "2 - Configuração URL VMESS"
 echo -e "3 - Configuração URL VLESS"
+echo -e "4 - Configuração URL Trojan"
 
 echo
 read -p "Escolha uma opção: " opi
@@ -3828,6 +3829,7 @@ case $opi in
 1)JaiSon;;
 2)UrlVmess;;
 3)UrlVless;;
+4)UrlTrojan;;
 *)MagiskRay;;
 esac
 ;;
@@ -4487,6 +4489,189 @@ su -c chmod 777 /data/v2ray/config.json
 
 
 
+
+
+
+
+rm -f appid.list
+abc=$(su -c cat /data/v2ray/appid.list | grep -c '0')
+case $abc in
+1);;
+*)echo -e "0" >> appid.list && su -c cp appid.list /data/v2ray/appid.list;;
+esac
+
+sudo bash /data/adb/modules/v2ray/scripts/v2ray.service stop > /dev/null 2>&1
+echo -e "${NADA}"
+echo -e "${DESTACAR}"
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+case $optione1 in
+*)MagiskRay;;
+esac
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+UrlTrojan(){
+su -c rm -f v2ray.txt
+
+echo
+echo -ne "${DESTACAR}Cole a URL Trojan: ${GREEN}"
+read config
+
+su -c sed -i 1,999d /data/v2ray/config.json
+
+WSBug=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d'?' -f1 | cut -d ':' -f1)
+
+
+Dominio=$(echo "$config" | grep "host" | cut -d'=' -f2 | cut -d'&' -f1)
+
+
+User=$(echo -e "$config" | grep '@' | cut -d'/' -f3 | cut -d'@' -f1)
+
+port=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d'?' -f1 | cut -d ':' -f2 | tr -d '/')
+
+path=$(echo "$config" | tr -s '&' '\n' | grep "path" | cut -d'=' -f2 | sed 's/%2F/\//g' | cut -d'#' -f1 | sed 's/%2f/\//g' | sed 's/%3f/?/g' | sed 's/%/@u00/g' | sed "s/@/\\\/g")
+
+
+
+
+aiu7=$(echo -e "$path" | wc -m)
+case $aiu7 in
+0)path="/howdy"
+WSBug=$(echo -e "$config" | cut -d'@' -f2 | cut -d':' -f2 | cut -d '/' -f2)
+
+Dominio=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d':' -f1)
+
+User=$(echo -e "$config" | grep '@' | cut -d'/' -f3 | cut -d'@' -f1)
+
+port=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d':' -f2 | cut -d'/' -f1)
+
+;;
+1)path="/howdy"
+WSBug=$(echo -e "$config" | cut -d'@' -f2 | cut -d':' -f2 | cut -d '/' -f2)
+
+Dominio=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d':' -f1)
+
+User=$(echo -e "$config" | grep '@' | cut -d'/' -f3 | cut -d'@' -f1)
+
+port=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d':' -f2 | cut -d'/' -f1)
+
+;;
+*);;
+esac
+
+case $port in
+443)
+echo -e "{
+  +log+: {
+    +access+: +none+,
+
+    +error+: +/data/v2ray/run/error.log+,
+
+    +loglevel+: +none+
+  },
+  +inbounds+: [{
+    +port+: 65535,
+
+    +listen+: +0.0.0.0+,
+
+    +tag+: +proxy-inbound+,
+
+    +protocol+: +dokodemo-door+,
+
+    +settings+: {
+      +udp+: true,
+      +userLevel+: 8,
+      +network+: +tcp,udp+,
+      +followRedirect+: true
+    },
+
+    +sniffing+: {
+      +enabled+: false
+    }
+  }],
+ +outbounds+: [
+    {
+      +mux+: {
+        +enabled+: false
+      },
+      +protocol+: +trojan+,
+      +settings+: {
+        +servers+: [
+          {
+            +address+: +$WSBug+,
+            +level+: 8,
+            +password+: +$User+,
+            +port+: 443
+          }
+        ]
+      },
+      +streamSettings+: {
+        +network+: +ws+,
+        +security+: +tls+,
+        +tlsSettings+: {
+          +allowInsecure+: true,
+          +serverName+: +$Dominio+
+        },
+        +wsSettings+: {
+          +headers+: {
+            +Host+: +$Dominio+
+          },
+          +path+: +$path+
+        }
+      },
+      +tag+: +TROJAN+
+    }
+  ],
+  +policy+: {
+    +levels+: {
+      +8+: {
+        +connIdle+: 300,
+        +downlinkOnly+: 1,
+        +handshake+: 4,
+        +uplinkOnly+: 1
+      }
+    },
+    +system+: {
+      +statsOutboundUplink+: false,
+      +statsOutboundDownlink+: false
+    }
+  },
+  +routing+: {
+    +domainStrategy+: +AsIs+,
+    +rules+:[]
+  },
+  +other+: {}
+}
+" >> v2ray.txt
+;;
+
+
+
+
+*)echo
+echo
+echo -e "${RED}Configuração Invalida${NADA}"
+sleep 5
+MagiskRay
+;;
+esac
+
+
+su -c cp v2ray.txt /data/v2ray/config.json
+su -c sed -i 's/+/\"/g' /data/v2ray/config.json
+su -c chmod 777 /data/v2ray/config.json
 
 
 
