@@ -3800,10 +3800,8 @@ echo -e "1 - Iniciar serviços V2RAY"
 echo -e "2 - Parar serviços V2RAY"
 echo -e "3 - Mudar configuração V2RAY"
 echo -e "4 - Instalar sudo"
-echo -e "5 - Corrigir erro de instalação"
-echo -e "6 - IP Roteamento Wi-Fi"
-echo -e "7 - IP Roteamento USB"
-echo -e "8 - IP Roteamento Bluetooth"
+echo -e "5 - Corrigir instalação do Modulo"
+echo -e "6 - Roteamento"
 echo -e "0 - Voltar"
 echo
 read -p "Escolha uma opção: " option
@@ -3818,7 +3816,121 @@ esac
 sudo bash /data/adb/modules/v2ray/scripts/v2ray.service start; sudo /data/adb/modules/v2ray/scripts/v2ray.tproxy enable;;
 2)sudo bash /data/adb/modules/v2ray/scripts/v2ray.service stop;;
 4)pkg install tsu -y; main;;
-3)echo -e "${GREEN}Cole a configuração em JSON..."
+3)
+echo -e "${DESTACAR}1 - Configuração JSON"
+echo -e "2 - Configuração URL VMESS"
+echo -e "3 - Configuração URL VLESS"
+
+echo
+read -p "Escolha uma opção: " opi
+echo -e "${NADA}"
+case $opi in
+1)JaiSon;;
+2)UrlVmess;;
+3)UrlVless;;
+*)MagiskRay;;
+esac
+;;
+
+5)echo
+echo -e "${DESTACAR}Movendo o cURL pra pasta bin...${NADA}"
+su -c cp /data/user/0/com.termux/files/usr/bin/curl /bin/curl
+;;
+
+
+6)
+echo -e "${DESTACAR}1 - IP Roteamento Wi-Fi"
+echo -e "2 - IP Roteamento USB"
+echo -e "3 - IP Roteamento Bluetooth"
+echo
+read -p "Escolha uma opção: " option
+echo
+case $option in
+
+1)
+su -c rm -f /data/v2ray/softap.list
+su -c 'svc wifi disable'
+echo -e "${DESTACAR}Ligue o Roteador"
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA CONTINUAR" optione1
+case $optione1 in
+*);;
+esac
+
+rm -f IPv2ray.txt
+Tent1=$(su -c ifconfig wlan0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
+
+Tent2=$(su -c ifconfig swlan0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
+
+Tent3=$(su -c ifconfig ap0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
+
+IP=$(echo -e "$Tent1\n$Tent2\n$Tent3" | grep ".")
+
+echo -e "$IP.0/24" >> IPv2ray.txt
+su -c cp IPv2ray.txt /data/v2ray/softap.list
+;;
+
+
+2)su -c rm -f /data/v2ray/softap.list
+rm -f IPv2ray.txt
+su -c 'svc wifi disable'
+echo -e "${DESTACAR}Ligue o Roteamento USB"
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA CONTINUAR" optione1
+case $optione1 in
+*);;
+esac
+
+
+Tent=$(su -c ifconfig rndis0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
+
+IP=$(echo -e "$Tent" | grep ".")
+
+echo -e "$IP.0/24" >> IPv2ray.txt
+su -c cp IPv2ray.txt /data/v2ray/softap.list
+;;
+
+
+3)su -c rm -f /data/v2ray/softap.list
+rm -f IPv2ray.txt
+su -c 'svc wifi disable'
+echo -e "${DESTACAR}Ligue o Roteamento Bluetooth"
+echo
+read -n1 -p "APERTE QUALQUER TECLA PARA CONTINUAR" optione1
+case $optione1 in
+*);;
+esac
+
+
+Tent=$(su -c ifconfig bt-pan | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
+
+IP=$(echo -e "$Tent" | grep ".")
+
+echo -e "$IP.0/24" >> IPv2ray.txt
+su -c cp IPv2ray.txt /data/v2ray/softap.list
+;;
+
+esac
+;; 
+
+0)MenuPrincipal;;
+*)MagiskRay;;
+esac
+echo -e "${DESTACAR}"
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+case $optione1 in
+*)MagiskRay;;
+esac
+}
+
+
+
+
+
+
+
+JaiSon(){
+echo -e "${GREEN}Cole a configuração em JSON..."
 sleep 4
 rm -f v2ray.txt
 echo -e "" >> v2ray.txt
@@ -3875,31 +3987,7 @@ ${a}
   },
   +routing+: {
     +domainStrategy+: +AsIs+,
-    +rules+:[
-      {
-        +type+: +field+,
-        +ip+: [+geoip:private+],
-        +outboundTag+: +direct+
-      },
-      {
-        +type+: +field+,
-        +ip+: [+geoip:cn+],
-        +outboundTag+: +direct+
-      }
-
-    ]
-  },
-  +policy+: {
-    +levels+: {
-      +0+: {
-        +uplinkOnly+: 0,
-        +downlinkOnly+: 0
-      }
-    },
-    +system+: {
-      +statsInboundUplink+: false,
-      +statsInboundDownlink+: false
-    }
+    +rules+:[]
   },
   +other+: {}
 }
@@ -3917,81 +4005,511 @@ esac
 
 sudo bash /data/adb/modules/v2ray/scripts/v2ray.service stop > /dev/null 2>&1
 echo -e "${NADA}"
-;;
-5)echo
-echo -e "${DESTACAR}Movendo o cURL pra pasta bin...${NADA}"
-su -c cp /data/user/0/com.termux/files/usr/bin/curl /bin/curl
-;;
-6)su -c rm -f /data/v2ray/softap.list
-su -c 'svc wifi disable'
-sleep 4
-echo -e "${DESTACAR}Ligue o Roteador"
-echo
-read -n1 -p "APERTE QUALQUER TECLA PARA CONTINUAR" optione1
+echo -e "${DESTACAR}"
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
 case $optione1 in
-*);;
-esac
-
-rm -f IPv2ray.txt
-Tent1=$(su -c ifconfig wlan0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
-
-Tent2=$(su -c ifconfig swlan0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
-
-Tent3=$(su -c ifconfig ap0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
-
-IP=$(echo -e "$Tent1\n$Tent2\n$Tent3" | grep ".")
-
-echo -e "$IP.0/24" >> IPv2ray.txt
-su -c sed -i 1,99d /data/v2ray/softap.list
-su -c cp IPv2ray.txt /data/v2ray/softap.list
-;;
-
-
-7)rm -f IPv2ray.txt
-su -c 'svc wifi disable'
-sleep 4
-echo -e "${DESTACAR}Ligue o Roteamento USB"
-echo
-read -n1 -p "APERTE QUALQUER TECLA PARA CONTINUAR" optione1
-case $optione1 in
-*);;
-esac
-
-
-Tent=$(su -c ifconfig rndis0 | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
-
-IP=$(echo -e "$Tent" | grep ".")
-
-echo -e "$IP.0/24" >> IPv2ray.txt
-su -c sed -i 1,99d /data/v2ray/softap.list
-su -c cp IPv2ray.txt /data/v2ray/softap.list
-;;
-
-
-8)rm -f IPv2ray.txt
-su -c 'svc wifi disable'
-sleep 4
-echo -e "${DESTACAR}Ligue o Roteamento Bluetooth"
-echo
-read -n1 -p "APERTE QUALQUER TECLA PARA CONTINUAR" optione1
-case $optione1 in
-*);;
-esac
-
-
-Tent=$(su -c ifconfig bt-pan | grep "inet addr" | grep -o inet............................... | cut -d' ' -f1-2 | cut -d':' -f2 | cut -d'.' -f1-3)
-
-IP=$(echo -e "$Tent" | grep ".")
-
-echo -e "$IP.0/24" >> IPv2ray.txt
-su -c sed -i 1,99d /data/v2ray/softap.list
-su -c cp IPv2ray.txt /data/v2ray/softap.list
-;;
-
-
-0)MenuPrincipal;;
 *)MagiskRay;;
 esac
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+UrlVmess(){
+su -c rm -f v2ray.txt
+echo -e "${DESTACAR}O processo precisa ser feito com internet"
+echo
+read -n1 -p "APERTE QUALQUER TECLA APÓS LIGAR A INTERNET" optione1
+case $optione1 in
+*);;
+esac
+
+echo
+echo -ne "${DESTACAR}Cole a URL VMESS: ${GREEN}"
+read configur
+
+v2=$(echo -e "$configur" | sed 's/\//%2F/g' | sed 's/:/%3A/g' | sed 's/=/%3D/g' | sed 's/+/%2B/g')
+
+confi=$(echo -e "config=$v2&submitDecode=Decode")
+
+AK47=$(curl -s -d "$confi" https://www.fastssh.com/page/v2ray-to-json/ -A Android -H "referer:https://www.fastssh.com/page/v2ray-to-json/" -H "origin:https://www.fastssh.com")
+
+su -c sed -i 1,999d /data/v2ray/config.json
+
+XequeMate=$(echo -e "$AK47" | grep 'cols="100">"'| cut -d'{' -f2 | cut -d'}' -f1)
+
+WSBug=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep add | cut -d'"' -f4)
+
+
+Dominio=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep host | cut -d'"' -f4)
+
+
+User=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep '"id"' | cut -d'"' -f4)
+
+
+path=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep '"path"' | cut -d'"' -f4)
+
+
+aid=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep 'aid"' | cut -d'"' -f4)
+
+
+port=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep 'port"' | cut -d'"' -f4)
+
+case $port in
+443)OuthLock="+outbounds+: [
+    {
+      +mux+: {
+        +concurrency+: -1,
+        +enabled+: false
+      },
+      +protocol+: +vmess+,
+      +settings+: {
+        +vnext+: [
+          {
+            +address+: +$WSBug+,
+            +port+: $port,
+            +users+: [
+              {
+                +alterId+: $aid,
+                +encryption+: ++,
+                +flow+: ++,
+                +id+: +$User+,
+                +level+: 8,
+                +security+: +auto+
+              }
+            ]
+          }
+        ]
+      },
+      +streamSettings+: {
+        +network+: +ws+,
+        +security+: +tls+,
+        +tlsSettings+: {
+          +allowInsecure+: true,
+          +serverName+: +$Dominio+
+        },
+        +wsSettings+: {
+          +headers+: {
+            +Host+: +$Dominio+
+          },
+          +path+: +$path+
+        }
+      },
+      +tag+: +proxy+
+    },
+    {
+      +protocol+: +freedom+,
+      +settings+: {},
+      +tag+: +direct+
+    },
+    {
+      +protocol+: +blackhole+,
+      +settings+: {
+        +response+: {
+          +type+: +http+
+        }
+      },
+      +tag+: +block+
+    }
+  ],"
+;;
+
+
+
+
+
+80)OuthLock="+outbounds+: [
+    {
+      +mux+: {
+        +concurrency+: -1,
+        +enabled+: false
+      },
+      +protocol+: +vmess+,
+      +settings+: {
+        +vnext+: [
+          {
+            +address+: +$WSBug+,
+            +port+: $port,
+            +users+: [
+              {
+                +alterId+: 32,
+                +encryption+: ++,
+                +flow+: ++,
+                +id+: +$User+,
+                +level+: 8,
+                +security+: +auto+
+              }
+            ]
+          }
+        ]
+      },
+      +streamSettings+: {
+        +network+: +ws+,
+        +security+: ++,
+        +wsSettings+: {
+          +headers+: {
+            +Host+: +$Dominio+
+          },
+          +path+: +$path+
+        }
+      },
+      +tag+: +proxy+
+    },
+    {
+      +protocol+: +freedom+,
+      +settings+: {},
+      +tag+: +direct+
+    },
+    {
+      +protocol+: +blackhole+,
+      +settings+: {
+        +response+: {
+          +type+: +http+
+        }
+      },
+      +tag+: +block+
+    }
+  ],"
+;;
+
+*)echo
+echo
+echo -e "${RED}Configuração Invalida${NADA}"
+sleep 5
+MagiskRay
+;;
+esac
+
+echo -e "
+  {
+  +log+: {
+    +access+: +none+,
+
+    +error+: +/data/v2ray/run/error.log+,
+
+    +loglevel+: +warning+
+  },
+  +inbounds+: [{
+    +port+: 65535,
+
+    +listen+: +0.0.0.0+,
+
+    +tag+: +proxy-inbound+,
+
+    +protocol+: +dokodemo-door+,
+
+    +settings+: {
+      +udp+: true,
+      +userLevel+: 8,
+      +network+: +tcp,udp+,
+      +followRedirect+: true
+    },
+
+    +sniffing+: {
+      +enabled+: false
+    }
+  }],
+$OuthLock
+  +policy+: {
+    +levels+: {
+      +8+: {
+        +connIdle+: 300,
+        +downlinkOnly+: 1,
+        +handshake+: 4,
+        +uplinkOnly+: 1
+      }
+    },
+    +system+: {
+      +statsOutboundUplink+: false,
+      +statsOutboundDownlink+: false
+    }
+  },
+  +routing+: {
+    +domainStrategy+: +AsIs+,
+    +rules+:[]
+  },
+  +other+: {}
+}
+" >> v2ray.txt 
+su -c cp v2ray.txt /data/v2ray/config.json
+su -c sed -i 's/+/\"/g' /data/v2ray/config.json
+su -c chmod 777 /data/v2ray/config.json
+
+
+
+
+rm -f appid.list
+abc=$(su -c cat /data/v2ray/appid.list | grep -c '0')
+case $abc in
+1);;
+*)echo -e "0" >> appid.list && su -c cp appid.list /data/v2ray/appid.list;;
+esac
+
+sudo bash /data/adb/modules/v2ray/scripts/v2ray.service stop > /dev/null 2>&1
+echo -e "${NADA}"
+echo -e "${DESTACAR}"
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+case $optione1 in
+*)MagiskRay;;
+esac
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+UrlVless(){
+su -c rm -f v2ray.txt
+
+echo
+echo -ne "${DESTACAR}Cole a URL VLESS: ${GREEN}"
+read carioca
+
+su -c sed -i 1,999d /data/v2ray/config.json
+
+config=$(echo -e "$carioca" | tr -s '&' '\n')
+
+WSBug=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d'?' -f1 | cut -d ':' -f1)
+
+
+Dominio=$(echo "$config" | grep "host" | cut -d'=' -f2)
+
+
+User=$(echo -e "$config" | grep '@' | cut -d'/' -f3 | cut -d'@' -f1)
+
+
+
+port=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d'?' -f1 | cut -d ':' -f2)
+
+encript=$(echo "$config" | grep "encryption" | cut -d'=' -f2)
+
+path=$(echo "$config" | grep "path" | cut -d'=' -f2 | sed 's/%2F/\//g' | cut -d'#' -f1 | sed 's/%2f/\//g' | sed 's/%3f/?/g' | sed 's/%/@u00/g' | sed "s/@/\\\/g")
+
+
+case $port in
+443)OuthLock="+outbounds+: [
+    {
+      +mux+: {
+        +concurrency+: -1,
+        +enabled+: false
+      },
+      +protocol+: +vless+,
+      +settings+: {
+        +vnext+: [
+          {
+            +address+: +$WSBug+,
+            +port+: $port,
+            +users+: [
+              {
+                +alterId+: 0,
+                +encryption+: +$encript+,
+                +flow+: ++,
+                +id+: +$User+,
+                +level+: 8,
+                +security+: +auto+
+              }
+            ]
+          }
+        ]
+      },
+      +streamSettings+: {
+        +network+: +ws+,
+        +security+: +tls+,
+        +tlsSettings+: {
+          +allowInsecure+: true,
+          +serverName+: +$Dominio+
+        },
+        +wsSettings+: {
+          +headers+: {
+            +Host+: +$Dominio+
+          },
+          +path+: +$path+
+        }
+      },
+      +tag+: +proxy+
+    },
+    {
+      +protocol+: +freedom+,
+      +settings+: {},
+      +tag+: +direct+
+    },
+    {
+      +protocol+: +blackhole+,
+      +settings+: {
+        +response+: {
+          +type+: +http+
+        }
+      },
+      +tag+: +block+
+    }
+  ],"
+;;
+
+
+
+
+
+
+
+80)OuthLock="+outbounds+: [
+    {
+      +mux+: {
+        +concurrency+: -1,
+        +enabled+: false
+      },
+      +protocol+: +vless+,
+      +settings+: {
+        +vnext+: [
+          {
+            +address+: +$WSBug+,
+            +port+: $port,
+            +users+: [
+              {
+                +alterId+: 0,
+                +encryption+: +$encript+,
+                +flow+: ++,
+                +id+: +$User+,
+                +level+: 8,
+                +security+: +auto+
+              }
+            ]
+          }
+        ]
+      },
+      +streamSettings+: {
+        +network+: +ws+,
+        +security+: ++,
+        +wsSettings+: {
+          +headers+: {
+            +Host+: +$Dominio+
+          },
+          +path+: +$path+
+        }
+      },
+      +tag+: +proxy+
+    },
+    {
+      +protocol+: +freedom+,
+      +settings+: {},
+      +tag+: +direct+
+    },
+    {
+      +protocol+: +blackhole+,
+      +settings+: {
+        +response+: {
+          +type+: +http+
+        }
+      },
+      +tag+: +block+
+    }
+  ],"
+;;
+
+
+
+
+*)echo
+echo
+echo -e "${RED}Configuração Invalida${NADA}"
+sleep 5
+MagiskRay
+;;
+esac
+
+echo "
+  {
+  +log+: {
+    +access+: +none+,
+
+    +error+: +/data/v2ray/run/error.log+,
+
+    +loglevel+: +warning+
+  },
+  +inbounds+: [{
+    +port+: 65535,
+
+    +listen+: +0.0.0.0+,
+
+    +tag+: +proxy-inbound+,
+
+    +protocol+: +dokodemo-door+,
+
+    +settings+: {
+      +udp+: true,
+      +userLevel+: 8,
+      +network+: +tcp,udp+,
+      +followRedirect+: true
+    },
+
+    +sniffing+: {
+      +enabled+: false
+    }
+  }],
+$OuthLock
+  +policy+: {
+    +levels+: {
+      +8+: {
+        +connIdle+: 300,
+        +downlinkOnly+: 1,
+        +handshake+: 4,
+        +uplinkOnly+: 1
+      }
+    },
+    +system+: {
+      +statsOutboundUplink+: false,
+      +statsOutboundDownlink+: false
+    }
+  },
+  +routing+: {
+    +domainStrategy+: +AsIs+,
+    +rules+:[]
+  },
+  +other+: {}
+}
+" >> v2ray.txt 
+su -c cp v2ray.txt /data/v2ray/config.json
+su -c sed -i 's/+/\"/g' /data/v2ray/config.json
+su -c chmod 777 /data/v2ray/config.json
+
+
+
+
+
+
+
+rm -f appid.list
+abc=$(su -c cat /data/v2ray/appid.list | grep -c '0')
+case $abc in
+1);;
+*)echo -e "0" >> appid.list && su -c cp appid.list /data/v2ray/appid.list;;
+esac
+
+sudo bash /data/adb/modules/v2ray/scripts/v2ray.service stop > /dev/null 2>&1
+echo -e "${NADA}"
 echo -e "${DESTACAR}"
 read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
 case $optione1 in
