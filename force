@@ -27,7 +27,7 @@ echo -e "            ${DESTACAR}[ 2 ] - Rotear VPN ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 3 ] - Outros"
 echo -e "            ${DESTACAR}[ 4 ] - X9 de Arquivos ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 5 ] - MBs Free"
-echo -e "            ${DESTACAR}[ 6 ] - V2ray Core Magisk ${CINZA}ROOT${NADA}"
+echo -e "            ${DESTACAR}[ 6 ] - Modulos V2ray Magisk ${CINZA}ROOT${NADA}"
 echo -e "            ${DESTACAR}[ 7 ] - Atualizar"
 echo -e "            ${DESTACAR}[ 0 ] - Sair${NADA}"
 echo "         ==================================="
@@ -3790,7 +3790,49 @@ read -n1 -p "DIGITE Y DEPOIS DE LIGAR" optione12 ; case $optione12 in
 
 
 
+
+
+
+
+
 MagiskRay(){
+clear
+echo -e '\n'
+echo "     ==================================="
+echo "                    MBS FREE     "
+echo "         ===================================" 
+echo "                ESCOLHA UMA OPÇÃO"
+echo
+echo "        ==================================="
+echo -e "              ${DESTACAR}[ 1 ] - V2ray for android"
+echo -e "              [ 2 ] - Xray for android"
+echo -e "              [ 0 ] - Voltar${NADA}"
+echo "         ==================================="
+echo 
+echo "@alpacinoo007"
+echo "@luanw04"
+echo
+read -n1 -p "ESCOLHA UMA OPÇÃO: " TokensNews01
+case $TokensNews01 in
+1)MagiskRay1;;
+2)MagiskRay2;;
+0)MenuPrincipal;;
+*)MagiskRay;;
+esac
+}
+
+
+
+
+
+
+
+
+
+
+
+
+MagiskRay1(){
 clear
 echo -e "${DESTACAR}V2RAY Core Magisk${NADA}"
 echo
@@ -3813,7 +3855,16 @@ case $abc in
 1);;
 *)echo -e "0" >> appid.list && su -c cp appid.list /data/v2ray/appid.list;;
 esac
-sudo bash /data/adb/modules/v2ray/scripts/v2ray.service start; sudo /data/adb/modules/v2ray/scripts/v2ray.tproxy enable;;
+sudo bash /data/adb/modules/v2ray/scripts/v2ray.service start
+sudo /data/adb/modules/v2ray/scripts/v2ray.tproxy enable
+
+sleep 6
+
+su -c settings put global airplane_mode_on 1
+su -c am broadcast -a android.intent.action.AIRPLANE_MODE > /dev/null 2>&1 && su -c settings put global airplane_mode_on 0
+su -c am broadcast -a android.intent.action.AIRPLANE_MODE > /dev/null 2>&1 
+
+;;
 2)sudo bash /data/adb/modules/v2ray/scripts/v2ray.service stop;;
 4)pkg install tsu -y; main;;
 3)
@@ -3830,7 +3881,7 @@ case $opi in
 2)UrlVmess;;
 3)UrlVless;;
 4)UrlTrojan;;
-*)MagiskRay;;
+*)MagiskRay1;;
 esac
 ;;
 
@@ -3916,12 +3967,12 @@ esac
 ;; 
 
 0)MenuPrincipal;;
-*)MagiskRay;;
+*)MagiskRay1;;
 esac
 echo -e "${DESTACAR}"
 read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
 case $optione1 in
-*)MagiskRay;;
+*)MagiskRay1;;
 esac
 }
 
@@ -4010,7 +4061,7 @@ echo -e "${NADA}"
 echo -e "${DESTACAR}"
 read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
 case $optione1 in
-*)MagiskRay;;
+*)MagiskRay1;;
 esac
 }
 
@@ -4038,7 +4089,7 @@ read configur
 su -c sed -i 1,999d /data/v2ray/config.json
 
 
-XequeMate=$(echo -e "$configur" | cut -d'/' -f3 | base64 -d)
+XequeMate=$(echo "$configur" | cut -d'/' -f3 | base64 -d)
 
 WSBug=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep add | cut -d'"' -f4)
 
@@ -4049,7 +4100,7 @@ Dominio=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep host | cut -d'"' -f4)
 User=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep '"id"' | cut -d'"' -f4)
 
 
-path=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep '"path"' | cut -d'"' -f4)
+path=$(echo "$XequeMate" | tr -s ',' '\n' | grep '"path"' | cut -d'"' -f4)
 
 
 aid=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep 'aid"' | cut -d'"' -f4)
@@ -4178,7 +4229,7 @@ case $port in
 echo
 echo -e "${RED}Configuração Invalida${NADA}"
 sleep 5
-MagiskRay
+MagiskRay1
 ;;
 esac
 
@@ -4252,7 +4303,7 @@ echo -e "${NADA}"
 echo -e "${DESTACAR}"
 read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
 case $optione1 in
-*)MagiskRay;;
+*)MagiskRay1;;
 esac
 }
 
@@ -4428,7 +4479,7 @@ case $port in
 echo
 echo -e "${RED}Configuração Invalida${NADA}"
 sleep 5
-MagiskRay
+MagiskRay1
 ;;
 esac
 
@@ -4505,7 +4556,7 @@ echo -e "${NADA}"
 echo -e "${DESTACAR}"
 read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
 case $optione1 in
-*)MagiskRay;;
+*)MagiskRay1;;
 esac
 }
 
@@ -4664,7 +4715,7 @@ echo -e "{
 echo
 echo -e "${RED}Configuração Invalida${NADA}"
 sleep 5
-MagiskRay
+MagiskRay1
 ;;
 esac
 
@@ -4688,7 +4739,788 @@ echo -e "${NADA}"
 echo -e "${DESTACAR}"
 read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
 case $optione1 in
-*)MagiskRay;;
+*)MagiskRay1;;
+esac
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MagiskRay2(){
+
+su -c rm -f dnsjson.txt
+
+DNSJSON="{
+    +dns+: {
+        +hosts+: {
+            +domain:googleapis.cn+: +googleapis.com+,
+            +domain:xray.helper+: +127.0.0.1+
+        },
+        +servers+: [
+            {
+                +address+: +119.29.29.29+,
+                +domains+: [
+                    +geosite:cn+
+                ],
+                +expectIPs+: [
+                    +geoip:cn+
+                ],
+                +port+: 53
+            },
+            {
+                +address+: +223.5.5.5+,
+                +domains+: [
+                    +geosite:cn+
+                ],
+                +expectIPs+: [
+                    +geoip:cn+
+                ],
+                +port+: 53
+            },
+            +8.8.8.8+,
+            +1.1.1.1+,
+            +https+local://doh.dns.sb/dns-query+
+        ],
+        +tag+: +dns+
+    }
+}
+"
+clear
+echo -e "${DESTACAR}Xray Core Magisk${NADA}"
+echo
+echo -e "${RED}Necessario ter instalado o modulo do magisk:\n${GREEN}Xray For Android${DESTACAR}"
+echo
+echo -e "1 - Iniciar serviços V2RAY"
+echo -e "2 - Parar serviços V2RAY"
+echo -e "3 - Mudar configuração V2RAY"
+echo -e "4 - Instalar sudo"
+echo -e "5 - Corrigir instalação do Modulo"
+echo -e "6 - Baixar Modulo"
+echo -e "0 - Voltar"
+echo
+read -p "Escolha uma opção: " option
+echo -e "${NADA}"
+case $option in
+1)SCRIPTS_DIR=/data/adb/xray/scripts
+sudo bash ${SCRIPTS_DIR}/xray.service start
+sudo bash ${SCRIPTS_DIR}/xray.tproxy enable
+
+sleep 6
+
+su -c settings put global airplane_mode_on 1
+su -c am broadcast -a android.intent.action.AIRPLANE_MODE > /dev/null 2>&1 && su -c settings put global airplane_mode_on 0
+su -c am broadcast -a android.intent.action.AIRPLANE_MODE > /dev/null 2>&1 
+;;
+
+2)SCRIPTS_DIR=/data/adb/xray/scripts
+sudo bash ${SCRIPTS_DIR}/xray.service stop
+sudo bash ${SCRIPTS_DIR}/xray.tproxy disable;;
+
+4)pkg install tsu -y; main;;
+3)
+echo -e "${DESTACAR}1 - Configuração URL VMESS"
+echo -e "2 - Configuração URL VLESS"
+echo -e "3 - Configuração URL Trojan"
+
+echo
+read -p "Escolha uma opção: " opi
+echo -e "${NADA}"
+case $opi in
+1)UrlVmess2;;
+2)UrlVless2;;
+3)UrlTrojan2;;
+*)MagiskRay2;;
+esac
+;;
+
+5)echo
+echo -e "${DESTACAR}Movendo o cURL pra pasta bin...${NADA}"
+su -c cp /data/user/0/com.termux/files/usr/bin/curl /bin/curl
+;;
+
+6)
+echo
+echo -e "${DESTACAR}LIGUE A INTERNET${NADA}"
+
+echo
+read -n1 -p "DIGITE Y DEPOIS DE LIGAR" optione12 ; case $optione12 in 
+  y|Y)echo ; echo ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/Xray && chmod +x Xray ; su -c mv Xray /sdcard/Download/Xray.zip ; echo -e "${GREEN}Modulo Xray.zip foi movido pra downloads${NADA}"; sleep 5 ;;
+  esac
+  
+  ;;
+
+0)MenuPrincipal;;
+*)MagiskRay2;;
+esac
+echo -e "${DESTACAR}"
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+case $optione1 in
+*)MagiskRay2;;
+esac
+}
+
+
+
+
+
+
+
+
+UrlVmess2(){
+su -c rm -f v2ray.txt
+
+echo
+echo -ne "${DESTACAR}Cole a URL VMESS: ${GREEN}"
+read configur
+
+su -c sed -i 1,999d /data/adb/xray/confs/dns.json
+echo -e "$DNSJSON" >> dnsjson.txt
+su -c cp dnsjson.txt /data/adb/xray/confs/dns.json
+su -c chmod 777 /data/adb/xray/confs/dns.json
+
+su -c sed -i 1,999d /data/adb/xray/confs/proxy.json
+su -c sed -i 's/+/\"/g' /data/adb/xray/confs/dns.json
+su -c sed -i 's/https\"local/https+local/g' /data/adb/xray/confs/dns.json
+su -c chmod 777 /data/adb/xray/confs/dns.json
+
+
+XequeMate=$(echo "$configur" | cut -d'/' -f3 | base64 -d)
+
+WSBug=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep add | cut -d'"' -f4)
+
+
+Dominio=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep host | cut -d'"' -f4)
+
+
+User=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep '"id"' | cut -d'"' -f4)
+
+
+path=$(echo "$XequeMate" | tr -s ',' '\n' | grep '"path"' | cut -d'"' -f4)
+
+
+aid=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep 'aid"' | cut -d'"' -f4)
+
+
+port=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep 'port"' | cut -d'"' -f4)
+
+case $port in
+443)OuthLock="{
+  +outbounds+: [
+    {
+      +tag+: +proxy+,
+      +protocol+: +vmess+,
+      +settings+: {
+        +vnext+: [
+          {
+            +address+: +$WSBug+,
+            +port+: $port,
+            +users+: [
+              {
+                +id+: +$User+,
+                +alterId+: $aid,
+                +security+: +auto+,
+                +encryption+: +none+,
+                +flow+: ++
+              }
+            ]
+          }
+        ]
+      },
+      +streamSettings+: {
+        +network+: +ws+,
+        +security+: +tls+,
+        +tlsSettings+: {
+          +allowInsecure+: false,
+          +serverName+: +$Dominio+
+        },
+        +wsSettings+: {
+          +path+: +$path+,
+          +headers+: {
+            +Host+: +$Dominio+
+          }
+        },
+        +sockopt+: {
+          +domainStrategy+: +UseIP+
+        }
+      },
+      +mux+: {
+        +enabled+: true,
+        +concurrency+: 8
+      }
+    }
+  ]
+}"
+;;
+
+
+
+
+
+80)OuthLock="{
+  +outbounds+: [
+    {
+      +mux+: {
+        +concurrency+: 8,
+        +enabled+: false
+      },
+      +protocol+: +vmess+,
+      +settings+: {
+        +vnext+: [
+          {
+            +address+: +$WSBug+,
+            +port+: $port,
+            +users+: [
+              {
+                +alterId+: $aid,
+                +encryption+: +auto+,
+                +flow+: ++,
+                +id+: +$path+,
+                +level+: 8,
+                +security+: +auto+
+              }
+            ]
+          }
+        ]
+      },
+      +streamSettings+: {
+        +network+: +ws+,
+        +security+: ++,
+        +wsSettings+: {
+          +headers+: {
+            +Host+: +$Dominio+
+          },
+          +path+: +$path+
+        }
+      },
+      +tag+: +proxy+
+    },
+    {
+      +protocol+: +freedom+,
+      +settings+: {},
+      +tag+: +direct+
+    },
+    {
+      +protocol+: +blackhole+,
+      +settings+: {
+        +response+: {
+          +type+: +http+
+        }
+      },
+      +tag+: +block+
+    }
+  ],
+  +routing+: {
+    +domainStrategy+: +IPIfNonMatch+,
+    +rules+: []
+  }
+}"
+;;
+
+*)echo
+echo
+echo -e "${RED}Configuração Invalida${NADA}"
+sleep 5
+MagiskRay2
+;;
+esac
+
+echo -e "$OuthLock" >> v2ray.txt 
+su -c cp v2ray.txt /data/adb/xray/confs/proxy.json
+su -c sed -i 's/+/\"/g' /data/adb/xray/confs/proxy.json
+su -c chmod 777 /data/adb/xray/confs/proxy.json
+
+
+
+
+
+SCRIPTS_DIR=/data/adb/xray/scripts
+sudo bash ${SCRIPTS_DIR}/xray.service stop > /dev/null 2>&1
+sudo bash ${SCRIPTS_DIR}/xray.tproxy disable > /dev/null 2>&1
+
+echo -e "${NADA}"
+echo -e "${DESTACAR}"
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+case $optione1 in
+*)MagiskRay2;;
+esac
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+UrlVless2(){
+su -c rm -f v2ray.txt
+
+echo
+echo -ne "${DESTACAR}Cole a URL VLESS: ${GREEN}"
+read carioca
+
+su -c sed -i 1,999d /data/adb/xray/confs/dns.json
+echo -e "$DNSJSON" >> dnsjson.txt
+su -c cp dnsjson.txt /data/adb/xray/confs/dns.json
+su -c chmod 777 /data/adb/xray/confs/dns.json
+su -c sed -i 's/+/\"/g' /data/adb/xray/confs/dns.json
+su -c sed -i 's/https\"local/https+local/g' /data/adb/xray/confs/dns.json
+su -c chmod 777 /data/adb/xray/confs/dns.json
+
+su -c sed -i 1,999d /data/adb/xray/confs/proxy.json
+
+config=$(echo -e "$carioca" | tr -s '&' '\n')
+
+WSBug=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d'?' -f1 | cut -d ':' -f1)
+
+
+Dominio=$(echo "$config" | grep "host" | cut -d'=' -f2)
+
+
+User=$(echo -e "$config" | grep '@' | cut -d'/' -f3 | cut -d'@' -f1)
+
+
+
+port=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d'?' -f1 | cut -d ':' -f2)
+
+encript=$(echo "$config" | grep "encryption" | cut -d'=' -f2)
+
+path=$(echo "$config" | grep "path" | cut -d'=' -f2 | sed 's/%2F/\//g' | cut -d'#' -f1 | sed 's/%2f/\//g' | sed 's/%3f/?/g' | sed 's/%/@u00/g' | sed "s/@/\\\/g")
+
+
+case $port in
+443)OuthLock="{
+  +outbounds+: [
+    {
+      +tag+: +proxy+,
+      +protocol+: +vless+,
+      +settings+: {
+        +vnext+: [
+          {
+            +address+: +$WSBug+,
+            +port+: $port,
+            +users+: [
+              {
+                +id+: +$User+,
+                +alterId+: 0,
+                +security+: +auto+,
+                +encryption+: +$encript+,
+                +flow+: ++
+              }
+            ]
+          }
+        ]
+      },
+      +streamSettings+: {
+        +network+: +ws+,
+        +security+: +tls+,
+        +tlsSettings+: {
+          +allowInsecure+: false,
+          +serverName+: +$Dominio+
+        },
+        +wsSettings+: {
+          +path+: +$path+,
+          +headers+: {
+            +Host+: +$Dominio+
+          }
+        },
+        +sockopt+: {
+          +domainStrategy+: +UseIP+
+        }
+      },
+      +mux+: {
+        +enabled+: true,
+        +concurrency+: 8
+      }
+    }
+  ]
+}"
+;;
+
+
+
+
+
+
+
+80)OuthLock="{
+  +outbounds+: [
+    {
+      +mux+: {
+        +concurrency+: 8,
+        +enabled+: false
+      },
+      +protocol+: +vless+,
+      +settings+: {
+        +vnext+: [
+          {
+            +address+: +$WSBug+,
+            +port+: $port,
+            +users+: [
+              {
+                +alterId+: 16,
+                +encryption+: +auto+,
+                +flow+: ++,
+                +id+: +$path+,
+                +level+: 8,
+                +security+: +auto+
+              }
+            ]
+          }
+        ]
+      },
+      +streamSettings+: {
+        +network+: +ws+,
+        +security+: ++,
+        +wsSettings+: {
+          +headers+: {
+            +Host+: +$Dominio+
+          },
+          +path+: +$path+
+        }
+      },
+      +tag+: +proxy+
+    },
+    {
+      +protocol+: +freedom+,
+      +settings+: {},
+      +tag+: +direct+
+    },
+    {
+      +protocol+: +blackhole+,
+      +settings+: {
+        +response+: {
+          +type+: +http+
+        }
+      },
+      +tag+: +block+
+    }
+  ],
+  +routing+: {
+    +domainStrategy+: +IPIfNonMatch+,
+    +rules+: []
+  }
+}"
+;;
+
+
+
+
+*)echo
+echo
+echo -e "${RED}Configuração Invalida${NADA}"
+sleep 5
+MagiskRay2
+;;
+esac
+
+echo "$OuthLock" >> v2ray.txt 
+su -c cp v2ray.txt /data/adb/xray/confs/proxy.json
+su -c sed -i 's/+/\"/g' /data/adb/xray/confs/proxy.json
+su -c chmod 777 /data/adb/xray/confs/proxy.json
+
+
+
+
+SCRIPTS_DIR=/data/adb/xray/scripts
+sudo bash ${SCRIPTS_DIR}/xray.service stop > /dev/null 2>&1
+sudo bash ${SCRIPTS_DIR}/xray.tproxy disable > /dev/null 2>&1
+
+echo -e "${NADA}"
+echo -e "${DESTACAR}"
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+case $optione1 in
+*)MagiskRay2;;
+esac
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+UrlTrojan2(){
+su -c rm -f v2ray.txt
+
+su -c sed -i 1,999d /data/adb/xray/confs/dns.json
+echo -e "$DNSJSON" >> dnsjson.txt
+su -c cp dnsjson.txt /data/adb/xray/confs/dns.json
+su -c chmod 777 /data/adb/xray/confs/dns.json
+su -c sed -i 's/+/\"/g' /data/adb/xray/confs/dns.json
+
+su -c sed -i 's/https\"local/https+local/g' /data/adb/xray/confs/dns.json
+
+su -c chmod 777 /data/adb/xray/confs/dns.json
+
+
+echo
+echo -ne "${DESTACAR}Cole a URL Trojan: ${GREEN}"
+read config
+
+su -c sed -i 1,999d /data/adb/xray/confs/proxy.json
+
+WSBug=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d'?' -f1 | cut -d ':' -f1)
+
+
+Dominio=$(echo "$config" | grep "host" | cut -d'=' -f2 | cut -d'&' -f1)
+
+
+User=$(echo -e "$config" | grep '@' | cut -d'/' -f3 | cut -d'@' -f1)
+
+port=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d'?' -f1 | cut -d ':' -f2 | tr -d '/')
+
+path=$(echo "$config" | tr -s '&' '\n' | grep "path" | cut -d'=' -f2 | sed 's/%2F/\//g' | cut -d'#' -f1 | sed 's/%2f/\//g' | sed 's/%3f/?/g' | sed 's/%/@u00/g' | sed "s/@/\\\/g")
+
+
+
+
+aiu7=$(echo -e "$path" | wc -m)
+case $aiu7 in
+0)path="/howdy"
+WSBug=$(echo -e "$config" | cut -d'@' -f2 | cut -d':' -f2 | cut -d '/' -f2)
+
+Dominio=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d':' -f1)
+
+User=$(echo -e "$config" | grep '@' | cut -d'/' -f3 | cut -d'@' -f1)
+
+port=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d':' -f2 | cut -d'/' -f1)
+
+;;
+1)path="/howdy"
+WSBug=$(echo -e "$config" | cut -d'@' -f2 | cut -d':' -f2 | cut -d '/' -f2)
+
+Dominio=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d':' -f1)
+
+User=$(echo -e "$config" | grep '@' | cut -d'/' -f3 | cut -d'@' -f1)
+
+port=$(echo -e "$config" | grep '@' | cut -d'@' -f2 | cut -d':' -f2 | cut -d'/' -f1)
+
+;;
+*);;
+esac
+
+case $port in
+443)
+echo -e "{
+  +inbounds+: [
+    {
+      +port+: 10808,
+      +protocol+: +socks+,
+      +settings+: {
+        +auth+: +noauth+,
+        +udp+: true,
+        +userLevel+: 8
+      },
+      +tag+: +socks+
+    }
+  ],
+  +outbounds+: [
+    {
+      +mux+: {
+        +concurrency+: 0,
+        +enabled+: false
+      },
+      +protocol+: +trojan+,
+      +settings+: {
+        +servers+: [
+          {
+            +address+: +$WSBug+,
+            +level+: 8,
+            +method+: +chacha20-poly1305+,
+            +ota+: false,
+            +password+: +$User+,
+            +port+: 443
+          }
+        ]
+      },
+      +streamSettings+: {
+        +network+: +ws+,
+        +security+: +tls+,
+        +tlsSettings+: {
+          +allowInsecure+: true,
+          +serverName+: +$Dominio+
+        },
+        +wsSettings+: {
+          +headers+: {
+            +Host+: +$Dominio+
+          },
+          +path+: +$path+
+        }
+      },
+      +tag+: +TROJAN+
+    }
+  ],
+  +policy+: {
+    +levels+: {
+      +8+: {
+        +connIdle+: 300,
+        +downlinkOnly+: 1,
+        +handshake+: 4,
+        +uplinkOnly+: 1
+      }
+    }
+  }
+}" >> v2ray.txt
+;;
+
+
+
+
+*)echo
+echo
+echo -e "${RED}Configuração Invalida${NADA}"
+sleep 5
+MagiskRay2
+;;
+esac
+
+
+su -c cp v2ray.txt /data/adb/xray/confs/proxy.json
+su -c sed -i 's/+/\"/g' /data/adb/xray/confs/proxy.json
+su -c chmod 777 /data/adb/xray/confs/proxy.json
+
+
+
+SCRIPTS_DIR=/data/adb/xray/scripts
+sudo bash ${SCRIPTS_DIR}/xray.service stop > /dev/null 2>&1
+sudo bash ${SCRIPTS_DIR}/xray.tproxy disable > /dev/null 2>&1
+
+echo -e "${NADA}"
+echo -e "${DESTACAR}"
+read -n1 -p "APERTE QUALQUER TECLA PARA VOLTAR" optione1
+case $optione1 in
+*)MagiskRay2;;
 esac
 }
 
