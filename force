@@ -4858,9 +4858,30 @@ esac
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 MagiskRay2(){
 
 su -c rm -f dnsjson.txt
+su -c rm -f routing.txt
+
+RoutingJSON="{
+    +routing+: {
+        +domainStrategy+: +IPIfNonMatch+,
+        +rules+: []
+    }
+}
+"
+
 
 DNSJSON="{
     +dns+: {
@@ -4869,28 +4890,8 @@ DNSJSON="{
             +domain:xray.helper+: +127.0.0.1+
         },
         +servers+: [
-            {
-                +address+: +119.29.29.29+,
-                +domains+: [
-                    +geosite:cn+
-                ],
-                +expectIPs+: [
-                    +geoip:cn+
-                ],
-                +port+: 53
-            },
-            {
-                +address+: +223.5.5.5+,
-                +domains+: [
-                    +geosite:cn+
-                ],
-                +expectIPs+: [
-                    +geoip:cn+
-                ],
-                +port+: 53
-            },
-            +8.8.8.8+,
-            +1.1.1.1+,
+            +PRIMARIO+,
+            +SECUNDARIO+,
             +https+local://doh.dns.sb/dns-query+
         ],
         +tag+: +dns+
@@ -4908,6 +4909,7 @@ echo -e "3 - Mudar configuração V2RAY"
 echo -e "4 - Instalar sudo"
 echo -e "5 - Corrigir instalação do Modulo"
 echo -e "6 - Baixar Modulo"
+echo -e "7 - DNS"
 echo -e "0 - Voltar"
 echo
 read -p "Escolha uma opção: " option
@@ -4961,6 +4963,53 @@ read -n1 -p "DIGITE Y DEPOIS DE LIGAR" optione12 ; case $optione12 in
   
   ;;
 
+7)
+echo
+echo -ne "${DESTACAR}DNS Primario: ${GREEN}"
+read Pri
+
+Lucas=$(fgrep "." -o <<< $Pri | wc -l)
+
+case $Lucas in
+3);;
+*)echo 
+echo -e "${RED}DNS Invalido"
+sleep 3
+MagiskRay2
+;;
+esac
+
+echo
+echo -ne "${DESTACAR}DNS Secundario: ${GREEN}"
+read Sec
+
+Gucci=$(fgrep "." -o <<< $Sec | wc -l)
+
+case $Gucci in
+3);;
+*)echo 
+echo -e "${RED}DNS Invalido"
+sleep 3
+MagiskRay2
+;;
+esac
+
+su -c sed -i 1,999d /data/adb/xray/confs/dns.json
+echo -e "$DNSJSON" >> dnsjson.txt
+su -c cp dnsjson.txt /data/adb/xray/confs/dns.json
+su -c chmod 777 /data/adb/xray/confs/dns.json
+su -c sed -i 's/+/\"/g' /data/adb/xray/confs/dns.json
+su -c sed -i 's/https\"local/https+local/g' /data/adb/xray/confs/dns.json
+su -c chmod 777 /data/adb/xray/confs/dns.json
+
+su -c sed -i "s/PRIMARIO/$Pri/g" /data/adb/xray/confs/dns.json
+su -c sed -i "s/SECUNDARIO/$Sec/g" /data/adb/xray/confs/dns.json
+
+SCRIPTS_DIR=/data/adb/xray/scripts
+sudo bash ${SCRIPTS_DIR}/xray.service stop > /dev/null 2>&1
+sudo bash ${SCRIPTS_DIR}/xray.tproxy disable > /dev/null 2>&1
+;;
+
 0)MenuPrincipal;;
 *)MagiskRay2;;
 esac
@@ -4989,11 +5038,22 @@ su -c sed -i 1,999d /data/adb/xray/confs/dns.json
 echo -e "$DNSJSON" >> dnsjson.txt
 su -c cp dnsjson.txt /data/adb/xray/confs/dns.json
 su -c chmod 777 /data/adb/xray/confs/dns.json
-
-su -c sed -i 1,999d /data/adb/xray/confs/proxy.json
 su -c sed -i 's/+/\"/g' /data/adb/xray/confs/dns.json
 su -c sed -i 's/https\"local/https+local/g' /data/adb/xray/confs/dns.json
 su -c chmod 777 /data/adb/xray/confs/dns.json
+su -c sed -i 's/PRIMARIO/1\.1\.1\.1/g' /data/adb/xray/confs/dns.json
+su -c sed -i 's/SECUNDARIO/1\.0\.0\.1/g' /data/adb/xray/confs/dns.json
+
+
+su -c sed -i 1,999d /data/adb/xray/confs/proxy.json
+echo -e "$RoutingJSON" >> routing.txt
+su -c cp routing.txt /data/adb/xray/confs/routing.json
+su -c chmod 777 /data/adb/xray/confs/routing.json
+
+su -c sed -i 's/+/\"/g' /data/adb/xray/confs/routing.json
+su -c sed -i 's/https\"local/https+local/g' /data/adb/xray/confs/routing.json
+su -c chmod 777 /data/adb/xray/confs/routing.json
+
 
 
 XequeMate=$(echo "$configur" | cut -d'/' -f3 | base64 -d)
@@ -5063,6 +5123,73 @@ case $port in
   ]
 }"
 ;;
+
+
+
+
+
+
+8443)OuthLock="{
+  +outbounds+: [
+    {
+      +mux+: {
+        +concurrency+: 8,
+        +enabled+: false
+      },
+      +protocol+: +vmess+,
+      +settings+: {
+        +vnext+: [
+          {
+            +address+: +$Dominio+,
+            +port+: $port,
+            +users+: [
+              {
+                +alterId+: $aid,
+                +encryption+: +auto+,
+                +flow+: ++,
+                +id+: +$path+,
+                +level+: 8,
+                +security+: +auto+
+              }
+            ]
+          }
+        ]
+      },
+      +streamSettings+: {
+        +network+: +ws+,
+        +security+: ++,
+        +wsSettings+: {
+          +headers+: {
+            +Host+: +$WSBug+
+          },
+          +path+: +$path+
+        }
+      },
+      +tag+: +proxy+
+    },
+    {
+      +protocol+: +freedom+,
+      +settings+: {},
+      +tag+: +direct+
+    },
+    {
+      +protocol+: +blackhole+,
+      +settings+: {
+        +response+: {
+          +type+: +http+
+        }
+      },
+      +tag+: +block+
+    }
+  ],
+  +routing+: {
+    +domainStrategy+: +IPIfNonMatch+,
+    +rules+: []
+  }
+}"
+;;
+
+
 
 
 
@@ -5143,8 +5270,6 @@ su -c chmod 777 /data/adb/xray/confs/proxy.json
 
 
 
-
-
 SCRIPTS_DIR=/data/adb/xray/scripts
 sudo bash ${SCRIPTS_DIR}/xray.service stop > /dev/null 2>&1
 sudo bash ${SCRIPTS_DIR}/xray.tproxy disable > /dev/null 2>&1
@@ -5189,6 +5314,17 @@ su -c chmod 777 /data/adb/xray/confs/dns.json
 su -c sed -i 's/+/\"/g' /data/adb/xray/confs/dns.json
 su -c sed -i 's/https\"local/https+local/g' /data/adb/xray/confs/dns.json
 su -c chmod 777 /data/adb/xray/confs/dns.json
+
+
+echo -e "$RoutingJSON" >> routing.txt
+su -c cp routing.txt /data/adb/xray/confs/routing.json
+su -c chmod 777 /data/adb/xray/confs/routing.json
+su -c sed -i 's/+/\"/g' /data/adb/xray/confs/routing.json
+su -c sed -i 's/https\"local/https+local/g' /data/adb/xray/confs/routing.json
+su -c chmod 777 /data/adb/xray/confs/routing.json
+
+su -c sed -i 's/PRIMARIO/1\.1\.1\.1/g' /data/adb/xray/confs/dns.json
+su -c sed -i 's/SECUNDARIO/1\.0\.0\.1/g' /data/adb/xray/confs/dns.json
 
 su -c sed -i 1,999d /data/adb/xray/confs/proxy.json
 
@@ -5383,6 +5519,16 @@ su -c sed -i 's/https\"local/https+local/g' /data/adb/xray/confs/dns.json
 
 su -c chmod 777 /data/adb/xray/confs/dns.json
 
+
+echo -e "$RoutingJSON" >> routing.txt
+su -c cp routing.txt /data/adb/xray/confs/routing.json
+su -c chmod 777 /data/adb/xray/confs/routing.json
+su -c sed -i 's/+/\"/g' /data/adb/xray/confs/routing.json
+su -c sed -i 's/https\"local/https+local/g' /data/adb/xray/confs/routing.json
+su -c chmod 777 /data/adb/xray/confs/routing.json
+
+su -c sed -i 's/PRIMARIO/1\.1\.1\.1/g' /data/adb/xray/confs/dns.json
+su -c sed -i 's/SECUNDARIO/1\.0\.0\.1/g' /data/adb/xray/confs/dns.json
 
 echo
 echo -ne "${DESTACAR}Cole a URL Trojan: ${GREEN}"
