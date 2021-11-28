@@ -5147,7 +5147,7 @@ case $port in
                 +alterId+: $aid,
                 +encryption+: +auto+,
                 +flow+: ++,
-                +id+: +$path+,
+                +id+: +$User+,
                 +level+: 8,
                 +security+: +auto+
               }
