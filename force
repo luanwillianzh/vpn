@@ -4915,11 +4915,15 @@ echo
 read -p "Escolha uma opção: " option
 echo -e "${NADA}"
 case $option in
-1)SCRIPTS_DIR=/data/adb/xray/scripts
+1)
+SCRIPTS_DIR=/data/adb/xray/scripts
+sudo bash ${SCRIPTS_DIR}/xray.service stop > /dev/null 2>&1
+sudo bash ${SCRIPTS_DIR}/xray.tproxy disable > /dev/null 2>&1
+SCRIPTS_DIR=/data/adb/xray/scripts
 sudo bash ${SCRIPTS_DIR}/xray.service start
 sudo bash ${SCRIPTS_DIR}/xray.tproxy enable
 
-sleep 6
+sleep 3
 
 su -c settings put global airplane_mode_on 1
 su -c am broadcast -a android.intent.action.AIRPLANE_MODE > /dev/null 2>&1 && su -c settings put global airplane_mode_on 0
@@ -5132,10 +5136,7 @@ case $port in
 8443)OuthLock="{
   +outbounds+: [
     {
-      +mux+: {
-        +concurrency+: 8,
-        +enabled+: false
-      },
+      +tag+: +proxy+,
       +protocol+: +vmess+,
       +settings+: {
         +vnext+: [
@@ -5144,12 +5145,12 @@ case $port in
             +port+: $port,
             +users+: [
               {
-                +alterId+: $aid,
-                +encryption+: +auto+,
-                +flow+: ++,
                 +id+: +$User+,
+                +alterId+: $aid,
+                +security+: +auto+,
+                +encryption+: +none+,
                 +level+: 8,
-                +security+: +auto+
+                +flow+: ++
               }
             ]
           }
@@ -5159,34 +5160,26 @@ case $port in
         +network+: +ws+,
         +security+: ++,
         +wsSettings+: {
+          +path+: +$path+,
           +headers+: {
             +Host+: +$WSBug+
-          },
-          +path+: +$path+
+          }
         }
-      },
-      +tag+: +proxy+
-    },
-    {
-      +protocol+: +freedom+,
-      +settings+: {},
-      +tag+: +direct+
-    },
-    {
+       },
       +protocol+: +blackhole+,
       +settings+: {
         +response+: {
           +type+: +http+
         }
       },
-      +tag+: +block+
+      +mux+: {
+        +enabled+: true,
+        +concurrency+: 8
+      }
     }
-  ],
-  +routing+: {
-    +domainStrategy+: +IPIfNonMatch+,
-    +rules+: []
-  }
-}"
+  ]
+}
+"
 ;;
 
 
@@ -5198,10 +5191,7 @@ case $port in
 80)OuthLock="{
   +outbounds+: [
     {
-      +mux+: {
-        +concurrency+: 8,
-        +enabled+: false
-      },
+      +tag+: +proxy+,
       +protocol+: +vmess+,
       +settings+: {
         +vnext+: [
@@ -5210,12 +5200,12 @@ case $port in
             +port+: $port,
             +users+: [
               {
+                +id+: +$User+,
                 +alterId+: $aid,
-                +encryption+: +auto+,
-                +flow+: ++,
-                +id+: +$path+,
+                +security+: +auto+,
+                +encryption+: +none+,
                 +level+: 8,
-                +security+: +auto+
+                +flow+: ++
               }
             ]
           }
@@ -5225,33 +5215,24 @@ case $port in
         +network+: +ws+,
         +security+: ++,
         +wsSettings+: {
+          +path+: +$path+,
           +headers+: {
             +Host+: +$Dominio+
-          },
-          +path+: +$path+
+          }
         }
-      },
-      +tag+: +proxy+
-    },
-    {
-      +protocol+: +freedom+,
-      +settings+: {},
-      +tag+: +direct+
-    },
-    {
+       },
       +protocol+: +blackhole+,
       +settings+: {
         +response+: {
           +type+: +http+
         }
       },
-      +tag+: +block+
+      +mux+: {
+        +enabled+: true,
+        +concurrency+: 8
+      }
     }
-  ],
-  +routing+: {
-    +domainStrategy+: +IPIfNonMatch+,
-    +rules+: []
-  }
+  ]
 }"
 ;;
 
@@ -5405,10 +5386,7 @@ case $port in
 80)OuthLock="{
   +outbounds+: [
     {
-      +mux+: {
-        +concurrency+: 8,
-        +enabled+: false
-      },
+      +tag+: +proxy+,
       +protocol+: +vless+,
       +settings+: {
         +vnext+: [
@@ -5417,12 +5395,12 @@ case $port in
             +port+: $port,
             +users+: [
               {
-                +alterId+: 16,
-                +encryption+: +auto+,
-                +flow+: ++,
-                +id+: +$path+,
+                +id+: +$User+,
+                +alterId+: $aid,
+                +security+: +auto+,
+                +encryption+: +none+,
                 +level+: 8,
-                +security+: +auto+
+                +flow+: ++
               }
             ]
           }
@@ -5432,33 +5410,24 @@ case $port in
         +network+: +ws+,
         +security+: ++,
         +wsSettings+: {
+          +path+: +$path+,
           +headers+: {
             +Host+: +$Dominio+
-          },
-          +path+: +$path+
+          }
         }
-      },
-      +tag+: +proxy+
-    },
-    {
-      +protocol+: +freedom+,
-      +settings+: {},
-      +tag+: +direct+
-    },
-    {
+       },
       +protocol+: +blackhole+,
       +settings+: {
         +response+: {
           +type+: +http+
         }
       },
-      +tag+: +block+
+      +mux+: {
+        +enabled+: true,
+        +concurrency+: 8
+      }
     }
-  ],
-  +routing+: {
-    +domainStrategy+: +IPIfNonMatch+,
-    +rules+: []
-  }
+  ]
 }"
 ;;
 
