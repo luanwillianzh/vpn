@@ -5007,7 +5007,7 @@ su -c cp /data/user/0/com.termux/files/usr/bin/curl /bin/curl
 6)
 echo
 echo -e "${DESTACAR}LIGUE A INTERNET${NADA}"
-
+su -c rm -f Xray
 echo
 read -n1 -p "DIGITE Y DEPOIS DE LIGAR" optione12 ; case $optione12 in 
   y|Y)echo ; echo ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/Xray && chmod +x Xray ; su -c mv Xray /sdcard/Download/Xray.zip ; echo -e "${GREEN}Modulo Xray.zip foi movido pra downloads${NADA}"; sleep 5 ;;
