@@ -4893,7 +4893,8 @@ echo
 read -p "Escolha uma opção: " option
 echo -e "${NADA}"
 case $option in
-1)su -c rm -f /data/adb/xray/confs/dns.json
+1)su -c sed -i 's/enable/disable/g' /data/adb/xray/ipv6
+su -c rm -f /data/adb/xray/confs/dns.json
 SCRIPTS_DIR=/data/adb/xray/scripts
 sudo bash ${SCRIPTS_DIR}/xray.service stop > /dev/null 2>&1
 sudo bash ${SCRIPTS_DIR}/xray.tproxy disable > /dev/null 2>&1
@@ -4971,7 +4972,6 @@ esac
 
 
 3)Molas="GHKAI"
-su -c sed -i 's/enable/disable/g' /data/adb/xray/ipv6
 echo -e "${DESTACAR}1 - Configuração URL VMESS"
 echo -e "2 - Configuração URL VLESS"
 echo -e "3 - Configuração URL Trojan"
@@ -5007,7 +5007,7 @@ su -c cp /data/user/0/com.termux/files/usr/bin/curl /bin/curl
 6)
 echo
 echo -e "${DESTACAR}LIGUE A INTERNET${NADA}"
-su -c rm -f Xray
+
 echo
 read -n1 -p "DIGITE Y DEPOIS DE LIGAR" optione12 ; case $optione12 in 
   y|Y)echo ; echo ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/Xray && chmod +x Xray ; su -c mv Xray /sdcard/Download/Xray.zip ; echo -e "${GREEN}Modulo Xray.zip foi movido pra downloads${NADA}"; sleep 5 ;;
