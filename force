@@ -4888,13 +4888,56 @@ echo -e "4 - Configurações Salvas"
 echo -e "5 - Instalar sudo"
 echo -e "6 - Baixar Nova Versão"
 echo -e "7 - Corrigir instalação do Modulo"
+echo -e "8 - Roteamento"
+echo -e "9 - DNS Arquivo"
 echo -e "0 - Voltar"
 echo
 read -p "Escolha uma opção: " option
 echo -e "${NADA}"
 case $option in
-1)su -c sed -i 's/enable/disable/g' /data/adb/xray/ipv6
-su -c rm -f /data/adb/xray/confs/dns.json
+
+9)DNSJSON="{
+    +dns+: {
+        +hosts+: {
+            +domain:googleapis.cn+: +googleapis.com+,
+            +domain:xray.helper+: +127.0.0.1+
+        },
+        +servers+: [
+            +PRIMARIO+,
+            +SECUNDARIO+,
+            +https+local://doh.dns.sb/dns-query+
+        ],
+        +tag+: +dns+
+    }
+}
+"
+echo
+echo -e "${DESTACAR}1 - Adicionar arquivo dns"
+echo -e "2 - Remover arquivo DNS"
+echo -e "0 - Voltar"
+echo
+read -p "Escolha uma opção: " option
+echo -e "${NADA}"
+case $option in
+
+1)
+echo -e "$DNSJSON" >> dnsjson.txt
+su -c cp dnsjson.txt /data/adb/xray/confs/dns.json
+su -c chmod 777 /data/adb/xray/confs/dns.json
+su -c sed -i 's/+/\"/g' /data/adb/xray/confs/dns.json
+su -c sed -i 's/https\"local/https+local/g' /data/adb/xray/confs/dns.json
+su -c chmod 777 /data/adb/xray/confs/dns.json
+su -c sed -i 's/PRIMARIO/1\.1\.1\.1/g' /data/adb/xray/confs/dns.json
+su -c sed -i 's/SECUNDARIO/1\.0\.0\.1/g' /data/adb/xray/confs/dns.json
+;;
+2)su -c rm -f /data/adb/xray/confs/dns.json
+;;
+0)MagiskRay2;;
+*);;
+esac
+;;
+
+1)su -c rm -f /data/adb/xray/confs/dns.json
 SCRIPTS_DIR=/data/adb/xray/scripts
 sudo bash ${SCRIPTS_DIR}/xray.service stop > /dev/null 2>&1
 sudo bash ${SCRIPTS_DIR}/xray.tproxy disable > /dev/null 2>&1
@@ -4914,6 +4957,61 @@ sudo bash ${SCRIPTS_DIR}/xray.service stop
 sudo bash ${SCRIPTS_DIR}/xray.tproxy disable;;
 
 5)pkg install tsu -y; main;;
+
+
+
+
+
+8)lin=$(su -c cat /data/adb/xray/ap.list | wc -l)
+echo
+echo -e "${DESTACAR}Interfaces que o roteamento está ativo: "
+echo
+
+for i in $(seq $lin)
+do
+Molas=$(su -c cat /data/adb/xray/ap.list | sed -n "$i"p | cut -d"+" -f1)
+echo -e "${GREEN}$i - ${Molas}${NADA}"
+done
+echo
+echo -e "${DESTACAR}A - Adicionar interface${NADA}"
+echo -e "${DESTACAR}D - Deletar interface${NADA}"
+echo -e "${DESTACAR}0 - Voltar${NADA}"
+echo
+echo -ne "Escolha uma opção: "
+read conf
+case $conf in 
+
+0)MagiskRay2;;
+A|a)
+echo
+echo -ne "${DESTACAR}Digite a interface: ${NADA}"
+read Numery
+su -c cp /data/adb/xray/ap.list ap.list
+su -c chmod 777 ap.list
+echo -e "${Numery}+" >> ap.list
+su -c cp ap.list /data/adb/xray/ap.list
+su -c chmod 777 /data/adb/xray/ap.list
+su -c rm -f ap.list
+sleep 3
+;;
+
+D|d)
+echo
+echo -ne "${DESTACAR}Digite o numero dela: ${NADA}"
+read Numery
+su -c sed -i ${Numery}d /data/adb/xray/ap.list
+sleep 3
+;;
+
+*);;
+esac
+
+SCRIPTS_DIR=/data/adb/xray/scripts
+sudo bash ${SCRIPTS_DIR}/xray.service stop > /dev/null 2>&1
+sudo bash ${SCRIPTS_DIR}/xray.tproxy disable > /dev/null 2>&1
+;;
+
+
 
 
 
@@ -4972,9 +5070,11 @@ esac
 
 
 3)Molas="GHKAI"
+su -c sed -i 's/enable/disable/g' /data/adb/xray/ipv6
 echo -e "${DESTACAR}1 - Configuração URL VMESS"
 echo -e "2 - Configuração URL VLESS"
 echo -e "3 - Configuração URL Trojan"
+echo -e "0 - Voltar"
 
 echo
 read -p "Escolha uma opção: " opi
@@ -4995,7 +5095,8 @@ UrlVless2;;
 echo -ne "${DESTACAR}Cole a URL Trojan: ${GREEN}"
 read carioca
 UrlTrojan2;;
-*)MagiskRay2;;
+0)MagiskRay2;;
+*);;
 esac
 ;;
 
@@ -5007,7 +5108,7 @@ su -c cp /data/user/0/com.termux/files/usr/bin/curl /bin/curl
 6)
 echo
 echo -e "${DESTACAR}LIGUE A INTERNET${NADA}"
-
+su -c rm -f Xray
 echo
 read -n1 -p "DIGITE Y DEPOIS DE LIGAR" optione12 ; case $optione12 in 
   y|Y)echo ; echo ; curl -sO https://raw.githubusercontent.com/luanwillianzh/vpn/main/Xray && chmod +x Xray ; su -c mv Xray /sdcard/Download/Xray.zip ; echo -e "${GREEN}Modulo Xray.zip foi movido pra downloads${NADA}"; sleep 5 ;;
