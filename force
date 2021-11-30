@@ -4879,13 +4879,14 @@ clear
 echo -e "${DESTACAR}Xray Core Magisk${NADA}"
 echo
 echo -e "${RED}Necessario ter instalado o modulo do magisk:\n${GREEN}Xray For Android${DESTACAR}"
+echo -e "${RED}Baixe a nova versão do modulo:\n${GREEN}V=1.53, Core=1.50\n${RED}e instale via magisk${NADA}${DESTACAR}"
 echo
 echo -e "1 - Iniciar serviços V2RAY"
 echo -e "2 - Parar serviços V2RAY"
 echo -e "3 - Mudar configuração V2RAY"
 echo -e "4 - Configuraões Salvas"
 echo -e "5 - Instalar sudo"
-echo -e "6 - Baixar Modulo"
+echo -e "6 - Baixar Nova Versão"
 echo -e "7 - Corrigir instalação do Modulo"
 echo -e "0 - Voltar"
 echo
