@@ -4937,7 +4937,7 @@ su -c sed -i 's/SECUNDARIO/1\.0\.0\.1/g' /data/adb/xray/confs/dns.json
 esac
 ;;
 
-1)su -c rm -f /data/adb/xray/confs/dns.json
+1)
 SCRIPTS_DIR=/data/adb/xray/scripts
 sudo bash ${SCRIPTS_DIR}/xray.service stop > /dev/null 2>&1
 sudo bash ${SCRIPTS_DIR}/xray.tproxy disable > /dev/null 2>&1
@@ -4945,7 +4945,7 @@ SCRIPTS_DIR=/data/adb/xray/scripts
 sudo bash ${SCRIPTS_DIR}/xray.service start
 sudo bash ${SCRIPTS_DIR}/xray.tproxy enable
 
-sleep 3
+sleep 1
 
 su -c settings put global airplane_mode_on 1
 su -c am broadcast -a android.intent.action.AIRPLANE_MODE > /dev/null 2>&1 && su -c settings put global airplane_mode_on 0
@@ -5185,7 +5185,7 @@ XequeMate=$(echo "$carioca" | cut -d'/' -f3 | base64 -d)
 WSBug=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep add | cut -d'"' -f4)
 
 
-Dominio=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep host | cut -d'"' -f4)
+Dominio=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep '"host"' | cut -d'"' -f4)
 
 
 User=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep '"id"' | cut -d'"' -f4)
@@ -5198,6 +5198,17 @@ aid=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep 'aid"' | cut -d'"' -f4)
 
 
 port=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep 'port"' | cut -d'"' -f4)
+
+
+Test0=$(echo "$XequeMate" | tr -s ',' '\n' | grep '"path"' | cut -d'"' -f4 | cut -d "/" -f2)
+case $Test0 in
+
+fastssh)Dominio=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep add | cut -d'"' -f4)
+WSBug=$(echo -e "$XequeMate" | tr -s ',' '\n' | grep '"host"' | cut -d'"' -f4)
+;;
+*);;
+esac
+
 
 case $port in
 443)OuthLock="{
@@ -5294,6 +5305,7 @@ case $port in
   ]
 }
 "
+su -c rm -f /data/adb/xray/confs/dns.json
 ;;
 
 
@@ -5507,6 +5519,7 @@ case $port in
     }
   ]
 }"
+su -c rm -f /data/adb/xray/confs/dns.json
 ;;
 
 
@@ -5658,7 +5671,7 @@ su -c sed -i 1,999d /data/adb/xray/confs/proxy.json
 WSBug=$(echo -e "$carioca" | grep '@' | cut -d'@' -f2 | cut -d'?' -f1 | cut -d ':' -f1)
 
 
-Dominio=$(echo "$carioca" | grep "host" | cut -d'=' -f2 | cut -d'&' -f1)
+Dominio=$(echo "$carioca" | tr -s "&" "\n" | grep "host" | cut -d'=' -f2 | cut -d'&' -f1)
 
 
 User=$(echo -e "$carioca" | grep '@' | cut -d'/' -f3 | cut -d'@' -f1)
@@ -5757,6 +5770,7 @@ echo -e "{
     }
   }
 }" >> v2ray.txt
+su -c rm -f /data/adb/xray/confs/dns.json
 ;;
 
 
