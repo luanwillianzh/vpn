@@ -4896,21 +4896,7 @@ read -p "Escolha uma opção: " option
 echo -e "${NADA}"
 case $option in
 
-9)DNSJSON="{
-    +dns+: {
-        +hosts+: {
-            +domain:googleapis.cn+: +googleapis.com+,
-            +domain:xray.helper+: +127.0.0.1+
-        },
-        +servers+: [
-            +PRIMARIO+,
-            +SECUNDARIO+,
-            +https+local://doh.dns.sb/dns-query+
-        ],
-        +tag+: +dns+
-    }
-}
-"
+9)
 echo
 echo -e "${DESTACAR}1 - Adicionar arquivo dns"
 echo -e "2 - Remover arquivo DNS"
@@ -4920,7 +4906,61 @@ read -p "Escolha uma opção: " option
 echo -e "${NADA}"
 case $option in
 
-1)
+1)echo
+echo -e "${DESTACAR}1 - DNS CloudFlare"
+echo -e "2 - DNS Google"
+echo -e "${DESTACAR}3 - DNS CloudFlare Privado"
+echo -e "${DESTACAR}4 - DNS Google Privado"
+echo -e "${DESTACAR}5 - DNS Padrão"
+echo -e "0 - Voltar"
+echo
+read -p "Escolha um DNS: " option
+echo -e "${NADA}"
+case $option in
+5)DNS="223.5.5.5"
+DNS2="1.1.1.1"
+;;
+
+1)DNS="1.1.1.1"
+DNS2="1.1.1.1"
+;;
+
+2)DNS="8.8.8.8"
+DNS2="8.8.8.8"
+;;
+
+4)DNS="dns.google"
+DNS2="8.8.8.8"
+;;
+
+3)DNS="1dot1dot1dot1.cloudflare-dns.com"
+DNS2="8.8.8.8"
+;;
+
+
+0)MagiskRay2;;
+*)echo 
+echo -e "${RED}ERRO"
+sleep 4
+;;
+esac
+
+DNSJSON="{
+    +dns+: {
+        +hosts+: {
+            +domain:googleapis.cn+: +googleapis.com+,
+            +domain:xray.helper+: +127.0.0.1+
+        },
+        +servers+: [
+            +$DNS2+,
+            +SECUNDARIO+,
+            +https+local://$DNS/dns-query+
+        ],
+        +tag+: +dns+
+    }
+}
+"
+
 echo -e "$DNSJSON" >> dnsjson.txt
 su -c cp dnsjson.txt /data/adb/xray/confs/dns.json
 su -c chmod 777 /data/adb/xray/confs/dns.json
