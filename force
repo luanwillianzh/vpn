@@ -1231,7 +1231,7 @@ clear
 
 echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS"
 
-Sniff=$(su -c tcpdump -c10 port ${Porta} -n -A)
+Sniff=$(sudo tcpdump -c10 port ${Porta} -n -A)
 echo -e "$Sniff" >> sniffer.txt
 
 Proxys=$(cat sniffer.txt | grep -a ">" | cut -d'>' -f2 | cut -d'.' -f1-5 | cut -d':' -f1)
@@ -1369,7 +1369,7 @@ su -c rm -f proxycreator.txt
 clear
 echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS"
 
-Sniff=$(su -c tcpdump -c55 -n -A)
+Sniff=$(sudo tcpdump -c55 -n -A)
 echo -e "$Sniff" >> sniffer.txt
 
 Proxycreator=$(cat sniffer.txt | grep -a 104 | cut -d' ' -f5 | grep -a 104)
@@ -1528,7 +1528,7 @@ echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}"
 
 echo 
 
-su -c tcpdump -i any -n -c25 -w sniffer.txt
+sudo tcpdump -i any -n -c25 -w sniffer.txt
 
 Proxys=$(cat sniffer.txt | grep -a 104 | cut -d' ' -f5)
 echo -e "$Proxys" >> proxys.txt
@@ -1687,7 +1687,7 @@ clear
 
 echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS"
 
-sniff=$(su -c tcpdump -c10 -n -A port ${Porta} -vv) && echo -e "$sniff" >> sniffer.txt
+sniff=$(sudo tcpdump -c10 -n -A port ${Porta} -vv) && echo -e "$sniff" >> sniffer.txt
 
 HostDir=$(cat sniffer.txt | grep -a Host | cut -d' ' -f2 | grep -a .) && echo -e "$HostDir" >> hostdirect.txt
 
@@ -1802,7 +1802,7 @@ su -c rm -f hostcreate.txt
 clear
 echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS"
 
-Sniff=$(su -c tcpdump -c80 -n -A port ${Portv2})
+Sniff=$(sudo tcpdump -c80 -n -A port ${Portv2})
 echo -e "$Sniff" >> sniffer.txt
 
 Proxycreator=$(cat sniffer.txt | grep -a 104 | cut -d' ' -f3 | grep -a 104)
@@ -1889,7 +1889,7 @@ su -c rm -f hostcreate.txt
 clear
 echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo "AGORA ENTRE NO APP E INICIE A CONEXÃO" ; echo "E LOGO APÓS VOLTE PARA VER AS CAPTURAS"
 
-Sniff=$(su -c tcpdump -c80 -n -A port 443)
+Sniff=$(sudo tcpdump -c80 -n -A port 443)
 echo -e "$Sniff" >> sniffer.txt
 
 Proxycreator=$(cat sniffer.txt | grep -a 104 | cut -d' ' -f3 | grep -a 104)
@@ -2003,7 +2003,7 @@ clear
 
 echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo -e "${DESTACAR}PARA PARAR DIGITE${NADA} ${GREEN}CTRL+C${NADA}"
 
-Sniff=$(su -c tcpdump -c10000 port ${Porta} -n -A)
+Sniff=$(sudo tcpdump -c10000 port ${Porta} -n -A)
 echo -e "$Sniff" >> sniffer.txt
 cat sniffer.txt
 
@@ -2054,7 +2054,7 @@ clear
 
 echo -e "${GREEN}CAPTURA INICIADA...${SCOLOR}" ; echo ; echo -e "${DESTACAR}PARA PARAR DIGITE${NADA} ${GREEN}CTRL+C${NADA}"
 
-Sniff=$(su -c tcpdump -c10000 -A)
+Sniff=$(sudo tcpdump -c10000 -A)
 echo -e "$Sniff" >> sniffer.txt
 cat sniffer.txt
 
@@ -4988,7 +4988,8 @@ sudo bash ${SCRIPTS_DIR}/xray.tproxy enable
 sleep 1
 
 #su -c settings put global airplane_mode_on 1
-#su -c am broadcast -a android.intent.action.AIRPLANE_MODE > /dev/null 2>&1 && su -c settings put global airplane_mode_on 0
+#su -c am broadcast -a android.intent.action.AIRPLANE_MODE > /dev/null 2>&1
+#su -c settings put global airplane_mode_on 0
 #su -c am broadcast -a android.intent.action.AIRPLANE_MODE > /dev/null 2>&1 
 ;;
 
