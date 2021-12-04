@@ -4987,9 +4987,9 @@ sudo bash ${SCRIPTS_DIR}/xray.tproxy enable
 
 sleep 1
 
-su -c settings put global airplane_mode_on 1
-su -c am broadcast -a android.intent.action.AIRPLANE_MODE > /dev/null 2>&1 && su -c settings put global airplane_mode_on 0
-su -c am broadcast -a android.intent.action.AIRPLANE_MODE > /dev/null 2>&1 
+#su -c settings put global airplane_mode_on 1
+#su -c am broadcast -a android.intent.action.AIRPLANE_MODE > /dev/null 2>&1 && su -c settings put global airplane_mode_on 0
+#su -c am broadcast -a android.intent.action.AIRPLANE_MODE > /dev/null 2>&1 
 ;;
 
 2)SCRIPTS_DIR=/data/adb/xray/scripts
