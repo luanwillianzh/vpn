@@ -2131,7 +2131,7 @@ LETRAPRETA='\e\033[02;30;47m'
 OPERADORA="VIVO"
 BANNER="${NADA}============================================${NADA}\n${LETRAPRETA}                  MBS $OPERADORA                  ${NADA}\n============================================${DESTACAR}"
 
-Repet1r="999"
+Repet1r="99"
 UrlAds="http://e.vivo.ddivulga.com/api/v2.1/fetch"
 UrlOrigin="http://navegue.vivo.com.br"
 UrlClick="http://e.vivo.ddivulga.com/api/clickEvent"
