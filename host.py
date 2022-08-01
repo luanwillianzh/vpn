@@ -6,7 +6,7 @@ linha = file.readlines()
 for i in linha:
     t = i.replace("\n", "")
     try:
-        r = requests.get(f"https://{t}", timeout=5)
-        print(f"{t} - OK")
+        r = requests.get(f"http://{t}", timeout=5)
+        print(f"{t} - {r.status_code}")
     except:
         pass
